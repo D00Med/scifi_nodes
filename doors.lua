@@ -16,7 +16,8 @@
 
 local doors = {
 	{"scifi_nodes:door2a","scifi_nodes:door2b","scifi_nodes:door2c","scifi_nodes:door2d","2","black"},
-	{"scifi_nodes:door3a","scifi_nodes:door3b","scifi_nodes:door3c","scifi_nodes:door3d","3","white"},}
+	{"scifi_nodes:door3a","scifi_nodes:door3b","scifi_nodes:door3c","scifi_nodes:door3d","3","white"},
+	{"scifi_nodes:door1a","scifi_nodes:door1b","scifi_nodes:door1c","scifi_nodes:door1d","1","Doom"},}
 
 for i in ipairs (doors) do
 local doora = doors[i][1]
@@ -140,7 +141,7 @@ minetest.register_node(doora, {
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_bottom.png^[transformFX",
+		"scifi_nodes_door"..num.."a_rbottom.png",
 		"scifi_nodes_door"..num.."a_bottom.png"
 	},
 	drawtype = "nodebox",
@@ -172,7 +173,7 @@ minetest.register_node(doorb, {
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_top.png^[transformFX",
+		"scifi_nodes_door"..num.."a_rtop.png",
 		"scifi_nodes_door"..num.."a_top.png"
 	},
 	drawtype = "nodebox",
@@ -197,7 +198,7 @@ minetest.register_node(doorb, {
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_bottom0.png^[transformFX",
+		"scifi_nodes_door"..num.."a_rbottom0.png",
 		"scifi_nodes_door"..num.."a_bottom0.png"
 	},
 	drawtype = "nodebox",
@@ -227,7 +228,7 @@ minetest.register_node(doord, {
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_topo.png^[transformFX",
+		"scifi_nodes_door"..num.."a_rtopo.png",
 		"scifi_nodes_door"..num.."a_topo.png"
 	},
 	drawtype = "nodebox",

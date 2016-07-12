@@ -16,6 +16,28 @@ minetest.register_node("scifi_nodes:light", {
 	groups = {cracky=1}
 })
 
+minetest.register_node("scifi_nodes:rfloor", {
+	description = "rusty floor",
+	tiles = {
+		"scifi_nodes_rustfloor.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	light_source = 10,
+	groups = {cracky=1}
+})
+
+minetest.register_node("scifi_nodes:bfloor", {
+	description = "blue floor",
+	tiles = {
+		"scifi_nodes_bluefloor.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	light_source = 10,
+	groups = {cracky=1}
+})
+
 
 minetest.register_node("scifi_nodes:stripes2", {
 	description = "hazard stripes2",
@@ -290,7 +312,18 @@ node.types = {
 	{"doomwall2",      "Doom wall 2",       "doomwall2"},
 	{"doomwall3",      "Doom wall 3",       "doomwall3"},
 	{"doomwall4",      "Doom wall 4",       "doomwall4"},
+	{"doomwall41",      "Doom wall 4.1",       "doomwall4.1"},
+	{"doomwall42",      "Doom wall 4.2",       "doomwall4.2"},
+	{"doomwall43",      "Doom wall 4.3",       "doomwall4.3"},
+	{"doomwall431",      "Doom wall 4.3.1",       "doomwall4.3.1"},
+	{"doomwall44",      "Doom wall 4.4",       "doomwall4.4"},
+	{"blackdmg",      "Damaged black wall",       "blckdmg"},
+	{"blackdmgstripe",      "Damaged black wall(stripes)",       "blckdmgstripe"},
+	{"doomengine",      "Doom engine wall",       "doomengine"},
+	{"monitorwall",      "Wall monitors",       "monitorwall"},
+	{"screen3",      "Wall monitor",       "screen3"},
 	{"doomlight",      "Doom light",       "doomlight", "12"},
+	{"bluwllight",      "Blue wall light",       "capsule3", "20"},
 	{"fan",      "Fan",       "fan"},
 }
 
@@ -309,7 +342,7 @@ for _, row in ipairs(node.types) do
 	})
 end
 
---chest code from default(couldn't find creator?)
+--chest code from default(Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>)
 
 local chest_formspec =
 	"size[8,9]" ..
@@ -513,3 +546,4 @@ dofile(minetest.get_modpath("scifi_nodes").."/panes.lua")
 end
 dofile(minetest.get_modpath("scifi_nodes").."/doors.lua")
 dofile(minetest.get_modpath("scifi_nodes").."/nodeboxes.lua")
+dofile(minetest.get_modpath("scifi_nodes").."/models.lua")
