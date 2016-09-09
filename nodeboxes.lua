@@ -3,6 +3,121 @@
 -- Node Box Editor, version 0.9.0
 -- Namespace: scifi_nodes
 
+minetest.register_node("scifi_nodes:pot_lid", {
+	description = "plant pot lid(place above plant)",
+	tiles = {
+		"scifi_nodes_glass2.png",
+		"scifi_nodes_glass2.png",
+		"scifi_nodes_glass2.png",
+		"scifi_nodes_glass2.png",
+		"scifi_nodes_glass2.png",
+		"scifi_nodes_glass2.png"
+	},
+	inventory_image = "scifi_nodes_pod_inv.png",
+	wield_image = "scifi_nodes_pod_inv.png",
+	use_texture_alpha = true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {cracky=1, not_in_creative_inventory=1},
+	sunlight_propagates = true,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -1, -0.5, 0.5, 0.1, 0.5}
+	},
+	collision_box = {
+		type = "fixed",
+		fixed = {-0.5, -1.5, -0.5, 0.5, -0.5, 0.5}
+	},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.1875, -0.5625, -0.1875, 0.1875, -0.5, 0.1875}, -- NodeBox13
+			{-0.25, -0.625, -0.25, 0.25, -0.5625, 0.25}, -- NodeBox14
+			{-0.3125, -0.6875, -0.3125, 0.3125, -0.625, 0.3125}, -- NodeBox15
+			{-0.375, -0.75, -0.375, 0.375, -0.6875, 0.375}, -- NodeBox16
+			{-0.4375, -0.75, 0.375, 0.4375, -1.5, 0.4375}, -- NodeBox17
+			{-0.4375, -0.75, -0.4375, 0.4375, -1.5, -0.375}, -- NodeBox18
+			{0.375, -0.75, -0.4375, 0.4375, -1.5, 0.4375}, -- NodeBox19
+			{-0.4375, -0.75, -0.4375, -0.375, -1.5, 0.4375}, -- NodeBox20
+		}
+	},
+	sounds = default.node_sound_glass_defaults()
+})
+
+
+
+minetest.register_node("scifi_nodes:pot", {
+	description = "metal plant pot (right click for lid, shift+rightclick to plant)",
+	tiles = {
+		"scifi_nodes_pot.png",
+		"scifi_nodes_greybolts.png",
+		"scifi_nodes_greybolts.png",
+		"scifi_nodes_greybolts.png",
+		"scifi_nodes_greybolts.png",
+		"scifi_nodes_greybolts.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {crumbly=3, soil=1, sand=1, wet=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.25, -0.5, 0.5, 0.5, 0.5}, -- NodeBox1
+			{0.1875, -0.5, 0.1875, 0.5, -0.25, 0.5}, -- NodeBox2
+			{-0.5, -0.5, -0.5, -0.1875, -0.25, -0.1875}, -- NodeBox3
+			{-0.5, -0.5, 0.1875, -0.1875, -0.25, 0.5}, -- NodeBox4
+			{0.1875, -0.5, -0.5, 0.5, -0.25, -0.1875}, -- NodeBox5
+		}
+	},
+	on_rightclick = function(pos, node, clicker, item, _)
+	local node = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z})
+	if node.name == "scifi_nodes:pot_lid" then
+		minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="air", param2=node.param2})
+	elseif node.name ~= "scifi_nodes:pot_lid" and node.name == "air" then
+		minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="scifi_nodes:pot_lid", param2=node.param2})
+	end
+	end,
+	on_destruct = function(pos, node, _)
+		minetest.remove_node({x=pos.x, y=pos.y+2, z=pos.z})
+	end
+})
+
+minetest.register_node("scifi_nodes:pot2", {
+	description = "metal wet plant pot(right click for lid, shift+rightclick to plant)",
+	tiles = {
+		"scifi_nodes_pot.png^[colorize:black:100",
+		"scifi_nodes_greybolts.png",
+		"scifi_nodes_greybolts.png",
+		"scifi_nodes_greybolts.png",
+		"scifi_nodes_greybolts.png",
+		"scifi_nodes_greybolts.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	groups = {crumbly=3, soil=3, wet=1},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.25, -0.5, 0.5, 0.5, 0.5}, -- NodeBox1
+			{0.1875, -0.5, 0.1875, 0.5, -0.25, 0.5}, -- NodeBox2
+			{-0.5, -0.5, -0.5, -0.1875, -0.25, -0.1875}, -- NodeBox3
+			{-0.5, -0.5, 0.1875, -0.1875, -0.25, 0.5}, -- NodeBox4
+			{0.1875, -0.5, -0.5, 0.5, -0.25, -0.1875}, -- NodeBox5
+		}
+	},
+	on_rightclick = function(pos, node, clicker, item, _)
+	local node = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z})
+	if node.name == "scifi_nodes:pot_lid" then
+		minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="air", param2=node.param2})
+	elseif node.name ~= "scifi_nodes:pot_lid" and node.name == "air" then
+		minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="scifi_nodes:pot_lid", param2=node.param2})
+	end
+	end,
+	on_destruct = function(pos, node, _)
+		minetest.remove_node({x=pos.x, y=pos.y+2, z=pos.z})
+	end
+})
+
 minetest.register_node("scifi_nodes:lightbar", {
 	description = "ceiling light",
 	tiles = {
