@@ -54,6 +54,52 @@ minetest.register_node("scifi_nodes:stripes2", {
 	groups = {cracky=1}
 })
 
+minetest.register_node("scifi_nodes:gblock", {
+	description = "Green metal block",
+	sunlight_propagates = false,
+	tiles = {
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock.png"
+	},
+	paramtype = "light",
+	groups = {cracky=1}
+})
+
+minetest.register_node("scifi_nodes:gblock2", {
+	description = "Green metal block 2",
+	sunlight_propagates = false,
+	tiles = {
+		"scifi_nodes_gblock2_top.png",
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock2.png",
+		"scifi_nodes_gblock2_fx.png",
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock2_front1.png"
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1}
+})
+
+minetest.register_node("scifi_nodes:gblock3", {
+	description = "Green metal block 3",
+	sunlight_propagates = false,
+	tiles = {
+		"scifi_nodes_gblock2_top.png",
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock2.png",
+		"scifi_nodes_gblock2_fx.png",
+		"scifi_nodes_gblock.png",
+		"scifi_nodes_gblock2_screen.png"
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1}
+})
 
 
 
@@ -322,15 +368,14 @@ node.types = {
 	{"doomengine",      "Doom engine wall",       "doomengine"},
 	{"monitorwall",      "Wall monitors",       "monitorwall"},
 	{"screen3",      "Wall monitor",       "screen3"},
-	{"doomlight",      "Doom light",       "doomlight", "12"},
-	{"bluwllight",      "Blue wall light",       "capsule3", "20"},
+	{"doomlight",      "Doom light",       "doomlight", 12},
+	{"bluwllight",      "Blue wall light",       "capsule3", 20},
 	{"fan",      "Fan",       "fan"},
 }
 
 for _, row in ipairs(node.types) do
 	local name = row[1]
 	local desc = row[2]
-	local craft_color_group = row[3]
 	local light = row[4]
 	-- Node Definition
 	minetest.register_node("scifi_nodes:"..name, {
@@ -338,6 +383,39 @@ for _, row in ipairs(node.types) do
 		tiles = {"scifi_nodes_"..name..".png"},
 		groups = {cracky=1},
 		paramtype = "light",
+		light_source = light,
+	})
+end
+
+node.plants = {
+	{"flower1", "Glow flower", 1, 50},
+	{"flower2", "Pink flower", 1.5, 10},
+	{"flower3", "Triffid", 2, 0},
+	{"plant1", "Bulb plant", 1, 0},
+	{"plant2", "Trap plant", 1.5, 30},
+}
+
+for _, row in ipairs(node.plants) do
+	local name = row[1]
+	local desc = row[2]
+	local size = row[3]
+	local light = row[4]
+	-- Node Definition
+	minetest.register_node("scifi_nodes:"..name, {
+		description = desc,
+		tiles = {"scifi_nodes_"..name..".png"},
+		drawtype = "plantlike",
+		inventory_image = {"scifi_nodes_"..name..".png"},
+		groups = {snappy=1, oddly_breakable_by_hand=1, dig_immediate=3, flora=1},
+		paramtype = "light",
+		visual_scale = size,
+		selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3, -0.5, -0.3, 0.3, 0.5, 0.3},
+		}
+		},
+		is_ground_content = false,
 		light_source = light,
 	})
 end

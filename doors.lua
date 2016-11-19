@@ -17,6 +17,7 @@
 local doors = {
 	{"scifi_nodes:door2a","scifi_nodes:door2b","scifi_nodes:door2c","scifi_nodes:door2d","2","black"},
 	{"scifi_nodes:door3a","scifi_nodes:door3b","scifi_nodes:door3c","scifi_nodes:door3d","3","white"},
+	{"scifi_nodes:door4a","scifi_nodes:door4b","scifi_nodes:door4c","scifi_nodes:door4d","4","green"},
 	{"scifi_nodes:door1a","scifi_nodes:door1b","scifi_nodes:door1c","scifi_nodes:door1d","1","Doom"},}
 
 for i in ipairs (doors) do
