@@ -397,6 +397,8 @@ node.plants = {
 	{"plant3", "Blue Jelly Plant", 1.2,0, 10},
 	{"plant4", "Green Jelly Plant", 1.2,0, 10},
 	{"plant5", "Fern Plant", 1.7,0, 0},
+	{"plant6", "Curly Plant", 1,0, 10},
+	{"plant7", "Egg weed", 1,0, 0},
 }
 
 for _, row in ipairs(node.plants) do

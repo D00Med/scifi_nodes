@@ -3,6 +3,37 @@
 -- Node Box Editor, version 0.9.0
 -- Namespace: scifi_nodes
 
+minetest.register_node("scifi_nodes:gloshroom", {
+	description = "Gloshroom",
+	tiles = {
+		"scifi_nodes_gloshroom.png",
+		"scifi_nodes_gloshroom_under.png",
+		"scifi_nodes_gloshroom.png",
+		"scifi_nodes_gloshroom.png",
+		"scifi_nodes_gloshroom.png",
+		"scifi_nodes_gloshroom.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	light_source = 50,
+	walkable = false,
+	buildable_to = true,
+	sunlight_propagates = false,
+	use_texture_alpha =  true,
+	groups = {fleshy=1, oddly_breakable_by_hand=1, dig_immediate=3},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.05, -0.5, -0.05, 0.05, 0.0625, 0.05}, -- NodeBox1
+			{-0.4375, -0.0625, -0.375, 0.4375, 0, 0.375}, -- NodeBox2
+			{-0.375, 0, -0.375, 0.375, 0.0625, 0.375}, -- NodeBox3
+			{-0.3125, 0.0625, -0.3125, 0.3125, 0.125, 0.3125}, -- NodeBox4
+			{-0.1875, 0.125, -0.1875, 0.1875, 0.1875, 0.1875}, -- NodeBox5
+			{-0.375, -0.0625, -0.4375, 0.375, 0, 0.4375}, -- NodeBox6
+		}
+	}
+})
+
 minetest.register_node("scifi_nodes:pot_lid", {
 	description = "plant pot lid(place above plant)",
 	tiles = {
