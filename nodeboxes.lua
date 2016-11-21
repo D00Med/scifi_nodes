@@ -22,7 +22,7 @@ minetest.register_node("scifi_nodes:pot_lid", {
 	sunlight_propagates = true,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -1, -0.5, 0.5, 0.1, 0.5}
+		fixed = {0, 0, 0, 0, 0, 0}
 	},
 	collision_box = {
 		type = "fixed",
