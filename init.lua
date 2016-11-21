@@ -292,6 +292,64 @@ minetest.register_node("scifi_nodes:grnpipe2", {
 	on_place = minetest.rotate_node
 })
 
+minetest.register_node("scifi_nodes:octrng", {
+	description = "Orange Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octrng.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	light_source = 10,
+	groups = {cracky=2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:octgrn", {
+	description = "Green Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octgrn.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	groups = {cracky=2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:octbl", {
+	description = "Blue Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octbl.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	light_source = 10,
+	groups = {cracky=2},
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:octppl", {
+	description = "Purple Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octppl.png",
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	light_source = 10,
+	groups = {cracky=2},
+	sounds = default.node_sound_glass_defaults(),
+})
 
 --edited wool code (Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>)
 
@@ -369,8 +427,15 @@ node.types = {
 	{"monitorwall",      "Wall monitors",       "monitorwall"},
 	{"screen3",      "Wall monitor",       "screen3"},
 	{"doomlight",      "Doom light",       "doomlight", 12},
-	{"bluwllight",      "Blue wall light",       "capsule3", 20},
+	{"bluwllight",      "Blue wall light", "capsule3", 20},
 	{"fan",      "Fan",       "fan"},
+	{"ppllght",      "Purple wall light", "", 50},
+	{"pplwll",      "Purple wall", "", 0},
+	{"pplwll2",      "Purple wall2", "", 0},
+	{"pplwll3",      "Purple wall3", "", 0},
+	{"pplwll4",      "Purple wall4", "", 0},
+	{"pplblk",      "Purple tile", "", 0},
+	{"purple",      "Purple block", "", 0},
 }
 
 for _, row in ipairs(node.types) do
@@ -383,6 +448,7 @@ for _, row in ipairs(node.types) do
 		tiles = {"scifi_nodes_"..name..".png"},
 		groups = {cracky=1},
 		paramtype = "light",
+		paramtype2 = "facedir",
 		light_source = light,
 	})
 end
@@ -399,6 +465,7 @@ node.plants = {
 	{"plant5", "Fern Plant", 1.7,0, 0},
 	{"plant6", "Curly Plant", 1,0, 10},
 	{"plant7", "Egg weed", 1,0, 0},
+	{"eyetree", "Eye Tree", 2.5,0, 0},
 }
 
 for _, row in ipairs(node.plants) do

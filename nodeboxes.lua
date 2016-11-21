@@ -3,6 +3,30 @@
 -- Node Box Editor, version 0.9.0
 -- Namespace: scifi_nodes
 
+minetest.register_node("scifi_nodes:pplwndw", {
+	description = "Purple Window",
+	tiles = {
+		"scifi_nodes_purple.png",
+		"scifi_nodes_purple.png",
+		"scifi_nodes_purple.png",
+		"scifi_nodes_purple.png",
+		"scifi_nodes_pplwndw.png",
+		"scifi_nodes_pplwndw.png"
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	use_texture_alpha = true,
+	groups = {cracky=3},
+	sounds = default.node_sound_glass_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.0625, 0.5, 0.5, 0.0625}, -- NodeBox1
+		}
+	}
+})
+
 minetest.register_node("scifi_nodes:gloshroom", {
 	description = "Gloshroom",
 	tiles = {
