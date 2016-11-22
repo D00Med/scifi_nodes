@@ -1,5 +1,40 @@
 --scifi_nodes by D00Med 
 
+--the builder node
+
+minetest.register_node("scifi_nodes:builder", {
+	description = "Sci-fi Node Builder",
+	sunlight_propagates = false,
+	tiles = {
+		"scifi_nodes_builder.png",
+		"scifi_nodes_builder.png",
+		"scifi_nodes_builder_side.png",
+		"scifi_nodes_builder_side.png",
+		"scifi_nodes_builder_side.png",
+		"scifi_nodes_builder_front.png"
+	},
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("infotext", "Node Builder (currently does nothing)")
+	end,
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1, oddly_breakable_by_hand=1}
+})
+
+
+
+--nodes
+
+minetest.register_node("scifi_nodes:grassblk", {
+	description = "Dirt With Alien Grass",
+	tiles = {"default_grass.png^[colorize:cyan:80", "default_dirt.png",
+		{name = "default_dirt.png^(default_grass_side.png^[colorize:cyan:80)",
+			tileable_vertical = false}},
+	light_source = 2,
+	groups = {crumbly=1, oddly_breakable_by_hand=1, soil=1}
+})
+
 minetest.register_node("scifi_nodes:light", {
 	description = "blue lightbox",
 	sunlight_propagates = false,
@@ -469,6 +504,8 @@ node.types = {
 	{"purple",      "Purple node", "", 0},
 	{"rock",      "Moonstone", "", 0},
 	{"rock2",      "Moonstone2", "", 0},
+	{"blackvnt",      "Black vent", "", 0},
+	{"blackplate",      "Black plate", "", 0},
 }
 
 for _, row in ipairs(node.types) do
@@ -599,7 +636,7 @@ minetest.register_node("scifi_nodes:crate", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", chest_formspec)
-		meta:set_string("infotext", "Chest")
+		meta:set_string("infotext", "Crate")
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8 * 4)
 	end,
@@ -638,7 +675,7 @@ minetest.register_node("scifi_nodes:box", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", chest_formspec)
-		meta:set_string("infotext", "Chest")
+		meta:set_string("infotext", "Box")
 		local inv = meta:get_inventory()
 		inv:set_size("main", 8 * 4)
 	end,
@@ -681,7 +718,7 @@ minetest.register_node("scifi_nodes:lightstp", {
 	tiles = {
 		"scifi_nodes_lightstripe.png"
 	},
-	light_source = 20,
+	light_source = 14,
 	paramtype = "light",
 	groups = {cracky=1}
 })
