@@ -351,6 +351,37 @@ minetest.register_node("scifi_nodes:octppl", {
 	sounds = default.node_sound_glass_defaults(),
 })
 
+minetest.register_node("scifi_nodes:tower", {
+	description = "Wind tower",
+	sunlight_propagates = false,
+	drawtype = "plantlike",
+	tiles = {{
+		name = "scifi_nodes_tower_anim.png",
+		animation = {type = "vertical_frames", aspect_w = 32, aspect_h = 32, length = 1.00},
+	}},
+	visual_scale = 2,
+	inventory_image = "scifi_nodes_tower.png",
+	paramtype = "light",
+	groups = {cracky=2},
+})
+
+minetest.register_node("scifi_nodes:junk", {
+	description = "Junk",
+	sunlight_propagates = true,
+	paramtype = "light",
+	liquid_viscosity = 8,
+	liquidtype = "source",
+	liquid_alternative_flowing = "scifi_nodes:junk",
+	liquid_alternative_source = "scifi_nodes:junk",
+	liquid_renewable = false,
+	liquid_range = 0,
+	walkable = false,
+	tiles = {
+		"scifi_nodes_junk.png"
+	},
+	groups = {snappy=1, oddly_breakable_by_hand=1, liquid=3, dig_immediate=1}
+})
+
 --edited wool code (Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>)
 
 local node = {}
@@ -435,7 +466,9 @@ node.types = {
 	{"pplwll3",      "Purple wall3", "", 0},
 	{"pplwll4",      "Purple wall4", "", 0},
 	{"pplblk",      "Purple tile", "", 0},
-	{"purple",      "Purple block", "", 0},
+	{"purple",      "Purple node", "", 0},
+	{"rock",      "Moonstone", "", 0},
+	{"rock2",      "Moonstone2", "", 0},
 }
 
 for _, row in ipairs(node.types) do
@@ -465,7 +498,11 @@ node.plants = {
 	{"plant5", "Fern Plant", 1.7,0, 0},
 	{"plant6", "Curly Plant", 1,0, 10},
 	{"plant7", "Egg weed", 1,0, 0},
+	{"plant8", "Slug weed", 1,0, 10},
+	{"plant9", "Prickly Plant", 1,0, 0},
+	{"plant10", "Umbrella weed", 1,0, 10},
 	{"eyetree", "Eye Tree", 2.5,0, 0},
+	{"grass", "Alien Grass", 1,0, 0},
 }
 
 for _, row in ipairs(node.plants) do
