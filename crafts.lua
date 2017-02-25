@@ -34,7 +34,7 @@ minetest.register_craft({
 	output = "scifi_nodes:whitetile 4",
 	recipe = {
         {"scifi_nodes:white2", "scifi_nodes:white2", ""},
-		{"scifi_nodes:white2", "scifi_nodes:white2", ""},
+	{"scifi_nodes:white2", "scifi_nodes:white2", ""},
         {"", "", ""}
     }
 })
