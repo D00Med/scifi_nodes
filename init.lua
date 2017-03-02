@@ -776,3 +776,4 @@ end
 dofile(minetest.get_modpath("scifi_nodes").."/doors.lua")
 dofile(minetest.get_modpath("scifi_nodes").."/nodeboxes.lua")
 dofile(minetest.get_modpath("scifi_nodes").."/models.lua")
+dofile(minetest.get_modpath("scifi_nodes").."/crafts.lua")
