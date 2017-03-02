@@ -53,8 +53,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = "scifi_nodes:white_base 6",
     recipe = {
-        {"scifi_nodes:white2 2", "scifi_nodes:white2 2", "scifi_nodes:white2 2"},
-        {"dye:black", "dye:black", "dye:black"}
+        {"scifi_nodes:white2", "scifi_nodes:white2", "scifi_nodes:white2"},
+        {"dye:black", "dye:black", "dye:black"},
+        {"scifi_nodes:white2", "scifi_nodes:white2", "scifi_nodes:white2"}
     }
 })
 
@@ -68,7 +69,6 @@ minetest.register_craft({
 
 -- 1 black from 1 plastic and 1 black dye
 minetest.register_craft({
-    type = "shapeless",
     output = "scifi_nodes:black",
     recipe = {
         {"scifi_nodes:white2", "dye:black"}
@@ -93,7 +93,7 @@ minetest.register_craft({
 
 -- 6 white light stripe from 6 plastic, 2 blue dye, 1 lightbar
 minetest.register_craft({
-    output = "scifi_nodes:whtlightbnd 6",
+    output = "scifi_nodes:whtlightbnd 4",
     recipe = {
         {"scifi_nodes:white2", "dye:blue", "scifi_nodes:white2"},
         {"", "scifi_nodes:lightbar", ""},
@@ -103,7 +103,6 @@ minetest.register_craft({
 
 -- 1 dark glass from 1 obsidian glass and 1 black dye
 minetest.register_craft({
-    type = "shapeless",
     output = "scifi_nodes:glass",
     recipe = {
         {"default:obsidian_glass", "dye:black"}
@@ -182,7 +181,6 @@ minetest.register_craft({
 
 -- 1 damaged black wall from 1 black wall
 minetest.register_craft({
-    type = "shapeless",
     output = "scifi_nodes:blackdmg",
     recipe = {
         {"scifi_nodes:black"}
@@ -195,7 +193,7 @@ minetest.register_craft({
     output = "scifi_nodes:screen 4",
     recipe = {
         {"scifi_nodes:white2", "mesecons_microcontroller:microcontroller0000", "scifi_nodes:white2"},
-        {"dye:cyan", "moreblocks:lightbar", "dye:cyan"},
+        {"dye:cyan", "scifi_nodes:lightbar", "dye:cyan"},
         {"scifi_nodes:white2", "mesecons_microcontroller:microcontroller0000", "scifi_nodes:white2"}
     }
 })
@@ -206,7 +204,7 @@ minetest.register_craft({
     output = "scifi_nodes:screen2 4",
     recipe = {
         {"scifi_nodes:white2", "mesecons_microcontroller:microcontroller0000", "scifi_nodes:white2"},
-        {"dye:green", "moreblocks:lightbar", "dye:green"},
+        {"dye:green", "scifi_nodes:lightbar", "dye:green"},
         {"scifi_nodes:white2", "mesecons_microcontroller:microcontroller0000", "scifi_nodes:white2"}
     }
 })
@@ -230,7 +228,6 @@ minetest.register_craft({
 
 -- 9 ladder 1 dented metal block
 minetest.register_craft({
-    type = "shapeless",
     output = "scifi_nodes:ladder 9",
     recipe = {
         {"scifi_nodes:dent"}
@@ -478,7 +475,6 @@ minetest.register_craft({
 
 -- 1 blue metal light from 1 blue metal and 1 lightbar
 minetest.register_craft({
-    type = "shapeless",
     output = "scifi_nodes:blumetlight",
     recipe = {
         {"scifi_nodes:bluemetal", "scifi_nodes:lightbar"}
@@ -507,7 +503,6 @@ minetest.register_craft({
 
 -- 9 disc from 1 plastic and 1 blue dye
 minetest.register_craft({
-    type = "shapeless",
     output = "scifi_nodes:disc 9",
     recipe = {
         {"scifi_nodes:white2", "dye:blue"}
