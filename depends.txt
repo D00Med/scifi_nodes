@@ -1,2 +1,9 @@
 default
 xpanes?
+moreblocks
+homedecor
+mesecons
+mesecons_microcontroller
+mesecons_button
+mesecons_torch
+dye
