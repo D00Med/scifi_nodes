@@ -417,6 +417,7 @@ minetest.register_node("scifi_nodes:octgrn", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	use_texture_alpha = true,
+	light_source = 10,
 	groups = {cracky=2},
 	sounds = default.node_sound_glass_defaults(),
 })
@@ -531,16 +532,16 @@ node.types = {
 	{"dent",      "dented metal block",       "dent"},
 	{"greenmetal",      "green metal wall",       "grnmetl"},
 	{"greenmetal2",      "green metal wall2",       "grnmetl2"},
-	{"greenlights",      "green wall lights",       "grnlt"},
-	{"greenlights2",      "green wall lights2",       "grnlt2"},
-	{"greenbar",      "green light bar",       "grnlghtbr"},
+	{"greenlights",      "green wall lights",       "grnlt", 10},
+	{"greenlights2",      "green wall lights2",       "grnlt2", 10},
+	{"greenbar",      "green light bar",       "grnlghtbr", 10},
 	{"green2",      "green wall panel",       "grn2"},
 	{"greentubes",      "green pipes",       "grntubes"},
 	{"grey",      "grey wall",       "gry"},
 	{"greybolts",      "grey wall bolts",       "gryblts"},
 	{"greybars",      "grey bars",       "grybrs"},
 	{"greydots",      "grey wall dots",       "grydts"},
-	{"greygreenbar",      "gray power pipe",       "grygrnbr"},
+	{"greygreenbar",      "gray power pipe",       "grygrnbr", 10},
 	{"octofloor",      "Doom floor",       "octofloor"},
 	{"octofloor2",      "Brown Doom floor",       "octofloor2"},
 	{"doomwall1",      "Doom wall 1",       "doomwall1"},
@@ -732,10 +733,10 @@ minetest.register_node("scifi_nodes:box", {
 		"scifi_nodes_box.png"
 	},
 	paramtype2 = "facedir",
-	groups = {cracky = 1, oddly_breakable_by_hand = 2, fuel = 8},
+	groups = {cracky = 1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+	sounds = default.node_sound_metal_defaults(),
 
 	after_dig_node = drop_chest_stuff(),
 	on_construct = function(pos)
@@ -842,3 +843,4 @@ end
 dofile(minetest.get_modpath("scifi_nodes").."/doors.lua")
 dofile(minetest.get_modpath("scifi_nodes").."/nodeboxes.lua")
 dofile(minetest.get_modpath("scifi_nodes").."/models.lua")
+dofile(minetest.get_modpath("scifi_nodes").."/crafts.lua")
