@@ -54,5 +54,5 @@ scifi_nodes.register_slope("lightstripe", "Lightstripe", {"scifi_nodes_lightstri
 scifi_nodes.register_slope("blight2", "Blue Light 2", {"scifi_nodes_capsule3.png",}, 20)
 scifi_nodes.register_slope("wallpipe", "Alien Pipe", {"scifi_nodes_wallpipe.png",}, 0)
 scifi_nodes.register_slope("alien", "Alien Wall", {"scifi_nodes_alnslp.png",}, 0)
-scifi_nodes.register_slope("purple", "Purple", {"scifi_nodes_stripes.png",}, 0)
+scifi_nodes.register_slope("purple", "Purple", {"scifi_nodes_purple.png",}, 0)
 scifi_nodes.register_slope("gblock", "Gblock", {"scifi_nodes_gblock2_front1.png",}, 0)

@@ -451,6 +451,12 @@ minetest.register_node("scifi_nodes:lightbar", {
 			{-0.125, -0.5, -0.5, 0.125, -0.375, 0.5}, -- NodeBox1
 		}
 	},
+	selection_box = {
+		type = "wallmounted",
+		wallmounted = {
+			{-0.125, -0.5, -0.5, 0.125, -0.375, 0.5}, -- NodeBox1
+		}
+	},
 	groups = {cracky=1},
 	sounds = default.node_sound_glass_defaults()
 })
