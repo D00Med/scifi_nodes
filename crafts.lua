@@ -209,13 +209,13 @@ minetest.register_craft({
     }
 })
 
--- 4 black wall screen from 4 black wall and 1 electronic screen2
+-- 4 black wall screen from 4 black meshes and 1 electronic screen2
 minetest.register_craft({
     output = "scifi_nodes:black_screen 4",
     recipe = {
-        {"scifi_nodes:black", "", "scifi_nodes:black"},
+        {"scifi_nodes:black_mesh", "", "scifi_nodes:black_mesh"},
         {"", "scifi_nodes:screen2", ""},
-        {"scifi_nodes:black", "", "scifi_nodes:black"}
+        {"scifi_nodes:black_mesh", "", "scifi_nodes:black_mesh"}
     }
 })
 
@@ -234,12 +234,12 @@ minetest.register_craft({
     }
 })
 
--- 4 black vent block from 4 black wall and 1 dented metal block
+-- 6 black vent block from 4 black wall and 1 dented metal block
 minetest.register_craft({
-    output = "scifi_nodes:black_mesh 4",
+    output = "scifi_nodes:black_mesh 6",
     recipe = {
         {"scifi_nodes:black", "", "scifi_nodes:black"},
-        {"", "scifi_nodes:dent", ""},
+        {"scifi_nodes:dent", "", "scifi_nodes:dent"},
         {"scifi_nodes:black", "", "scifi_nodes:black"}
     }
 })
@@ -576,6 +576,677 @@ minetest.register_craft({
         {"scifi_nodes:blackvent", "scifi_nodes:blackvent", "scifi_nodes:blackvent"},
         {"scifi_nodes:light_dynamic", "scifi_nodes:light_dynamic", "scifi_nodes:light_dynamic"},
         {"scifi_nodes:blackvent", "scifi_nodes:blackvent", "scifi_nodes:blackvent"}
+    }
+})
+
+-- 1 black wallpanel from 1 red, 1 green, 1 yellow dye, 1 microcontroller
+-- and one black wall
+minetest.register_craft({
+    output = "scifi_nodes:black_lights",
+    recipe = {
+        {"dye:red", "dye:green", "dye:yellow"},
+        {"mesecons_microcontroller:microcontroller0000", "scifi_nodes:black", "mesecons_microcontroller:microcontroller0000"}
+    }
+})
+
+-- 4 Doom light from 4 red dye and 4 black
+minetest.register_craft({
+    output = "scifi_nodes:doomlight 4",
+    recipe = {
+        {"dye:red", "scifi_nodes:black", "dye:red"},
+        {"scifi_nodes:black", "scifi_nodes:lightbar", "scifi_nodes:black"},
+        {"dye:red", "scifi_nodes:black", "dye:red"}
+    }
+})
+
+-- 6 Doom wall1 from 4 white wall, 2 black wall, 1 red dye
+minetest.register_craft({
+    output = "scifi_nodes:doomwall1 6",
+    recipe = {
+        {"scifi_nodes:white", "scifi_nodes:white", "scifi_nodes:white"},
+        {"scifi_nodes:black", "dye:red", "scifi_nodes:black"},
+        {"scifi_nodes:white", "scifi_nodes:white", "scifi_nodes:white"}
+    }
+})
+
+-- 6 Doom wall2 from 4 white wall, 2 black wall, 1 green dye
+minetest.register_craft({
+    output = "scifi_nodes:doomwall2 6",
+    recipe = {
+        {"scifi_nodes:white", "scifi_nodes:white", "scifi_nodes:white"},
+        {"scifi_nodes:black", "dye:green", "scifi_nodes:black"},
+        {"scifi_nodes:white", "scifi_nodes:white", "scifi_nodes:white"}
+    }
+})
+
+-- 6 Doom wall3 from 4 white wall, 2 black wall, 1 grey dye
+minetest.register_craft({
+    output = "scifi_nodes:doomwall3 6",
+    recipe = {
+        {"scifi_nodes:white", "scifi_nodes:white", "scifi_nodes:white"},
+        {"scifi_nodes:black", "dye:red", "scifi_nodes:black"},
+        {"scifi_nodes:white", "scifi_nodes:white", "scifi_nodes:white"}
+    }
+})
+
+-- 4 fan from 4 vent, 4 plastic sheet, 1 red dye
+minetest.register_craft({
+    output = "scifi_nodes:fan 4",
+    recipe = {
+        {"scifi_nodes:vent2", "homedecor:plastic_sheeting", "scifi_nodes:vent2"},
+        {"homedecor:plastic_sheeting", "dye:red", "homedecor:plastic_sheeting"},
+        {"scifi_nodes:vent2", "homedecor:plastic_sheeting", "scifi_nodes:vent2"}
+    }
+})
+
+-- 6 green metal from 6 plastic, 2 green dye, 1 dented metal block
+minetest.register_craft({
+    output = "scifi_nodes:greenmetal 6",
+    recipe = {
+        {"scifi_nodes:white2", "dye:green", "scifi_nodes:white2"},
+        {"scifi_nodes:white2", "scifi_nodes:dent", "scifi_nodes:white2"},
+        {"scifi_nodes:white2", "dye:green", "scifi_nodes:white2"}
+    }
+})
+
+-- 4 green lines from 4 black plate and 1 green dye
+minetest.register_craft({
+    output = "scifi_nodes:green 4",
+    recipe = {
+        {"scifi_nodes:blackplate", "", "scifi_nodes:blackplate"},
+        {"", "dye:green", ""},
+        {"scifi_nodes:blackplate", "", "scifi_nodes:blackplate"}
+    }
+})
+
+-- 6 green pipe from 6 green metal and 1 vent
+minetest.register_craft({
+    output = "scifi_nodes:grnpipe 6",
+    recipe = {
+        {"scifi_nodes:greenmetal", "", "scifi_nodes:greenmetal"},
+        {"scifi_nodes:greenmetal", "scifi_nodes:vent2", "scifi_nodes:greenmetal"},
+        {"scifi_nodes:greenmetal", "", "scifi_nodes:greenmetal"}
+    }
+})
+
+-- 1 broken green pipe from 1 green pipe
+minetest.register_craft({
+    output = "scifi_nodes:grnpipe2",
+    recipe = {
+        {"scifi_nodes:grnpipe"}
+    }
+})
+
+-- 6 green lightbox from 6 metal block, 2 green dye and 1 light bar
+minetest.register_craft({
+    output = "scifi_nodes:green_light 6",
+    recipe = {
+        {"scifi_nodes:lighttop", "dye:green", "scifi_nodes:lighttop"},
+        {"scifi_nodes:lighttop", "scifi_nodes:lightbar", "scifi_nodes:lighttop"},
+        {"scifi_nodes:lighttop", "dye:green", "scifi_nodes:lighttop"}
+    }
+})
+
+-- 6 green tubes from 6 green pipe
+minetest.register_craft({
+    output = "scifi_nodes:greentubes 6",
+    recipe = {
+        {"scifi_nodes:grnpipe", "", "scifi_nodes:grnpipe"},
+        {"scifi_nodes:grnpipe", "", "scifi_nodes:grnpipe"},
+        {"scifi_nodes:grnpipe", "", "scifi_nodes:grnpipe"}
+    }
+})
+
+-- 4 green metal wall2 from 4 green metal, 1 white dye
+minetest.register_craft({
+    output = "scifi_nodes:greenmetal2 4",
+    recipe = {
+        {"scifi_nodes:greenmetal", "dye:white", "scifi_nodes:greenmetal"},
+        {"scifi_nodes:greenmetal", "", "scifi_nodes:greenmetal"}
+    }
+})
+
+-- 6 green wall lights2 from 6 green metal, 2 green dye, 1 lightbar
+minetest.register_craft({
+    output = "scifi_nodes:greenlights2 6",
+    recipe = {
+        {"scifi_nodes:greenmetal", "scifi_nodes:greenmetal", "scifi_nodes:greenmetal"},
+        {"dye:green", "scifi_nodes:lightbar", "dye:green"},
+        {"scifi_nodes:greenmetal", "scifi_nodes:greenmetal", "scifi_nodes:greenmetal"}
+    }
+})
+
+-- 6 green wall lights from 6 green metal2, 2 green dye, 1 lightbar
+minetest.register_craft({
+    output = "scifi_nodes:greenlights 6",
+    recipe = {
+        {"scifi_nodes:greenmetal2", "scifi_nodes:greenmetal2", "scifi_nodes:greenmetal2"},
+        {"dye:green", "scifi_nodes:lightbar", "dye:green"},
+        {"scifi_nodes:greenmetal2", "scifi_nodes:greenmetal2", "scifi_nodes:greenmetal2"}
+    }
+})
+
+-- 4 green light bar from 4 green metal, 2 green dye, 1 lightbar
+minetest.register_craft({
+    output = "scifi_nodes:greenbar 4",
+    recipe = {
+        {"scifi_nodes:greenmetal", "", "scifi_nodes:greenmetal"},
+        {"dye:green", "scifi_nodes:lightbar", "dye:green"},
+        {"scifi_nodes:greenmetal", "", "scifi_nodes:greenmetal"}
+    }
+})
+
+-- 4 green metal block from 4 green metal
+minetest.register_craft({
+    output = "scifi_nodes:green_square 4",
+    recipe = {
+        {"scifi_nodes:greenmetal", "", "scifi_nodes:greenmetal"},
+        {"", "", ""},
+        {"scifi_nodes:greenmetal", "", "scifi_nodes:greenmetal"}
+    }
+})
+
+-- 4 green octagon glass from 4 glass, 2 green dye and 1 lightbar
+minetest.register_craft({
+    output = "scifi_nodes:octgrn 4",
+    recipe = {
+        {"dye:green", "scifi_nodes:glass", ""},
+        {"scifi_nodes:glass", "scifi_nodes:lightbar", "scifi_nodes:glass"},
+        {"", "scifi_nodes:glass", "dye:green"}
+    }
+})
+
+-- 1 grey from 1 plastic and 1 grey dye
+minetest.register_craft({
+    output = "scifi_nodes:grey",
+    recipe = {
+        {"scifi_nodes:white2", "dye:grey"}
+    }
+})
+
+-- 4 grey metal block from 4 grey and 1 dented metal block
+minetest.register_craft({
+    output = "scifi_nodes:grey_square 4",
+    recipe = {
+        {"scifi_nodes:grey", "", "scifi_nodes:grey"},
+        {"", "scifi_nodes:dent", ""},
+        {"scifi_nodes:grey", "", "scifi_nodes:grey"}
+    }
+})
+
+-- 6 grey bars from 4 grey and 2 grey metal block
+minetest.register_craft({
+    output = "scifi_nodes:greybars 6",
+    recipe = {
+        {"scifi_nodes:grey", "", "scifi_nodes:grey"},
+        {"scifi_nodes:grey_square", "", "scifi_nodes:grey_square"},
+        {"scifi_nodes:grey", "", "scifi_nodes:grey"}
+    }
+})
+
+-- 6 grey wall bolts from 4 grey wall and 2 grey metal block
+minetest.register_craft({
+    output = "scifi_nodes:greybolts 6",
+    recipe = {
+        {"scifi_nodes:grey_square", "scifi_nodes:grey", "scifi_nodes:grey_square"},
+        {"scifi_nodes:grey", "scifi_nodes:grey", "scifi_nodes:grey"}
+    }
+})
+
+-- 4 grey wall dots from 4 grey wall and 1 white dye, 1 grey dye
+minetest.register_craft({
+    output = "scifi_nodes:greydots 4",
+    recipe = {
+        {"dye:white", "scifi_nodes:grey", "dye:grey"},
+        {"scifi_nodes:grey", "scifi_nodes:grey", "scifi_nodes:grey"}
+    }
+})
+
+-- 6 grey power pipe from 6 grey and 2 green dye and 1 light bar
+minetest.register_craft({
+    output = "scifi_nodes:greygreenbar 6",
+    recipe = {
+        {"scifi_nodes:grey", "scifi_nodes:grey", "scifi_nodes:grey"},
+        {"dye:green", "scifi_nodes:lightbar", "dye:green"},
+        {"scifi_nodes:grey", "scifi_nodes:grey", "scifi_nodes:grey"}
+    }
+})
+
+-- 4 grey tile from 4 grey and 1 black dye and 1 white dye
+minetest.register_craft({
+    output = "scifi_nodes:greytile 4",
+    recipe = {
+        {"scifi_nodes:grey", "dye:black", "scifi_nodes:grey"},
+        {"", "", ""},
+        {"scifi_nodes:grey", "dye:white", "scifi_nodes:grey"}
+    }
+})
+
+-- 4 metal table from 2 grey and 2 dented metal block
+minetest.register_craft({
+    output = "scifi_nodes:table 4",
+    recipe = {
+        {"scifi_nodes:grey", "scifi_nodes:dent", "scifi_nodes:grey"},
+        {"", "scifi_nodes:dent", ""}
+    }
+})
+
+-- 8 doom floor from 4 plastic, 1 black dye, 4 stones
+minetest.register_craft({
+    output = "scifi_nodes:octofloor 8",
+    recipe = {
+        {"scifi_nodes:white2", "default:stone", "scifi_nodes:white2"},
+        {"default:stone", "dye:black", "default:stone"},
+        {"scifi_nodes:white2", "default:stone", "scifi_nodes:white2"}
+    }
+})
+
+-- 8 brown doom floor from 4 plastic, 1 black dye, 4 woods
+minetest.register_craft({
+    output = "scifi_nodes:octofloor2 8",
+    recipe = {
+        {"scifi_nodes:white2", "default:wood", "scifi_nodes:white2"},
+        {"default:wood", "dye:black", "default:wood"},
+        {"scifi_nodes:white2", "default:wood", "scifi_nodes:white2"}
+    }
+})
+
+-- 4 purple octagon glass from 4 glass, 1 red dye, 1 blue dye and 1 lightbar
+minetest.register_craft({
+    output = "scifi_nodes:octppl 4",
+    recipe = {
+        {"dye:red", "scifi_nodes:glass", ""},
+        {"scifi_nodes:glass", "scifi_nodes:lightbar", "scifi_nodes:glass"},
+        {"", "scifi_nodes:glass", "dye:blue"}
+    }
+})
+
+-- 4 orange octagon glass from 4 glass, 2 orange dye and 1 lightbar
+minetest.register_craft({
+    output = "scifi_nodes:octrng 4",
+    recipe = {
+        {"dye:orange", "scifi_nodes:glass", ""},
+        {"scifi_nodes:glass", "scifi_nodes:lightbar", "scifi_nodes:glass"},
+        {"", "scifi_nodes:glass", "dye:orange"}
+    }
+})
+
+-- 1 purple node from 1 plastic, 1 blue dye and 1 red dye
+minetest.register_craft({
+    output = "scifi_nodes:purple",
+    recipe = {
+        {"dye:red", "scifi_nodes:white2", "dye:blue"}
+    }
+})
+
+-- 4 purple tile from 4 purple node
+minetest.register_craft({
+    output = "scifi_nodes:pplblk 4",
+    recipe = {
+        {"scifi_nodes:purple", "", "scifi_nodes:purple"},
+        {"", "scifi_nodes:dent", ""},
+        {"scifi_nodes:purple", "", "scifi_nodes:purple"}
+    }
+})
+
+-- 6 purple window from  2 purple node, 1 orange octagon glass
+minetest.register_craft({
+    output = "scifi_nodes:pplwndw 6",
+    recipe = {
+        {"scifi_nodes:purple", "scifi_nodes:octrng", "scifi_nodes:purple"}
+    }
+})
+
+-- 6 purple wall4 from 6 purple nodes, 3 white dyes
+minetest.register_craft({
+    output = "scifi_nodes:pplwll4 6",
+    recipe = {
+        {"dye:white", "dye:white", "dye:white"},
+        {"scifi_nodes:purple", "scifi_nodes:purple", "scifi_nodes:purple"},
+        {"scifi_nodes:purple", "scifi_nodes:purple", "scifi_nodes:purple"}
+    }
+})
+
+-- 6 purple wall3 from 6 purple nodes, 3 white dyes
+minetest.register_craft({
+    output = "scifi_nodes:pplwll3 6",
+    recipe = {
+        {"dye:white", "scifi_nodes:purple", "scifi_nodes:purple"},
+        {"dye:white", "scifi_nodes:purple", "scifi_nodes:purple"},
+        {"dye:white", "scifi_nodes:purple", "scifi_nodes:purple"}
+    }
+})
+
+-- 6 purple wall2 from 6 purple nodes, 3 black dye
+minetest.register_craft({
+    output = "scifi_nodes:pplwll2 6",
+    recipe = {
+        {"scifi_nodes:purple", "scifi_nodes:purple", "scifi_nodes:purple"},
+        {"scifi_nodes:purple", "scifi_nodes:purple", "scifi_nodes:purple"},
+        {"dye:black", "dye:black", "dye:black"}
+    }
+})
+
+-- 1 purple wall from  1 purple wall2
+minetest.register_craft({
+    output = "scifi_nodes:pplwll",
+    recipe = {
+        {"scifi_nodes:pplwll2"}
+    }
+})
+
+-- 6 red lightbox from 6 metal block, 2 red dye and 1 light bar
+minetest.register_craft({
+    output = "scifi_nodes:red_light 6",
+    recipe = {
+        {"scifi_nodes:lighttop", "dye:red", "scifi_nodes:lighttop"},
+        {"scifi_nodes:lighttop", "scifi_nodes:lightbar", "scifi_nodes:lighttop"},
+        {"scifi_nodes:lighttop", "dye:red", "scifi_nodes:lighttop"}
+    }
+})
+
+-- 1 rough metal from 1 metal block and 1 compressed cobblestone
+minetest.register_craft({
+    output = "scifi_nodes:rough",
+    recipe = {
+        {"scifi_nodes:lighttop", "moreblocks:cobble_compressed"}
+    }
+})
+
+--1 rusty metal from 1 rough metal and 1 water bucket
+minetest.register_craft({
+    output = "scifi_nodes:rust",
+    recipe = {
+        {"scifi_nodes:rough", "bucket:bucket_water"}
+    },
+    replacements = {{"bucket:bucket_water", "bucket:bucket_empty"}}
+})
+
+-- 4 red metal block from 4 rusty metal and 1 dented metal block
+minetest.register_craft({
+    output = "scifi_nodes:red_square 4",
+    recipe = {
+        {"scifi_nodes:rust", "", "scifi_nodes:rust"},
+        {"", "scifi_nodes:dent", ""},
+        {"scifi_nodes:rust", "", "scifi_nodes:rust"}
+    }
+})
+
+-- 6 rusty floor from 6 rusty metal, 1 black dye, 1 white dye and 1 trap glow glass
+minetest.register_craft({
+    output = "scifi_nodes:rfloor 6",
+    recipe = {
+        {"dye:black", "scifi_nodes:rust", "dye:white"},
+        {"scifi_nodes:rust", "scifi_nodes:lightbar", "scifi_nodes:rust"},
+        {"scifi_nodes:rust", "scifi_nodes:rust", "scifi_nodes:rust"}
+    }
+})
+
+-- 1 moonstone from 1 rough metal and 1 plastic
+minetest.register_craft({
+    output = "scifi_nodes:rock",
+    recipe = {
+        {"scifi_nodes:rough", "scifi_nodes:white2"}
+    }
+})
+
+-- 1 moonstone2 from 1 rough metal and 1 plastic
+minetest.register_craft({
+    output = "scifi_nodes:rock2",
+    recipe = {
+        {"scifi_nodes:rough"},
+        {"scifi_nodes:white2"}
+    }
+})
+
+-- 6 glass screen from 1 plastic, 1 dark glass, 1 green dye
+minetest.register_craft({
+    output = "scifi_nodes:glassscreen 6",
+    recipe = {
+        {"scifi_nodes:glass", "scifi_nodes:light_dynamic"},
+        {"dye:green", "scifi_nodes:white2"}
+    }
+})
+
+-- 4 purple wall light from 4 purple tiles, 4 cyan dye and 1 wall light
+minetest.register_craft({
+    output = "scifi_nodes:ppllght 4",
+    recipe = {
+        {"scifi_nodes:pplblk", "dye:cyan", "scifi_nodes:pplblk"},
+        {"dye:cyan", "scifi_nodes:light_dynamic", "dye:cyan"},
+        {"scifi_nodes:pplblk", "dye:cyan", "scifi_nodes:pplblk"}
+    }
+})
+
+-- 1 orange lightbars from 4 lightbar, 1 orange dye
+minetest.register_craft({
+    output = "scifi_nodes:lightbars",
+    recipe = {
+        {"scifi_nodes:lightbar", "", "scifi_nodes:lightbar"},
+        {"", "dye:orange", ""},
+        {"scifi_nodes:lightbar", "", "scifi_nodes:lightbar"}
+    }
+})
+
+-- 4 liquid pipe from 2 dark  glass, 2 green dye, 1 wall light
+minetest.register_craft({
+    output = "scifi_nodes:liquid_pipe 4",
+    recipe = {
+        {"", "dye:green", ""},
+        {"scifi_nodes:glass", "scifi_nodes:light_dynamic", "scifi_nodes:glass"},
+        {"", "dye:green", ""}
+    }
+})
+
+-- 4 liquid pipe2 from 2 dark glass, 4 orange dye, 1 wall light
+minetest.register_craft({
+    output = "scifi_nodes:liquid_pipe2 4",
+    recipe = {
+        {"dye:orange", "", "dye:orange"},
+        {"scifi_nodes:glass", "scifi_nodes:light_dynamic", "scifi_nodes:glass"},
+        {"dye:orange", "", "dye:orange"}
+    }
+})
+
+-- 1 metal plant pot from 1 greybolts and 1 clean glass
+minetest.register_craft({
+    output = "scifi_nodes:pot",
+    recipe = {
+        {"moreblocks:clean_glass"},
+        {"default:dirt"},
+        {"scifi_nodes:greybolts"}
+    }
+})
+
+-- 6 itemholder from 2 dented metal block and 1 plastic
+minetest.register_craft({
+    output = "scifi_nodes:itemholder 6",
+    recipe = {
+        {"scifi_nodes:dent"},
+        {"scifi_nodes:white2"},
+        {"scifi_nodes:dent"}
+    }
+})
+
+-- FEW SLOPES (will be making more when respective block recipe will be ready)
+
+-- 6 plastic slope from 3 plastic
+minetest.register_craft({
+    output = "scifi_nodes:slope_white2 6",
+    recipe = {
+        {"scifi_nodes:white2", ""},
+        {"scifi_nodes:white2","scifi_nodes:white2"}
+    }
+}) 
+
+-- 6 white slope from 3 plastic wall
+minetest.register_craft({
+    output = "scifi_nodes:slope_white 6",
+    recipe = {
+        {"scifi_nodes:white", ""},
+        {"scifi_nodes:white","scifi_nodes:white"}
+    }
+})
+
+-- 6 black slope from 3 black wall
+minetest.register_craft({
+    output = "scifi_nodes:slope_black 6",
+    recipe = {
+        {"scifi_nodes:black", ""},
+        {"scifi_nodes:black","scifi_nodes:black"}
+    }
+})
+
+-- 6 blue light box slope from 3 blue light box
+minetest.register_craft({
+    output = "scifi_nodes:slope_blight 6",
+    recipe = {
+        {"scifi_nodes:light", ""},
+        {"scifi_nodes:light","scifi_nodes:light"}
+    }
+})
+
+-- 6 blue light box slope from 3 blue light box
+minetest.register_craft({
+    output = "scifi_nodes:slope_rlight 6",
+    recipe = {
+        {"scifi_nodes:red_light", ""},
+        {"scifi_nodes:red_light","scifi_nodes:red_light"}
+    }
+})
+
+-- 6 blue light box slope from 3 blue light box
+minetest.register_craft({
+    output = "scifi_nodes:slope_glight 6",
+    recipe = {
+        {"scifi_nodes:green_light", ""},
+        {"scifi_nodes:green_light","scifi_nodes:green_light"}
+    }
+})
+
+-- 6 blue light2 slopes from 3 blue wall light
+minetest.register_craft({
+    output = "scifi_nodes:slope_blight2 6",
+    recipe = {
+        {"scifi_nodes:bluwllight", ""},
+        {"scifi_nodes:bluwllight","scifi_nodes:bluwllight"}
+    }
+})
+
+-- 6 blue slope from 3 blue bars
+minetest.register_craft({
+    output = "scifi_nodes:slope_bluebars 6",
+    recipe = {
+        {"scifi_nodes:bluebars", ""},
+        {"scifi_nodes:bluebars","scifi_nodes:bluebars"}
+    }
+})
+
+-- 6 lightstripe slope from 3 twin lights
+minetest.register_craft({
+    output = "scifi_nodes:slope_lightstripe 6",
+    recipe = {
+        {"scifi_nodes:lightstp", ""},
+        {"scifi_nodes:lightstp","scifi_nodes:lightstp"}
+    }
+})
+
+-- 6 metal floormesh slope from 3 metal floormesh
+minetest.register_craft({
+    output = "scifi_nodes:slope_mesh2 6",
+    recipe = {
+        {"scifi_nodes:mesh2", ""},
+        {"scifi_nodes:mesh2","scifi_nodes:mesh2"}
+    }
+})
+
+-- 6 metal mesh slope from 3 metal mesh
+minetest.register_craft({
+    output = "scifi_nodes:slope_mesh 6",
+    recipe = {
+        {"scifi_nodes:mesh", ""},
+        {"scifi_nodes:mesh","scifi_nodes:mesh"}
+    }
+})
+
+-- 6 stripes slope from 3 hazard stripes
+minetest.register_craft({
+    output = "scifi_nodes:slope_stripes 6",
+    recipe = {
+        {"scifi_nodes:stripes", ""},
+        {"scifi_nodes:stripes","scifi_nodes:stripes"}
+    }
+})
+
+-- 6 vent slope from 3 vent
+minetest.register_craft({
+    output = "scifi_nodes:slope_vent 6",
+    recipe = {
+        {"scifi_nodes:vent2", ""},
+        {"scifi_nodes:vent2","scifi_nodes:vent2"}
+    }
+})
+
+-- 6 purple slope from 3 purple node
+minetest.register_craft({
+    output = "scifi_nodes:slope_purple 6",
+    recipe = {
+        {"scifi_nodes:purple", ""},
+        {"scifi_nodes:purple","scifi_nodes:purple"}
+    }
+})
+
+-- 6 green metal slope from 3 green metal
+minetest.register_craft({
+    output = "scifi_nodes:slope_greenmetal 6",
+    recipe = {
+        {"scifi_nodes:greenmetal", ""},
+        {"scifi_nodes:greenmetal","scifi_nodes:greenmetal"}
+    }
+})
+
+-- 6 grey slope from 3 grey wall
+minetest.register_craft({
+    output = "scifi_nodes:slope_grey 6",
+    recipe = {
+        {"scifi_nodes:grey", ""},
+        {"scifi_nodes:grey","scifi_nodes:grey"}
+    }
+})
+
+-- 6 blue metal slope from 3 blue metal
+minetest.register_craft({
+    output = "scifi_nodes:slope_bluemetal 6",
+    recipe = {
+        {"scifi_nodes:bluemetal", ""},
+        {"scifi_nodes:bluemetal","scifi_nodes:bluemetal"}
+    }
+})
+
+-- 6 metal wall slope from 3 metal wall
+minetest.register_craft({
+    output = "scifi_nodes:slope_wall 6",
+    recipe = {
+        {"scifi_nodes:wall", ""},
+        {"scifi_nodes:wall","scifi_nodes:wall"}
+    }
+})
+
+-- 6 rough metal slope from 3 rough metal
+minetest.register_craft({
+    output = "scifi_nodes:slope_rough 6",
+    recipe = {
+        {"scifi_nodes:rough", ""},
+        {"scifi_nodes:rough","scifi_nodes:rough"}
+    }
+})
+
+-- 6 black stripe light slope from 3 black stripe light
+minetest.register_craft({
+    output = "scifi_nodes:slope_blklt2 6",
+    recipe = {
+        {"scifi_nodes:blklt2", ""},
+        {"scifi_nodes:blklt2","scifi_nodes:blklt2"}
     }
 })
 

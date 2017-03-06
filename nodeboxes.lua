@@ -375,7 +375,7 @@ minetest.register_node("scifi_nodes:pot", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {crumbly=3, soil=1, sand=1, wet=1},
+	groups = {cracky=1, soil=1, sand=1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -411,7 +411,7 @@ minetest.register_node("scifi_nodes:pot2", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {crumbly=3, soil=3, wet=1},
+	groups = {cracky=1, soil=3, wet=1},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -1093,11 +1093,37 @@ minetest.register_node("scifi_nodes:itemholder", {
 			{-0.25, -0.5, -0.0625, -0.1875, -0.0625, 0.0625}, -- NodeBox5
 		}
 	},
-	groups = {cracky=1, oddly_breakable_by_hand=1},
+	groups = {cracky=1},
+	on_rotate = screwdriver.disallow,
+	after_place_node = function(pos, placer, itemstack)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("owner",placer:get_player_name())
+		meta:set_string("infotext", "Itemholder (owned by " ..
+				meta:get_string("owner") .. ")")
+	end,
 	on_rightclick = function(pos, node, clicker, item, _)
-		local wield_item = clicker:get_wielded_item():get_name()
-		item:take_item()
-		minetest.add_item(pos, wield_item)
+		local name = clicker and clicker:get_player_name()
+		local meta = minetest.get_meta(pos)
+		if name == meta:get_string("owner") or
+				minetest.check_player_privs(name, "protection_bypass") then
+			local wield_item = clicker:get_wielded_item():get_name()
+			item:take_item()
+			minetest.add_item(pos, wield_item)
+		end
+	end,
+	can_dig = function(pos,player)
+		if not player then return end
+		local name = player and player:get_player_name()
+		local meta = minetest.get_meta(pos)
+		return name == meta:get_string("owner") or
+				minetest.check_player_privs(name, "protection_bypass")
+	end,
+	on_destruct = function(pos)
+		local meta = minetest.get_meta(pos)
+		local node = minetest.get_node(pos)
+		if meta:get_string("item") ~= "" then
+			drop_item(pos, node)
+		end
 	end,
 })
 
