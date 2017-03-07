@@ -1,8 +1,8 @@
 default
 xpanes?
-moreblocks
-mesecons
-mesecons_microcontroller
-mesecons_button
-mesecons_torch
-dye
+moreblocks?
+mesecons?
+mesecons_microcontroller?
+mesecons_button?
+mesecons_torch?
+dye?
