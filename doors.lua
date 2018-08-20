@@ -43,11 +43,14 @@ function onplace(itemstack, placer, pointed_thing)
 	local pos2 = {x=pos1.x, y=pos1.y, z=pos1.z}
 	      pos2.y = pos2.y+1
 	if
+
 	not minetest.registered_nodes[minetest.get_node(pos1).name].buildable_to or
 	not minetest.registered_nodes[minetest.get_node(pos2).name].buildable_to or
 	not placer or
-	not placer:is_player() then
-	return 
+	not placer:is_player() or
+	minetest.is_protected(pos1, placer:get_player_name()) or
+	minetest.is_protected(pos2, placer:get_player_name()) then
+		return
 	end
 			local pt = pointed_thing.above
 			local pt2 = {x=pt.x, y=pt.y, z=pt.z}
@@ -75,6 +78,9 @@ function onplace(itemstack, placer, pointed_thing)
 				minetest.set_node(pt, {name=doora, param2=p2})
 				minetest.set_node(pt2, {name=doorb, param2=p2})
 			end
+	itemstack:take_item(1)
+
+	return itemstack;
 end
 
 function afterdestruct(pos, oldnode)
