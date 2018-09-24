@@ -1250,3 +1250,10 @@ minetest.register_craft({
     }
 })
 
+-- https://forum.minetest.net/viewtopic.php?f=10&t=13125&p=261481#p261481
+minetest.register_craft({
+    output = 'scifi_nodes:windowpanel 4',
+    recipe = {
+        {"scifi_nodes:glass","",""}
+    }
+})

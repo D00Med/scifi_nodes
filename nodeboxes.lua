@@ -1220,3 +1220,26 @@ minetest.register_node("scifi_nodes:tallscreen", {
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1}
 })
+
+-- https://forum.minetest.net/viewtopic.php?f=10&t=13125&p=261481#p261481
+minetest.register_node("scifi_nodes:windowpanel", {
+    description = "strong window panel",
+    tiles = {
+        "scifi_nodes_glass.png",
+    },
+    drawtype = "nodebox",
+    paramtype = "light",
+    use_texture_alpha = true,
+    sunlight_propagates = true,
+    paramtype2 = "facedir",
+    node_box = {
+        type = "fixed",
+        fixed = {
+            {-0.0625, -0.5, -0.5, 0.0625, 0.5, 0.5}, -- NodeBox11
+        }
+    },
+    groups = {cracky=1},
+    on_place = minetest.rotate_node,
+    sounds = default.node_sound_glass_defaults(),
+})
+
