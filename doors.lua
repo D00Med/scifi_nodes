@@ -15,12 +15,20 @@
 
 
 local doors = {
-	{"scifi_nodes:door2a","scifi_nodes:door2b","scifi_nodes:door2c","scifi_nodes:door2d","2","black", "doors:door_steel"},
-	{"scifi_nodes:door3a","scifi_nodes:door3b","scifi_nodes:door3c","scifi_nodes:door3d","3","white", "doors:door_glass"},
-	{"scifi_nodes:door4a","scifi_nodes:door4b","scifi_nodes:door4c","scifi_nodes:door4d","4","green", "doors:door_wood"},
-	{"scifi_nodes:door1a","scifi_nodes:door1b","scifi_nodes:door1c","scifi_nodes:door1d","1","Doom", "doors:door_obsidian_glass"},}
+	-- Black door
+	{"scifi_nodes:door2a","scifi_nodes:door2b","scifi_nodes:door2c","scifi_nodes:door2d","2","black", "doors:door_steel", "scifi_nodes_door_mechanic"},
+	-- White door
+	{"scifi_nodes:door3a","scifi_nodes:door3b","scifi_nodes:door3c","scifi_nodes:door3d","3","white", "doors:door_glass", "scifi_nodes_door_normal"},
+	-- Green door
+	{"scifi_nodes:door4a","scifi_nodes:door4b","scifi_nodes:door4c","scifi_nodes:door4d","4","green", "doors:door_wood", "scifi_nodes_door_mechanic"},
+	-- DOOM door
+	{"scifi_nodes:door1a","scifi_nodes:door1b","scifi_nodes:door1c","scifi_nodes:door1d","1","Doom", "doors:door_obsidian_glass", "scifi_nodes_door_mechanic"}
+}
+
 
 for i in ipairs (doors) do
+
+-- TODO: make a map with entries: {a="", b="", desc="", etc}
 local doora = doors[i][1]
 local doorb = doors[i][2]
 local doorc = doors[i][3]
@@ -28,6 +36,7 @@ local doord = doors[i][4]
 local num = doors[i][5]
 local des = doors[i][6]
 local base_ingredient = doors[i][7]
+local sound = doors[i][8]
 
 minetest.register_craft({
     output = doora .. " 2",
@@ -88,6 +97,13 @@ function afterdestruct(pos, oldnode)
 end
 
 function rightclick(pos, node, player, itemstack, pointed_thing)
+	-- play sound
+	minetest.sound_play(sound,{
+		max_hear_distance = 16,
+		pos = pos,
+		gain = 1.0
+	})
+
 	local timer = minetest.get_node_timer(pos)
 	local a = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})
 	local b = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1})
@@ -122,6 +138,13 @@ function afterplace(pos, placer, itemstack, pointed_thing)
 end
 
 function ontimer(pos, elapsed)
+	-- play sound
+	minetest.sound_play(sound,{
+		max_hear_distance = 16,
+		pos = pos,
+		gain = 1.0
+	})
+
 	local node = minetest.get_node(pos)
 	local a = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})
 	local b = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1})
