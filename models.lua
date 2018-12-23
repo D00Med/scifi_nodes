@@ -37,9 +37,33 @@ minetest.register_node("scifi_nodes:slope_"..name, {
 })
 end
 
+
+-- register some blocks in stairsplus if available (part of moreblocks)
+local has_moreblocks = minetest.get_modpath("moreblocks")
+if has_moreblocks then
+	-- register black tile 2 in stairsplus
+	stairsplus:register_all("scifi_nodes", "blacktile2", "scifi_nodes:blacktile2", {
+		description = "black tile 2",
+		tiles = {"scifi_nodes_blacktile2.png"},
+		groups = {cracky=1}
+	})
+
+	-- register white block in stairsplus
+	-- previous "local" slope has the same name and does not need to be aliased
+	stairsplus:register_all("scifi_nodes", "white", "scifi_nodes:white", {
+		description = "White",
+		tiles = {"scifi_nodes_white.png"},
+		groups = {cracky=1}
+	})
+
+
+else
+	-- register local slope
+	scifi_nodes.register_slope("white", "White", {"scifi_nodes_white.png",}, 0)
+end
+
 scifi_nodes.register_slope("white2", "Plastic", {"scifi_nodes_white2.png",}, 0)
 scifi_nodes.register_slope("black", "Black", {"scifi_nodes_black.png",}, 0)
-scifi_nodes.register_slope("white", "White", {"scifi_nodes_white.png",}, 0)
 scifi_nodes.register_slope("grey", "Grey", {"scifi_nodes_grey.png",}, 0)
 scifi_nodes.register_slope("bluebars", "Blue bars", {"scifi_nodes_bluebars.png",}, 0)
 scifi_nodes.register_slope("mesh2", "Metal floormesh", {"scifi_nodes_mesh2.png",}, 0)
