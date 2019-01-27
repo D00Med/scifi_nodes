@@ -10,6 +10,27 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = "scifi_nodes:super_white",
+	recipe = {
+		{"scifi_nodes:white2", "default:torch", ""}
+	}
+})
+
+minetest.register_craft({
+	output = "scifi_nodes:ultra_white",
+	recipe = {
+		{"default:torch", "scifi_nodes:white2", "default:torch"}
+	}
+})
+
+minetest.register_craft({
+	output = "scifi_nodes:ultra_white",
+	recipe = {
+		{"scifi_nodes:super_white", "default:torch", ""}
+	}
+})
+
 -- 6 plastic wall from 6 plastic
 minetest.register_craft({
     output = "scifi_nodes:white 6",

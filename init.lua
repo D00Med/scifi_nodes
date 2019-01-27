@@ -499,6 +499,8 @@ node.types = {
 	{"blue",      "blue lines",        "blue"},
 	{"holes",       "metal with holes","holes"},
 	{"white2",      "plastic",         "white2"},
+    {"super_white",      "Super Plastic",         "super_white", 11},
+    {"ultra_white",      "Ultra Plastic",         "ultra_white", default.LIGHT_MAX},
 	{"engine",      "engine",          "engine"},
 	{"wall",      "metal wall",        "wall"},
 	{"white",      "plastic wall",     "white"},
