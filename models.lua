@@ -53,8 +53,8 @@ scifi_nodes.register_slope("holes", "Holes", {"scifi_nodes_holes.png",}, 0)
 scifi_nodes.register_slope("pipe", "Pipe", {"scifi_nodes_pipe.png",}, 0)
 scifi_nodes.register_slope("stripes", "Stripes", {"scifi_nodes_stripes.png",}, 0)
 scifi_nodes.register_slope("screen", "Screen", {"scifi_nodes_screen3.png",}, 5)
-scifi_nodes.register_slope("lightstripe", "Lightstripe", {"scifi_nodes_lightstripe.png",}, 20)
-scifi_nodes.register_slope("blight2", "Blue Light 2", {"scifi_nodes_capsule3.png",}, 20)
+scifi_nodes.register_slope("lightstripe", "Lightstripe", {"scifi_nodes_lightstripe.png",}, default.LIGH_MAX)
+scifi_nodes.register_slope("blight2", "Blue Light 2", {"scifi_nodes_capsule3.png",}, default.LIGH_MAX)
 scifi_nodes.register_slope("wallpipe", "Alien Pipe", {"scifi_nodes_wallpipe.png",}, 0)
 scifi_nodes.register_slope("alien", "Alien Wall", {"scifi_nodes_alnslp.png",}, 0)
 scifi_nodes.register_slope("purple", "Purple", {"scifi_nodes_purple.png",}, 0)
@@ -137,10 +137,10 @@ node.types = {
 --	{"monitorwall",      "Wall monitors",       "monitorwall"},
 	{"screen3",      "Wall monitor",       "screen3"},
 	{"doomlight",      "Doom light",       "doomlight", 12},
-	{"bluwllight",      "Blue wall light", "capsule3", 20},
+	{"bluwllight",      "Blue wall light", "capsule3", default.LIGH_MAX},
 	{"bluegrid",      "Blue Grid", "bluegrid", 5},
 	{"fan",      "Fan",       "fan"},
-	{"ppllght",      "Purple wall light", "", 50},
+	{"ppllght",      "Purple wall light", "", default.LIGH_MAX},
 	{"pplwll",      "Purple wall", "", 0},
 	{"pplwll2",      "Purple wall2", "", 0},
 	{"pplwll3",      "Purple wall3", "", 0},
