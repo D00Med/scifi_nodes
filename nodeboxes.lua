@@ -301,7 +301,7 @@ minetest.register_node("scifi_nodes:gloshroom", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	light_source = 50,
+	light_source = default.LIGHT_MAX,
 	walkable = false,
 	buildable_to = true,
 	sunlight_propagates = false,
@@ -444,7 +444,7 @@ minetest.register_node("scifi_nodes:lightbar", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
-	light_source = 25,
+	light_source = default.LIGHT_MAX,
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -460,52 +460,6 @@ minetest.register_node("scifi_nodes:lightbar", {
 	groups = {cracky=1},
 	sounds = default.node_sound_glass_defaults()
 })
---wall switch, currently does not do anything
-minetest.register_node("scifi_nodes:switch_off", {
-	description = "Wall switch",
-	tiles = {
-		"scifi_nodes_switch_off.png",
-	},
-	inventory_image = "scifi_nodes_switch_on.png",
-	wield_image = "scifi_nodes_switch_on.png",
-	drawtype = "signlike",
-	sunlight_propagates = true,
-	selection_box = {
-		type = "wallmounted",
-		fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
-	},
-	paramtype = "light",
-	paramtype2 = "wallmounted",
-	groups = {cracky=1, oddly_breakable_by_hand=1},
-	on_rightclick = function(pos, node, clicker, item, _)
-			minetest.set_node(pos, {name="scifi_nodes:switch_on", param2=node.param2})
-	end,
-	sounds = default.node_sound_glass_defaults()
-})
-
-minetest.register_node("scifi_nodes:switch_on", {
-	description = "Wall switch",
-	sunlight_propagates = true,
-	tiles = {
-		"scifi_nodes_switch_on.png",
-	},
-	inventory_image = "scifi_nodes_switch_on.png",
-	wield_image = "scifi_nodes_switch_on.png",
-	drawtype = "signlike",
-	selection_box = {
-		type = "wallmounted",
-		fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
-	},
-	paramtype = "light",
-	paramtype2 = "wallmounted",
-	light_source = 5,
-	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
-	on_rightclick = function(pos, node, clicker, item, _)
-			minetest.set_node(pos, {name="scifi_nodes:switch_off", param2=node.param2})
-	end,
-	sounds = default.node_sound_glass_defaults()
-})
---end of wall switch
 
 minetest.register_node("scifi_nodes:light_dynamic", {
 	description = "Wall light",
@@ -521,7 +475,7 @@ minetest.register_node("scifi_nodes:light_dynamic", {
 		fixed = {-0.5, -0.5, -0.5, -0.45, 0.5, 0.5}
 	},
 	paramtype2 = "wallmounted",
-	light_source = 25,
+	light_source = default.LIGHT_MAX,
 	groups = {cracky=1, oddly_breakable_by_hand=1},
 	sounds = default.node_sound_glass_defaults()
 })
@@ -568,7 +522,7 @@ minetest.register_node("scifi_nodes:lightbars", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	use_texture_alpha = true,
-	light_source = 25,
+	light_source = default.LIGHT_MAX,
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -589,7 +543,7 @@ tiles = {{
 		animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},
 	}},
 	use_texture_alpha = true,
-	light_source = 15,
+	light_source = default.LIGHT_MAX,
 	drawtype = "nodebox",
 	sunlight_propagates = true,
 	paramtype = "light",
@@ -609,7 +563,7 @@ tiles = {
 		"scifi_nodes_orange.png",
 	},
 	use_texture_alpha = true,
-	light_source = 20,
+	light_source = default.LIGHT_MAX,
 	drawtype = "nodebox",
 	sunlight_propagates = true,
 	paramtype = "light",
@@ -1147,7 +1101,7 @@ minetest.register_node("scifi_nodes:glassscreen", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	light_source = 15,
+	light_source = default.LIGHT_MAX,
 	sunlight_propagates = true,
 	node_box = {
 		type = "fixed",
@@ -1243,3 +1197,112 @@ minetest.register_node("scifi_nodes:windowpanel", {
     sounds = default.node_sound_glass_defaults(),
 })
 
+if  (mesecon ~= nil) and
+    (mesecon.receptor_on ~= nil) and
+    (mesecon.receptor_off ~= nil)           then
+   minetest.register_node("scifi_nodes:switch_off", {
+        description = "Wall switch",
+        tiles = {
+            "scifi_nodes_switch_off.png",
+        },
+        inventory_image = "scifi_nodes_switch_on.png",
+        wield_image = "scifi_nodes_switch_on.png",
+        drawtype = "signlike",
+        sunlight_propagates = true,
+        selection_box = {
+            type = "wallmounted",
+            fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
+        },
+        paramtype = "light",
+        paramtype2 = "wallmounted",
+        groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
+        on_rightclick = function(pos, node, clicker, item, _)
+                minetest.set_node(pos, {name="scifi_nodes:switch_on", param2=node.param2})
+                mesecon.receptor_on(pos)
+        end,
+        sounds = default.node_sound_glass_defaults(),
+        mesecons = {receptor = { state = mesecon.state.off }}
+    })
+
+    minetest.register_node("scifi_nodes:switch_on", {
+        description = "Wall switch",
+        sunlight_propagates = true,
+        tiles = {
+            "scifi_nodes_switch_on.png",
+        },
+        inventory_image = "scifi_nodes_switch_on.png",
+        wield_image = "scifi_nodes_switch_on.png",
+        drawtype = "signlike",
+        selection_box = {
+            type = "wallmounted",
+            fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
+        },
+        paramtype = "light",
+        paramtype2 = "wallmounted",
+        light_source = 5,
+        groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+        on_rightclick = function(pos, node, clicker, item, _)
+                minetest.set_node(pos, {name="scifi_nodes:switch_off", param2=node.param2})
+                mesecon.receptor_off(pos)
+        end,
+        sounds = default.node_sound_glass_defaults(),
+        mesecons = {receptor = { state = mesecon.state.on }}
+    })
+
+    minetest.register_craft({
+        output = "scifi_nodes:switch_off 2",
+        recipe = {
+            {"mesecons_button:button_off", "scifi_nodes:grey", ""}
+        }
+    })
+    
+else
+    --wall switch, currently does not do anything
+    minetest.register_node("scifi_nodes:switch_off", {
+        description = "Wall switch",
+        tiles = {
+            "scifi_nodes_switch_off.png",
+        },
+        inventory_image = "scifi_nodes_switch_on.png",
+        wield_image = "scifi_nodes_switch_on.png",
+        drawtype = "signlike",
+        sunlight_propagates = true,
+        selection_box = {
+            type = "wallmounted",
+            fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
+        },
+        paramtype = "light",
+        paramtype2 = "wallmounted",
+        groups = {cracky=1, oddly_breakable_by_hand=1},
+        on_rightclick = function(pos, node, clicker, item, _)
+                minetest.set_node(pos, {name="scifi_nodes:switch_on", param2=node.param2})
+        end,
+        sounds = default.node_sound_glass_defaults()
+    })
+
+    minetest.register_node("scifi_nodes:switch_on", {
+        description = "Wall switch",
+        sunlight_propagates = true,
+        tiles = {
+            "scifi_nodes_switch_on.png",
+        },
+        inventory_image = "scifi_nodes_switch_on.png",
+        wield_image = "scifi_nodes_switch_on.png",
+        drawtype = "signlike",
+        selection_box = {
+            type = "wallmounted",
+            fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
+        },
+        paramtype = "light",
+        paramtype2 = "wallmounted",
+        light_source = 5,
+        groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
+        on_rightclick = function(pos, node, clicker, item, _)
+                minetest.set_node(pos, {name="scifi_nodes:switch_off", param2=node.param2})
+        end,
+        sounds = default.node_sound_glass_defaults()
+    })
+    
+    --end of wall switch
+    
+end -- if(mesecon.receptor ~= on

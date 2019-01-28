@@ -10,6 +10,27 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = "scifi_nodes:super_white",
+	recipe = {
+		{"scifi_nodes:white2", "default:torch", ""}
+	}
+})
+
+minetest.register_craft({
+	output = "scifi_nodes:ultra_white",
+	recipe = {
+		{"default:torch", "scifi_nodes:white2", "default:torch"}
+	}
+})
+
+minetest.register_craft({
+	output = "scifi_nodes:ultra_white",
+	recipe = {
+		{"scifi_nodes:super_white", "default:torch", ""}
+	}
+})
+
 -- 6 plastic wall from 6 plastic
 minetest.register_craft({
     output = "scifi_nodes:white 6",
@@ -1257,3 +1278,408 @@ minetest.register_craft({
         {"scifi_nodes:glass","",""}
     }
 })
+
+
+minetest.register_craft({
+    output = "scifi_nodes:powered_stand",
+    recipe = {
+        {"", "default:junglewood", ""},
+        {"default:fence_junglewood", "default:fence_junglewood", "default:fence_junglewood"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:door3a 2",
+    recipe = {
+        {"scifi_nodes:white2", "scifi_nodes:white2", ""},
+        {"scifi_nodes:white2", "scifi_nodes:white2", "scifi_nodes:white_pad"},
+	{"scifi_nodes:white2", "scifi_nodes:white2", ""}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:door4a 2",
+    recipe = {
+        {"scifi_nodes:doomwall2"},
+        {"scifi_nodes:doomwall2"},
+	{"scifi_nodes:doomwall2"}
+    }
+})
+
+--[[
+-- 1 metal plant pot from 1 greybolts and 1 clean glass
+minetest.register_craft({
+    output = "scifi_nodes:pot",
+    recipe = {
+        {"moreblocks:clean_glass"},
+        {"default:dirt"},
+        {"scifi_nodes:greybolts"}
+    }
+})
+]]--
+
+minetest.register_craft({
+    output = "scifi_nodes:flower1",
+    recipe = {
+        {"flowers:viola"},
+        {"default:dirt"},
+        {"scifi_nodes:greybolts"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:flower2",
+    recipe = {
+        {"flowers:dandelion_white","flowers:rose"},
+        {"default:dirt",""},
+        {"scifi_nodes:greybolts",""}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:flower3",
+    recipe = {
+        {"flowers:mushroom_brown"},
+        {"default:dirt"},
+        {"scifi_nodes:greybolts"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:flower4",
+    recipe = {
+        {"flowers:viola","default:junglegrass"},
+        {"default:dirt",""},
+        {"scifi_nodes:greybolts",""}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:plant1",
+    recipe = {
+        {"flowers:geranium"},
+        {"default:dirt"},
+        {"scifi_nodes:greybolts"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:plant2",
+    recipe = {
+        {"flowers:mushroom_red","default:grass_1"},
+        {"default:dirt",""},
+        {"scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:plant3",
+    recipe = {
+        {"flowers:geranium","default:grass_1","flowers:geranium"},
+        {"","default:dirt",""},
+        {"","scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:plant4",
+    recipe = {
+        {"flowers:dandelion_white","default:grass_1","flowers:dandelion_white"},
+        {"","default:dirt",""},
+        {"","scifi_nodes:greybolts",""}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:plant5",
+    recipe = {
+        {"default:grass_1"},
+        {"default:dirt"},
+        {"scifi_nodes:greybolts"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:plant6",
+    recipe = {
+        {"flowers:viola","default:grass_1"},
+        {"default:dirt",""},
+        {"scifi_nodes:greybolts",""}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:plant7",
+    recipe = {
+        {"flowers:mushroom_brown","default:grass_1","flowers:mushroom_brown"},
+        {"","default:dirt",""},
+        {"","scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:plant8",
+    recipe = {
+        {"flowers:viola","default:junglegrass"},
+        {"default:dirt",""},
+        {"scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:plant9",
+    recipe = {
+        {"flowers:viola","default:grass_1","flowers:dandelion"},
+        {"","default:dirt",""},
+        {"","scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:plant10",
+    recipe = {
+        {"default:grass_1","flowers:dandelion","default:grass_1"},
+        {"","default:dirt",""},
+        {"","scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:grassblk",
+    recipe = {
+        {"default:grass_1","default:junglegrass","default:grass_1"},
+        {"","default:dirt",""},
+        {"","scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:grass",
+    recipe = {
+        {"default:grass_1","default:junglegrass"},
+        {"default:dirt",""},
+        {"scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:egg",
+    recipe = {
+        {"default:clay_lump","default:clay_lump","default:clay_lump"},
+        {"default:clay_lump","dye:blue","default:clay_lump"},
+        {"default:clay_lump","default:clay_lump","default:clay_lump"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:eyetree",
+    recipe = {
+        {"scifi_nodes:egg"},
+        {"default:sapling"},
+        {"scifi_nodes:greybolts"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:gloshroom",
+    recipe = {
+        {"default:grass_1","flowers:mushroom_red"},
+        {"default:tin_ingot",""},
+        {"scifi_nodes:greybolts",""}
+    }
+})
+
+
+minetest.register_craft({
+    output = "scifi_nodes:plant_trap",
+    recipe = {
+        {"vessels:drinking_glass","scifi_nodes:lightbars"},
+        {"scifi_nodes:greybolts",""}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:gblock 3",
+    recipe = {
+        {"dye:white","scifi_nodes:greenmetal","dye:green"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:gblock2 4",
+    recipe = {
+        {"scifi_nodes:disc","scifi_nodes:disc","scifi_nodes:disc"},
+        {"","scifi_nodes:gblock",""}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:gblock3",
+    recipe = {
+        {"default:sign_wall_wood"},
+        {"scifi_nodes:gblock"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:bluegrid 4",
+    recipe = {
+        {"scifi_nodes:bluemetal","", "scifi_nodes:bluemetal"},
+        {"scifi_nodes:bluemetal","default:obsidian_glass", "scifi_nodes:bluemetal"},
+        {"scifi_nodes:bluemetal","", "scifi_nodes:bluemetal"},
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:red 4",
+    recipe = {
+        {"scifi_nodes:blackplate","", "scifi_nodes:blackplate"},
+        {"","dye:red",""},
+        {"scifi_nodes:blackplate","", "scifi_nodes:blackplate"}
+    }
+})
+
+minetest.register_craft({
+    output = "scifi_nodes:wallpipe 3",
+    recipe = {
+        {"default:papyrus","scifi_nodes:grnpipe", "scifi_nodes:liquid_pipe"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:doomwall41 6',
+    recipe = {
+        {"scifi_nodes:white","dye:blue","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","dye:blue","scifi_nodes:white"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:doomwall42 6',
+    recipe = {
+        {"scifi_nodes:white","dye:black","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","dye:yellow","scifi_nodes:white"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:doomwall43 6',
+    recipe = {
+        {"scifi_nodes:white","dye:black","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","dye:yellow","scifi_nodes:white"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:doomwall43 6',
+    recipe = {
+        {"scifi_nodes:white","scifi_nodes:white","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","default:grass_1","scifi_nodes:white"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:doomwall431 6',
+    recipe = {
+        {"scifi_nodes:white","default:grass_1","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","scifi_nodes:white","scifi_nodes:white"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:doomwall44 6',
+    recipe = {
+        {"scifi_nodes:white","default:grass_1","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","default:grass_1","scifi_nodes:white"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:doomwall44 6',
+    recipe = {
+        {"scifi_nodes:white","default:grass_1","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","default:grass_1","scifi_nodes:white"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:pipe 8',
+    recipe = {
+        {"scifi_nodes:greenmetal","scifi_nodes:vent2","scifi_nodes:greenmetal"},
+        {"scifi_nodes:greenmetal","","scifi_nodes:greenmetal"},
+        {"scifi_nodes:greenmetal","scifi_nodes:vent2","scifi_nodes:greenmetal"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:pipeside 8',
+    recipe = {
+        {"scifi_nodes:greenmetal","scifi_nodes:greenmetal","scifi_nodes:greenmetal"},
+        {"scifi_nodes:vent2","","scifi_nodes:vent2"},
+        {"scifi_nodes:greenmetal","scifi_nodes:greenmetal","scifi_nodes:greenmetal"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:computer',
+    recipe = {
+        {"default:bookshelf","default:diamond","default:copper_ingot"},
+        {"","scifi_nodes:black_lights",""}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:cover',
+    recipe = {
+        {"scifi_nodes:dent","default:wood","scifi_nodes:dent"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:pipen',
+    recipe = {
+        {"scifi_nodes:black","","scifi_nodes:black"},
+        {"scifi_nodes:black","scifi_nodes:vent2","scifi_nodes:black"},
+        {"scifi_nodes:black","","scifi_nodes:black"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:alienslope 6',
+    recipe = {
+        {"scifi_nodes:screen3",""},
+        {"scifi_nodes:grnpipe","scifi_nodes:vent2"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:stripes2top 3',
+    recipe = {
+        {"scifi_nodes:black","scifi_noedes:black","scifi_nodes:black"},
+        {"default:silver_sand","default:silver_sand","default:silver_sand"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:stripes2 2',
+    recipe = {
+        {"scifi_nodes:stripes2top"},
+        {"scifi_nodes:stripes"}
+    }
+})
+
