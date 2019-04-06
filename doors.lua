@@ -109,6 +109,12 @@ function rightclick(pos, node, player, itemstack, pointed_thing)
 	local b = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1})
 	local c = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z})
 	local d = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z})
+	local e = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z-1})
+	local f = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z-1})
+	local g = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z+1})
+	local h = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z+1})
+	
+	
 		minetest.set_node(pos, {name=doorc, param2=node.param2})
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=doord, param2=node.param2})
 
@@ -127,6 +133,22 @@ function rightclick(pos, node, player, itemstack, pointed_thing)
 	     if d.name == doora then
 		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=doorc, param2=d.param2})
 		minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=doord, param2=d.param2})
+		end
+	     if e.name == doora then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=doorc, param2=e.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=doord, param2=e.param2})
+		end
+	     if f.name == doora then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=doorc, param2=f.param2})
+		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=doord, param2=f.param2})
+		end
+	     if g.name == doora then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=doorc, param2=g.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=doord, param2=g.param2})
+		end
+	     if h.name == doora then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=doorc, param2=h.param2})
+		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=doord, param2=h.param2})
 		end
 
 	   timer:start(3)
@@ -150,6 +172,12 @@ function ontimer(pos, elapsed)
 	local b = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1})
 	local c = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z})
 	local d = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z})
+	local e = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z-1})
+	local f = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z-1})
+	local g = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z+1})
+	local h = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z+1})
+	
+	
 		minetest.set_node(pos, {name=doora, param2=node.param2})
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=doorb, param2=node.param2})
 
@@ -168,6 +196,22 @@ function ontimer(pos, elapsed)
 	     if d.name == doorc then
 		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=doora, param2=d.param2})
 		minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=doorb, param2=d.param2})
+		end
+	     if e.name == doorc then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=doora, param2=e.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=doorb, param2=e.param2})
+		end
+	     if f.name == doorc then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=doora, param2=f.param2})
+		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=doorb, param2=f.param2})
+		end
+	     if g.name == doorc then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=doora, param2=g.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=doorb, param2=g.param2})
+		end
+	     if h.name == doorc then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=doora, param2=h.param2})
+		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=doorb, param2=h.param2})
 		end
 
 end
@@ -232,7 +276,8 @@ minetest.register_node(doorb, {
 			{0, 0, 0, 0, 0, 0},
 		}
 	},
-})minetest.register_node(doorc, {
+})
+minetest.register_node(doorc, {
 	tiles = {
 		"scifi_nodes_door"..num.."a_edge.png",
 		"scifi_nodes_door"..num.."a_edge.png",
