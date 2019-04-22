@@ -32,6 +32,7 @@ minetest.register_node("scifi_nodes:alienslope", {
 			{-0.125, 0.375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox17
 		}
 	},
+	sounds = default.node_sound_wood_defaults(),
 	on_place = minetest.rotate_node
 })
 
@@ -61,6 +62,7 @@ minetest.register_node("scifi_nodes:wallpipe", {
 			{-0.5, -0.125, 0, 0.5, 0, 0.0625}, -- NodeBox24
 		}
 	},
+	sounds = default.node_sound_wood_defaults()
 })
 
 minetest.register_node("scifi_nodes:plant_trap", {
@@ -88,7 +90,8 @@ minetest.register_node("scifi_nodes:plant_trap", {
 			{-0.0625, -0.5, -0.0625, 0, -0.4375, 0.375}, -- NodeBox27
 			{-0.0625, -0.5, 0.3125, 0, 0.5, 0.375}, -- NodeBox28
 		}
-	}
+	},
+	sounds = default.node_sound_wood_defaults(),
 })
 
 minetest.register_node("scifi_nodes:egg", {
@@ -118,7 +121,8 @@ minetest.register_node("scifi_nodes:egg", {
 			{-0.1875, 0.6875, -0.1875, 0.1875, 0.75, 0.1875}, -- NodeBox7
 			{-0.125, 0.75, -0.125, 0.125, 0.8125, 0.125}, -- NodeBox8
 			{-0.375, -0.3125, -0.4375, 0.375, 0.3125, 0.4375}, -- NodeBox9
-		}
+		},
+	sounds = default.node_sound_wood_defaults()
 	}
 })
 
@@ -261,7 +265,8 @@ minetest.register_node("scifi_nodes:pad", {
 			{-0.8125, -0.5, -0.875, 0.75, -0.375, 0.875}, -- NodeBox2
 			{-0.875, -0.5, -0.8125, 0.8125, -0.375, 0.8125}, -- NodeBox3
 			{-0.8125, -0.5, -0.75, 0.75, -0.3125, 0.75}, -- NodeBox4
-		}
+		},
+	sounds = default.node_sound_wood_defaults()
 	}
 })
 
@@ -506,7 +511,8 @@ minetest.register_node("scifi_nodes:ladder", {
 			{0.3125, -0.5, 0.3125, 0.4375, -0.375, 0.4375}, -- NodeBox24
 			{0.3125, -0.5, 0.0625, 0.4375, -0.375, 0.1875}, -- NodeBox25
 			{0.3125, -0.5, -0.1875, 0.4375, -0.375, -0.0625}, -- NodeBox26
-		}
+		},
+	sounds = default.node_sound_metal_defaults()
 	},
 	paramtype2 = "wallmounted",
 	walkable = false,
@@ -631,6 +637,7 @@ minetest.register_node("scifi_nodes:cover", {
 			{-0.3125, -0.375, -0.3125, 0.3125, -0.3125, 0.3125}, -- NodeBox6
 		}
 	},
+	sounds = default.node_sound_wood_defaults(),
 	groups = {cracky=1, oddly_breakable_by_hand=1}
 })
 
@@ -735,6 +742,7 @@ minetest.register_node("scifi_nodes:table", {
 			{-0.0625, 0.25, -0.125, 0.0625, 0.4375, -0.0625}, -- NodeBox7
 		}
 	},
+	sounds = default.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -1209,9 +1217,11 @@ if  (mesecon ~= nil) and
         wield_image = "scifi_nodes_switch_on.png",
         drawtype = "signlike",
         sunlight_propagates = true,
+        node_box = {
+            type = "wallmounted",
+        },
         selection_box = {
             type = "wallmounted",
-            fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
         },
         paramtype = "light",
         paramtype2 = "wallmounted",
@@ -1233,9 +1243,11 @@ if  (mesecon ~= nil) and
         inventory_image = "scifi_nodes_switch_on.png",
         wield_image = "scifi_nodes_switch_on.png",
         drawtype = "signlike",
+        node_box = {
+            type = "wallmounted",
+        },
         selection_box = {
             type = "wallmounted",
-            fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
         },
         paramtype = "light",
         paramtype2 = "wallmounted",
@@ -1267,9 +1279,11 @@ else
         wield_image = "scifi_nodes_switch_on.png",
         drawtype = "signlike",
         sunlight_propagates = true,
+        node_box = {
+            type = "wallmounted",
+        },
         selection_box = {
             type = "wallmounted",
-            fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
         },
         paramtype = "light",
         paramtype2 = "wallmounted",
@@ -1289,9 +1303,11 @@ else
         inventory_image = "scifi_nodes_switch_on.png",
         wield_image = "scifi_nodes_switch_on.png",
         drawtype = "signlike",
-        selection_box = {
+        node_box = {
             type = "wallmounted",
-            fixed = {-0.5, -0.3, -0.3, -0.45, 0.3, 0.3}
+        },
+        selecion_box = {
+            type = "wallmounted",
         },
         paramtype = "light",
         paramtype2 = "wallmounted",
