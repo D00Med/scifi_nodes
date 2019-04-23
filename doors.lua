@@ -14,32 +14,37 @@
 -- will the authors be held liable for any damages arising from the use of this content.
 
 
+-- This table now uses named parameters and more convenient variables names
 local doors = {
+	-- DOOM door {closed, closed top, opened, opened top, texture number, main ingredient, sound}
+	{base_name = "Doom", tex_number = "1", base_ingredient =  "doors:door_obsidian_glass", sound = "scifi_nodes_door_mechanic"},
 	-- Black door
-	{"scifi_nodes:door2a","scifi_nodes:door2b","scifi_nodes:door2c","scifi_nodes:door2d","2","black", "doors:door_steel", "scifi_nodes_door_mechanic"},
+	{base_name = "black", tex_number = "2", base_ingredient = "doors:door_steel", sound = "scifi_nodes_door_mechanic"},
 	-- White door
-	{"scifi_nodes:door3a","scifi_nodes:door3b","scifi_nodes:door3c","scifi_nodes:door3d","3","white", "doors:door_glass", "scifi_nodes_door_normal"},
+	{base_name = "white", tex_number = "3", base_ingredient = "doors:door_glass", sound = "scifi_nodes_door_normal"},
 	-- Green door
-	{"scifi_nodes:door4a","scifi_nodes:door4b","scifi_nodes:door4c","scifi_nodes:door4d","4","green", "doors:door_wood", "scifi_nodes_door_mechanic"},
-	-- DOOM door
-	{"scifi_nodes:door1a","scifi_nodes:door1b","scifi_nodes:door1c","scifi_nodes:door1d","1","Doom", "doors:door_obsidian_glass", "scifi_nodes_door_mechanic"}
+	{base_name = "green", tex_number = "4", base_ingredient = "doors:door_wood", sound = "scifi_nodes_door_mechanic"},
 }
+
+
+-- Maybe useful later with mesecons_doors.meseconify_door()
+function get_doors_list()
+	return doors
+end
 
 
 for i in ipairs (doors) do
 
--- TODO: make a map with entries: {a="", b="", desc="", etc}
-local doora = doors[i][1]
-local doorb = doors[i][2]
-local doorc = doors[i][3]
-local doord = doors[i][4]
-local num = doors[i][5]
-local des = doors[i][6]
-local base_ingredient = doors[i][7]
-local sound = doors[i][8]
+local closed = "scifi_nodes:"..doors[i].base_name.."_door_closed"
+local closed_top = "scifi_nodes:"..doors[i].base_name.."_door_closed_top"
+local opened = "scifi_nodes:"..doors[i].base_name.."_door_opened"
+local opened_top = "scifi_nodes:"..doors[i].base_name.."_door_opened_top"
+local tex_number = doors[i].tex_number
+local base_ingredient = doors[i].base_ingredient
+local sound = doors[i].sound
 
 minetest.register_craft({
-    output = doora .. " 2",
+    output = closed .. " 2",
     recipe = {
         {"scifi_nodes:white2", base_ingredient, "scifi_nodes:white2"},
         {"scifi_nodes:black", base_ingredient, "scifi_nodes:black"}
@@ -80,12 +85,12 @@ function onplace(itemstack, placer, pointed_thing)
 				pt3.z = pt3.z-1
 				p4 = 1
 			end
-			if minetest.get_node(pt3).name == doora then
-				minetest.set_node(pt, {name=doora, param2=p4})
-				minetest.set_node(pt2, {name=doorb, param2=p4})
+			if minetest.get_node(pt3).name == closed then
+				minetest.set_node(pt, {name=closed, param2=p4})
+				minetest.set_node(pt2, {name=closed_top, param2=p4})
 			else
-				minetest.set_node(pt, {name=doora, param2=p2})
-				minetest.set_node(pt2, {name=doorb, param2=p2})
+				minetest.set_node(pt, {name=closed, param2=p2})
+				minetest.set_node(pt2, {name=closed_top, param2=p2})
 			end
 	itemstack:take_item(1)
 
@@ -115,40 +120,40 @@ function rightclick(pos, node, player, itemstack, pointed_thing)
 	local h = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z+1})
 	
 	
-		minetest.set_node(pos, {name=doorc, param2=node.param2})
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=doord, param2=node.param2})
+		minetest.set_node(pos, {name=opened, param2=node.param2})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=opened_top, param2=node.param2})
 
-	     if a.name == doora then
-		minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name=doorc, param2=a.param2})
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z-1}, {name=doord, param2=a.param2})
+	     if a.name == closed then
+		minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name=opened, param2=a.param2})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z-1}, {name=opened_top, param2=a.param2})
 		end
-	     if b.name == doora then
-		minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name=doorc, param2=b.param2})
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z+1}, {name=doord, param2=b.param2})
+	     if b.name == closed then
+		minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name=opened, param2=b.param2})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z+1}, {name=opened_top, param2=b.param2})
 		end
-	     if c.name == doora then
-		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name=doorc, param2=c.param2})
-		minetest.set_node({x=pos.x+1,y=pos.y+1,z=pos.z}, {name=doord, param2=c.param2})
+	     if c.name == closed then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name=opened, param2=c.param2})
+		minetest.set_node({x=pos.x+1,y=pos.y+1,z=pos.z}, {name=opened_top, param2=c.param2})
 		end
-	     if d.name == doora then
-		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=doorc, param2=d.param2})
-		minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=doord, param2=d.param2})
+	     if d.name == closed then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=opened, param2=d.param2})
+		minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=opened_top, param2=d.param2})
 		end
-	     if e.name == doora then
-		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=doorc, param2=e.param2})
-		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=doord, param2=e.param2})
+	     if e.name == closed then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=opened, param2=e.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=opened_top, param2=e.param2})
 		end
-	     if f.name == doora then
-		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=doorc, param2=f.param2})
-		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=doord, param2=f.param2})
+	     if f.name == closed then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=opened, param2=f.param2})
+		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=opened_top, param2=f.param2})
 		end
-	     if g.name == doora then
-		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=doorc, param2=g.param2})
-		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=doord, param2=g.param2})
+	     if g.name == closed then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=opened, param2=g.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=opened_top, param2=g.param2})
 		end
-	     if h.name == doora then
-		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=doorc, param2=h.param2})
-		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=doord, param2=h.param2})
+	     if h.name == closed then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=opened, param2=h.param2})
+		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=opened_top, param2=h.param2})
 		end
 
 	   timer:start(3)
@@ -156,7 +161,7 @@ function rightclick(pos, node, player, itemstack, pointed_thing)
 end
 
 function afterplace(pos, placer, itemstack, pointed_thing)
-	   minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=doord,param2=nodeu.param2})
+	   minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=nodeu.param2})
 end
 
 function ontimer(pos, elapsed)
@@ -178,55 +183,55 @@ function ontimer(pos, elapsed)
 	local h = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z+1})
 	
 	
-		minetest.set_node(pos, {name=doora, param2=node.param2})
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=doorb, param2=node.param2})
+		minetest.set_node(pos, {name=closed, param2=node.param2})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=closed_top, param2=node.param2})
 
-	     if a.name == doorc then
-		minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name=doora, param2=a.param2})
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z-1}, {name=doorb, param2=a.param2})
+	     if a.name == opened then
+		minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name=closed, param2=a.param2})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z-1}, {name=closed_top, param2=a.param2})
 		end
-	     if b.name == doorc then
-		minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name=doora, param2=b.param2})
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z+1}, {name=doorb, param2=b.param2})
+	     if b.name == opened then
+		minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name=closed, param2=b.param2})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z+1}, {name=closed_top, param2=b.param2})
 		end
-	     if c.name == doorc then
-		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name=doora, param2=c.param2})
-		minetest.set_node({x=pos.x+1,y=pos.y+1,z=pos.z}, {name=doorb, param2=c.param2})
+	     if c.name == opened then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name=closed, param2=c.param2})
+		minetest.set_node({x=pos.x+1,y=pos.y+1,z=pos.z}, {name=closed_top, param2=c.param2})
 		end
-	     if d.name == doorc then
-		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=doora, param2=d.param2})
-		minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=doorb, param2=d.param2})
+	     if d.name == opened then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=closed, param2=d.param2})
+		minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=closed_top, param2=d.param2})
 		end
-	     if e.name == doorc then
-		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=doora, param2=e.param2})
-		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=doorb, param2=e.param2})
+	     if e.name == opened then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=closed, param2=e.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=closed_top, param2=e.param2})
 		end
-	     if f.name == doorc then
-		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=doora, param2=f.param2})
-		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=doorb, param2=f.param2})
+	     if f.name == opened then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=closed, param2=f.param2})
+		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=closed_top, param2=f.param2})
 		end
-	     if g.name == doorc then
-		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=doora, param2=g.param2})
-		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=doorb, param2=g.param2})
+	     if g.name == opened then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=closed, param2=g.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=closed_top, param2=g.param2})
 		end
-	     if h.name == doorc then
-		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=doora, param2=h.param2})
-		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=doorb, param2=h.param2})
+	     if h.name == opened then
+		minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=closed, param2=h.param2})
+		minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=closed_top, param2=h.param2})
 		end
 
 end
 
-minetest.register_node(doora, {
-	description = des.." Sliding Door",
-	inventory_image = "scifi_nodes_door"..num.."a_inv.png",
-	wield_image = "scifi_nodes_door"..num.."a_inv.png",
+minetest.register_node(closed, {
+	description = doors[i].base_name.." sliding door",
+	inventory_image = "scifi_nodes_door"..tex_number.."a_inv.png",
+	wield_image = "scifi_nodes_door"..tex_number.."a_inv.png",
 	tiles = {
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_rbottom.png",
-		"scifi_nodes_door"..num.."a_bottom.png"
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_rbottom.png",
+		"scifi_nodes_door"..tex_number.."a_bottom.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -251,14 +256,15 @@ after_destruct = afterdestruct,
 
 on_rightclick = rightclick,
 })
-minetest.register_node(doorb, {
+
+minetest.register_node(closed_top, {
 	tiles = {
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_rtop.png",
-		"scifi_nodes_door"..num.."a_top.png"
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_rtop.png",
+		"scifi_nodes_door"..tex_number.."a_top.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -277,19 +283,20 @@ minetest.register_node(doorb, {
 		}
 	},
 })
-minetest.register_node(doorc, {
+
+minetest.register_node(opened, {
 	tiles = {
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_rbottom0.png",
-		"scifi_nodes_door"..num.."a_bottom0.png"
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_rbottom0.png",
+		"scifi_nodes_door"..tex_number.."a_bottom0.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	drop = doora,
+	drop = closed,
 	groups = {cracky = 1},
 	node_box = {
 		type = "fixed",
@@ -307,14 +314,15 @@ after_place_node = afterplace,
 after_destruct = afterdestruct,
 on_timer = ontimer,
 })
-minetest.register_node(doord, {
+
+minetest.register_node(opened_top, {
 	tiles = {
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_edge.png",
-		"scifi_nodes_door"..num.."a_rtopo.png",
-		"scifi_nodes_door"..num.."a_topo.png"
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_edge.png",
+		"scifi_nodes_door"..tex_number.."a_rtopo.png",
+		"scifi_nodes_door"..tex_number.."a_topo.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
