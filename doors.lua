@@ -17,13 +17,14 @@
 -- This table now uses named parameters and more convenient variables names
 local doors = {
 	-- DOOM door {closed, closed top, opened, opened top, texture number, main ingredient, sound}
-	{base_name = "Doom", tex_number = "1", base_ingredient =  "doors:door_obsidian_glass", sound = "scifi_nodes_door_mechanic"},
+	{base_name = "Doom", base_ingredient =  "doors:door_obsidian_glass", sound = "scifi_nodes_door_mechanic"},
 	-- Black door
-	{base_name = "black", tex_number = "2", base_ingredient = "doors:door_steel", sound = "scifi_nodes_door_mechanic"},
+	{base_name = "black", base_ingredient = "doors:door_steel", sound = "scifi_nodes_door_mechanic"},
 	-- White door
-	{base_name = "white", tex_number = "3", base_ingredient = "doors:door_glass", sound = "scifi_nodes_door_normal"},
+	{base_name = "white", base_ingredient = "doors:door_glass", sound = "scifi_nodes_door_normal"},
 	-- Green door
-	{base_name = "green", tex_number = "4", base_ingredient = "doors:door_wood", sound = "scifi_nodes_door_mechanic"},
+	{base_name = "green", base_ingredient = "doors:door_wood", sound = "scifi_nodes_door_mechanic"},
+	{base_name = "blue", base_ingredient = "default:steel_block", sound = "scifi_nodes_door_normal"}
 }
 
 
@@ -33,15 +34,15 @@ function get_doors_list()
 end
 
 
-for i in ipairs (doors) do
+for _, current_door in ipairs(doors) do
 
-local closed = "scifi_nodes:"..doors[i].base_name.."_door_closed"
-local closed_top = "scifi_nodes:"..doors[i].base_name.."_door_closed_top"
-local opened = "scifi_nodes:"..doors[i].base_name.."_door_opened"
-local opened_top = "scifi_nodes:"..doors[i].base_name.."_door_opened_top"
-local tex_number = doors[i].tex_number
-local base_ingredient = doors[i].base_ingredient
-local sound = doors[i].sound
+local closed = "scifi_nodes:"..current_door.base_name.."_door_closed"
+local closed_top = "scifi_nodes:"..current_door.base_name.."_door_closed_top"
+local opened = "scifi_nodes:"..current_door.base_name.."_door_opened"
+local opened_top = "scifi_nodes:"..current_door.base_name.."_door_opened_top"
+local base_name = current_door.base_name
+local base_ingredient = current_door.base_ingredient
+local sound = current_door.sound
 
 minetest.register_craft({
     output = closed .. " 2",
@@ -222,16 +223,16 @@ function ontimer(pos, elapsed)
 end
 
 minetest.register_node(closed, {
-	description = doors[i].base_name.." sliding door",
-	inventory_image = "scifi_nodes_door"..tex_number.."a_inv.png",
-	wield_image = "scifi_nodes_door"..tex_number.."a_inv.png",
+	description = current_door.base_name.." sliding door",
+	inventory_image = "scifi_nodes_door_"..base_name.."_inv.png",
+	wield_image = "scifi_nodes_door_"..base_name.."_inv.png",
 	tiles = {
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_rbottom.png",
-		"scifi_nodes_door"..tex_number.."a_bottom.png"
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_rbottom.png",
+		"scifi_nodes_door_"..base_name.."_bottom.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -249,6 +250,18 @@ minetest.register_node(closed, {
 			{-0.5, -0.5, -0.0625, 0.5, 1.5, 0.0625}
 		}
 	},
+	mesecon = {
+		effector = {
+			action_on = function (pos, node)
+			minetest.sound_play(sound, {
+				max_hear_distance = 16,
+				pos = pos,
+				gain = 1.0
+			})
+		end,
+		rules = mesecon.rules.pplate
+		},
+	},
 
 on_place = onplace,
 
@@ -259,12 +272,12 @@ on_rightclick = rightclick,
 
 minetest.register_node(closed_top, {
 	tiles = {
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_rtop.png",
-		"scifi_nodes_door"..tex_number.."a_top.png"
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_rtop.png",
+		"scifi_nodes_door_"..base_name.."_top.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -286,12 +299,12 @@ minetest.register_node(closed_top, {
 
 minetest.register_node(opened, {
 	tiles = {
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_rbottom0.png",
-		"scifi_nodes_door"..tex_number.."a_bottom0.png"
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_rbottom0.png",
+		"scifi_nodes_door_"..base_name.."_bottom0.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
@@ -317,12 +330,12 @@ on_timer = ontimer,
 
 minetest.register_node(opened_top, {
 	tiles = {
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_edge.png",
-		"scifi_nodes_door"..tex_number.."a_rtopo.png",
-		"scifi_nodes_door"..tex_number.."a_topo.png"
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_edge.png",
+		"scifi_nodes_door_"..base_name.."_rtopo.png",
+		"scifi_nodes_door_"..base_name.."_topo.png"
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
