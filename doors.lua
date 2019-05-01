@@ -14,15 +14,32 @@
 -- will the authors be held liable for any damages arising from the use of this content.
 
 
+-- Some aliases to deal with old namming policy --
+minetest.register_alias("scifi_nodes:doors_1a","scifi_nodes:Doom_door_closed")
+minetest.register_alias("scifi_nodes:doors_1b","scifi_nodes:Doom_door_closed_top")
+minetest.register_alias("scifi_nodes:doors_1c","scifi_nodes:Doom_door_opened")
+minetest.register_alias("scifi_nodes:doors_1d","scifi_nodes:Doom_door_opened_top")
+
+minetest.register_alias("scifi_nodes:doors_2a","scifi_nodes:black_door_closed")
+minetest.register_alias("scifi_nodes:doors_2b","scifi_nodes:black_door_closed_top")
+minetest.register_alias("scifi_nodes:doors_2c","scifi_nodes:black_door_opened")
+minetest.register_alias("scifi_nodes:doors_2d","scifi_nodes:black_door_opened_top")
+
+minetest.register_alias("scifi_nodes:doors_3a","scifi_nodes:white_door_closed")
+minetest.register_alias("scifi_nodes:doors_3b","scifi_nodes:white_door_closed_top")
+minetest.register_alias("scifi_nodes:doors_3c","scifi_nodes:white_door_opened")
+minetest.register_alias("scifi_nodes:doors_3d","scifi_nodes:white_door_opened_top")
+
+minetest.register_alias("scifi_nodes:doors_4a","scifi_nodes:green_door_closed")
+minetest.register_alias("scifi_nodes:doors_4b","scifi_nodes:green_door_closed_top")
+minetest.register_alias("scifi_nodes:doors_4c","scifi_nodes:green_door_opened")
+minetest.register_alias("scifi_nodes:doors_4d","scifi_nodes:green_door_opened_top")
+
 -- This table now uses named parameters and more convenient variables names
 local doors = {
-	-- DOOM door {closed, closed top, opened, opened top, texture number, main ingredient, sound}
 	{base_name = "Doom", base_ingredient =  "doors:door_obsidian_glass", sound = "scifi_nodes_door_mechanic"},
-	-- Black door
 	{base_name = "black", base_ingredient = "doors:door_steel", sound = "scifi_nodes_door_mechanic"},
-	-- White door
 	{base_name = "white", base_ingredient = "doors:door_glass", sound = "scifi_nodes_door_normal"},
-	-- Green door
 	{base_name = "green", base_ingredient = "doors:door_wood", sound = "scifi_nodes_door_mechanic"},
 	{base_name = "blue", base_ingredient = "default:steel_block", sound = "scifi_nodes_door_normal"}
 }
@@ -47,11 +64,12 @@ for _, current_door in ipairs(doors) do
 
 
 	function onplace(itemstack, placer, pointed_thing)
+		-- Is there room enough ?
 		local pos1 = pointed_thing.above
 		local pos2 = {x=pos1.x, y=pos1.y, z=pos1.z}
-			  pos2.y = pos2.y+1
-		if
+			  pos2.y = pos2.y+1 -- 2 nodes above
 
+		if
 		not minetest.registered_nodes[minetest.get_node(pos1).name].buildable_to or
 		not minetest.registered_nodes[minetest.get_node(pos2).name].buildable_to or
 		not placer or
@@ -60,39 +78,47 @@ for _, current_door in ipairs(doors) do
 		minetest.is_protected(pos2, placer:get_player_name()) then
 			return
 		end
-				local pt = pointed_thing.above
-				local pt2 = {x=pt.x, y=pt.y, z=pt.z}
-				pt2.y = pt2.y+1
-				local p2 = minetest.dir_to_facedir(placer:get_look_dir())
-				local pt3 = {x=pt.x, y=pt.y, z=pt.z}
-				local p4 = 0
-				if p2 == 0 then
-					pt3.x = pt3.x-1
-					p4 = 2
-				elseif p2 == 1 then
-					pt3.z = pt3.z+1
-					p4 = 3
-				elseif p2 == 2 then
-					pt3.x = pt3.x+1
-					p4 = 0
-				elseif p2 == 3 then
-					pt3.z = pt3.z-1
-					p4 = 1
-				end
-				if minetest.get_node(pt3).name == closed then
-					minetest.set_node(pt, {name=closed, param2=p4})
-					minetest.set_node(pt2, {name=closed_top, param2=p4})
-				else
-					minetest.set_node(pt, {name=closed, param2=p2})
-					minetest.set_node(pt2, {name=closed_top, param2=p2})
-				end
-		itemstack:take_item(1)
 
+		local pt = pointed_thing.above
+		local pt2 = {x=pt.x, y=pt.y, z=pt.z}
+		pt2.y = pt2.y+1
+		-- Player look dir is converted to node rotation ?
+		local p2 = minetest.dir_to_facedir(placer:get_look_dir())
+		-- Where to look for another door ?
+		local pt3 = {x=pt.x, y=pt.y, z=pt.z}
+
+		-- Door param2 depends of placer's look dir
+		local p4 = 0
+		if p2 == 0 then
+			pt3.x = pt3.x-1
+			p4 = 2
+		elseif p2 == 1 then
+			pt3.z = pt3.z+1
+			p4 = 3
+		elseif p2 == 2 then
+			pt3.x = pt3.x+1
+			p4 = 0
+		elseif p2 == 3 then
+			pt3.z = pt3.z-1
+			p4 = 1
+		end
+
+		-- First door of a pair is already there
+		if minetest.get_node(pt3).name == closed then
+			minetest.set_node(pt, {name=closed, param2=p4,})
+			minetest.set_node(pt2, {name=closed_top, param2=p4})
+		--	Placed door is the first of a pair
+		else
+			minetest.set_node(pt, {name=closed, param2=p2,})
+			minetest.set_node(pt2, {name=closed_top, param2=p2})
+		end
+
+		itemstack:take_item(1)
 		return itemstack;
 	end
 
 	function afterdestruct(pos, oldnode)
-		   minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 	end
 
 	function rightclick(pos, node, player, itemstack, pointed_thing)
@@ -149,9 +175,7 @@ for _, current_door in ipairs(doors) do
 			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=opened, param2=h.param2})
 			minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=opened_top, param2=h.param2})
 			end
-
 			timer:start(3)
-
 	end
 
 	function afterplace(pos, placer, itemstack, pointed_thing)
@@ -175,86 +199,67 @@ for _, current_door in ipairs(doors) do
 		local f = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z-1})
 		local g = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z+1})
 		local h = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z+1})
-	
-	
-			minetest.set_node(pos, {name=closed, param2=node.param2})
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=closed_top, param2=node.param2})
 
-			 if a.name == opened then
+		minetest.set_node(pos, {name=closed, param2=node.param2})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=closed_top, param2=node.param2})
+
+		if a.name == opened then
 			minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name=closed, param2=a.param2})
 			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z-1}, {name=closed_top, param2=a.param2})
-			end
-			 if b.name == opened then
+		end
+		if b.name == opened then
 			minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name=closed, param2=b.param2})
 			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z+1}, {name=closed_top, param2=b.param2})
-			end
-			 if c.name == opened then
+		end
+		if c.name == opened then
 			minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name=closed, param2=c.param2})
 			minetest.set_node({x=pos.x+1,y=pos.y+1,z=pos.z}, {name=closed_top, param2=c.param2})
-			end
-			 if d.name == opened then
+		end
+		if d.name == opened then
 			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=closed, param2=d.param2})
 			minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=closed_top, param2=d.param2})
-			end
-			 if e.name == opened then
+		end
+		if e.name == opened then
 			minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=closed, param2=e.param2})
 			minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=closed_top, param2=e.param2})
-			end
-			 if f.name == opened then
+		end
+		if f.name == opened then
 			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=closed, param2=f.param2})
 			minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=closed_top, param2=f.param2})
+		end
+		if g.name == opened then
+		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=closed, param2=g.param2})
+		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=closed_top, param2=g.param2})
 			end
-			 if g.name == opened then
-			minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=closed, param2=g.param2})
-			minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=closed_top, param2=g.param2})
-			end
-			 if h.name == opened then
+		if h.name == opened then
 			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=closed, param2=h.param2})
 			minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=closed_top, param2=h.param2})
-			end
-
+		end
 	end
 
--- allow doors opening on mesecon signal
--- from a pressure plate
-local mesecons_door_def
---local mesecons_door_top_def
-local mesecons_door_rules
---local mesecons_door_top_rules
-if minetest.get_modpath("mesecons") then
-	mesecons_door_rules = {
+	local mesecons_doors_rules = {
 		-- get signal from pressure plate
-		{x=1, y=0, z=0},
 		{x=-1, y=0, z=0},
-		{x=0, y=0, z=1},
-		{x=0, y=0, z=-1},
+		{x=0,  y=0, z=1},
+		{x=0,  y=0, z=-1},
+		{x=1,  y=0, z=0},
 		-- get signal from wall mounted button
-		{x=1, y=1, z=1},
-		{x=-1, y=1, z=1},
-		{x=1, y=1, z=-1},
 		{x=-1, y=1, z=-1},
+		{x=-1, y=1, z=1},
+		{x=0, y=1, z=-1},
+		{x=0, y=1, z=1},
+		{x=1, y=1, z=-1},
+		{x=1, y=1, z=1},
+		{x=-1, y=1, z=0},
+		{x=1, y=1, z=0},
 	}
-	mesecons_door_def = {
+
+	local mesecons_doors_def = {
 		effector = {
 			action_on = rightclick,
-			rules = mesecons_door_rules
+			rules = mesecons_doors_rules
 		},
 	}
---	mesecons_door_top_rules = {
---		-- get signal switch or digicode
---		{x=1, y=0, z=1},
---		{x=-1, y=0, z=1},
---		{x=1, y=0, z=1},
---		{x=-1, y=0, z=-1},
---		-- get signal from door_bottom
---		{x=0, y=-1, z=0},
---	}
---	mesecons_door_top_def = {
---		conductor = {
---			rules = mesecons_door_top_rules
---		}
---	}
-end
 
 	minetest.register_node(closed, {
 		description = current_door.base_name.." sliding door",
@@ -284,12 +289,10 @@ end
 				{-0.5, -0.5, -0.0625, 0.5, 1.5, 0.0625}
 			}
 		},
-		mesecons = mesecons_door_def,
+		mesecons = mesecons_doors_def,
 
 		on_place = onplace,
-
 		after_destruct = afterdestruct,
-
 		on_rightclick = rightclick,
 	})
 
@@ -318,7 +321,6 @@ end
 				{0, 0, 0, 0, 0, 0},
 			}
 		},
---		mesecons = mesecons_door_top_def,
 	})
 
 	minetest.register_node(opened, {

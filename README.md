@@ -1,9 +1,18 @@
+![Scifi nodes][screenshot.png]
+
 # scifi_nodes
-Minetest mod that adds scifi themed nodes
 
-**Adding Recipes for the unfinished scifi_nodes**
+Minetest mod that adds scifi themed blocks, doors, materials, plants and other assets.
 
-** Added support for stairsplus **
+* 05/01/2019 : create aliases to deal with old namming policy un doors.lua
+* 04/26/2019 :
+  * sliding doors now open with mesecon signal
+  * added blue sliding doors
+  * added digicode node
+  * changed ceiling lights recipe
+  * added some sounds
+* Added Recipes for the unfinished scifi_nodes
+* Added support for stairsplus
 
 # Attributions
 
@@ -12,3 +21,6 @@ CC BY-NC 3.0
 * scifi_nodes_door_mechanic.ogg primeval_polypod https://freesound.org/people/primeval_polypod/sounds/156507/
 * scifi_nodes_digicode.ogg https://freesound.org/people/Robinhood76/sounds/94933/
 * scifi_nodes_switch.ogg http://soundbible.com/1950-Button-Push.html
+* scifi_nodes_palm_scanner.ogg https://freesound.org/people/THE_bizniss/sounds/39313/
+* scifi_nodes_access_granted https://freesound.org/people/TheBuilder15/sounds/415762/
+* scifi_nodes_access_refused https://freesound.org/people/RICHERlandTV/sounds/216090/
