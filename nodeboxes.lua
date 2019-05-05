@@ -1359,9 +1359,7 @@ minetest.register_node("scifi_nodes:digicode_off", {
 
 minetest.register_craft({
 	output = "scifi_nodes:digicode_off 2",
-	recipe = {
-	{"mesecons_switch:mesecon_switch_off", "scifi_nodes:grey", ""}
-	}
+	recipe = {{"mesecons_switch:mesecon_switch_off", "scifi_nodes:grey", ""}}
 })
 
 ------------------
@@ -1376,14 +1374,8 @@ minetest.register_craft({
 local function toggle_palm_scanner(pos)
 	local node = minetest.get_node(pos)
 	local name = node.name
-	if name == "scifi_nodes:palm_scanner_off" then
-		minetest.swap_node(pos, {name="scifi_nodes:palm_scanner_on", param2=node.param2})
-		mesecon.receptor_on(pos, get_switch_rules(node.param2))
-		minetest.get_node_timer(pos):start(2)
-	elseif name == "scifi_nodes:palm_scanner_on" then
-		minetest.swap_node(pos, {name="scifi_nodes:palm_scanner_off", param2=node.param2})
-		mesecon.receptor_off(pos, get_switch_rules(node.param2))
-	end
+	minetest.swap_node(pos, {name="scifi_nodes:palm_scanner_off", param2=node.param2})
+	mesecon.receptor_off(pos, get_switch_rules(node.param2))
 end
 
 -- after_place_node
@@ -1398,21 +1390,25 @@ end
 local function check_owner(pos, node, player, itemstack, pointed_thing)
 	local meta = minetest.get_meta(pos)
 	local owner = meta:get_string("owner")
-	local player = player:get_player_name()
-	print(dump(owner)..dump(player))
+	local tested_player = player:get_player_name()
+	minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_checking", param2 = node.param2})
 	minetest.sound_play("scifi_nodes_palm_scanner", {max_hear_distance = 8, pos = pos, gain = 1.0})
-	-- wait a minute please !
-	local clock = os.clock
-	local t0 = clock()
-	while clock() - t0 <= 1.5 do end
-	if owner == player then
-		minetest.sound_play("scifi_nodes_access_granted", {max_hear_distance = 8, pos = pos, gain = 1.0})
-		minetest.chat_send_player(player, "Access granted !")
-		toggle_palm_scanner(pos)
-	else
-		minetest.chat_send_player(player, "Access refused !")
-		minetest.sound_play("scifi_nodes_access_refused", {max_hear_distance = 8, pos = pos, gain = 1.0})
-	end
+	minetest.chat_send_player(tested_player, "Checking : please wait.")
+
+	-- wait for a bit please !
+	minetest.after(1.5, function(pos, node, tested_player, owner)
+		if tested_player == owner then
+			minetest.sound_play("scifi_nodes_access_granted", {max_hear_distance = 8, pos = pos, gain = 1.0})
+			minetest.chat_send_player(tested_player, "Access granted !")
+			minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_on", param2 = node.param2})
+			mesecon.receptor_on(pos, get_switch_rules(node.param2))
+			minetest.get_node_timer(pos):start(2)
+		else
+			minetest.chat_send_player(tested_player, "Access refused !")
+			minetest.sound_play("scifi_nodes_access_refused", {max_hear_distance = 8, pos = pos, gain = 1.0})
+			minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_off", param2 = node.param2})
+		end
+	end, pos, node, tested_player, owner) -- end of anonymous function
 end
 
 minetest.register_node("scifi_nodes:palm_scanner_on", {
@@ -1435,7 +1431,7 @@ minetest.register_node("scifi_nodes:palm_scanner_on", {
 })
 
 minetest.register_node("scifi_nodes:palm_scanner_off", {
-	description = "Palm scannner",
+	description = "Palm scanner",
 	tiles = {"scifi_nodes_palm_scanner_off.png",},
 	inventory_image = "scifi_nodes_palm_scanner_on.png",
 	wield_image = "scifi_nodes_palm_scanner_on.png",
@@ -1451,6 +1447,24 @@ minetest.register_node("scifi_nodes:palm_scanner_off", {
 	after_place_node = set_owner,
 	on_rightclick = check_owner,
 	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:palm_scanner_checking", {
+	description = "Palm scanner",
+	tiles = {{
+		name = "scifi_nodes_palm_scanner_checking.png",
+		animation = {type = "vertical_frames",aspect_w = 16,aspect_h = 16,length = 1.5}
+	}},
+	wield_image = "scifi_nodes_palm_scanner_on.png",
+	inventory_image = "scifi_nodes_palm_scanner_on.png",
+	drawtype = "signlike",
+	sunlight_propagates = true,
+	buildable_to = false,
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
 })
 
 minetest.register_craft({
