@@ -1,9 +1,10 @@
-![Scifi nodes][screenshot.png]
+![Scifi nodes](screenshot.png)
 
 # scifi_nodes
 
 Minetest mod that adds scifi themed blocks, doors, materials, plants and other assets.
 
+* 05/05/2019 : added palm_scanner, which emmits mesecon signal when rightclicked by owner
 * 05/01/2019 : create aliases to deal with old namming policy un doors.lua
 * 04/26/2019 :
   * sliding doors now open with mesecon signal

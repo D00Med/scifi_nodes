@@ -1206,271 +1206,270 @@ minetest.register_node("scifi_nodes:windowpanel", {
 --------------
 -- Switches --
 --------------
-local switch_rules = {}
-local mesecons_switch_on_def = {}
-local mesecons_switch_off_def = {}
 
-if  (mesecon ~= nil) and
-    (mesecon.receptor_on ~= nil) and
-    (mesecon.receptor_off ~= nil)           then
+local function get_switch_rules(param2)
 
-	switch_rules = {
-		{x=1, y=-1, z=1},
+	-- param2 = 2
+	local rules = {
 		{x=1, y=-1, z=-1},
-		{x=-1, y=-1, z=1},
-		{x=-1, y=-1, z=-1}
+		{x=1, y=-1, z=1},
+		{x=0, y=-1, z=-1},
+		{x=0, y=-1, z=1},
 	}
-	mesecons_switch_on_def = {receptor = {state = mesecon.state.on, rules = switch_rules}}
-	mesecons_switch_off_def = {receptor = {state = mesecon.state.off, rules = switch_rules}}
 
-    minetest.register_node("scifi_nodes:switch_on", {
-        description = "Wall switch",
-        sunlight_propagates = true,
-        tiles = {
-            "scifi_nodes_switch_on.png",
-        },
-        inventory_image = "scifi_nodes_switch_on.png",
-        wield_image = "scifi_nodes_switch_on.png",
-        drawtype = "signlike",
-        node_box = {
-            type = "wallmounted",
-        },
-        selection_box = {
-            type = "wallmounted",
-        },
-        paramtype = "light",
-        paramtype2 = "wallmounted",
-        light_source = 5,
-        groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
-		mesecons = mesecons_switch_on_def,
-        on_rightclick = function(pos, node, clicker, item, _)
-			minetest.set_node(pos, {name="scifi_nodes:switch_off", param2=node.param2})
-			mesecon.receptor_off(pos, switch_rules)
-			if switch_rules == {} or nil then minetest.chat_send_all("Nib !") end
-			minetest.sound_play("scifi_nodes_switch", {max_hear_distance = 8, pos = pos, gain = 1.0})
-        end,
-        sounds = default.node_sound_glass_defaults(),
-	})
+-- Left and right when looking to +y ?
+	if param2 == 3 then
+		rules = mesecon.rotate_rules_right(mesecon.rotate_rules_right (rules))
+	elseif param2 == 4 then
+		rules = mesecon.rotate_rules_right(rules)
+	elseif param2 == 5 then
+		rules = mesecon.rotate_rules_left(rules)
+	end
+	return rules
+end
 
-	minetest.register_node("scifi_nodes:switch_off", {
-        description = "Wall switch",
-        tiles = {"scifi_nodes_switch_off.png",},
-        inventory_image = "scifi_nodes_switch_on.png",
-        wield_image = "scifi_nodes_switch_on.png",
-        drawtype = "signlike",
-        sunlight_propagates = true,
-        node_box = {type = "wallmounted",},
-        selection_box = {type = "wallmounted",},
-        paramtype = "light",
-        paramtype2 = "wallmounted",
-        groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
-        mesecons = mesecons_switch_off_def,
-        on_rightclick = function(pos, node, clicker, item, _)
-                minetest.set_node(pos, {name="scifi_nodes:switch_on", param2=node.param2})
-                mesecon.receptor_on(pos, switch_rules)
-				minetest.sound_play("scifi_nodes_switch", {max_hear_distance = 8, pos = pos, gain = 1.0})
-        end,
-        sounds = default.node_sound_glass_defaults(),
-    })
+local function toggle_switch(pos)
+	local node = minetest.get_node(pos)
+	local name = node.name
+	if name == "scifi_nodes:switch_on" then
+		minetest.sound_play("scifi_nodes_switch", {max_hear_distance = 8, pos = pos})
+		minetest.set_node(pos, {name = "scifi_nodes:switch_off", param2 = node.param2})
+		mesecon.receptor_off(pos, get_switch_rules(node.param2))
+	elseif name == "scifi_nodes:switch_off" then
+		minetest.sound_play("scifi_nodes_switch", {max_hear_distance = 8, pos = pos})
+		minetest.set_node(pos, {name = "scifi_nodes:switch_on", param2 = node.param2})
+		mesecon.receptor_on(pos, get_switch_rules(node.param2))
+		minetest.get_node_timer(pos):start(2)
+	end
+end
 
-	minetest.register_craft({
-		output = "scifi_nodes:switch_off 2",
-		recipe = {
-		{"mesecons_button:button_off", "scifi_nodes:grey", ""}
-		}
-	})
+minetest.register_node("scifi_nodes:switch_on", {
+	description = "Wall switch",
+	sunlight_propagates = true,
+	buildable_to = false,
+	tiles = {"scifi_nodes_switch_on.png",},
+	inventory_image = "scifi_nodes_switch_on.png",
+	wield_image = "scifi_nodes_switch_on.png",
+	drawtype = "signlike",
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	light_source = 5,
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	mesecons = {receptor = {state = mesecon.state.on,}},
+	sounds = default.node_sound_glass_defaults(),
+	on_rightclick = toggle_switch,
+	on_timer = toggle_switch
+})
 
-else
-    --wall switch, currently does not do anything
-    minetest.register_node("scifi_nodes:switch_off", {
-        description = "Wall switch",
-        tiles = {
-            "scifi_nodes_switch_off.png",
-        },
-        inventory_image = "scifi_nodes_switch_on.png",
-        wield_image = "scifi_nodes_switch_on.png",
-        drawtype = "signlike",
-        sunlight_propagates = true,
-        node_box = {
-            type = "wallmounted",
-        },
-        selection_box = {
-            type = "wallmounted",
-        },
-        paramtype = "light",
-        paramtype2 = "wallmounted",
-        groups = {cracky=1, oddly_breakable_by_hand=1},
-        on_rightclick = function(pos, node, clicker, item, _)
-                minetest.set_node(pos, {name="scifi_nodes:switch_on", param2=node.param2})
-				minetest.sound_play("scifi_nodes_switch", {max_hear_distance = 8, pos = pos, gain = 1.0})
-        end,
-        sounds = default.node_sound_glass_defaults()
-    })
+minetest.register_node("scifi_nodes:switch_off", {
+	description = "Wall switch",
+	tiles = {"scifi_nodes_switch_off.png",},
+	inventory_image = "scifi_nodes_switch_on.png",
+	wield_image = "scifi_nodes_switch_on.png",
+	drawtype = "signlike",
+	sunlight_propagates = true,
+	buildable_to = false,
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
+	mesecons = {receptor = {state = mesecon.state.off,}},
+	sounds = default.node_sound_glass_defaults(),
+	on_rightclick = toggle_switch
+})
 
-    minetest.register_node("scifi_nodes:switch_on", {
-        description = "Wall switch",
-        sunlight_propagates = true,
-        tiles = {
-            "scifi_nodes_switch_on.png",
-        },
-        inventory_image = "scifi_nodes_switch_on.png",
-        wield_image = "scifi_nodes_switch_on.png",
-        drawtype = "signlike",
-        node_box = {
-            type = "wallmounted",
-        },
-        selecion_box = {
-            type = "wallmounted",
-        },
-        paramtype = "light",
-        paramtype2 = "wallmounted",
-        light_source = 5,
-        groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
-        on_rightclick = function(pos, node, clicker, item, _)
-                minetest.set_node(pos, {name="scifi_nodes:switch_off", param2=node.param2})
-				minetest.sound_play("scifi_nodes_switch", {max_hear_distance = 8, pos = pos, gain = 1.0})
-        end,
-        sounds = default.node_sound_glass_defaults()
-    })     --end of wall switch
-end -- if(mesecon.receptor ~= on
+minetest.register_craft({
+	output = "scifi_nodes:switch_off 2",
+	recipe = {{"mesecons_button:button_off", "scifi_nodes:grey", ""}}
+})
 
 --------------
 -- Digicode --
 --------------
-local digicode_rules = {}
-local mesecons_digicode_on_def = {}
-local mesecons_digicode_off_def = {}
 
-if (mesecon ~= nil) and
-	(mesecon.receptor_on ~= nil) and
-	(mesecon.receptor_off ~= nil) then
+local secret_code = {"1234"}
+local allowed_chars = {"0123456789"}
+local code_length = 4
 
-	digicode_rules = {
-		{x=1, y=-1, z=1},
-		{x=1, y=-1, z=-1},
-		{x=-1, y=-1, z=1},
-		{x=-1, y=-1, z=-1}
-	}
-	mesecons_digicode_on_def = {receptor = {state = mesecon.state.on, rules = digicode_rules}}
-	mesecons_digicode_off_def = {receptor = {state = mesecon.state.off, rules = digicode_rules}}
-
-	local function toggle_digicode(pos)
-		local node = minetest.get_node(pos)
-		local name = node.name
-		if name == "scifi_nodes:digicode_off" then
-			minetest.sound_play("scifi_nodes_digicode", {max_hear_distance = 8, pos = pos, gain = 1.0})
-			minetest.set_node(pos, {name="scifi_nodes:digicode_on", param2=node.param2})
-			mesecon.receptor_on(pos, digicode_rules)
-			minetest.get_node_timer(pos):start(2)
-		else
-			minetest.set_node(pos, {name="scifi_nodes:digicode_off", param2=node.param2})
-			mesecon.receptor_off(pos, digicode_rules)
-		end
+local function toggle_digicode(pos)
+	local node = minetest.get_node(pos)
+	local name = node.name
+	if name == "scifi_nodes:digicode_off" then
+		minetest.sound_play("scifi_nodes_digicode", {max_hear_distance = 8, pos = pos, gain = 1.0})
+		minetest.set_node(pos, {name="scifi_nodes:digicode_on", param2=node.param2})
+		mesecon.receptor_on(pos, get_switch_rules(node.param2))
+		minetest.get_node_timer(pos):start(2)
+	elseif name == "scifi_nodes:digicode_on" then
+		minetest.set_node(pos, {name="scifi_nodes:digicode_off", param2=node.param2})
+		mesecon.receptor_off(pos, get_switch_rules(node.param2))
 	end
+end
+
+local function code_is_valid(code)
+	local valid = true
+	return valid
+end
 
 --	local function digicode_turn_off (pos)
 --		local node = minetest.get_node(pos)
 --		minetest.set_node (pos, {name = "scifi_nodes:digicode_off", param2 = node.param2})
---		mesecon.receptor_off(pos, digicode_rules)
+--		mesecon.receptor_off(pos, get_switch_rules(node.param2))
 --		return false
 --	end
 
-	minetest.register_node("scifi_nodes:digicode_on", {
-		description = "Wall switch",
-		sunlight_propagates = true,
-		tiles = {"scifi_nodes_digicode_on.png",},
-		inventory_image = "scifi_nodes_digicode_on.png",
-		wield_image = "scifi_nodes_digicode_on.png",
-		drawtype = "signlike",
-		node_box = {type = "wallmounted",},
-		selection_box = {type = "wallmounted",},
-		paramtype = "light",
-		paramtype2 = "wallmounted",
-		light_source = 5,
-		groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
-		mesecons = mesecons_digicode_on_def,
-		on_rightclick = toggle_digicode,
-		on_timer = toggle_digicode,
-		sounds = default.node_sound_glass_defaults(),
-	})
+minetest.register_node("scifi_nodes:digicode_on", {
+	description = "Digicode",
+	sunlight_propagates = true,
+	buildable_to = false,
+	tiles = {"scifi_nodes_digicode_on.png",},
+	inventory_image = "scifi_nodes_digicode_on.png",
+	wield_image = "scifi_nodes_digicode_on.png",
+	drawtype = "signlike",
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	light_source = 5,
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	mesecons = {receptor = {state = mesecon.state.on,}},
+	on_timer = toggle_digicode,
+	sounds = default.node_sound_glass_defaults(),
+})
 
-	minetest.register_node("scifi_nodes:digicode_off", {
-		description = "Digicode",
-		tiles = {"scifi_nodes_digicode_off.png",},
-		inventory_image = "scifi_nodes_digicode_on.png",
-		wield_image = "scifi_nodes_digicode_on.png",
-		drawtype = "signlike",
-		sunlight_propagates = true,
-		node_box = {type = "wallmounted",},
-		selection_box = {type = "wallmounted",},
-		paramtype = "light",
-		paramtype2 = "wallmounted",
-		groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
-		mesecons = mesecons_digicode_off_def,
-		on_rightclick = toggle_digicode,
-		sounds = default.node_sound_glass_defaults(),
-	})
+minetest.register_node("scifi_nodes:digicode_off", {
+	description = "Digicode",
+	tiles = {"scifi_nodes_digicode_off.png",},
+	inventory_image = "scifi_nodes_digicode_on.png",
+	wield_image = "scifi_nodes_digicode_on.png",
+	drawtype = "signlike",
+	sunlight_propagates = true,
+	buildable_to = false,
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
+	mesecons = {receptor = {state = mesecon.state.off,}},
+	on_rightclick = toggle_digicode,
+	sounds = default.node_sound_glass_defaults(),
+})
 
+minetest.register_craft({
+	output = "scifi_nodes:digicode_off 2",
+	recipe = {{"mesecons_switch:mesecon_switch_off", "scifi_nodes:grey", ""}}
+})
 
-    minetest.register_craft({
-        output = "scifi_nodes:digicode_off 2",
-        recipe = {
-            {"mesecons_switch:mesecon_switch_off", "scifi_nodes:grey", ""}
-        }
-    })
+------------------
+-- Palm scanner --
+------------------
 
--- In case mesecons mod is missing :
-else
-    minetest.register_node("scifi_nodes:digicode_off", {
-        description = "Digicode",
-        tiles = {
-            "scifi_nodes_digicode_off.png",
-        },
-        inventory_image = "scifi_nodes_digicode_on.png",
-        wield_image = "scifi_nodes_digicode_on.png",
-        drawtype = "signlike",
-        sunlight_propagates = true,
-        node_box = {
-            type = "wallmounted",
-        },
-        selection_box = {
-            type = "wallmounted",
-        },
-        paramtype = "light",
-        paramtype2 = "wallmounted",
-        groups = {cracky=1, oddly_breakable_by_hand=1},
-        on_rightclick = function(pos, node, clicker, item, _)
-				minetest.sound_play("scifi_nodes_digicode", {max_hear_distance = 8, pos = pos, gain = 1.0})
-				minetest.swap_node(pos, {name="scifi_nodes:digicode_on", param2=node.param2})
-		end,
-		sounds = default.node_sound_glass_defaults()
-	})
+-----------------------------------------------
+-- /!\ When "overriding" a callback function --
+-- re-use all the parameters in same order ! --
+-----------------------------------------------
 
-    minetest.register_node("scifi_nodes:digicode_on", {
-        description = "Digicode",
-        sunlight_propagates = true,
-        tiles = {
-            "scifi_nodes_switch_on.png",
-        },
-        inventory_image = "scifi_nodes_digicode_on.png",
-        wield_image = "scifi_nodes_digicode_on.png",
-        drawtype = "signlike",
-        node_box = {
-            type = "wallmounted",
-        },
-        selecion_box = {
-            type = "wallmounted",
-        },
-        paramtype = "light",
-        paramtype2 = "wallmounted",
-        light_source = 5,
-        groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
-		on_rightclick = function(pos, node, clicker, item, _)
-			minetest.swap_node(pos, {name="scifi_nodes:digicode_off", param2=node.param2})
-		end,
-		on_timer = function(pos, node, clicker, item, _)
-			minetest.swap_node(pos, {name="scifi_nodes:digicode_off", param2=node.param2})
-		end,
-		sounds = default.node_sound_glass_defaults()
-	})    
-end -- if(mesecon.receptor ~= on
+local function toggle_palm_scanner(pos)
+	local node = minetest.get_node(pos)
+	local name = node.name
+	minetest.swap_node(pos, {name="scifi_nodes:palm_scanner_off", param2=node.param2})
+	mesecon.receptor_off(pos, get_switch_rules(node.param2))
+end
+
+-- after_place_node
+-- placer is a player object
+local function set_owner(pos, placer, itemstack, pointed_thing)
+	local meta = minetest.get_meta(pos)
+	meta:set_string("owner", placer:get_player_name())
+end
+
+-- on_rightclick
+-- player is a player object
+local function check_owner(pos, node, player, itemstack, pointed_thing)
+	local meta = minetest.get_meta(pos)
+	local owner = meta:get_string("owner")
+	local tested_player = player:get_player_name()
+	minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_checking", param2 = node.param2})
+	minetest.sound_play("scifi_nodes_palm_scanner", {max_hear_distance = 8, pos = pos, gain = 1.0})
+	minetest.chat_send_player(tested_player, "Checking : please wait.")
+
+	-- wait for a bit please !
+	minetest.after(1.5, function(pos, node, tested_player, owner)
+		if tested_player == owner then
+			minetest.sound_play("scifi_nodes_access_granted", {max_hear_distance = 8, pos = pos, gain = 1.0})
+			minetest.chat_send_player(tested_player, "Access granted !")
+			minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_on", param2 = node.param2})
+			mesecon.receptor_on(pos, get_switch_rules(node.param2))
+			minetest.get_node_timer(pos):start(2)
+		else
+			minetest.chat_send_player(tested_player, "Access refused !")
+			minetest.sound_play("scifi_nodes_access_refused", {max_hear_distance = 8, pos = pos, gain = 1.0})
+			minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_off", param2 = node.param2})
+		end
+	end, pos, node, tested_player, owner) -- end of anonymous function
+end
+
+minetest.register_node("scifi_nodes:palm_scanner_on", {
+	description = "Palm scanner",
+	sunlight_propagates = true,
+	buildable_to = false,
+	tiles = {"scifi_nodes_palm_scanner_on.png",},
+	inventory_image = "scifi_nodes_palm_scanner_on.png",
+	wield_image = "scifi_nodes_palm_scanner_on.png",
+	drawtype = "signlike",
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	light_source = 5,
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	mesecons = {receptor = {state = mesecon.state.on,}},
+	on_timer = toggle_palm_scanner,
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:palm_scanner_off", {
+	description = "Palm scanner",
+	tiles = {"scifi_nodes_palm_scanner_off.png",},
+	inventory_image = "scifi_nodes_palm_scanner_on.png",
+	wield_image = "scifi_nodes_palm_scanner_on.png",
+	drawtype = "signlike",
+	sunlight_propagates = true,
+	buildable_to = false,
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
+	mesecons = {receptor = {state = mesecon.state.off,}},
+	after_place_node = set_owner,
+	on_rightclick = check_owner,
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:palm_scanner_checking", {
+	description = "Palm scanner",
+	tiles = {{
+		name = "scifi_nodes_palm_scanner_checking.png",
+		animation = {type = "vertical_frames",aspect_w = 16,aspect_h = 16,length = 1.5}
+	}},
+	wield_image = "scifi_nodes_palm_scanner_on.png",
+	inventory_image = "scifi_nodes_palm_scanner_on.png",
+	drawtype = "signlike",
+	sunlight_propagates = true,
+	buildable_to = false,
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+})
+
+minetest.register_craft({
+	output = "scifi_nodes:palm_scanner_off 2",
+	recipe = {
+	{"mesecons_powerplant:power_plant", "scifi_nodes:grey", ""}
+	}
+})

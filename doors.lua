@@ -276,7 +276,7 @@ for _, current_door in ipairs(doors) do
 		drawtype = "nodebox",
 		paramtype = "light",
 		paramtype2 = "facedir",
-		groups = {cracky = 3},
+		groups = {cracky = 3, oddly_breakable_by_hand = 1},
 		node_box = {
 			type = "fixed",
 			fixed = {
