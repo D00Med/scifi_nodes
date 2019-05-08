@@ -1140,12 +1140,12 @@ minetest.register_node("scifi_nodes:widescreen", {
 		type = "fixed",
 		fixed = {
 			{-0.375, -0.3125, 0.4375, 0.375, 0.3125, 0.5}, -- NodeBox1
-			{-0.5, -0.375, 0.375, -0.375, 0.375, 0.5}, -- NodeBox2
-			{0.375, -0.375, 0.375, 0.5, 0.375, 0.5}, -- NodeBox3
-			{-0.3125, 0.25, 0.375, 0.3125, 0.375, 0.5}, -- NodeBox4
-			{-0.3125, -0.375, 0.375, 0.25, -0.25, 0.5}, -- NodeBox5
-			{-0.5, -0.3125, 0.375, 0.5, -0.25, 0.5}, -- NodeBox6
-			{-0.5, 0.25, 0.375, 0.5, 0.3125, 0.5}, -- NodeBox7
+			{-0.5, -0.375, 0.375, -0.375, 0.375, 0.5},     -- NodeBox2
+			{0.375, -0.375, 0.375, 0.5, 0.375, 0.5},       -- NodeBox3
+			{-0.3125, 0.25, 0.375, 0.3125, 0.375, 0.5},    -- NodeBox4
+			{-0.3125, -0.375, 0.375, 0.25, -0.25, 0.5},    -- NodeBox5
+			{-0.5, -0.3125, 0.375, 0.5, -0.25, 0.5},       -- NodeBox6
+			{-0.5, 0.25, 0.375, 0.5, 0.3125, 0.5},         -- NodeBox7
 		}
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1}
@@ -1202,6 +1202,7 @@ minetest.register_node("scifi_nodes:windowpanel", {
     on_place = minetest.rotate_node,
     sounds = default.node_sound_glass_defaults(),
 })
+
 
 --------------
 -- Switches --
@@ -1286,39 +1287,110 @@ minetest.register_craft({
 	recipe = {{"mesecons_button:button_off", "scifi_nodes:grey", ""}}
 })
 
+
 --------------
 -- Digicode --
 --------------
 
-local secret_code = {"1234"}
-local allowed_chars = {"0123456789"}
+local secret_code = "1234"
+local allowed_chars = "0123456789"
 local code_length = 4
+local digicode_context = {}
+
+-- after_place_node, use by digicode and palm_scanner
+-- placer is a player object
+local function set_owner(pos, placer, itemstack, pointed_thing)
+	local meta = minetest.get_meta(pos)
+	meta:set_string("owner", placer:get_player_name())
+	meta:set_string("code", secret_code)
+end
 
 local function toggle_digicode(pos)
 	local node = minetest.get_node(pos)
 	local name = node.name
 	if name == "scifi_nodes:digicode_off" then
-		minetest.sound_play("scifi_nodes_digicode", {max_hear_distance = 8, pos = pos, gain = 1.0})
-		minetest.set_node(pos, {name="scifi_nodes:digicode_on", param2=node.param2})
+		minetest.swap_node(pos, {name="scifi_nodes:digicode_on", param2=node.param2})
 		mesecon.receptor_on(pos, get_switch_rules(node.param2))
 		minetest.get_node_timer(pos):start(2)
 	elseif name == "scifi_nodes:digicode_on" then
-		minetest.set_node(pos, {name="scifi_nodes:digicode_off", param2=node.param2})
+		minetest.swap_node(pos, {name="scifi_nodes:digicode_off", param2=node.param2})
 		mesecon.receptor_off(pos, get_switch_rules(node.param2))
 	end
 end
 
 local function code_is_valid(code)
-	local valid = true
+	local valid = false
+	if type(code) == "string" and #code == code_length then
+		valid = true
+	end
+	for i=1, #code do
+		if not string.find(allowed_chars, string.sub(code,i,i)) then
+			valid = false
+		end
+	end
 	return valid
 end
 
---	local function digicode_turn_off (pos)
---		local node = minetest.get_node(pos)
---		minetest.set_node (pos, {name = "scifi_nodes:digicode_off", param2 = node.param2})
---		mesecon.receptor_off(pos, get_switch_rules(node.param2))
---		return false
---	end
+local function update_code(pos, code)
+	local meta = minetest.get_meta(pos)
+	meta:set_string("code", code)
+end
+
+local function show_digicode_formspec(pos, node, player, itemstack, pointed_thing)
+	local meta = minetest.get_meta(pos)
+	local owner = meta:get_string("owner")
+	local current_code = meta:get_string("code")
+	local current_player = player:get_player_name()
+
+	-- Gathering datas that will be used by callback function
+	digicode_context[current_player] = {code = current_code, pos = pos}
+
+	if current_player == owner then
+		minetest.show_formspec(current_player, "digicode_formspec",
+		"size[6,3]"..
+		"field[1,1;3,1;code;Code;]".. -- type, position, size, name, label
+		"button_exit[1,2;2,1;change;Change code]"..
+		"button_exit[3,2;2,1;open;Open door]")
+	else
+		minetest.show_formspec(current_player, "digicode_formspec",
+		"size[6,3]"..
+		"field[2,1;3,1;code;Code;]"..
+		"button_exit[2,2;3,1;open;Open door]")
+	end
+end
+
+-- Process datas from digicode_formspec
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if formname ~= "digicode_formspec" then
+		return false
+	end
+
+	local sounds = {"scifi_nodes_scanner_granted","scifi_nodes_scanner_refused",
+		"scifi_nodes_digicode_granted","scifi_nodes_digicode_refused"
+	}
+	local sound_index
+
+	-- We have the right formspec so we can proceed it.
+	-- Let's retrieve the datas we need :
+	local context = digicode_context[player:get_player_name()]
+
+	if fields.change and code_is_valid(fields.code) then
+		update_code(context.pos, fields.code)
+		sound_index = 1
+	elseif
+		fields.change and not code_is_valid(fields.code) then
+		sound_index = 2
+	elseif
+		fields.open and fields.code == context.code then
+		toggle_digicode(context.pos)
+		sound_index = 3
+	elseif
+		fields.open and fields.code ~= context.code then
+		sound_index = 4
+	end
+	minetest.sound_play(sounds[sound_index])
+	context[player:get_player_name()] = nil -- we don't need it anymore
+end)
 
 minetest.register_node("scifi_nodes:digicode_on", {
 	description = "Digicode",
@@ -1334,6 +1406,7 @@ minetest.register_node("scifi_nodes:digicode_on", {
 	paramtype2 = "wallmounted",
 	light_source = 5,
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	drop = {items = {"scifi_nodes:digicode_off"}},
 	mesecons = {receptor = {state = mesecon.state.on,}},
 	on_timer = toggle_digicode,
 	sounds = default.node_sound_glass_defaults(),
@@ -1342,8 +1415,8 @@ minetest.register_node("scifi_nodes:digicode_on", {
 minetest.register_node("scifi_nodes:digicode_off", {
 	description = "Digicode",
 	tiles = {"scifi_nodes_digicode_off.png",},
-	inventory_image = "scifi_nodes_digicode_on.png",
-	wield_image = "scifi_nodes_digicode_on.png",
+	inventory_image = "scifi_nodes_digicode_off.png",
+	wield_image = "scifi_nodes_digicode_off.png",
 	drawtype = "signlike",
 	sunlight_propagates = true,
 	buildable_to = false,
@@ -1353,7 +1426,8 @@ minetest.register_node("scifi_nodes:digicode_off", {
 	paramtype2 = "wallmounted",
 	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
 	mesecons = {receptor = {state = mesecon.state.off,}},
-	on_rightclick = toggle_digicode,
+	after_place_node = set_owner,
+	on_rightclick = show_digicode_formspec,
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -1362,54 +1436,97 @@ minetest.register_craft({
 	recipe = {{"mesecons_switch:mesecon_switch_off", "scifi_nodes:grey", ""}}
 })
 
-------------------
--- Palm scanner --
-------------------
 
+-----------------------------------------------
+--             Palm scanner                  --
 -----------------------------------------------
 -- /!\ When "overriding" a callback function --
 -- re-use all the parameters in same order ! --
 -----------------------------------------------
 
-local function toggle_palm_scanner(pos)
-	local node = minetest.get_node(pos)
-	local name = node.name
-	minetest.swap_node(pos, {name="scifi_nodes:palm_scanner_off", param2=node.param2})
-	mesecon.receptor_off(pos, get_switch_rules(node.param2))
-end
-
 -- after_place_node
 -- placer is a player object
-local function set_owner(pos, placer, itemstack, pointed_thing)
+local function set_scanner_owner(pos, placer, itemstack, pointed_thing)
 	local meta = minetest.get_meta(pos)
 	meta:set_string("owner", placer:get_player_name())
 end
 
--- on_rightclick
--- player is a player object
-local function check_owner(pos, node, player, itemstack, pointed_thing)
+local function toggle_palm_scanner(pos, node, player, itemstack, pointed_thing)
+	-- Some calling function don't send node param, but everybody sends a pos, so :
+	local node = minetest.get_node(pos)
+	if node.name == "scifi_nodes:palm_scanner_off" then
+		local meta = minetest.get_meta(pos)
+		meta:set_string("clicker", player:get_player_name()) -- need to keep it somewhere
+		minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_checking", param2 = node.param2})
+		minetest.sound_play("scifi_nodes_palm_scanner", {max_hear_distance = 8, pos = pos, gain = 1.0})
+		minetest.chat_send_player(player:get_player_name(), "Checking : please wait.")
+		minetest.get_node_timer(pos):start(2)
+	elseif node.name == "scifi_nodes:palm_scanner_checking" then
+		minetest.swap_node(pos,{name = "scifi_nodes:palm_scanner_on", param2 = node.param2})
+		mesecon.receptor_on(pos, get_switch_rules(node.param2))
+		minetest.get_node_timer(pos):start(2)
+	elseif node.name == "scifi_nodes:palm_scanner_on" then
+		minetest.sound_play("scifi_nodes_switch", {max_hear_distance = 8, pos = pos, gain = 1.0})
+		minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_off", param2 = node.param2})
+		mesecon.receptor_off (pos, get_switch_rules(node.param2))
+	end
+end
+
+-- palm_scanner_checking.on_timer
+local function check_owner(pos, elapsed)
 	local meta = minetest.get_meta(pos)
 	local owner = meta:get_string("owner")
-	local tested_player = player:get_player_name()
-	minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_checking", param2 = node.param2})
-	minetest.sound_play("scifi_nodes_palm_scanner", {max_hear_distance = 8, pos = pos, gain = 1.0})
-	minetest.chat_send_player(tested_player, "Checking : please wait.")
-
-	-- wait for a bit please !
-	minetest.after(1.5, function(pos, node, tested_player, owner)
-		if tested_player == owner then
-			minetest.sound_play("scifi_nodes_access_granted", {max_hear_distance = 8, pos = pos, gain = 1.0})
-			minetest.chat_send_player(tested_player, "Access granted !")
-			minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_on", param2 = node.param2})
-			mesecon.receptor_on(pos, get_switch_rules(node.param2))
-			minetest.get_node_timer(pos):start(2)
-		else
-			minetest.chat_send_player(tested_player, "Access refused !")
-			minetest.sound_play("scifi_nodes_access_refused", {max_hear_distance = 8, pos = pos, gain = 1.0})
-			minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_off", param2 = node.param2})
-		end
-	end, pos, node, tested_player, owner) -- end of anonymous function
+	local clicker = meta:get_string("clicker")
+	local node = minetest.get_node(pos)
+	if clicker == owner then
+		minetest.sound_play("scifi_nodes_scanner_granted", {max_hear_distance = 8, pos = pos, gain = 1.0})
+		minetest.chat_send_player(clicker, "Access granted !")
+		toggle_palm_scanner (pos)
+	else
+		minetest.chat_send_player(clicker, "Access refused !")
+		minetest.sound_play("scifi_nodes_scanner_refused", {max_hear_distance = 8, pos = pos, gain = 1.0})
+		minetest.swap_node(pos, {name = "scifi_nodes:palm_scanner_off", param2 = node.param2})
+		mesecon.receptor_off(pos, get_switch_rules(node.param2))
+	end
 end
+
+minetest.register_node("scifi_nodes:palm_scanner_off", {
+	description = "Palm scanner",
+	tiles = {"scifi_nodes_palm_scanner_off.png",},
+	inventory_image = "scifi_nodes_palm_scanner_off.png",
+	wield_image = "scifi_nodes_palm_scanner_on.png",
+	drawtype = "signlike",
+	sunlight_propagates = true,
+	buildable_to = false,
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
+	mesecons = {receptor = {state = mesecon.state.off,}},
+	after_place_node = set_scanner_owner,
+	on_rightclick = toggle_palm_scanner,
+	sounds = default.node_sound_glass_defaults(),
+})
+
+minetest.register_node("scifi_nodes:palm_scanner_checking", {
+	description = "Palm scanner",
+	tiles = {{
+		name = "scifi_nodes_palm_scanner_checking.png",
+		animation = {type = "vertical_frames",aspect_w = 16,aspect_h = 16,length = 1.5}
+	}},
+	drawtype = "signlike",
+	sunlight_propagates = true,
+	buildable_to = false,
+	node_box = {type = "wallmounted",},
+	selection_box = {type = "wallmounted",},
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	drop = "scifi_nodes:palm_scanner_off",
+	sounds = default.node_sound_glass_defaults(),
+	on_timer = check_owner,
+})
 
 minetest.register_node("scifi_nodes:palm_scanner_on", {
 	description = "Palm scanner",
@@ -1425,51 +1542,13 @@ minetest.register_node("scifi_nodes:palm_scanner_on", {
 	paramtype2 = "wallmounted",
 	light_source = 5,
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	drop = "scifi_nodes:palm_scanner_off",
 	mesecons = {receptor = {state = mesecon.state.on,}},
 	on_timer = toggle_palm_scanner,
 	sounds = default.node_sound_glass_defaults(),
 })
 
-minetest.register_node("scifi_nodes:palm_scanner_off", {
-	description = "Palm scanner",
-	tiles = {"scifi_nodes_palm_scanner_off.png",},
-	inventory_image = "scifi_nodes_palm_scanner_on.png",
-	wield_image = "scifi_nodes_palm_scanner_on.png",
-	drawtype = "signlike",
-	sunlight_propagates = true,
-	buildable_to = false,
-	node_box = {type = "wallmounted",},
-	selection_box = {type = "wallmounted",},
-	paramtype = "light",
-	paramtype2 = "wallmounted",
-	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
-	mesecons = {receptor = {state = mesecon.state.off,}},
-	after_place_node = set_owner,
-	on_rightclick = check_owner,
-	sounds = default.node_sound_glass_defaults(),
-})
-
-minetest.register_node("scifi_nodes:palm_scanner_checking", {
-	description = "Palm scanner",
-	tiles = {{
-		name = "scifi_nodes_palm_scanner_checking.png",
-		animation = {type = "vertical_frames",aspect_w = 16,aspect_h = 16,length = 1.5}
-	}},
-	wield_image = "scifi_nodes_palm_scanner_on.png",
-	inventory_image = "scifi_nodes_palm_scanner_on.png",
-	drawtype = "signlike",
-	sunlight_propagates = true,
-	buildable_to = false,
-	node_box = {type = "wallmounted",},
-	selection_box = {type = "wallmounted",},
-	paramtype = "light",
-	paramtype2 = "wallmounted",
-	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
-})
-
 minetest.register_craft({
 	output = "scifi_nodes:palm_scanner_off 2",
-	recipe = {
-	{"mesecons_powerplant:power_plant", "scifi_nodes:grey", ""}
-	}
+	recipe = {{"mesecons_powerplant:power_plant", "scifi_nodes:grey", ""}}
 })
