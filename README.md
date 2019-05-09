@@ -4,6 +4,9 @@
 
 Minetest mod that adds scifi themed blocks, doors, materials, plants and other assets.
 
+# Changes log
+
+* 05/09/2019 : door opening on rightclick is disabled (maybe reactivated via a mod option)
 * 05/08/2019 :
   * digicodes now work
   * new (and cleaner) implementation for palm scanner
