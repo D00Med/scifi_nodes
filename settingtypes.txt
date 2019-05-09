@@ -1,0 +1,2 @@
+#    Doors can only be opened by mesecon signal
+scifi_nodes.doors_open_with_mesecon_only (disables right click on doors) bool true
