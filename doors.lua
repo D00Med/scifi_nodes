@@ -14,6 +14,11 @@
 -- will the authors be held liable for any damages arising from the use of this content.
 
 
+-- Retrieving mod settings
+local scifi_nodes = {}
+scifi_nodes.doors_open_with_mesecon_only = minetest.settings:get_bool("scifi_nodes.doors_open_with_mesecon_only", true)
+print("Ici !"..dump(scifi_nodes))
+
 -- Some aliases to deal with old namming policy --
 minetest.register_alias("scifi_nodes:doors_1a","scifi_nodes:Doom_door_closed")
 minetest.register_alias("scifi_nodes:doors_1b","scifi_nodes:Doom_door_closed_top")
@@ -53,6 +58,7 @@ for _, current_door in ipairs(doors) do
 	local base_name = current_door.base_name
 	local base_ingredient = current_door.base_ingredient
 	local sound = current_door.sound
+	local doors_rightclick
 
 	minetest.register_craft({
 		output = closed .. " 2",
@@ -121,7 +127,7 @@ for _, current_door in ipairs(doors) do
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 	end
 
-	function rightclick(pos, node, player, itemstack, pointed_thing)
+	function open_door(pos, node, player, itemstack, pointed_thing)
 		-- play sound
 		minetest.sound_play(sound,{
 			max_hear_distance = 16,
@@ -177,6 +183,7 @@ for _, current_door in ipairs(doors) do
 			end
 			timer:start(3)
 	end
+	if scifi_nodes.doors_open_with_mesecon_only then rightclick = nil end
 
 	function afterplace(pos, placer, itemstack, pointed_thing)
 		   minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=nodeu.param2})
@@ -256,10 +263,13 @@ for _, current_door in ipairs(doors) do
 
 	local mesecons_doors_def = {
 		effector = {
-			action_on = rightclick,
+			action_on = open_door,
 			rules = mesecons_doors_rules
 		},
 	}
+	local doors_rightclick
+	if scifi_nodes.doors_open_with_mesecon_only then doors_rightclick = {}
+	else doors_rightclick = open_door end
 
 	minetest.register_node(closed, {
 		description = current_door.base_name.." sliding door",
@@ -290,7 +300,6 @@ for _, current_door in ipairs(doors) do
 			}
 		},
 		mesecons = mesecons_doors_def,
-
 		on_place = onplace,
 		after_destruct = afterdestruct,
 		on_rightclick = rightclick,
