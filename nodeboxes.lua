@@ -1389,10 +1389,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		sound_index = 4
 	end
     -- play sound at context position
-	minetest.sound_play(sounds[sound_index],
-    	context.pos,
-		max_hear_distance = 40
-    )
+	minetest.sound_play(sounds[sound_index], {
+    	pos = context.pos,
+		max_hear_distance = 10
+    })
 	context[player:get_player_name()] = nil -- we don't need it anymore
 end)
 
