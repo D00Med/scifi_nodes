@@ -9,7 +9,7 @@ minetest.register_node("scifi_nodes:slope_"..name, {
 	description = desc.." Slope",
 	sunlight_propagates = false,
 	drawtype = "mesh",
-	mesh = "moreblocks_slope.obj",
+	mesh = "scifi_nodes_slope.obj",
 	tiles = texture,
 		selection_box = {
 			type = "fixed",

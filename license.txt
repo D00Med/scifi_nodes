@@ -45,7 +45,7 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 will the authors be held liable for any damages arising from the use of this content.
 
 
-For moreblocks_slope.obj:
+For scifi_nodes_slope.obj, which is renamed from moreblocks_slope.obj:
 
 zlib license
 ============
