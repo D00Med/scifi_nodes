@@ -16,8 +16,7 @@
 
 -- Retrieving mod settings
 local scifi_nodes = {}
-scifi_nodes.doors_open_with_mesecon_only = minetest.settings:get_bool("scifi_nodes.doors_open_with_mesecon_only", true)
-print("Ici !"..dump(scifi_nodes))
+scifi_nodes.doors_open_with_mesecon_only = minetest.settings:get_bool("scifi_nodes.doors_open_with_mesecon_only", false)
 
 -- Some aliases to deal with old namming policy --
 minetest.register_alias("scifi_nodes:doors_1a","scifi_nodes:Doom_door_closed")
@@ -267,9 +266,8 @@ for _, current_door in ipairs(doors) do
 			rules = mesecons_doors_rules
 		},
 	}
-	local doors_rightclick
-	if scifi_nodes.doors_open_with_mesecon_only then doors_rightclick = {}
-	else doors_rightclick = open_door end
+	local doors_rightclick = nil -- Crashes serv if empty table !
+	if not scifi_nodes.doors_open_with_mesecon_only then doors_rightclick = open_doors end
 
 	minetest.register_node(closed, {
 		description = current_door.base_name.." sliding door",
@@ -302,7 +300,7 @@ for _, current_door in ipairs(doors) do
 		mesecons = mesecons_doors_def,
 		on_place = onplace,
 		after_destruct = afterdestruct,
-		on_rightclick = rightclick,
+		on_rightclick = doors_rightclick,
 	})
 
 	minetest.register_node(closed_top, {
