@@ -848,7 +848,7 @@ minetest.register_node("scifi_nodes:blumetstr", {
 minetest.register_node("scifi_nodes:glass", {
 	description = "dark glass",
 	drawtype = "glasslike",
-	sunlight_propagates = false,
+	sunlight_propagates = true,
 	tiles = {
 		"scifi_nodes_glass.png"
 	},

@@ -34,3 +34,11 @@ CC BY-NC 3.0
 * scifi_nodes_palm_scanner.ogg https://freesound.org/people/THE_bizniss/sounds/39313/
 * scifi_nodes_access_granted https://freesound.org/people/TheBuilder15/sounds/415762/
 * scifi_nodes_access_refused https://freesound.org/people/RICHERlandTV/sounds/216090/
+
+# Contributors:
+
+* tanmayameher https://github.com/tanmayameher
+* naturefreshmilk https://github.com/naturefreshmilk
+* acmgit https://github.com/acmgit
+* catz85 https://github.com/catz85
+* coil0 https://github.com/coil0

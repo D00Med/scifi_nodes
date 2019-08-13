@@ -610,8 +610,11 @@ minetest.register_node("scifi_nodes:powered_stand", {
 	groups = {cracky=1, oddly_breakable_by_hand=1},
 	on_rightclick = function(pos, node, clicker, item, _)
 		local wield_item = clicker:get_wielded_item():get_name()
-		item:take_item()
-		minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, wield_item)
+		local taken = item:take_item()
+		if taken and not taken:is_empty() then
+			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, wield_item)
+			return item
+		end
 	end,
 })
 
@@ -1073,8 +1076,11 @@ minetest.register_node("scifi_nodes:itemholder", {
 		if name == meta:get_string("owner") or
 				minetest.check_player_privs(name, "protection_bypass") then
 			local wield_item = clicker:get_wielded_item():get_name()
-			item:take_item()
-			minetest.add_item(pos, wield_item)
+			local taken = item:take_item()
+			if taken and not taken:is_empty() then
+				minetest.add_item(pos, wield_item)
+				return item
+			end
 		end
 	end,
 	can_dig = function(pos,player)

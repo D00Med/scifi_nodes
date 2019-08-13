@@ -647,7 +647,7 @@ minetest.register_craft({
     output = "scifi_nodes:doomwall3 6",
     recipe = {
         {"scifi_nodes:white", "scifi_nodes:white", "scifi_nodes:white"},
-        {"scifi_nodes:black", "dye:red", "scifi_nodes:black"},
+        {"scifi_nodes:black", "dye:grey", "scifi_nodes:black"},
         {"scifi_nodes:white", "scifi_nodes:white", "scifi_nodes:white"}
     }
 })
