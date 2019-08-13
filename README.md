@@ -6,9 +6,6 @@ Minetest mod that adds scifi themed blocks, doors, materials, plants and other a
 
 # Changes log
 
-* 13/08/2019 :
-  * doors_open_with_mesecon_only is now a mod option (default is false)
-  * corrected a typo wich prevented the option to work properly
 * 05/09/2019 : door opening on rightclick is disabled (maybe reactivated via a mod option)
 * 05/08/2019 :
   * digicodes now work
