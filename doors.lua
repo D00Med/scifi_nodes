@@ -19,25 +19,25 @@ local scifi_nodes = {}
 scifi_nodes.doors_open_with_mesecon_only = minetest.settings:get_bool("scifi_nodes.doors_open_with_mesecon_only", false)
 
 -- Some aliases to deal with old namming policy --
-minetest.register_alias("scifi_nodes:doors1a","scifi_nodes:Doom_door_closed")
-minetest.register_alias("scifi_nodes:doors1b","scifi_nodes:Doom_door_closed_top")
-minetest.register_alias("scifi_nodes:doors1c","scifi_nodes:Doom_door_opened")
-minetest.register_alias("scifi_nodes:doors1d","scifi_nodes:Doom_door_opened_top")
+minetest.register_alias("scifi_nodes:door1a","scifi_nodes:Doom_door_closed")
+minetest.register_alias("scifi_nodes:door1b","scifi_nodes:Doom_door_closed_top")
+minetest.register_alias("scifi_nodes:door1c","scifi_nodes:Doom_door_opened")
+minetest.register_alias("scifi_nodes:door1d","scifi_nodes:Doom_door_opened_top")
 
-minetest.register_alias("scifi_nodes:doors2a","scifi_nodes:black_door_closed")
-minetest.register_alias("scifi_nodes:doors2b","scifi_nodes:black_door_closed_top")
-minetest.register_alias("scifi_nodes:doors2c","scifi_nodes:black_door_opened")
-minetest.register_alias("scifi_nodes:doors2d","scifi_nodes:black_door_opened_top")
+minetest.register_alias("scifi_nodes:door2a","scifi_nodes:black_door_closed")
+minetest.register_alias("scifi_nodes:door2b","scifi_nodes:black_door_closed_top")
+minetest.register_alias("scifi_nodes:door2c","scifi_nodes:black_door_opened")
+minetest.register_alias("scifi_nodes:door2d","scifi_nodes:black_door_opened_top")
 
-minetest.register_alias("scifi_nodes:doors3a","scifi_nodes:white_door_closed")
-minetest.register_alias("scifi_nodes:doors3b","scifi_nodes:white_door_closed_top")
-minetest.register_alias("scifi_nodes:doors3c","scifi_nodes:white_door_opened")
-minetest.register_alias("scifi_nodes:doors3d","scifi_nodes:white_door_opened_top")
+minetest.register_alias("scifi_nodes:door3a","scifi_nodes:white_door_closed")
+minetest.register_alias("scifi_nodes:door3b","scifi_nodes:white_door_closed_top")
+minetest.register_alias("scifi_nodes:door3c","scifi_nodes:white_door_opened")
+minetest.register_alias("scifi_nodes:door3d","scifi_nodes:white_door_opened_top")
 
-minetest.register_alias("scifi_nodes:doors4a","scifi_nodes:green_door_closed")
-minetest.register_alias("scifi_nodes:doors4b","scifi_nodes:green_door_closed_top")
-minetest.register_alias("scifi_nodes:doors4c","scifi_nodes:green_door_opened")
-minetest.register_alias("scifi_nodes:doors4d","scifi_nodes:green_door_opened_top")
+minetest.register_alias("scifi_nodes:door4a","scifi_nodes:green_door_closed")
+minetest.register_alias("scifi_nodes:door4b","scifi_nodes:green_door_closed_top")
+minetest.register_alias("scifi_nodes:door4c","scifi_nodes:green_door_opened")
+minetest.register_alias("scifi_nodes:door4d","scifi_nodes:green_door_opened_top")
 
 -- This table now uses named parameters and more convenient variables names
 local doors = {
