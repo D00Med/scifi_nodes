@@ -182,7 +182,6 @@ for _, current_door in ipairs(doors) do
 			end
 			timer:start(3)
 	end
-	if scifi_nodes.doors_open_with_mesecon_only then rightclick = nil end
 
 	function afterplace(pos, placer, itemstack, pointed_thing)
 		   minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=nodeu.param2})
@@ -266,8 +265,9 @@ for _, current_door in ipairs(doors) do
 			rules = mesecons_doors_rules
 		},
 	}
+
 	local doors_rightclick = nil -- Crashes serv if empty table !
-	if not scifi_nodes.doors_open_with_mesecon_only then doors_rightclick = open_doors end
+	if not scifi_nodes.doors_open_with_mesecon_only then doors_rightclick = open_door end
 
 	minetest.register_node(closed, {
 		description = current_door.base_name.." sliding door",
