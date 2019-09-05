@@ -158,7 +158,7 @@ node.types = {
 }
 
 if minetest.global_exists("stairsplus") then
-		
+
 	for _, row in ipairs(node.types) do
 		local name = row[1]
 		local desc = row[2]

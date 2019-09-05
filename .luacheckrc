@@ -16,6 +16,6 @@ read_globals = {
 	"dump",
 
 	-- optional deps
-	"default", "stairsplus", "xpanes"
+	"default", "stairsplus", "xpanes", "screwdriver"
 
 }

@@ -154,13 +154,13 @@ minetest.register_node("scifi_nodes:pad", {
 	on_construct = function(pos, node, placer)
 		local meta = minetest.get_meta(pos)
 		if position1 == nil then
-		position1 = pos
-		meta:set_int("type", 1)
+			position1 = pos
+			meta:set_int("type", 1)
 		elseif position2 == nil then
-		position2 = pos
-		meta:set_int("type", 2)
-		else 
-		minetest.chat_send_all("There can only be two teleportation pads at a time!")
+			position2 = pos
+			meta:set_int("type", 2)
+		else
+			minetest.chat_send_all("There can only be two teleportation pads at a time!")
 		end
 	end,
 	on_rightclick = function(pos, node, clicker)
@@ -185,11 +185,9 @@ minetest.register_node("scifi_nodes:pad", {
 		minetest.after(1, function()
 		local ppos = clicker:getpos()
 		if minetest.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
-		clicker:setpos(position2)
-		else
-		--minetest.chat_send_all("Nothing to teleport!")
+			clicker:setpos(position2)
 		end
-		local objs = minetest.env:get_objects_inside_radius(pos, 3) 
+		local objs = minetest.env:get_objects_inside_radius(pos, 3)
                 for _, obj in pairs(objs) do
 				if obj:get_luaentity() and not obj:is_player() then
 				if obj:get_luaentity().name == "__builtin:item" then
@@ -221,11 +219,9 @@ minetest.register_node("scifi_nodes:pad", {
 		minetest.after(1, function()
 		local ppos = clicker:getpos()
 		if minetest.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
-		clicker:setpos(position1)
-		else
-		--minetest.chat_send_all("No-one to teleport!")
+			clicker:setpos(position1)
 		end
-		local objs = minetest.env:get_objects_inside_radius(pos, 3) 
+		local objs = minetest.env:get_objects_inside_radius(pos, 3)
                 for _, obj in pairs(objs) do
 				if obj:get_luaentity() and not obj:is_player() then
 				if obj:get_luaentity().name == "__builtin:item" then
@@ -390,12 +386,12 @@ minetest.register_node("scifi_nodes:pot", {
 		}
 	},
 	on_rightclick = function(pos, node, clicker, item, _)
-	local node = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z})
-	if node.name == "scifi_nodes:pot_lid" then
-		minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="air", param2=node.param2})
-	elseif node.name ~= "scifi_nodes:pot_lid" and node.name == "air" then
-		minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="scifi_nodes:pot_lid", param2=node.param2})
-	end
+		local lid_node = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z})
+		if lid_node.name == "scifi_nodes:pot_lid" then
+			minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="air", param2=lid_node.param2})
+		elseif lid_node.name ~= "scifi_nodes:pot_lid" and node.name == "air" then
+			minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="scifi_nodes:pot_lid", param2=lid_node.param2})
+		end
 	end,
 	on_destruct = function(pos, node, _)
 		minetest.remove_node({x=pos.x, y=pos.y+2, z=pos.z})
@@ -426,12 +422,12 @@ minetest.register_node("scifi_nodes:pot2", {
 		}
 	},
 	on_rightclick = function(pos, node, clicker, item, _)
-	local node = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z})
-	if node.name == "scifi_nodes:pot_lid" then
-		minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="air", param2=node.param2})
-	elseif node.name ~= "scifi_nodes:pot_lid" and node.name == "air" then
-		minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="scifi_nodes:pot_lid", param2=node.param2})
-	end
+		local lid_node = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z})
+		if lid_node.name == "scifi_nodes:pot_lid" then
+			minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="air", param2=lid_node.param2})
+		elseif lid_node.name ~= "scifi_nodes:pot_lid" and node.name == "air" then
+			minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="scifi_nodes:pot_lid", param2=lid_node.param2})
+		end
 	end,
 	on_destruct = function(pos, node, _)
 		minetest.remove_node({x=pos.x, y=pos.y+2, z=pos.z})
@@ -1092,9 +1088,8 @@ minetest.register_node("scifi_nodes:itemholder", {
 	end,
 	on_destruct = function(pos)
 		local meta = minetest.get_meta(pos)
-		local node = minetest.get_node(pos)
 		if meta:get_string("item") ~= "" then
-			drop_item(pos, node)
+			minetest.add_item(pos, meta:get_string("item"))
 		end
 	end,
 })
@@ -1396,7 +1391,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
     -- play sound at context position
 	minetest.sound_play(sounds[sound_index], {
-    	pos = context.pos,
+	pos = context.pos,
 		max_hear_distance = 10
     })
 	context[player:get_player_name()] = nil -- we don't need it anymore
@@ -1463,7 +1458,10 @@ end
 
 local function toggle_palm_scanner(pos, node, player, itemstack, pointed_thing)
 	-- Some calling function don't send node param, but everybody sends a pos, so :
-	local node = minetest.get_node(pos)
+	if not node then
+		node = minetest.get_node(pos)
+	end
+
 	if node.name == "scifi_nodes:palm_scanner_off" then
 		local meta = minetest.get_meta(pos)
 		meta:set_string("clicker", player:get_player_name()) -- need to keep it somewhere

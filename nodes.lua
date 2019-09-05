@@ -333,7 +333,6 @@ minetest.register_node("scifi_nodes:octrng", {
 	light_source = 10,
 	groups = {cracky=2},
 	sounds = default.node_sound_glass_defaults(),
-	sounds = default.node_sound_glass_defaults(),
 })
 
 minetest.register_node("scifi_nodes:octgrn", {
@@ -363,7 +362,6 @@ minetest.register_node("scifi_nodes:octbl", {
 	use_texture_alpha = true,
 	light_source = 10,
 	groups = {cracky=2},
-	sounds = default.node_sound_glass_defaults(),
 	sounds = default.node_sound_glass_defaults(),
 })
 

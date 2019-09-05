@@ -2,7 +2,7 @@
 
 --the builder node
 
-local builder_formspec = 
+local builder_formspec =
 	"size[8,9]" ..
 	default.gui_bg ..
 	default.gui_bg_img ..
@@ -17,7 +17,21 @@ local builder_formspec =
 	default.get_hotbar_bg(0,4.85)
 
 local input_items = {
-	{"default:steel_ingot 1", "scifi_nodes:black", "scifi_nodes:blue", "scifi_nodes:rough", "scifi_nodes:rust", "scifi_nodes:white", "scifi_nodes:grey", "scifi_nodes:pplwll", "scifi_nodes:greenmetal", "scifi_nodes:wall", "scifi_nodes:blue_square", "scifi_nodes:mesh", "scifi_nodes:greytile"}
+	{
+		"default:steel_ingot 1",
+		"scifi_nodes:black",
+		"scifi_nodes:blue",
+		"scifi_nodes:rough",
+		"scifi_nodes:rust",
+		"scifi_nodes:white",
+		"scifi_nodes:grey",
+		"scifi_nodes:pplwll",
+		"scifi_nodes:greenmetal",
+		"scifi_nodes:wall",
+		"scifi_nodes:blue_square",
+		"scifi_nodes:mesh",
+		"scifi_nodes:greytile"
+	}
 }
 
 minetest.register_node("scifi_nodes:builder", {
@@ -33,7 +47,7 @@ minetest.register_node("scifi_nodes:builder", {
 	on_construct = function(pos)
 		--local meta = minetest.get_meta(pos)
 		--meta:set_string("infotext", "Node Builder (currently does nothing)")
-		
+
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", builder_formspec)
 		meta:set_string("infotext", "Node Builder")
@@ -66,16 +80,16 @@ minetest.register_node("scifi_nodes:builder", {
 					inv:set_stack("output", 11, row[12])
 					inv:set_stack("output", 12, row[13])
 				end
-			end			
+			end
 		end
 	end,
     on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
-			local stack = inv:get_stack("input", 1)
-			local stack_name = stack:get_name()
+			local istack = inv:get_stack("input", 1)
+			local stack_name = istack:get_name()
 			inv:remove_item("input", stack_name.." 1")
-			
+
 			inv:set_stack("output", 1, "")
 			inv:set_stack("output", 2, "")
 			inv:set_stack("output", 3, "")

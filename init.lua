@@ -1,4 +1,4 @@
---scifi_nodes by D00Med 
+--scifi_nodes by D00Med
 local MP = minetest.get_modpath("scifi_nodes")
 
 if minetest.get_modpath("xpanes") then
