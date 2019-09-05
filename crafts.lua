@@ -96,11 +96,13 @@ minetest.register_craft({
     }
 })
 
--- 6 ceiling light from 2 plastic and 1  trap super glow glass
+-- 8 ceiling light from 2 plastic and 1 meselamp
+-- Old recipe used "moreblocks:trap_super_glow_glass" 
+-- but moreblocks is an optional dependance
 minetest.register_craft({
-    output = "scifi_nodes:lightbar 6",
+    output = "scifi_nodes:lightbar 8",
     recipe = {
-        {"scifi_nodes:white2", "moreblocks:trap_super_glow_glass", "scifi_nodes:white2"}
+        {"scifi_nodes:white2", "default:meselamp", "scifi_nodes:white2"}
     }
 })
 
