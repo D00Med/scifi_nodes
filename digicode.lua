@@ -2,6 +2,7 @@
 --------------
 -- Digicode --
 --------------
+local has_mesecons = minetest.get_modpath("mesecons")
 
 local secret_code = "1234"
 local allowed_chars = "0123456789"
@@ -122,7 +123,11 @@ minetest.register_node("scifi_nodes:digicode_on", {
 	light_source = 5,
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
 	drop = {items = {"scifi_nodes:digicode_off"}},
-	mesecons = {receptor = {state = mesecon.state.on,}},
+	mesecons = {
+		receptor = {
+			state = (has_mesecons and mesecon.state.on)
+		}
+	},
 	on_timer = toggle_digicode,
 	sounds = default.node_sound_glass_defaults(),
 })
@@ -140,7 +145,11 @@ minetest.register_node("scifi_nodes:digicode_off", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
-	mesecons = {receptor = {state = mesecon.state.off,}},
+	mesecons = {
+		receptor = {
+			state = (has_mesecons and mesecon.state.off)
+		}
+	},
 	after_place_node = set_owner,
 	on_rightclick = show_digicode_formspec,
 	sounds = default.node_sound_glass_defaults(),

@@ -7,6 +7,8 @@
 -- re-use all the parameters in same order ! --
 -----------------------------------------------
 
+local has_mesecons = minetest.get_modpath("mesecons")
+
 -- after_place_node
 -- placer is a player object
 local function set_scanner_owner(pos, placer, itemstack, pointed_thing)
@@ -47,7 +49,7 @@ local function check_owner(pos, elapsed)
 	if clicker == owner then
 		minetest.sound_play("scifi_nodes_scanner_granted", {max_hear_distance = 8, pos = pos, gain = 1.0})
 		minetest.chat_send_player(clicker, "Access granted !")
-		toggle_palm_scanner (pos)
+		toggle_palm_scanner(pos)
 	else
 		minetest.chat_send_player(clicker, "Access refused !")
 		minetest.sound_play("scifi_nodes_scanner_refused", {max_hear_distance = 8, pos = pos, gain = 1.0})
@@ -69,9 +71,13 @@ minetest.register_node("scifi_nodes:palm_scanner_off", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
-	mesecons = {receptor = {state = mesecon.state.off,}},
+	mesecons = {
+		receptor = {
+			state = (has_mesecons and mesecon.state.off)
+		}
+	},
 	after_place_node = set_scanner_owner,
-	on_rightclick = toggle_palm_scanner,
+	on_rightclick = (has_mesecons and toggle_palm_scanner),
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -109,8 +115,12 @@ minetest.register_node("scifi_nodes:palm_scanner_on", {
 	light_source = 5,
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
 	drop = "scifi_nodes:palm_scanner_off",
-	mesecons = {receptor = {state = mesecon.state.on,}},
-	on_timer = toggle_palm_scanner,
+	mesecons = {
+		receptor = {
+			state = (has_mesecons and mesecon.state.on)
+		}
+	},
+	on_timer = (has_mesecons and toggle_palm_scanner),
 	sounds = default.node_sound_glass_defaults(),
 })
 

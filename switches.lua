@@ -3,6 +3,8 @@
 -- Switches --
 --------------
 
+local has_mesecons = minetest.get_modpath("mesecons")
+
 local function toggle_switch(pos)
 	local node = minetest.get_node(pos)
 	local name = node.name
@@ -32,10 +34,14 @@ minetest.register_node("scifi_nodes:switch_on", {
 	paramtype2 = "wallmounted",
 	light_source = 5,
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
-	mesecons = {receptor = {state = mesecon.state.on,}},
+	mesecons = {
+		receptor = {
+			state = (has_mesecons and mesecon.state.on)
+		}
+	},
 	sounds = default.node_sound_glass_defaults(),
-	on_rightclick = toggle_switch,
-	on_timer = toggle_switch
+	on_rightclick = (has_mesecons and toggle_switch),
+	on_timer = (has_mesecons and toggle_switch)
 })
 
 minetest.register_node("scifi_nodes:switch_off", {
@@ -51,9 +57,13 @@ minetest.register_node("scifi_nodes:switch_off", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
-	mesecons = {receptor = {state = mesecon.state.off,}},
+	mesecons = {
+		receptor = {
+			state = (has_mesecons and mesecon.state.off)
+		}
+	},
 	sounds = default.node_sound_glass_defaults(),
-	on_rightclick = toggle_switch
+	on_rightclick = (has_mesecons and toggle_switch)
 })
 
 minetest.register_craft({
