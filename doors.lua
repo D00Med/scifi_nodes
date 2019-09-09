@@ -15,7 +15,6 @@
 
 
 -- Retrieving mod settings
-local scifi_nodes = {}
 scifi_nodes.doors_open_with_mesecon_only = minetest.settings:get_bool("scifi_nodes.doors_open_with_mesecon_only", false)
 
 -- Some aliases to deal with old namming policy --

@@ -1,6 +1,6 @@
 
 
-function scifi_nodes.get_switch_rules(param2)
+scifi_nodes.get_switch_rules = function(param2)
 
 	-- param2 = 2
 	local rules = {
