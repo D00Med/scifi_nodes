@@ -10,12 +10,11 @@
 -- TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
 -- 1. You are allowed to do whatever you want to with what content is using this license.
--- 2. This content is provided 'as-is', without any express or implied warranty. In no event 
+-- 2. This content is provided 'as-is', without any express or implied warranty. In no event
 -- will the authors be held liable for any damages arising from the use of this content.
 
 
 -- Retrieving mod settings
-local scifi_nodes = {}
 scifi_nodes.doors_open_with_mesecon_only = minetest.settings:get_bool("scifi_nodes.doors_open_with_mesecon_only", false)
 
 -- Some aliases to deal with old namming policy --
@@ -57,7 +56,6 @@ for _, current_door in ipairs(doors) do
 	local base_name = current_door.base_name
 	local base_ingredient = current_door.base_ingredient
 	local sound = current_door.sound
-	local doors_rightclick
 
 	minetest.register_craft({
 		output = closed .. " 2",
@@ -143,8 +141,8 @@ for _, current_door in ipairs(doors) do
 		local f = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z-1})
 		local g = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z+1})
 		local h = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z+1})
-	
-	
+
+
 			minetest.set_node(pos, {name=opened, param2=node.param2})
 			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=opened_top, param2=node.param2})
 
@@ -184,7 +182,8 @@ for _, current_door in ipairs(doors) do
 	end
 
 	function afterplace(pos, placer, itemstack, pointed_thing)
-		   minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=nodeu.param2})
+		local node = minetest.get_node(pos)
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=node.param2})
 	end
 
 	function ontimer(pos, elapsed)
@@ -383,7 +382,7 @@ for _, current_door in ipairs(doors) do
 		selection_box = {
 			type = "fixed",
 			fixed = {
-				{0, 0, 0, 0, 0, 0}, 
+				{0, 0, 0, 0, 0, 0},
 			}
 		},
 	})

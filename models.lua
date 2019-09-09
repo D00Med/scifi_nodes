@@ -2,8 +2,6 @@
 --Copyright (c) 2011-2015 Calinou and contributors.
 --Licensed under the zlib license.
 
-scifi_nodes = {}
-
 function scifi_nodes.register_slope(name, desc, texture, light)
 minetest.register_node("scifi_nodes:slope_"..name, {
 	description = desc.." Slope",
@@ -158,7 +156,7 @@ node.types = {
 }
 
 if minetest.global_exists("stairsplus") then
-		
+
 	for _, row in ipairs(node.types) do
 		local name = row[1]
 		local desc = row[2]
@@ -174,4 +172,3 @@ if minetest.global_exists("stairsplus") then
 		})
 	end
 end
-
