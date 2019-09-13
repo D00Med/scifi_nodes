@@ -44,7 +44,7 @@ local doors = {
 	{base_name = "black", base_ingredient = "doors:door_steel", sound = "scifi_nodes_door_mechanic"},
 	{base_name = "white", base_ingredient = "doors:door_glass", sound = "scifi_nodes_door_normal"},
 	{base_name = "green", base_ingredient = "doors:door_wood", sound = "scifi_nodes_door_mechanic"},
-	{base_name = "blue", base_ingredient = "default:steel_block", sound = "scifi_nodes_door_normal"}
+	{base_name = "blue", base_ingredient = "default:steelblock", sound = "scifi_nodes_door_normal"}
 }
 
 for _, current_door in ipairs(doors) do
