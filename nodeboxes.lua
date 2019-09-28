@@ -577,43 +577,6 @@ tiles = {
 	sounds = default.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:powered_stand", {
-	description = "powered stand",
-	tiles = {
-		"scifi_nodes_pwrstnd_top.png",
-		"scifi_nodes_pwrstnd_top.png",
-		"scifi_nodes_pwrstnd_side.png",
-		"scifi_nodes_pwrstnd_side.png",
-		"scifi_nodes_pwrstnd_side.png",
-		"scifi_nodes_pwrstnd_side.png"
-	},
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.375, 0.25, -0.3125, 0.375, 0.4375, 0.3125}, -- NodeBox1
-			{-0.3125, 0.25, -0.375, 0.3125, 0.4375, 0.375}, -- NodeBox2
-			{-0.3125, 0.4375, -0.3125, 0.3125, 0.5, 0.3125}, -- NodeBox3
-			{-0.5, -0.5, -0.125, 0.5, 0.125, 0.125}, -- NodeBox4
-			{-0.125, -0.5, -0.5, 0.125, 0.125, 0.5}, -- NodeBox5
-			{-0.4375, 0.125, -0.125, 0.4375, 0.25, 0.125}, -- NodeBox6
-			{-0.125, 0.125, -0.4375, 0.125, 0.25, 0.4375}, -- NodeBox7
-			{-0.3125, -0.5, -0.375, 0.3125, 0.0625, 0.3125}, -- NodeBox8
-			{-0.25, 0.0625, -0.3125, 0.25, 0.125, 0.3125}, -- NodeBox9
-		}
-	},
-	groups = {cracky=1, oddly_breakable_by_hand=1},
-	on_rightclick = function(pos, node, clicker, item, _)
-		local wield_item = clicker:get_wielded_item():get_name()
-		local taken = item:take_item()
-		if taken and not taken:is_empty() then
-			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, wield_item)
-			return item
-		end
-	end,
-})
-
 minetest.register_node("scifi_nodes:cover", {
 	description = "Metal cover",
 	tiles = {
@@ -1032,65 +995,6 @@ minetest.register_node("scifi_nodes:capsule2", {
 	sounds = default.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, clicker, item, _)
 			minetest.set_node(pos, {name="scifi_nodes:capsule3", param2=node.param2})
-	end,
-})
-
-minetest.register_node("scifi_nodes:itemholder", {
-	description = "item holder",
-	tiles = {
-		"scifi_nodes_box_top.png",
-		"scifi_nodes_box_top.png",
-		"scifi_nodes_box_top.png",
-		"scifi_nodes_box_top.png",
-		"scifi_nodes_box_top.png",
-		"scifi_nodes_box_top.png"
-	},
-	drawtype = "nodebox",
-	paramtype = "light",
-	sunlight_propagates = true,
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.3125, -0.5, -0.3125, 0.3125, -0.25, 0.3125}, -- NodeBox1
-			{-0.0625, -0.5, 0.1875, 0.0625, -0.0625, 0.25}, -- NodeBox2
-			{-0.0625, -0.5, -0.25, 0.0625, -0.0625, -0.1875}, -- NodeBox3
-			{0.1875, -0.5, -0.0625, 0.25, -0.0625, 0.0625}, -- NodeBox4
-			{-0.25, -0.5, -0.0625, -0.1875, -0.0625, 0.0625}, -- NodeBox5
-		}
-	},
-	groups = {cracky=1},
-	on_rotate = screwdriver.disallow,
-	after_place_node = function(pos, placer, itemstack)
-		local meta = minetest.get_meta(pos)
-		meta:set_string("owner",placer:get_player_name())
-		meta:set_string("infotext", "Itemholder (owned by " ..
-				meta:get_string("owner") .. ")")
-	end,
-	on_rightclick = function(pos, node, clicker, item, _)
-		local name = clicker and clicker:get_player_name()
-		local meta = minetest.get_meta(pos)
-		if name == meta:get_string("owner") or
-				minetest.check_player_privs(name, "protection_bypass") then
-			local wield_item = clicker:get_wielded_item():get_name()
-			local taken = item:take_item()
-			if taken and not taken:is_empty() then
-				minetest.add_item(pos, wield_item)
-				return item
-			end
-		end
-	end,
-	can_dig = function(pos,player)
-		if not player then return end
-		local name = player and player:get_player_name()
-		local meta = minetest.get_meta(pos)
-		return name == meta:get_string("owner") or
-				minetest.check_player_privs(name, "protection_bypass")
-	end,
-	on_destruct = function(pos)
-		local meta = minetest.get_meta(pos)
-		if meta:get_string("item") ~= "" then
-			minetest.add_item(pos, meta:get_string("item"))
-		end
 	end,
 })
 
