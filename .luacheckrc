@@ -1,9 +1,7 @@
 unused_args = false
-allow_defined_top = true
 
 globals = {
-	"minetest",
-	"mesecon"
+	"scifi_nodes"
 }
 
 read_globals = {
@@ -16,6 +14,11 @@ read_globals = {
 	"dump",
 
 	-- optional deps
-	"default", "stairsplus", "xpanes", "screwdriver"
+	"default",
+	"stairsplus",
+	"xpanes",
+	"screwdriver",
+	"minetest",
+	"mesecon"
 
 }
