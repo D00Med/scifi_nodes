@@ -605,9 +605,16 @@ minetest.register_node("scifi_nodes:powered_stand", {
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1},
 	on_rightclick = function(pos, node, clicker, item, _)
-		local wield_item = clicker:get_wielded_item():get_name()
+		local wield_item_stack = clicker:get_wielded_item()
+		local wield_item = wield_item_stack:get_name()
 		local taken = item:take_item()
 		if taken and not taken:is_empty() then
+
+			if wield_item_stack:get_count() == 1 then
+				-- only 1 item in "hands" copy over entire stack with metadata
+				wield_item = wield_item_stack
+			end
+
 			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, wield_item)
 			return item
 		end
