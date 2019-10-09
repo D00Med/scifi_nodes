@@ -2,8 +2,8 @@
 -- GENERATED CODE
 -- Node Box Editor, version 0.9.0
 
-position1 = nil
-position2 = nil
+local position1 = nil
+local position2 = nil
 
 minetest.register_node("scifi_nodes:alienslope", {
 	description = "Alien Platform",

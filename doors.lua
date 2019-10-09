@@ -66,7 +66,7 @@ for _, current_door in ipairs(doors) do
 	})
 
 
-	function onplace(itemstack, placer, pointed_thing)
+	local function onplace(itemstack, placer, pointed_thing)
 		-- Is there room enough ?
 		local pos1 = pointed_thing.above
 		local pos2 = {x=pos1.x, y=pos1.y, z=pos1.z}
@@ -120,11 +120,11 @@ for _, current_door in ipairs(doors) do
 		return itemstack;
 	end
 
-	function afterdestruct(pos, oldnode)
+	local function afterdestruct(pos, oldnode)
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 	end
 
-	function open_door(pos, node, player, itemstack, pointed_thing)
+	local function open_door(pos, node, player, itemstack, pointed_thing)
 		-- play sound
 		minetest.sound_play(sound,{
 			max_hear_distance = 16,
@@ -181,12 +181,12 @@ for _, current_door in ipairs(doors) do
 			timer:start(3)
 	end
 
-	function afterplace(pos, placer, itemstack, pointed_thing)
+	local function afterplace(pos, placer, itemstack, pointed_thing)
 		local node = minetest.get_node(pos)
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=node.param2})
 	end
 
-	function ontimer(pos, elapsed)
+	local function ontimer(pos, elapsed)
 		-- play sound
 		minetest.sound_play(sound,{
 			max_hear_distance = 16,

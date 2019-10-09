@@ -10,7 +10,7 @@
 local has_mesecons = minetest.get_modpath("mesecons")
 
 
-function activate_palm_scanner(pos, node, player)
+local function activate_palm_scanner(pos, node, player)
 	local name = player and player:get_player_name()
 	name = name or ""
 
