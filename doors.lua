@@ -265,6 +265,10 @@ for _, current_door in ipairs(doors) do
 		},
 	}
 
+	local function nodig(pos, digger)
+		return false
+	end
+
 	local doors_rightclick = nil -- Crashes serv if empty table !
 	if not scifi_nodes.doors_open_with_mesecon_only then doors_rightclick = open_door end
 
@@ -327,6 +331,7 @@ for _, current_door in ipairs(doors) do
 				{0, 0, 0, 0, 0, 0},
 			}
 		},
+		can_dig = nodig,
 	})
 
 	minetest.register_node(opened, {
@@ -355,9 +360,9 @@ for _, current_door in ipairs(doors) do
 				{-0.5, -0.5, -0.0625, -0.25, 1.5, 0.0625},
 			}
 		},
-	after_place_node = afterplace,
-	after_destruct = afterdestruct,
-	on_timer = ontimer,
+		after_place_node = afterplace,
+		after_destruct = afterdestruct,
+		on_timer = ontimer,
 	})
 
 	minetest.register_node(opened_top, {
@@ -385,5 +390,6 @@ for _, current_door in ipairs(doors) do
 				{0, 0, 0, 0, 0, 0},
 			}
 		},
+		can_dig = nodig,
 	})
 end     -- end of doors table browsing
