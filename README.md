@@ -2,6 +2,8 @@
 
 # scifi_nodes
 
+![](https://github.com/D00Med/scifi_nodes/workflows/luacheck/badge.svg)
+
 Minetest mod that adds scifi themed blocks, doors, materials, plants and other assets.
 
 # Changes log
