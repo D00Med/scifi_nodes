@@ -124,6 +124,37 @@ for _, current_door in ipairs(doors) do
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 	end
 
+	local function change_adjacent(target, pos, node)
+		local target_opposite, target_top
+		if target == opened then
+			target_top = opened_top
+			target_opposite = closed
+		else
+			target_top = closed_top
+			target_opposite = opened
+		end
+
+		for offset = -1,1,2 do
+			local x = pos.x
+			local y = pos.y
+			local z = pos.z
+
+			-- match param2=0 or param2=2
+			if node.param2 % 2 == 0 then
+				x = x + offset
+			else
+				z = z + offset
+			end
+
+			local adjacent = minetest.get_node({x=x, y=y, z=z})
+			if adjacent.name == target_opposite then
+				minetest.set_node({x=x, y=y, z=z}, {name=target, param2 = adjacent.param2})
+				minetest.set_node({x=x, y=y+1, z=z}, {name=target_top, param2 = adjacent.param2})
+			end
+		end
+
+	end
+
 	local function open_door(pos, node, player, itemstack, pointed_thing)
 		-- play sound
 		minetest.sound_play(sound,{
@@ -133,52 +164,13 @@ for _, current_door in ipairs(doors) do
 		})
 
 		local timer = minetest.get_node_timer(pos)
-		local a = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})
-		local b = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1})
-		local c = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z})
-		local d = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z})
-		local e = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z-1})
-		local f = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z-1})
-		local g = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z+1})
-		local h = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z+1})
 
+		minetest.set_node(pos, {name=opened, param2=node.param2})
+		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=opened_top, param2=node.param2})
 
-			minetest.set_node(pos, {name=opened, param2=node.param2})
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=opened_top, param2=node.param2})
+		change_adjacent(opened, pos, node)
 
-			 if a.name == closed then
-			minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name=opened, param2=a.param2})
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z-1}, {name=opened_top, param2=a.param2})
-			end
-			 if b.name == closed then
-			minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name=opened, param2=b.param2})
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z+1}, {name=opened_top, param2=b.param2})
-			end
-			 if c.name == closed then
-			minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name=opened, param2=c.param2})
-			minetest.set_node({x=pos.x+1,y=pos.y+1,z=pos.z}, {name=opened_top, param2=c.param2})
-			end
-			 if d.name == closed then
-			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=opened, param2=d.param2})
-			minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=opened_top, param2=d.param2})
-			end
-			 if e.name == closed then
-			minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=opened, param2=e.param2})
-			minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=opened_top, param2=e.param2})
-			end
-			 if f.name == closed then
-			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=opened, param2=f.param2})
-			minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=opened_top, param2=f.param2})
-			end
-			 if g.name == closed then
-			minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=opened, param2=g.param2})
-			minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=opened_top, param2=g.param2})
-			end
-			 if h.name == closed then
-			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=opened, param2=h.param2})
-			minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=opened_top, param2=h.param2})
-			end
-			timer:start(3)
+		timer:start(3)
 	end
 
 	local function afterplace(pos, placer, itemstack, pointed_thing)
@@ -195,50 +187,11 @@ for _, current_door in ipairs(doors) do
 		})
 
 		local node = minetest.get_node(pos)
-		local a = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})
-		local b = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1})
-		local c = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z})
-		local d = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z})
-		local e = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z-1})
-		local f = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z-1})
-		local g = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z+1})
-		local h = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z+1})
 
 		minetest.set_node(pos, {name=closed, param2=node.param2})
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=closed_top, param2=node.param2})
 
-		if a.name == opened then
-			minetest.set_node({x=pos.x, y=pos.y, z=pos.z-1}, {name=closed, param2=a.param2})
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z-1}, {name=closed_top, param2=a.param2})
-		end
-		if b.name == opened then
-			minetest.set_node({x=pos.x, y=pos.y, z=pos.z+1}, {name=closed, param2=b.param2})
-			minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z+1}, {name=closed_top, param2=b.param2})
-		end
-		if c.name == opened then
-			minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z}, {name=closed, param2=c.param2})
-			minetest.set_node({x=pos.x+1,y=pos.y+1,z=pos.z}, {name=closed_top, param2=c.param2})
-		end
-		if d.name == opened then
-			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z}, {name=closed, param2=d.param2})
-			minetest.set_node({x=pos.x-1,y=pos.y+1,z=pos.z}, {name=closed_top, param2=d.param2})
-		end
-		if e.name == opened then
-			minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z-1}, {name=closed, param2=e.param2})
-			minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z-1}, {name=closed_top, param2=e.param2})
-		end
-		if f.name == opened then
-			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z-1}, {name=closed, param2=f.param2})
-			minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z-1}, {name=closed_top, param2=f.param2})
-		end
-		if g.name == opened then
-		minetest.set_node({x=pos.x+1, y=pos.y, z=pos.z+1}, {name=closed, param2=g.param2})
-		minetest.set_node({x=pos.x+1, y=pos.y+1, z=pos.z+1}, {name=closed_top, param2=g.param2})
-			end
-		if h.name == opened then
-			minetest.set_node({x=pos.x-1, y=pos.y, z=pos.z+1}, {name=closed, param2=h.param2})
-			minetest.set_node({x=pos.x-1, y=pos.y+1, z=pos.z+1}, {name=closed_top, param2=h.param2})
-		end
+		change_adjacent(closed, pos, node)
 	end
 
 	local mesecons_doors_rules = {
