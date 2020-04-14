@@ -29,14 +29,17 @@ Minetest mod that adds scifi themed blocks, doors, materials, plants and other a
 
 # Attributions
 
-CC BY-NC 3.0
+CC BY 3.0
 * scifi_nodes_door_normal.ogg tlwmdbt https://freesound.org/people/tlwmdbt/sounds/165862/
-* scifi_nodes_door_mechanic.ogg primeval_polypod https://freesound.org/people/primeval_polypod/sounds/156507/
-* scifi_nodes_digicode.ogg https://freesound.org/people/Robinhood76/sounds/94933/
 * scifi_nodes_switch.ogg http://soundbible.com/1950-Button-Push.html
 * scifi_nodes_palm_scanner.ogg https://freesound.org/people/THE_bizniss/sounds/39313/
 * scifi_nodes_access_granted https://freesound.org/people/TheBuilder15/sounds/415762/
 * scifi_nodes_access_refused https://freesound.org/people/RICHERlandTV/sounds/216090/
+
+CC BY-NC 3.0
+* scifi_nodes_door_mechanic.ogg primeval_polypod https://freesound.org/people/primeval_polypod/sounds/156507/
+* scifi_nodes_digicode.ogg https://freesound.org/people/Robinhood76/sounds/94933/
+
 
 # Contributors:
 
