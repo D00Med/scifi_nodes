@@ -36,8 +36,8 @@ CC BY 3.0
 * scifi_nodes_access_granted https://freesound.org/people/TheBuilder15/sounds/415762/
 * scifi_nodes_access_refused https://freesound.org/people/RICHERlandTV/sounds/216090/
 
-CC BY-NC 3.0
-* scifi_nodes_digicode.ogg https://freesound.org/people/Robinhood76/sounds/94933/
+CC0
+* scifi_nodes_digicode.ogg https://freesound.org/people/benjaminharveydesign/sounds/315921/
 
 
 # Contributors:
