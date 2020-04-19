@@ -37,7 +37,6 @@ CC BY 3.0
 * scifi_nodes_access_refused https://freesound.org/people/RICHERlandTV/sounds/216090/
 
 CC BY-NC 3.0
-* scifi_nodes_door_mechanic.ogg primeval_polypod https://freesound.org/people/primeval_polypod/sounds/156507/
 * scifi_nodes_digicode.ogg https://freesound.org/people/Robinhood76/sounds/94933/
 
 

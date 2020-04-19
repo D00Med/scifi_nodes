@@ -40,10 +40,10 @@ minetest.register_alias("scifi_nodes:door4d","scifi_nodes:green_door_opened_top"
 
 -- This table now uses named parameters and more convenient variables names
 local doors = {
-	{base_name = "Doom", base_ingredient =  "doors:door_obsidian_glass", sound = "scifi_nodes_door_mechanic"},
-	{base_name = "black", base_ingredient = "doors:door_steel", sound = "scifi_nodes_door_mechanic"},
+	{base_name = "Doom", base_ingredient =  "doors:door_obsidian_glass", sound = "scifi_nodes_door_normal"},
+	{base_name = "black", base_ingredient = "doors:door_steel", sound = "scifi_nodes_door_normal"},
 	{base_name = "white", base_ingredient = "doors:door_glass", sound = "scifi_nodes_door_normal"},
-	{base_name = "green", base_ingredient = "doors:door_wood", sound = "scifi_nodes_door_mechanic"},
+	{base_name = "green", base_ingredient = "doors:door_wood", sound = "scifi_nodes_door_normal"},
 	{base_name = "blue", base_ingredient = "default:steelblock", sound = "scifi_nodes_door_normal"}
 }
 
