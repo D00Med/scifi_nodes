@@ -29,7 +29,7 @@ for _, row in ipairs(plants) do
 		description = desc,
 		tiles = {"scifi_nodes_"..name..".png"},
 		drawtype = "plantlike",
-		inventory_image = {"scifi_nodes_"..name..".png"},
+		inventory_image = "scifi_nodes_"..name..".png",
 		groups = {snappy=1, oddly_breakable_by_hand=1, dig_immediate=3, flora=1},
 		paramtype = "light",
 		visual_scale = size,
