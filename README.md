@@ -43,9 +43,13 @@ CC0
 
 # Contributors:
 
+* D00Med https://github.com/D00Med (creator)
 * tanmayameher https://github.com/tanmayameher
-* naturefreshmilk https://github.com/naturefreshmilk
+* BuckarooBanzay https://github.com/BuckarooBanzay
 * acmgit https://github.com/acmgit
 * catz85 https://github.com/catz85
 * coil0 https://github.com/coil0
 * Grossam https://github.com/Grossam
+* OgelGames https://github.com/OgelGames
+* leftshift https://github.com/leftshift
+* fluxionary https://github.com/fluxionary
