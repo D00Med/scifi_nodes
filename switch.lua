@@ -33,7 +33,12 @@ minetest.register_node("scifi_nodes:switch_on", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	light_source = 5,
-	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	groups = {
+		cracky=1,
+		oddly_breakable_by_hand = 1,
+		not_in_creative_inventory = 1,
+		mesecon_needs_receiver = 1
+	},
 	mesecons = {
 		receptor = {
 			state = (has_mesecons and mesecon.state.on)
@@ -56,7 +61,11 @@ minetest.register_node("scifi_nodes:switch_off", {
 	selection_box = {type = "wallmounted",},
 	paramtype = "light",
 	paramtype2 = "wallmounted",
-	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
+	groups = {
+		cracky = 1,
+		oddly_breakable_by_hand = 1,
+		mesecon_needs_receiver = 1
+	},
 	mesecons = {
 		receptor = {
 			state = (has_mesecons and mesecon.state.off)
