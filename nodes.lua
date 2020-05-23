@@ -532,9 +532,9 @@ local nodetypes = {
 	{"white",      "plastic wall",       "white"},
 	{"pipe",      "wall pipe",       "pipe2"},
 	{"pipeside",      "side pipe",       "pipe3"},
-	{"tile",      "white tile",       "tile", 0, true},
-	{"whiteoct",      "white octagon",       "whiteoct"},
-	{"whitetile",      "white tile2",       "whttl"},
+	{"tile",      "white tile",       "tile"},
+	{"whiteoct",      "white octagon",       "whiteoct", 0, true},
+	{"whitetile",      "white tile2",       "whttl", 0, true},
 	{"black_detail",      "black detail",       "blckdtl"},
 	{"green_square",      "green metal block",       "grnblck"},
 	{"red_square",      "red metal block",       "redblck"},
@@ -607,13 +607,32 @@ for _, row in ipairs(nodetypes) do
 	}
 
 	if is_colorable and has_unifieddyes_mod then
-		-- add unifieddyes specific attributes
-		node_def.paramtype2 = "color"
+		-- overwrite attributes on the "uncolored" node
 		node_def.palette = "unifieddyes_palette_extended.png"
 		node_def.groups.ud_param2_colorable = 1
-		node_def.on_construct = unifieddyes.on_construct
-		node_def.on_dig = unifieddyes.on_dig
+		node_def.airbrush_replacement_node = "scifi_nodes:"..name.."_colored"
 	end
 
+	-- register node
 	minetest.register_node("scifi_nodes:"..name, node_def)
+
+	if is_colorable and has_unifieddyes_mod then
+		-- register colored node
+		minetest.register_node("scifi_nodes:"..name.."_colored", {
+			description = desc,
+			tiles = {"scifi_nodes_"..name..".png"},
+			groups = {
+				cracky = 1,
+				ud_param2_colorable = 1,
+				not_in_creative_inventory = 1
+			},
+			palette = "unifieddyes_palette_extended.png",
+			paramtype = "light",
+			paramtype2 = "color",
+			light_source = light,
+			sounds = default.node_sound_glass_defaults(),
+			on_construct = unifieddyes.on_construct,
+			on_dig = unifieddyes.on_dig
+		})
+	end
 end
