@@ -19,6 +19,7 @@ read_globals = {
 	"xpanes",
 	"screwdriver",
 	"minetest",
-	"mesecon"
+	"mesecon",
+	"unifieddyes"
 
 }

@@ -7,8 +7,9 @@
 
 Minetest mod that adds scifi themed blocks, doors, materials, plants and other assets.
 
-# Changes log
+# Changelog
 
+* Added support for unifieddyes
 * 14/08/2019 : retrocompatibility fixed (aliases in doors.lua)
 * 13/08/2019 :
   * added mod option doors_open_with_mesecon_only (default = false)
