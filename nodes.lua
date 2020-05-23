@@ -500,6 +500,7 @@ minetest.register_node("scifi_nodes:whtlightbnd", {
 -- colors available. When crafting, the last recipes will be checked first.
 --add new block using texture name(without "scifi_nodes_" prefix) then the description, and then the name of the block
 local nodetypes = {
+	-- { name, description, shortname?, light, colorable }
 	{"blue",      "blue lines",        "blue"},
 	{"holes",       "metal with holes","holes"},
 	{"white2",      "plastic",         "white2"},
@@ -531,7 +532,7 @@ local nodetypes = {
 	{"white",      "plastic wall",       "white"},
 	{"pipe",      "wall pipe",       "pipe2"},
 	{"pipeside",      "side pipe",       "pipe3"},
-	{"tile",      "white tile",       "tile"},
+	{"tile",      "white tile",       "tile", 0, true},
 	{"whiteoct",      "white octagon",       "whiteoct"},
 	{"whitetile",      "white tile2",       "whttl"},
 	{"black_detail",      "black detail",       "blckdtl"},
@@ -586,12 +587,16 @@ local nodetypes = {
 	{"blackplate",      "Black plate", "", 0},
 }
 
+local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
+
 for _, row in ipairs(nodetypes) do
 	local name = row[1]
 	local desc = row[2]
 	local light = row[4]
+	local is_colorable = row[5]
+
 	-- Node Definition
-	minetest.register_node("scifi_nodes:"..name, {
+	local node_def = {
 		description = desc,
 		tiles = {"scifi_nodes_"..name..".png"},
 		groups = {cracky=1},
@@ -599,5 +604,16 @@ for _, row in ipairs(nodetypes) do
 		paramtype2 = "facedir",
 		light_source = light,
 		sounds = default.node_sound_glass_defaults()
-	})
+	}
+
+	if is_colorable and has_unifieddyes_mod then
+		-- add unifieddyes specific attributes
+		node_def.paramtype2 = "color"
+		node_def.palette = "unifieddyes_palette_extended.png"
+		node_def.groups.ud_param2_colorable = 1
+		node_def.on_construct = unifieddyes.on_construct
+		node_def.on_dig = unifieddyes.on_dig
+	end
+
+	minetest.register_node("scifi_nodes:"..name, node_def)
 end
