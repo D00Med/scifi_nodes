@@ -151,7 +151,8 @@ minetest.register_node("scifi_nodes:pad", {
 	paramtype = "light",
 	groups = {cracky=1, oddly_breakable_by_hand=1},
 	light_source = 5,
-	on_construct = function(pos, node, placer)
+    after_place_node = function(pos, placer, itemstack, pointed_thing)
+        local placer_name = placer:get_player_name()
 		local meta = minetest.get_meta(pos)
 		if position1 == nil then
 			position1 = pos
@@ -160,10 +161,11 @@ minetest.register_node("scifi_nodes:pad", {
 			position2 = pos
 			meta:set_int("type", 2)
 		else
-			minetest.chat_send_all("There can only be two teleportation pads at a time!")
+			minetest.chat_send_player(placer_name, "There can only be two teleportation pads at a time!")
 		end
 	end,
-	on_rightclick = function(pos, node, clicker)
+    on_rightclick = function(pos, node, clicker)
+        local clicker_name = clicker:get_player_name()
 		local meta = minetest.get_meta(pos)
 		if meta:get_int("type") == 1 and position2 ~= nil and position1 ~= nil then
 		minetest.add_particlespawner(
@@ -217,7 +219,7 @@ minetest.register_node("scifi_nodes:pad", {
 			"scifi_nodes_tp_part.png" --texture
 		)
 		minetest.after(1, function()
-		local ppos = clicker:getpos()
+        local ppos = clicker:getpos()
 		if minetest.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
 			clicker:setpos(position1)
 		end
@@ -235,13 +237,13 @@ minetest.register_node("scifi_nodes:pad", {
 		end)
 		elseif position1 == nil and meta:get_int("type") ~= 2 then
 		position1 = pos
-		meta:set_int("type", 1)
-		minetest.chat_send_all("Teleporter 1 connected at "..minetest.pos_to_string(pos))
+        meta:set_int("type", 1)
+		minetest.chat_send_player(clicker_name, "Teleporter 1 connected at "..minetest.pos_to_string(pos))
 		elseif position2 == nil and meta:get_int("type") ~= 1 then
 		position2 = pos
 		meta:set_int("type", 2)
-		minetest.chat_send_all("Teleporter 2 connected at "..minetest.pos_to_string(pos))
-		else minetest.chat_send_all("Teleporter error!")
+		minetest.chat_send_player(clicker_name, "Teleporter 2 connected at "..minetest.pos_to_string(pos))
+		else minetest.chat_send_player(clicker_name, "Teleporter error!")
 		end
 	end,
 	on_destruct = function(pos, oldnode, placer)
