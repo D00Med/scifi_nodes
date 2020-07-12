@@ -83,25 +83,25 @@ local function register(basename, description, texture)
   -- register recipes
 
   minetest.register_craft({
-		output = nodename_single .. " 16",
-		recipe = {
-			{recipe_ingredient}
-		},
-	})
-
-  minetest.register_craft({
-		output = nodename_double .. " 16",
-		recipe = {
-			{recipe_ingredient},
+    output = nodename_single .. " 16",
+    recipe = {
       {recipe_ingredient}
-		},
-	})
+    },
+  })
 
   minetest.register_craft({
-		output = nodename_offset,
+    output = nodename_double .. " 16",
+    recipe = {
+      {recipe_ingredient},
+      {recipe_ingredient}
+    },
+  })
+
+  minetest.register_craft({
+    output = nodename_offset,
     type = "shapeless",
-		recipe = {nodename_single},
-	})
+    recipe = {nodename_single},
+  })
 end
 
 register("octrng", "Orange Octagon Glass pane", "scifi_nodes_octrng.png")
