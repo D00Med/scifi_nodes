@@ -19,7 +19,7 @@ local function register(basename, description, texture)
     is_ground_content = false,
     node_box = {
       type = "fixed",
-      fixed = {{-0.5, -0.5, 0, 0.5, 0.5, 0}},
+      fixed = {{-0.5, -0.5, -0.03125, 0.5, 0.5, 0.03125}},
     },
     selection_box = {
       type = "fixed",
