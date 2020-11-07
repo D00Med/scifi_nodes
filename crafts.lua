@@ -1680,7 +1680,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'scifi_nodes:stripes2top 3',
     recipe = {
-        {"scifi_nodes:black","scifi_noedes:black","scifi_nodes:black"},
+        {"scifi_nodes:black","scifi_nodes:black","scifi_nodes:black"},
         {"default:silver_sand","default:silver_sand","default:silver_sand"}
     }
 })
@@ -1692,4 +1692,3 @@ minetest.register_craft({
         {"scifi_nodes:stripes"}
     }
 })
-
