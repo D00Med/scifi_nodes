@@ -4,6 +4,7 @@
 
 ![](https://github.com/D00Med/scifi_nodes/workflows/luacheck/badge.svg)
 ![](https://github.com/D00Med/scifi_nodes/workflows/integration-test/badge.svg)
+[![ContentDB](https://content.minetest.net/packages/D00Med/scifi_nodes/shields/downloads/)](https://content.minetest.net/packages/D00Med/scifi_nodes/)
 
 Minetest mod that adds scifi themed blocks, doors, materials, plants and other assets.
 
