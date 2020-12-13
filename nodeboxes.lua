@@ -1080,10 +1080,9 @@ minetest.register_node("scifi_nodes:itemholder", {
 		local meta = minetest.get_meta(pos)
 		if name == meta:get_string("owner") or
 				minetest.check_player_privs(name, "protection_bypass") then
-			local wield_item = clicker:get_wielded_item():get_name()
 			local taken = item:take_item()
 			if taken and not taken:is_empty() then
-				minetest.add_item(pos, wield_item)
+				minetest.add_item(pos, taken:to_string())
 				return item
 			end
 		end
