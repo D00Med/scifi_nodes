@@ -475,6 +475,12 @@ minetest.register_node("scifi_nodes:light_dynamic", {
 		type = "wallmounted",
 		fixed = {-0.5, -0.5, -0.5, -0.45, 0.5, 0.5}
 	},
+	node_box = {
+		type = "fixed",
+		fixed = {
+			fixed = {-0.5, -0.5, -0.5, -0.45, 0.5, 0.5}
+		}
+	},
 	paramtype2 = "wallmounted",
 	light_source = default.LIGHT_MAX,
 	groups = {cracky=1, oddly_breakable_by_hand=1},
