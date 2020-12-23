@@ -1282,10 +1282,13 @@ minetest.register_craft({
 })
 
 -- https://forum.minetest.net/viewtopic.php?f=10&t=13125&p=261481#p261481
+-- with modified recipe
 minetest.register_craft({
-    output = 'scifi_nodes:windowpanel 4',
+    output = 'scifi_nodes:windowpanel',
     recipe = {
-        {"scifi_nodes:glass","",""}
+        {"scifi_nodes:glass_pane","scifi_nodes:glass_pane",""},
+        {"scifi_nodes:glass_pane","scifi_nodes:glass_pane",""},
+        {"","",""}
     }
 })
 
