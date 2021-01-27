@@ -182,6 +182,23 @@ minetest.register_node("scifi_nodes:disc", {
 	groups = {cracky=1}
 })
 
+minetest.register_node("scifi_nodes:greenbar_animated", {
+	description = "animated green light bar",
+	sunlight_propagates = false,
+	tiles = {
+		"scifi_nodes_greenbar.png",
+		"scifi_nodes_greenbar.png", {
+			name="scifi_nodes_greenbar_animated.png",
+			animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1.00},
+		}
+	},
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=1},
+	light_source = 10,
+	sounds = default.node_sound_glass_defaults(),
+	on_place = minetest.rotate_node
+})
 
 minetest.register_node("scifi_nodes:blink", {
 	description = "blinking light",

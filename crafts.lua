@@ -767,6 +767,16 @@ minetest.register_craft({
     }
 })
 
+-- 4 green light bar from 4 green metal, 2 green dye, 1 lightbar
+minetest.register_craft({
+    output = "scifi_nodes:greenbar_animated 4",
+    recipe = {
+        {"scifi_nodes:greenbar", "", "scifi_nodes:greenbar"},
+        {"", "mesecons:wire_00000000_off", ""},
+        {"scifi_nodes:greenbar", "", "scifi_nodes:greenbar"}
+    }
+})
+
 -- 4 green metal block from 4 green metal
 minetest.register_craft({
     output = "scifi_nodes:green_square 4",
