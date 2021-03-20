@@ -281,7 +281,7 @@ minetest.register_node("scifi_nodes:pplwndw", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	groups = {cracky=3},
 	sounds = default.node_sound_glass_defaults(),
 	node_box = {
@@ -308,7 +308,7 @@ minetest.register_node("scifi_nodes:gloshroom", {
 	walkable = false,
 	buildable_to = true,
 	sunlight_propagates = false,
-	use_texture_alpha =  true,
+	use_texture_alpha = "blend",
 	groups = {fleshy=1, oddly_breakable_by_hand=1, dig_immediate=3},
 	node_box = {
 		type = "fixed",
@@ -335,7 +335,7 @@ minetest.register_node("scifi_nodes:pot_lid", {
 	},
 	inventory_image = "scifi_nodes_pod_inv.png",
 	wield_image = "scifi_nodes_pod_inv.png",
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	drawtype = "nodebox",
 	paramtype = "light",
 	groups = {cracky=1, not_in_creative_inventory=1},
@@ -529,7 +529,7 @@ minetest.register_node("scifi_nodes:lightbars", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	light_source = default.LIGHT_MAX,
 	node_box = {
 		type = "fixed",
@@ -550,7 +550,7 @@ tiles = {{
 		name = "scifi_nodes_liquid.png",
 		animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},
 	}},
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	light_source = default.LIGHT_MAX,
 	drawtype = "nodebox",
 	sunlight_propagates = true,
@@ -570,7 +570,7 @@ minetest.register_node("scifi_nodes:liquid_pipe2", {
 tiles = {
 		"scifi_nodes_orange.png",
 	},
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	light_source = default.LIGHT_MAX,
 	drawtype = "nodebox",
 	sunlight_propagates = true,
@@ -854,7 +854,7 @@ minetest.register_node("scifi_nodes:windowcorner", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	node_box = {
@@ -885,7 +885,7 @@ minetest.register_node("scifi_nodes:windowstraight", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	node_box = {
@@ -912,7 +912,7 @@ minetest.register_node("scifi_nodes:windowcorner2", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	node_box = {
@@ -943,7 +943,7 @@ minetest.register_node("scifi_nodes:windowstraight2", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	sunlight_propagates = true,
 	paramtype2 = "facedir",
 	node_box = {
@@ -970,7 +970,7 @@ minetest.register_node("scifi_nodes:capsule", {
 		"scifi_nodes_capsule.png",
 		"scifi_nodes_capsule.png"
 	},
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -1000,7 +1000,7 @@ minetest.register_node("scifi_nodes:capsule3", {
 		"scifi_nodes_capsule3.png",
 		"scifi_nodes_capsule3.png"
 	},
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -1030,7 +1030,7 @@ minetest.register_node("scifi_nodes:capsule2", {
 		"scifi_nodes_capsule2.png",
 		"scifi_nodes_capsule2.png"
 	},
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -1118,7 +1118,7 @@ minetest.register_node("scifi_nodes:glassscreen", {
 		"scifi_nodes_glscrn.png",
 		"scifi_nodes_glscrn.png"
 	},
-	use_texture_alpha = true,
+	use_texture_alpha = "blend",
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -1204,7 +1204,7 @@ minetest.register_node("scifi_nodes:windowpanel", {
     },
     drawtype = "nodebox",
     paramtype = "light",
-    use_texture_alpha = true,
+    use_texture_alpha = "blend",
     sunlight_propagates = true,
     paramtype2 = "facedir",
     node_box = {
