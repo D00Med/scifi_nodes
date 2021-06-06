@@ -22,6 +22,8 @@ local function activate_palm_scanner(pos, node, player)
 
 	-- check protection
 	minetest.after(2, function()
+		if minetest.get_node(pos).name ~= node.name then return end
+
 		if minetest.is_protected(pos, name or "") then
 			-- clicker has no access to area
 			minetest.chat_send_player(name, "Access denied !")
@@ -36,6 +38,7 @@ local function activate_palm_scanner(pos, node, player)
 
 		-- reset state
 		minetest.after(1, function()
+			if minetest.get_node(pos).name ~= node.name then return end
 			node.name = "scifi_nodes:palm_scanner_off"
 			minetest.swap_node(pos, node)
 			mesecon.receptor_off(pos, scifi_nodes.get_switch_rules(node.param2))
