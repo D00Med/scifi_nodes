@@ -97,7 +97,6 @@ node.types = {
 	{"bluetile",      "blue tile",       "blutl"},
 	{"greytile",      "grey tile",       "grytl"},
 	{"mesh2",      "metal floormesh",       "mesh2"},
-	{"white",      "plastic wall",       "white"},
 	{"pipe",      "wall pipe",       "pipe2"},
 	{"pipeside",      "side pipe",       "pipe3"},
 	{"tile",      "white tile",       "tile"},
