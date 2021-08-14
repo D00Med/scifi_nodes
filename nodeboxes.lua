@@ -337,6 +337,7 @@ minetest.register_node("scifi_nodes:pot_lid", {
 	wield_image = "scifi_nodes_pod_inv.png",
 	use_texture_alpha = "blend",
 	drawtype = "nodebox",
+	drop = "", -- part of the pot, don't let it in players inventory
 	paramtype = "light",
 	groups = {cracky=1, not_in_creative_inventory=1},
 	sunlight_propagates = true,
@@ -364,6 +365,42 @@ minetest.register_node("scifi_nodes:pot_lid", {
 	sounds = default.node_sound_glass_defaults()
 })
 
+local lid_offset = {x=0, y=2, z=0}
+
+local function toggle_lid(pot_pos, player)
+	if not player then
+		return
+	end
+	local player_name = player:get_player_name()
+	local lid_pos = vector.add(pot_pos, lid_offset)
+	local lid_node = minetest.get_node(lid_pos)
+	if minetest.is_protected(lid_pos, player_name) then
+		-- lid is in a protected area
+		return
+	end
+	if lid_node.name == "scifi_nodes:pot_lid" then
+		minetest.set_node(lid_pos, {name="air"})
+	elseif lid_node.name == "air" then
+		minetest.set_node(lid_pos, {name="scifi_nodes:pot_lid"})
+	end
+end
+
+local function remove_lid(pot_pos, player)
+	if not player then
+		return
+	end
+	local player_name = player:get_player_name()
+	local lid_pos = vector.add(pot_pos, lid_offset)
+	local lid_node = minetest.get_node(lid_pos)
+	if minetest.is_protected(lid_pos, player_name) then
+		-- lid is in protected area
+		return
+	end
+	if lid_node.name == "scifi_nodes:pot_lid" then
+		minetest.set_node(lid_pos, {name="air"})
+	end
+end
+
 minetest.register_node("scifi_nodes:pot", {
 	description = "metal plant pot (right click for lid, shift+rightclick to plant)",
 	tiles = {
@@ -387,16 +424,11 @@ minetest.register_node("scifi_nodes:pot", {
 			{0.1875, -0.5, -0.5, 0.5, -0.25, -0.1875}, -- NodeBox5
 		}
 	},
-	on_rightclick = function(pos, node, clicker, item, _)
-		local lid_node = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z})
-		if lid_node.name == "scifi_nodes:pot_lid" then
-			minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="air", param2=lid_node.param2})
-		elseif lid_node.name ~= "scifi_nodes:pot_lid" and node.name == "air" then
-			minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="scifi_nodes:pot_lid", param2=lid_node.param2})
-		end
+	on_rightclick = function(pos, _, player)
+		toggle_lid(pos, player)
 	end,
-	on_destruct = function(pos, node, _)
-		minetest.remove_node({x=pos.x, y=pos.y+2, z=pos.z})
+	after_dig_node = function(pos, _, _, player)
+		remove_lid(pos, player)
 	end
 })
 
@@ -423,16 +455,11 @@ minetest.register_node("scifi_nodes:pot2", {
 			{0.1875, -0.5, -0.5, 0.5, -0.25, -0.1875}, -- NodeBox5
 		}
 	},
-	on_rightclick = function(pos, node, clicker, item, _)
-		local lid_node = minetest.get_node({x=pos.x, y=pos.y+2, z=pos.z})
-		if lid_node.name == "scifi_nodes:pot_lid" then
-			minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="air", param2=lid_node.param2})
-		elseif lid_node.name ~= "scifi_nodes:pot_lid" and node.name == "air" then
-			minetest.set_node({x=pos.x, y=pos.y+2, z=pos.z}, {name="scifi_nodes:pot_lid", param2=lid_node.param2})
-		end
+	on_rightclick = function(pos, _, player)
+		toggle_lid(pos, player)
 	end,
-	on_destruct = function(pos, node, _)
-		minetest.remove_node({x=pos.x, y=pos.y+2, z=pos.z})
+	after_dig_node = function(pos, _, _, player)
+		remove_lid(pos, player)
 	end
 })
 
