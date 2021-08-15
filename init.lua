@@ -4,6 +4,9 @@ scifi_nodes = {}
 
 local MP = minetest.get_modpath("scifi_nodes")
 
+
+dofile(MP.."/sounds.lua")
+
 if minetest.get_modpath("xpanes") then
 	dofile(MP.."/panes.lua")
 end

@@ -32,7 +32,7 @@ minetest.register_node("scifi_nodes:alienslope", {
 			{-0.125, 0.375, -0.5, 0.5, 0.5, 0.5}, -- NodeBox17
 		}
 	},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = scifi_nodes.node_sound_wood_defaults(),
 	on_place = minetest.rotate_node
 })
 
@@ -62,7 +62,7 @@ minetest.register_node("scifi_nodes:wallpipe", {
 			{-0.5, -0.125, 0, 0.5, 0, 0.0625}, -- NodeBox24
 		}
 	},
-	sounds = default.node_sound_wood_defaults()
+	sounds = scifi_nodes.node_sound_wood_defaults()
 })
 
 minetest.register_node("scifi_nodes:plant_trap", {
@@ -91,7 +91,7 @@ minetest.register_node("scifi_nodes:plant_trap", {
 			{-0.0625, -0.5, 0.3125, 0, 0.5, 0.375}, -- NodeBox28
 		}
 	},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = scifi_nodes.node_sound_wood_defaults(),
 })
 
 minetest.register_node("scifi_nodes:egg", {
@@ -122,7 +122,7 @@ minetest.register_node("scifi_nodes:egg", {
 			{-0.125, 0.75, -0.125, 0.125, 0.8125, 0.125}, -- NodeBox8
 			{-0.375, -0.3125, -0.4375, 0.375, 0.3125, 0.4375}, -- NodeBox9
 		},
-	sounds = default.node_sound_wood_defaults()
+	sounds = scifi_nodes.node_sound_wood_defaults()
 	}
 })
 
@@ -264,7 +264,7 @@ minetest.register_node("scifi_nodes:pad", {
 			{-0.875, -0.5, -0.8125, 0.8125, -0.375, 0.8125}, -- NodeBox3
 			{-0.8125, -0.5, -0.75, 0.75, -0.3125, 0.75}, -- NodeBox4
 		},
-	sounds = default.node_sound_wood_defaults()
+	sounds = scifi_nodes.node_sound_wood_defaults()
 	}
 })
 
@@ -283,7 +283,7 @@ minetest.register_node("scifi_nodes:pplwndw", {
 	paramtype2 = "facedir",
 	use_texture_alpha = "blend",
 	groups = {cracky=3},
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -354,7 +354,7 @@ minetest.register_node("scifi_nodes:pot_lid", {
 			{-0.1875, -0.3125, -0.1875, 0.1875, -0.25, 0.1875}
 		}
 	},
-	sounds = default.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
 local function toggle_lid(pos, node, player, itemstack)
@@ -407,7 +407,7 @@ minetest.register_node("scifi_nodes:pot", {
 	},
 	on_rightclick = toggle_lid,
 	on_destruct = remove_lid,
-	sounds = default.node_sound_metal_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
 minetest.register_node("scifi_nodes:pot2", {
@@ -439,7 +439,7 @@ minetest.register_node("scifi_nodes:pot2", {
 	},
 	on_rightclick = toggle_lid,
 	on_destruct = remove_lid,
-	sounds = default.node_sound_metal_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
 minetest.register_node("scifi_nodes:lightbar", {
@@ -465,7 +465,7 @@ minetest.register_node("scifi_nodes:lightbar", {
 		}
 	},
 	groups = {cracky=1},
-	sounds = default.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
 minetest.register_node("scifi_nodes:light_dynamic", {
@@ -490,7 +490,7 @@ minetest.register_node("scifi_nodes:light_dynamic", {
 	paramtype2 = "wallmounted",
 	light_source = minetest.LIGHT_MAX,
 	groups = {cracky=1, oddly_breakable_by_hand=1},
-	sounds = default.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
 minetest.register_node("scifi_nodes:ladder", {
@@ -520,7 +520,7 @@ minetest.register_node("scifi_nodes:ladder", {
 			{0.3125, -0.5, 0.0625, 0.4375, -0.375, 0.1875}, -- NodeBox25
 			{0.3125, -0.5, -0.1875, 0.4375, -0.375, -0.0625}, -- NodeBox26
 		},
-	sounds = default.node_sound_metal_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 	},
 	paramtype2 = "wallmounted",
 	walkable = false,
@@ -547,7 +547,7 @@ minetest.register_node("scifi_nodes:lightbars", {
 		}
 	},
 	groups = {cracky=1},
-	sounds = default.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
 minetest.register_node("scifi_nodes:liquid_pipe", {
@@ -568,7 +568,7 @@ tiles = {{
 		}
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1},
-	sounds = default.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
 minetest.register_node("scifi_nodes:liquid_pipe2", {
@@ -588,7 +588,7 @@ tiles = {
 		}
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1},
-	sounds = default.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
 minetest.register_node("scifi_nodes:powered_stand", {
@@ -655,7 +655,7 @@ minetest.register_node("scifi_nodes:cover", {
 			{-0.3125, -0.375, -0.3125, 0.3125, -0.3125, 0.3125}, -- NodeBox6
 		}
 	},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = scifi_nodes.node_sound_wood_defaults(),
 	groups = {cracky=1, oddly_breakable_by_hand=1}
 })
 
@@ -760,7 +760,7 @@ minetest.register_node("scifi_nodes:table", {
 			{-0.0625, 0.25, -0.125, 0.0625, 0.4375, -0.0625}, -- NodeBox7
 		}
 	},
-	sounds = default.node_sound_metal_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 	groups = {cracky=1}
 })
 
@@ -876,7 +876,7 @@ minetest.register_node("scifi_nodes:windowcorner", {
 	},
 	groups = {cracky=1},
 	on_place = minetest.rotate_node,
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
 minetest.register_node("scifi_nodes:windowstraight", {
@@ -903,7 +903,7 @@ minetest.register_node("scifi_nodes:windowstraight", {
 	},
 	groups = {cracky=1},
 	on_place = minetest.rotate_node,
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
 minetest.register_node("scifi_nodes:windowcorner2", {
@@ -934,7 +934,7 @@ minetest.register_node("scifi_nodes:windowcorner2", {
 	},
 	groups = {cracky=1},
 	on_place = minetest.rotate_node,
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
 minetest.register_node("scifi_nodes:windowstraight2", {
@@ -961,7 +961,7 @@ minetest.register_node("scifi_nodes:windowstraight2", {
 	},
 	groups = {cracky=1},
 	on_place = minetest.rotate_node,
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
 
@@ -990,7 +990,7 @@ minetest.register_node("scifi_nodes:capsule", {
 		}
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1},
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, clicker, item, _)
 			minetest.set_node(pos, {name="scifi_nodes:capsule2", param2=node.param2})
 	end,
@@ -1020,7 +1020,7 @@ minetest.register_node("scifi_nodes:capsule3", {
 		}
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, clicker, item, _)
 			minetest.set_node(pos, {name="scifi_nodes:capsule", param2=node.param2})
 	end,
@@ -1050,7 +1050,7 @@ minetest.register_node("scifi_nodes:capsule2", {
 		}
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, clicker, item, _)
 			minetest.set_node(pos, {name="scifi_nodes:capsule3", param2=node.param2})
 	end,
@@ -1138,7 +1138,7 @@ minetest.register_node("scifi_nodes:glassscreen", {
 		}
 	},
 	groups = {cracky=1, oddly_breakable_by_hand=1},
-	sounds = default.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
 
@@ -1221,5 +1221,5 @@ minetest.register_node("scifi_nodes:windowpanel", {
     },
     groups = {cracky=1},
     on_place = minetest.rotate_node,
-    sounds = default.node_sound_glass_defaults(),
+    sounds = scifi_nodes.node_sound_glass_defaults(),
 })
