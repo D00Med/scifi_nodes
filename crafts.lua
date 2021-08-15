@@ -1,14 +1,24 @@
 -- CRAFTING RECIPES FOR SCIFI NODES
 
--- 6 basic plastic from 9 homedecor plastic sheet
-minetest.register_craft({
-	output = "scifi_nodes:white2 6",
-	recipe = {
-		{"homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting"},
-		{"homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting"},
-		{"homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting"}
-	}
-})
+if minetest.get_modpath("basic_materials") then
+    -- 6 basic plastic from 9 homedecor plastic sheet
+    minetest.register_craft({
+        output = "scifi_nodes:white2 6",
+        recipe = {
+            {"homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting"},
+            {"homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting"},
+            {"homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting"}
+        }
+    })
+end
+
+if not minetest.get_modpath("default") or not minetest.get_modpath("dye") then
+    -- the default and dye mod are required for most of the recipes
+    -- if either of them is missing (because we are not in the default game)
+    -- then just skip the recipes entirely
+    -- TODO: potentially switch recipes depending on current game
+    return
+end
 
 minetest.register_craft({
 	output = "scifi_nodes:super_white",
