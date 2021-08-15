@@ -39,7 +39,7 @@ end
 -- register some blocks in stairsplus if available (part of moreblocks)
 scifi_nodes.register_slope("white2", "Plastic", {"scifi_nodes_white2.png",}, 0)
 scifi_nodes.register_slope("super_white", "Super Plastic", {"scifi_nodes_super_white.png",}, 11)
-scifi_nodes.register_slope("ultra_white", "Super Plastic", {"scifi_nodes_ultra_white.png",}, default.LIGHT_MAX)
+scifi_nodes.register_slope("ultra_white", "Super Plastic", {"scifi_nodes_ultra_white.png",}, minetest.LIGHT_MAX)
 scifi_nodes.register_slope("black", "Black", {"scifi_nodes_black.png",}, 0)
 scifi_nodes.register_slope("white", "White", {"scifi_nodes_white.png",}, 0)
 scifi_nodes.register_slope("grey", "Grey", {"scifi_nodes_grey.png",}, 0)
@@ -54,8 +54,8 @@ scifi_nodes.register_slope("holes", "Holes", {"scifi_nodes_holes.png",}, 0)
 scifi_nodes.register_slope("pipe", "Pipe", {"scifi_nodes_pipe.png",}, 0)
 scifi_nodes.register_slope("stripes", "Stripes", {"scifi_nodes_stripes.png",}, 0)
 scifi_nodes.register_slope("screen", "Screen", {"scifi_nodes_screen3.png",}, 5)
-scifi_nodes.register_slope("lightstripe", "Lightstripe", {"scifi_nodes_lightstripe.png",}, default.LIGHT_MAX)
-scifi_nodes.register_slope("blight2", "Blue Light 2", {"scifi_nodes_capsule3.png",}, default.LIGHT_MAX)
+scifi_nodes.register_slope("lightstripe", "Lightstripe", {"scifi_nodes_lightstripe.png",}, minetest.LIGHT_MAX)
+scifi_nodes.register_slope("blight2", "Blue Light 2", {"scifi_nodes_capsule3.png",}, minetest.LIGHT_MAX)
 scifi_nodes.register_slope("wallpipe", "Alien Pipe", {"scifi_nodes_wallpipe.png",}, 0)
 scifi_nodes.register_slope("alien", "Alien Wall", {"scifi_nodes_alnslp.png",}, 0)
 scifi_nodes.register_slope("purple", "Purple", {"scifi_nodes_purple.png",}, 0)
@@ -74,7 +74,7 @@ node.types = {
 	{"holes",       "metal with holes"},
 	{"white2",      "plastic",},
 	{"super_white",      "Super Plastic", 11},
-	{"ultra_white",      "Ultra Plastic", default.LIGHT_MAX},
+	{"ultra_white",      "Ultra Plastic", minetest.LIGHT_MAX},
 --	{"engine",      "engine",          "engine"},
 	{"wall",      "metal wall"},
 	{"white",      "plastic wall"},
@@ -139,10 +139,10 @@ node.types = {
 --	{"monitorwall",      "Wall monitors",       "monitorwall"},
 	{"screen3",      "Wall monitor"},
 	{"doomlight",      "Doom light",       12},
-	{"bluwllight",      "Blue wall light", default.LIGHT_MAX},
+	{"bluwllight",      "Blue wall light", minetest.LIGHT_MAX},
 	{"bluegrid",      "Blue Grid", 5},
 	{"fan",      "Fan"},
-	{"ppllght",      "Purple wall light", default.LIGHT_MAX},
+	{"ppllght",      "Purple wall light", minetest.LIGHT_MAX},
 	{"pplwll",      "Purple wall"},
 	{"pplwll2",      "Purple wall2"},
 	{"pplwll3",      "Purple wall3"},
