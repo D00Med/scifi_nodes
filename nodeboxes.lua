@@ -324,87 +324,64 @@ minetest.register_node("scifi_nodes:gloshroom", {
 })
 
 minetest.register_node("scifi_nodes:pot_lid", {
-	description = "plant pot lid(place above plant)",
+	description = "Plant Pot Lid",
 	tiles = {
-		"scifi_nodes_glass2.png",
-		"scifi_nodes_glass2.png",
-		"scifi_nodes_glass2.png",
-		"scifi_nodes_glass2.png",
-		"scifi_nodes_glass2.png",
 		"scifi_nodes_glass2.png"
 	},
 	inventory_image = "scifi_nodes_pod_inv.png",
 	wield_image = "scifi_nodes_pod_inv.png",
 	use_texture_alpha = "blend",
 	drawtype = "nodebox",
-	drop = "", -- part of the pot, don't let it in players inventory
 	paramtype = "light",
-	groups = {cracky=1, not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory = 1},
 	sunlight_propagates = true,
+	diggable = false,
+	drop = "",
 	selection_box = {
 		type = "fixed",
-		fixed = {0, 0, 0, 0, 0, 0}
-	},
-	collision_box = {
-		type = "fixed",
-		fixed = {-0.5, -1.5, -0.5, 0.5, -0.5, 0.5}
+		fixed = {-0.5, -1.5, -0.5, 0.5, -0.25, 0.5}
 	},
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.1875, -0.5625, -0.1875, 0.1875, -0.5, 0.1875}, -- NodeBox13
-			{-0.25, -0.625, -0.25, 0.25, -0.5625, 0.25}, -- NodeBox14
-			{-0.3125, -0.6875, -0.3125, 0.3125, -0.625, 0.3125}, -- NodeBox15
-			{-0.375, -0.75, -0.375, 0.375, -0.6875, 0.375}, -- NodeBox16
-			{-0.4375, -0.75, 0.375, 0.4375, -1.5, 0.4375}, -- NodeBox17
-			{-0.4375, -0.75, -0.4375, 0.4375, -1.5, -0.375}, -- NodeBox18
-			{0.375, -0.75, -0.4375, 0.4375, -1.5, 0.4375}, -- NodeBox19
-			{-0.4375, -0.75, -0.4375, -0.375, -1.5, 0.4375}, -- NodeBox20
+			{-0.4375, -1.5, -0.4375, 0.4375, -0.5, -0.375},
+			{-0.4375, -1.5, 0.375, 0.4375, -0.5, 0.4375},
+			{-0.4375, -1.5, -0.375, -0.375, -0.5, 0.375},
+			{0.375, -1.5, -0.375, 0.4375, -0.5, 0.375},
+			{-0.375, -0.5, -0.375, 0.375, -0.4375, 0.375},
+			{-0.3125, -0.4375, -0.3125, 0.3125, -0.375, 0.3125},
+			{-0.25, -0.375, -0.25, 0.25, -0.3125, 0.25},
+			{-0.1875, -0.3125, -0.1875, 0.1875, -0.25, 0.1875}
 		}
 	},
 	sounds = default.node_sound_glass_defaults()
 })
 
-local lid_offset = {x=0, y=2, z=0}
-
-local function toggle_lid(pot_pos, player)
-	if not player then
+local function toggle_lid(pos, node, player, itemstack)
+	if not player or minetest.is_protected(pos, player:get_player_name()) then
 		return
 	end
-	local player_name = player:get_player_name()
-	local lid_pos = vector.add(pot_pos, lid_offset)
+	local lid_pos = {x = pos.x, y = pos.y+2 , z = pos.z}
 	local lid_node = minetest.get_node(lid_pos)
-	if minetest.is_protected(lid_pos, player_name) then
-		-- lid is in a protected area
-		return
-	end
 	if lid_node.name == "scifi_nodes:pot_lid" then
-		minetest.set_node(lid_pos, {name="air"})
+		minetest.set_node(lid_pos, {name = "air"})
 	elseif lid_node.name == "air" then
-		minetest.set_node(lid_pos, {name="scifi_nodes:pot_lid"})
+		minetest.set_node(lid_pos, {name = "scifi_nodes:pot_lid"})
 	end
 end
 
-local function remove_lid(pot_pos, player)
-	if not player then
-		return
-	end
-	local player_name = player:get_player_name()
-	local lid_pos = vector.add(pot_pos, lid_offset)
+local function remove_lid(pos)
+	local lid_pos = {x = pos.x, y = pos.y+2 , z = pos.z}
 	local lid_node = minetest.get_node(lid_pos)
-	if minetest.is_protected(lid_pos, player_name) then
-		-- lid is in protected area
-		return
-	end
 	if lid_node.name == "scifi_nodes:pot_lid" then
-		minetest.set_node(lid_pos, {name="air"})
+		minetest.set_node(lid_pos, {name = "air"})
 	end
 end
 
 minetest.register_node("scifi_nodes:pot", {
-	description = "metal plant pot (right click for lid, shift+rightclick to plant)",
+	description = "Metal Plant Pot (right-click for lid, sneak + right-click to plant)",
 	tiles = {
-		"scifi_nodes_pot.png",
+		"default_dirt.png^scifi_nodes_pot.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
@@ -413,29 +390,30 @@ minetest.register_node("scifi_nodes:pot", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {cracky=1, soil=1, sand=1},
+	groups = {cracky = 1, soil = 1, sand = 1},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}
+	},
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.5, -0.25, -0.5, 0.5, 0.5, 0.5}, -- NodeBox1
-			{0.1875, -0.5, 0.1875, 0.5, -0.25, 0.5}, -- NodeBox2
-			{-0.5, -0.5, -0.5, -0.1875, -0.25, -0.1875}, -- NodeBox3
-			{-0.5, -0.5, 0.1875, -0.1875, -0.25, 0.5}, -- NodeBox4
-			{0.1875, -0.5, -0.5, 0.5, -0.25, -0.1875}, -- NodeBox5
+			{-0.5, -0.25, -0.5, 0.5, 0.5, 0.5},
+			{0.1875, -0.5, 0.1875, 0.5, -0.25, 0.5},
+			{-0.5, -0.5, -0.5, -0.1875, -0.25, -0.1875},
+			{-0.5, -0.5, 0.1875, -0.1875, -0.25, 0.5},
+			{0.1875, -0.5, -0.5, 0.5, -0.25, -0.1875}
 		}
 	},
-	on_rightclick = function(pos, _, player)
-		toggle_lid(pos, player)
-	end,
-	after_dig_node = function(pos, _, _, player)
-		remove_lid(pos, player)
-	end
+	on_rightclick = toggle_lid,
+	on_destruct = remove_lid,
+	sounds = default.node_sound_metal_defaults(),
 })
 
 minetest.register_node("scifi_nodes:pot2", {
-	description = "metal wet plant pot(right click for lid, shift+rightclick to plant)",
+	description = "Metal Plant Pot Wet (right-click for lid, sneak + right-click to plant)",
 	tiles = {
-		"scifi_nodes_pot.png^[colorize:black:100",
+		"default_dirt.png^scifi_nodes_pot2.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
@@ -444,23 +422,24 @@ minetest.register_node("scifi_nodes:pot2", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {cracky=1, soil=3, wet=1},
+	groups = {cracky = 1, soil = 3, wet = 1},
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}
+	},
 	node_box = {
 		type = "fixed",
 		fixed = {
-			{-0.5, -0.25, -0.5, 0.5, 0.5, 0.5}, -- NodeBox1
-			{0.1875, -0.5, 0.1875, 0.5, -0.25, 0.5}, -- NodeBox2
-			{-0.5, -0.5, -0.5, -0.1875, -0.25, -0.1875}, -- NodeBox3
-			{-0.5, -0.5, 0.1875, -0.1875, -0.25, 0.5}, -- NodeBox4
-			{0.1875, -0.5, -0.5, 0.5, -0.25, -0.1875}, -- NodeBox5
+			{-0.5, -0.25, -0.5, 0.5, 0.5, 0.5},
+			{0.1875, -0.5, 0.1875, 0.5, -0.25, 0.5},
+			{-0.5, -0.5, -0.5, -0.1875, -0.25, -0.1875},
+			{-0.5, -0.5, 0.1875, -0.1875, -0.25, 0.5},
+			{0.1875, -0.5, -0.5, 0.5, -0.25, -0.1875}
 		}
 	},
-	on_rightclick = function(pos, _, player)
-		toggle_lid(pos, player)
-	end,
-	after_dig_node = function(pos, _, _, player)
-		remove_lid(pos, player)
-	end
+	on_rightclick = toggle_lid,
+	on_destruct = remove_lid,
+	sounds = default.node_sound_metal_defaults(),
 })
 
 minetest.register_node("scifi_nodes:lightbar", {

@@ -1099,6 +1099,22 @@ minetest.register_craft({
     }
 })
 
+-- wet metal plant pot from dry metal plant pot
+minetest.register_craft({
+    output = "scifi_nodes:pot2",
+    recipe = {
+        {"scifi_nodes:pot", "bucket:bucket_water"}
+    },
+    replacements = {{"bucket:bucket_water", "bucket:bucket_empty"}}
+})
+
+-- dry metal plant pot from wet metal plant pot
+minetest.register_craft({
+	type = "cooking",
+	output = "scifi_nodes:pot",
+	recipe = "scifi_nodes:pot2",
+})
+
 -- 6 itemholder from 2 dented metal block and 1 plastic
 minetest.register_craft({
     output = "scifi_nodes:itemholder 6",
