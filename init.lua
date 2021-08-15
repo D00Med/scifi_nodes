@@ -12,8 +12,14 @@ if minetest.get_modpath("xpanes") then
 end
 
 dofile(MP.."/common.lua")
-dofile(MP.."/builder.lua")
-dofile(MP.."/chest.lua")
+
+if minetest.get_modpath("default") then
+	-- only load builder and chest if the default mod is available
+	-- the formspecs depend on it
+	dofile(MP.."/builder.lua")
+	dofile(MP.."/chest.lua")
+end
+
 dofile(MP.."/plants.lua")
 dofile(MP.."/nodes.lua")
 dofile(MP.."/doors.lua")
