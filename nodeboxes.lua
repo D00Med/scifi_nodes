@@ -1080,7 +1080,7 @@ minetest.register_node("scifi_nodes:itemholder", {
 		}
 	},
 	groups = {cracky=1},
-	on_rotate = screwdriver.disallow,
+	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.disallow,
 	after_place_node = function(pos, placer, itemstack)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("owner",placer:get_player_name())
