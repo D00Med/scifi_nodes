@@ -43,7 +43,7 @@ minetest.register_node("scifi_nodes:crate", {
 	groups = {cracky = 1, oddly_breakable_by_hand = 2, fuel = 8},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
-	sounds = default.node_sound_wood_defaults(),
+	sounds = scifi_nodes.node_sound_wood_defaults(),
 
 	after_dig_node = drop_chest_stuff(),
 	on_construct = function(pos)
@@ -82,7 +82,7 @@ minetest.register_node("scifi_nodes:box", {
 	groups = {cracky = 1},
 	legacy_facedir_simple = true,
 	is_ground_content = false,
-	sounds = default.node_sound_metal_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 
 	after_dig_node = drop_chest_stuff(),
 	on_construct = function(pos)

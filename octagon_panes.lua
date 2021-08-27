@@ -27,7 +27,7 @@ local function register(basename, description, texture)
     },
     groups = {cracky = 3, oddly_breakable_by_hand = 3},
     use_texture_alpha = "blend",
-    sounds = default.node_sound_glass_defaults()
+    sounds = scifi_nodes.node_sound_glass_defaults()
   })
 
   -- double height
@@ -52,7 +52,7 @@ local function register(basename, description, texture)
     },
     groups = {cracky = 3, oddly_breakable_by_hand = 3},
     use_texture_alpha = "blend",
-    sounds = default.node_sound_glass_defaults()
+    sounds = scifi_nodes.node_sound_glass_defaults()
   })
 
   -- single height with offset
@@ -77,7 +77,7 @@ local function register(basename, description, texture)
     },
     groups = {cracky = 3, oddly_breakable_by_hand = 3},
     use_texture_alpha = "blend",
-    sounds = default.node_sound_glass_defaults()
+    sounds = scifi_nodes.node_sound_glass_defaults()
   })
 
   -- register recipes
