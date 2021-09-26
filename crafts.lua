@@ -10,7 +10,18 @@ if minetest.get_modpath("basic_materials") then
             {"homedecor:plastic_sheeting", "homedecor:plastic_sheeting", "homedecor:plastic_sheeting"}
         }
     })
+
+	minetest.register_craft({
+		output = "scifi_nodes:pad",
+		recipe = {
+			{"homedecor:plastic_sheeting", "quartz:block", "homedecor:plastic_sheeting"},
+			{"default:mese_crystal", "quartz:block", "default:mese_crystal"},
+			{"homedecor:plastic_sheeting", "quartz:block", "homedecor:plastic_sheeting"}
+		}
+	})
+
 end
+
 
 if not minetest.get_modpath("default") or not minetest.get_modpath("dye") then
     -- the default and dye mod are required for most of the recipes
