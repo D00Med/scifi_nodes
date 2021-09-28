@@ -11,14 +11,17 @@ if minetest.get_modpath("basic_materials") then
         }
     })
 
-	minetest.register_craft({
-		output = "scifi_nodes:pad",
-		recipe = {
-			{"homedecor:plastic_sheeting", "quartz:block", "homedecor:plastic_sheeting"},
-			{"default:mese_crystal", "quartz:block", "default:mese_crystal"},
-			{"homedecor:plastic_sheeting", "quartz:block", "homedecor:plastic_sheeting"}
-		}
-	})
+    if minetest.settings:get_bool("scifi_nodes.teleporter_enable_crafting", false) then
+        -- enable the teleporter pad crafting recipe only if the setting is enabled
+        minetest.register_craft({
+            output = "scifi_nodes:pad",
+            recipe = {
+                {"homedecor:plastic_sheeting", "quartz:block", "homedecor:plastic_sheeting"},
+                {"default:mese_crystal", "quartz:block", "default:mese_crystal"},
+                {"homedecor:plastic_sheeting", "quartz:block", "homedecor:plastic_sheeting"}
+            }
+        })
+    end
 
 end
 

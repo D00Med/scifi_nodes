@@ -1,2 +1,5 @@
 #    Doors can only be opened by mesecon signal
 scifi_nodes.doors_open_with_mesecon_only (disables right click on doors) bool true
+
+# Teleporter recipe flag
+scifi_nodes.teleporter_enable_crafting (enables the teleporter recipe) bool false
