@@ -31,3 +31,8 @@ dofile(MP.."/digicode.lua")
 dofile(MP.."/models.lua")
 dofile(MP.."/octagon_panes.lua")
 dofile(MP.."/crafts.lua")
+
+if minetest.get_modpath("pkarcs") then
+	-- register some nodes in the pkarcs mod
+	dofile(MP.."/pkarcs.lua")
+end

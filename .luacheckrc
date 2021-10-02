@@ -20,6 +20,7 @@ read_globals = {
 	"screwdriver",
 	"minetest",
 	"mesecon",
-	"unifieddyes"
+	"unifieddyes",
+	"pkarcs"
 
 }
