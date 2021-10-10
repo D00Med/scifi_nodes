@@ -1486,7 +1486,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = "scifi_nodes:plant8",
     recipe = {
-        {"flowers:viola","default:junglegrass"},
+        {"flowers:viola","default:junglegrass", "default:grass_1"},
         {"default:dirt",""},
         {"scifi_nodes:greybolts",""}
     }
