@@ -1638,15 +1638,6 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'scifi_nodes:doomwall43 6',
     recipe = {
-        {"scifi_nodes:white","dye:black","scifi_nodes:white"},
-        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
-        {"scifi_nodes:white","dye:yellow","scifi_nodes:white"}
-    }
-})
-
-minetest.register_craft({
-    output = 'scifi_nodes:doomwall43 6',
-    recipe = {
         {"scifi_nodes:white","scifi_nodes:white","scifi_nodes:white"},
         {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
         {"scifi_nodes:white","default:grass_1","scifi_nodes:white"}
