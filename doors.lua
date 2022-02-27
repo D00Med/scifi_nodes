@@ -271,7 +271,7 @@ for _, current_door in ipairs(doors) do
 		drawtype = "nodebox",
 		paramtype = "light",
 		paramtype2 = "facedir",
-		groups = {cracky = 1},
+		groups = {cracky = 1, dig_generic = 3},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -300,7 +300,7 @@ for _, current_door in ipairs(doors) do
 		paramtype = "light",
 		paramtype2 = "facedir",
 		drop = closed,
-		groups = {cracky = 1},
+		groups = {cracky = 1, dig_generic = 3},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -330,7 +330,7 @@ for _, current_door in ipairs(doors) do
 		drawtype = "nodebox",
 		paramtype = "light",
 		paramtype2 = "facedir",
-		groups = {cracky = 1},
+		groups = {cracky = 1, dig_generic = 3},
 		node_box = {
 			type = "fixed",
 			fixed = {
