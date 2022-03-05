@@ -31,7 +31,7 @@ minetest.register_node("scifi_nodes:slope_"..name, {
 	paramtype2 = "facedir",
 	use_texture_alpha = "clip",
 	light_source = light,
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	on_place = minetest.rotate_node
 })
 end
@@ -164,7 +164,7 @@ if minetest.global_exists("stairsplus") then
 			description = row[2],
 			tiles = {"scifi_nodes_"..name..".png"},
 			use_texture_alpha = "clip",
-			groups = {cracky=1},
+			groups = {cracky=1, dig_generic = 3},
 			paramtype = "light",
 			paramtype2 = "facedir",
 			light_source = row[3],

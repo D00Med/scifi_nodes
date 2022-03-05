@@ -18,7 +18,7 @@ minetest.register_node("scifi_nodes:alienslope", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -49,7 +49,7 @@ minetest.register_node("scifi_nodes:wallpipe", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -107,7 +107,7 @@ minetest.register_node("scifi_nodes:egg", {
 	sunlight_propagates = false,
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {cracky=1, oddly_breakable_by_hand=1, dig_immediate=2, falling_node=1},
+	groups = {cracky=1, oddly_breakable_by_hand=1, dig_immediate=2, falling_node=1, dig_generic = 3},
 	light_source = 5,
 	node_box = {
 		type = "fixed",
@@ -282,7 +282,7 @@ minetest.register_node("scifi_nodes:pplwndw", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	use_texture_alpha = "blend",
-	groups = {cracky=3},
+	groups = {cracky=3, dig_generic = 4},
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 	node_box = {
 		type = "fixed",
@@ -378,10 +378,13 @@ local function remove_lid(pos)
 	end
 end
 
+local dirt_tex = "default_dirt.png"
+if not minetest.get_modpath("default") then dirt_tex = "[combine:16x16^[noalpha^[colorize:#654321" end
+
 minetest.register_node("scifi_nodes:pot", {
 	description = "Metal Plant Pot (right-click for lid, sneak + right-click to plant)",
 	tiles = {
-		"default_dirt.png^scifi_nodes_pot.png",
+		dirt_tex .. "^scifi_nodes_pot.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
@@ -390,7 +393,7 @@ minetest.register_node("scifi_nodes:pot", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {cracky = 1, soil = 1, sand = 1},
+	groups = {cracky = 1, soil = 1, sand = 1, dig_generic = 3},
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}
@@ -413,7 +416,7 @@ minetest.register_node("scifi_nodes:pot", {
 minetest.register_node("scifi_nodes:pot2", {
 	description = "Metal Plant Pot Wet (right-click for lid, sneak + right-click to plant)",
 	tiles = {
-		"default_dirt.png^scifi_nodes_pot2.png",
+		dirt_tex .. "^scifi_nodes_pot2.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
@@ -422,7 +425,7 @@ minetest.register_node("scifi_nodes:pot2", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	groups = {cracky = 1, soil = 3, wet = 1},
+	groups = {cracky = 1, soil = 3, wet = 1, dig_generic = 3},
 	selection_box = {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}
@@ -464,7 +467,7 @@ minetest.register_node("scifi_nodes:lightbar", {
 			{-0.125, -0.5, -0.5, 0.125, -0.375, 0.5}, -- NodeBox1
 		}
 	},
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
@@ -546,7 +549,7 @@ minetest.register_node("scifi_nodes:lightbars", {
 			{0.125, -0.5, -0.375, 0.375, 0.5, -0.125}, -- NodeBox4
 		}
 	},
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
@@ -567,7 +570,7 @@ tiles = {{
 			{-0.375, -0.5, -0.375, 0.375, 0.5, 0.375}, -- NodeBox1
 		}
 	},
-	groups = {cracky=1, oddly_breakable_by_hand=1},
+	groups = {cracky=1, oddly_breakable_by_hand=1, dig_generic = 3},
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
@@ -761,7 +764,7 @@ minetest.register_node("scifi_nodes:table", {
 		}
 	},
 	sounds = scifi_nodes.node_sound_metal_defaults(),
-	groups = {cracky=1}
+	groups = {cracky=1, dig_generic = 3}
 })
 
 minetest.register_node("scifi_nodes:laptop_open", {
@@ -844,7 +847,7 @@ minetest.register_node("scifi_nodes:pipen", {
 			{-0.5, -0.4375, -0.5, 0.5, -0.375, 0.5}, -- NodeBox9
 		}
 	},
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	on_place = minetest.rotate_node
 })
 
@@ -874,7 +877,7 @@ minetest.register_node("scifi_nodes:windowcorner", {
 			{-0.0625, -0.5, -0.5, 0.0625, 0.5, 0.5}, -- NodeBox11
 		}
 	},
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	on_place = minetest.rotate_node,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
@@ -901,7 +904,7 @@ minetest.register_node("scifi_nodes:windowstraight", {
 			{-0.0625, -0.5, -0.5, 0.0625, 0.5, 0.5}, -- NodeBox11
 		}
 	},
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	on_place = minetest.rotate_node,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
@@ -932,7 +935,7 @@ minetest.register_node("scifi_nodes:windowcorner2", {
 			{-0.0625, -0.5, -0.5, 0.0625, 0.5, 0.5}, -- NodeBox11
 		}
 	},
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	on_place = minetest.rotate_node,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
@@ -959,7 +962,7 @@ minetest.register_node("scifi_nodes:windowstraight2", {
 			{-0.0625, -0.5, -0.5, 0.0625, 0.5, 0.5}, -- NodeBox11
 		}
 	},
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	on_place = minetest.rotate_node,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
@@ -989,7 +992,7 @@ minetest.register_node("scifi_nodes:capsule", {
 			{-0.3125, -0.4375, -0.1875, 0.3125, -0.0625, 0.1875}, -- NodeBox3
 		}
 	},
-	groups = {cracky=1, oddly_breakable_by_hand=1},
+	groups = {cracky=1, oddly_breakable_by_hand=1, dig_generic = 3},
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, clicker, item, _)
 			minetest.set_node(pos, {name="scifi_nodes:capsule2", param2=node.param2})
@@ -1079,7 +1082,7 @@ minetest.register_node("scifi_nodes:itemholder", {
 			{-0.25, -0.5, -0.0625, -0.1875, -0.0625, 0.0625}, -- NodeBox5
 		}
 	},
-	groups = {cracky=1},
+	groups = {cracky=1, dig_generic = 3},
 	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.disallow,
 	after_place_node = function(pos, placer, itemstack)
 		local meta = minetest.get_meta(pos)
@@ -1219,7 +1222,7 @@ minetest.register_node("scifi_nodes:windowpanel", {
             {-0.0625, -0.5, -0.5, 0.0625, 0.5, 0.5}, -- NodeBox11
         }
     },
-    groups = {cracky=1},
+    groups = {cracky=1, dig_generic = 3},
     on_place = minetest.rotate_node,
     sounds = scifi_nodes.node_sound_glass_defaults(),
 })
