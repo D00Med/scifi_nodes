@@ -33,7 +33,6 @@ for _, row in ipairs(plants) do
 		groups = {snappy=1, oddly_breakable_by_hand=1, dig_immediate=3, flora=1},
 		paramtype = "light",
 		visual_scale = size,
-		buildable_to = true,
 		walkable = false,
 		damage_per_second = dmg,
 		selection_box = {
