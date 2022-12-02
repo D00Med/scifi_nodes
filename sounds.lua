@@ -1,29 +1,50 @@
 -- sound definitions
 
-function scifi_nodes.node_sound_wood_defaults()
+function scifi_nodes.node_sound_defaults(param)
     if minetest.get_modpath("default") then
         -- default game
-        return default.node_sound_wood_defaults()
+        return default.node_sound_defaults(param)
     end
 end
 
-function scifi_nodes.node_sound_glass_defaults()
+function scifi_nodes.node_sound_wood_defaults(param)
     if minetest.get_modpath("default") then
         -- default game
-        return default.node_sound_glass_defaults()
+        return default.node_sound_wood_defaults(param)
     end
 end
 
-function scifi_nodes.node_sound_metal_defaults()
+function scifi_nodes.node_sound_glass_defaults(param)
     if minetest.get_modpath("default") then
         -- default game
-        return default.node_sound_metal_defaults()
+        return default.node_sound_glass_defaults(param)
     end
 end
 
-function scifi_nodes.node_sound_stone_defaults()
+function scifi_nodes.node_sound_metal_defaults(param)
     if minetest.get_modpath("default") then
         -- default game
-        return default.node_sound_stone_defaults()
+        return default.node_sound_metal_defaults(param)
+    end
+end
+
+function scifi_nodes.node_sound_stone_defaults(param)
+    if minetest.get_modpath("default") then
+        -- default game
+        return default.node_sound_stone_defaults(param)
+    end
+end
+
+function scifi_nodes.node_sound_dirt_defaults(param)
+    if minetest.get_modpath("default") then
+        -- default game
+        return default.node_sound_dirt_defaults(param)
+    end
+end
+
+function scifi_nodes.node_sound_plant_defaults(param)
+    if minetest.get_modpath("default") then
+        -- default game
+        return default.node_sound_leaves_defaults(param)
     end
 end

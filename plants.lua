@@ -43,5 +43,6 @@ for _, row in ipairs(plants) do
 		},
 		is_ground_content = false,
 		light_source = light,
+		sounds = scifi_nodes.node_sound_plant_defaults(),
 	})
 end

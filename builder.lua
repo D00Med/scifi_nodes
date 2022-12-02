@@ -105,5 +105,6 @@ minetest.register_node("scifi_nodes:builder", {
 	end,
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=1, oddly_breakable_by_hand=1}
+	groups = {cracky=1, oddly_breakable_by_hand=1},
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 })

@@ -257,6 +257,7 @@ for _, current_door in ipairs(doors) do
 		on_place = onplace,
 		after_destruct = afterdestruct,
 		on_rightclick = doors_rightclick,
+		sounds = scifi_nodes.node_sound_metal_defaults(),
 	})
 
 	minetest.register_node(closed_top, {
@@ -285,6 +286,7 @@ for _, current_door in ipairs(doors) do
 			}
 		},
 		can_dig = nodig,
+		sounds = scifi_nodes.node_sound_metal_defaults(),
 	})
 
 	minetest.register_node(opened, {
@@ -316,6 +318,7 @@ for _, current_door in ipairs(doors) do
 		after_place_node = afterplace,
 		after_destruct = afterdestruct,
 		on_timer = ontimer,
+		sounds = scifi_nodes.node_sound_metal_defaults(),
 	})
 
 	minetest.register_node(opened_top, {
@@ -344,5 +347,6 @@ for _, current_door in ipairs(doors) do
 			}
 		},
 		can_dig = nodig,
+		sounds = scifi_nodes.node_sound_metal_defaults(),
 	})
 end     -- end of doors table browsing

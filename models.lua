@@ -2,7 +2,13 @@
 --Copyright (c) 2011-2015 Calinou and contributors.
 --Licensed under the zlib license.
 
-function scifi_nodes.register_slope(name, desc, texture, light)
+function scifi_nodes.register_slope(name, desc, texture, light, soundtype)
+local sounds
+if soundtype == "stone" then
+	sounds = scifi_nodes.node_sound_stone_defaults()
+else
+	sounds = scifi_nodes.node_sound_metal_defaults()
+end
 minetest.register_node("scifi_nodes:slope_"..name, {
 	description = desc.." Slope",
 	sunlight_propagates = false,
@@ -32,14 +38,15 @@ minetest.register_node("scifi_nodes:slope_"..name, {
 	use_texture_alpha = "clip",
 	light_source = light,
 	groups = {cracky=1, dig_generic = 3},
-	on_place = minetest.rotate_node
+	on_place = minetest.rotate_node,
+	sounds = sounds,
 })
 end
 
 -- register some blocks in stairsplus if available (part of moreblocks)
-scifi_nodes.register_slope("white2", "Plastic", {"scifi_nodes_white2.png",}, 0)
-scifi_nodes.register_slope("super_white", "Super Plastic", {"scifi_nodes_super_white.png",}, 11)
-scifi_nodes.register_slope("ultra_white", "Super Plastic", {"scifi_nodes_ultra_white.png",}, minetest.LIGHT_MAX)
+scifi_nodes.register_slope("white2", "Plastic", {"scifi_nodes_white2.png",}, 0, "stone")
+scifi_nodes.register_slope("super_white", "Super Plastic", {"scifi_nodes_super_white.png",}, 11, "stone")
+scifi_nodes.register_slope("ultra_white", "Super Plastic", {"scifi_nodes_ultra_white.png",}, minetest.LIGHT_MAX, "stone")
 scifi_nodes.register_slope("black", "Black", {"scifi_nodes_black.png",}, 0)
 scifi_nodes.register_slope("white", "White", {"scifi_nodes_white.png",}, 0)
 scifi_nodes.register_slope("grey", "Grey", {"scifi_nodes_grey.png",}, 0)
@@ -73,7 +80,7 @@ node.types = {
 	{"blue",      "blue lines"},
 	{"holes",       "metal with holes"},
 	{"white2",      "plastic",},
-	{"super_white",      "Super Plastic", 11},
+	{"super_white",      "Super Plastic", 11, "stone"},
 	{"ultra_white",      "Ultra Plastic", minetest.LIGHT_MAX},
 --	{"engine",      "engine",          "engine"},
 	{"wall",      "metal wall"},
@@ -149,8 +156,8 @@ node.types = {
 	{"pplwll4",      "Purple wall4"},
 	{"pplblk",      "Purple tile"},
 	{"purple",      "Purple node"},
-	{"rock",      "Moonstone"},
-	{"rock2",      "Moonstone2"},
+	{"rock",      "Moonstone", nil, "stone"},
+	{"rock2",      "Moonstone2", nil, "stone"},
 	{"blackvnt",      "Black vent"},
 	{"blackplate",      "Black plate"},
 }
@@ -158,6 +165,13 @@ node.types = {
 if minetest.global_exists("stairsplus") then
 	for _, row in ipairs(node.types) do
 		local name = row[1]
+		local soundtype = row[4]
+		local sounds
+		if soundtype == "stone" then
+			sounds = scifi_nodes.node_sound_stone_defaults()
+		else
+			sounds = scifi_nodes.node_sound_metal_defaults()
+		end
 
 		-- Node Definition
 		stairsplus:register_all("scifi_nodes", name, "scifi_nodes:"..name, {
@@ -168,6 +182,7 @@ if minetest.global_exists("stairsplus") then
 			paramtype = "light",
 			paramtype2 = "facedir",
 			light_source = row[3],
+			sounds = sounds,
 		})
 	end
 end
