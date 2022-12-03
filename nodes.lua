@@ -8,7 +8,10 @@ if minetest.get_modpath("default") then
 			{name = "default_dirt.png^(default_grass_side.png^[colorize:cyan:80)",
 				tileable_vertical = false}},
 		light_source = 2,
-		groups = {crumbly=1, oddly_breakable_by_hand=1, soil=1}
+		groups = {crumbly=1, oddly_breakable_by_hand=1, soil=1},
+		sounds = scifi_nodes.node_sound_dirt_defaults({
+			footstep = scifi_nodes.node_sound_plant_defaults().footstep,
+		}),
 	})
 end
 
@@ -25,7 +28,8 @@ minetest.register_node("scifi_nodes:light", {
 	},
 	light_source = 10,
 	paramtype = "light",
-	groups = {cracky=1, dig_generic = 3}
+	groups = {cracky=1, dig_generic = 3},
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
 minetest.register_node("scifi_nodes:rfloor", {
@@ -168,7 +172,7 @@ minetest.register_node("scifi_nodes:discs", {
 	},
 	paramtype = "light",
 	groups = {cracky=1, dig_generic = 3},
-	sounds = scifi_nodes.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
 minetest.register_node("scifi_nodes:disc", {
@@ -181,7 +185,8 @@ minetest.register_node("scifi_nodes:disc", {
 	inventory_image = "scifi_nodes_disc.png",
 	wield_image = "scifi_nodes_disc.png",
 	paramtype = "light",
-	groups = {cracky=1, dig_generic = 3}
+	groups = {cracky=1, dig_generic = 3},
+	sounds = scifi_nodes.node_sound_defaults(),
 })
 
 minetest.register_node("scifi_nodes:greenbar_animated", {
@@ -224,7 +229,7 @@ minetest.register_node("scifi_nodes:black_lights", {
 	}},
 	paramtype = "light",
 	groups = {cracky=1, dig_generic = 3},
-	sounds = scifi_nodes.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
 minetest.register_node("scifi_nodes:black_screen", {
@@ -237,7 +242,7 @@ minetest.register_node("scifi_nodes:black_screen", {
 	paramtype = "light",
 	groups = {cracky=1, dig_generic = 3},
 	light_source = 1,
-	sounds = scifi_nodes.node_sound_stone_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
 minetest.register_node("scifi_nodes:screen", {
@@ -282,7 +287,7 @@ minetest.register_node("scifi_nodes:white_pad", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1, dig_generic = 3},
-	sounds = scifi_nodes.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
 minetest.register_node("scifi_nodes:white_base", {
@@ -428,7 +433,7 @@ minetest.register_node("scifi_nodes:junk", {
 	tiles = {
 		"scifi_nodes_junk.png"
 	},
-	groups = {snappy=1, oddly_breakable_by_hand=1, liquid=3, dig_immediate=1}
+	groups = {snappy=1, oddly_breakable_by_hand=1, liquid=3, dig_immediate=1},
 })
 
 
@@ -471,7 +476,7 @@ minetest.register_node("scifi_nodes:blklt2", {
 	light_source = 10,
 	paramtype = "light",
 	groups = {cracky=1, dig_generic = 3},
-	sounds = scifi_nodes.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
 minetest.register_node("scifi_nodes:blumetstr", {
@@ -483,7 +488,7 @@ minetest.register_node("scifi_nodes:blumetstr", {
 	light_source = 10,
 	paramtype = "light",
 	groups = {cracky=1, dig_generic = 3},
-	sounds = scifi_nodes.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
 minetest.register_node("scifi_nodes:glass", {
@@ -508,7 +513,7 @@ minetest.register_node("scifi_nodes:whtlightbnd", {
 	light_source = 10,
 	paramtype = "light",
 	groups = {cracky=1, dig_generic = 3},
-	sounds = scifi_nodes.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
 --edited wool code (Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>)
@@ -519,15 +524,15 @@ minetest.register_node("scifi_nodes:whtlightbnd", {
 -- colors available. When crafting, the last recipes will be checked first.
 --add new block using texture name(without "scifi_nodes_" prefix) then the description, and then the name of the block
 local nodetypes = {
-	-- { name, description, shortname?, light, colorable }
+	-- { name, description, shortname?, light, colorable, sounds }
 	{"blue",      "blue lines",        "blue"},
 	{"holes",       "metal with holes","holes"},
-	{"white2",      "plastic",         "white2", 0, true},
-    {"super_white",      "Super Plastic",         "super_white", 11},
-    {"ultra_white",      "Ultra Plastic",         "ultra_white", minetest.LIGHT_MAX},
+	{"white2",      "plastic",         "white2", 0, true, "stone"},
+    {"super_white",      "Super Plastic",         "super_white", 11, nil, "stone"},
+    {"ultra_white",      "Ultra Plastic",         "ultra_white", minetest.LIGHT_MAX, nil, "stone"},
 	{"engine",      "engine",          "engine"},
 	{"wall",      "metal wall",        "wall"},
-	{"white",      "plastic wall",     "white", 0, true},
+	{"white",      "plastic wall",     "white", 0, true, "stone"},
 	{"stripes2top",     "dirty metal block","metal2"},
 	{"rough",      "rough metal",      "rough"},
 	{"lighttop",      "metal block",      "metal"},
@@ -572,8 +577,8 @@ local nodetypes = {
 	{"greybars",      "grey bars",       "grybrs"},
 	{"greydots",      "grey wall dots",       "grydts"},
 	{"greygreenbar",      "gray power pipe",       "grygrnbr", 10},
-	{"octofloor",      "Doom floor",       "octofloor"},
-	{"octofloor2",      "Brown Doom floor",       "octofloor2"},
+	{"octofloor",      "Doom floor",       "octofloor", nil, nil, "stone"},
+	{"octofloor2",      "Brown Doom floor",       "octofloor2", nil, nil, "stone"},
 	{"doomwall1",      "Doom wall 1",       "doomwall1"},
 	{"doomwall2",      "Doom wall 2",       "doomwall2"},
 	{"doomwall3",      "Doom wall 3",       "doomwall3"},
@@ -599,8 +604,8 @@ local nodetypes = {
 	{"pplwll4",      "Purple wall4", "", 0},
 	{"pplblk",      "Purple tile", "", 0},
 	{"purple",      "Purple node", "", 0},
-	{"rock",      "Moonstone", "", 0},
-	{"rock2",      "Moonstone2", "", 0},
+	{"rock",      "Moonstone", "", 0, nil, "stone"},
+	{"rock2",      "Moonstone2", "", 0, nil, "stone"},
 	{"blackvnt",      "Black vent", "", 0},
 	{"blackplate",      "Black plate", "", 0},
 }
@@ -612,6 +617,14 @@ for _, row in ipairs(nodetypes) do
 	local desc = row[2]
 	local light = row[4]
 	local is_colorable = row[5]
+	local soundtype = row[6]
+
+	local sounds
+	if soundtype == "stone" then
+		sounds = scifi_nodes.node_sound_stone_defaults()
+	else
+		sounds = scifi_nodes.node_sound_metal_defaults()
+	end
 
 	-- Node Definition
 	local node_def = {
@@ -621,7 +634,7 @@ for _, row in ipairs(nodetypes) do
 		paramtype = "light",
 		paramtype2 = "facedir",
 		light_source = light,
-		sounds = scifi_nodes.node_sound_glass_defaults()
+		sounds = sounds,
 	}
 
 	if is_colorable and has_unifieddyes_mod then

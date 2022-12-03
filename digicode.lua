@@ -129,7 +129,7 @@ minetest.register_node("scifi_nodes:digicode_on", {
 		}
 	},
 	on_timer = toggle_digicode,
-	sounds = scifi_nodes.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
 minetest.register_node("scifi_nodes:digicode_off", {
@@ -152,7 +152,7 @@ minetest.register_node("scifi_nodes:digicode_off", {
 	},
 	after_place_node = set_owner,
 	on_rightclick = show_digicode_formspec,
-	sounds = scifi_nodes.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
 minetest.register_craft({

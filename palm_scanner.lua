@@ -65,7 +65,7 @@ minetest.register_node("scifi_nodes:palm_scanner_off", {
 		}
 	},
 	on_rightclick = (has_mesecons and activate_palm_scanner),
-	sounds = scifi_nodes.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
 minetest.register_node("scifi_nodes:palm_scanner_checking", {
@@ -83,7 +83,7 @@ minetest.register_node("scifi_nodes:palm_scanner_checking", {
 	paramtype2 = "wallmounted",
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
 	drop = "scifi_nodes:palm_scanner_off",
-	sounds = scifi_nodes.node_sound_glass_defaults()
+	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
 minetest.register_node("scifi_nodes:palm_scanner_on", {
@@ -106,7 +106,7 @@ minetest.register_node("scifi_nodes:palm_scanner_on", {
 			state = (has_mesecons and mesecon.state.on)
 		}
 	},
-	sounds = scifi_nodes.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
 minetest.register_craft({

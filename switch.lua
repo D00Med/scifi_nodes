@@ -44,7 +44,7 @@ minetest.register_node("scifi_nodes:switch_on", {
 			state = (has_mesecons and mesecon.state.on)
 		}
 	},
-	sounds = scifi_nodes.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 	on_rightclick = (has_mesecons and toggle_switch),
 	on_timer = (has_mesecons and toggle_switch)
 })
@@ -71,7 +71,7 @@ minetest.register_node("scifi_nodes:switch_off", {
 			state = (has_mesecons and mesecon.state.off)
 		}
 	},
-	sounds = scifi_nodes.node_sound_glass_defaults(),
+	sounds = scifi_nodes.node_sound_metal_defaults(),
 	on_rightclick = (has_mesecons and toggle_switch)
 })
 
