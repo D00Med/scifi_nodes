@@ -1,0 +1,5 @@
+letters.register_letters("scifi_nodes", "black", "scifi_nodes:black", "Black wall", "scifi_nodes_black.png")
+letters.register_letters("scifi_nodes", "white2", "scifi_nodes:white2", "Plastic", "scifi_nodes_white2.png")
+letters.register_letters("scifi_nodes", "purple", "scifi_nodes:purple", "Purple node", "scifi_nodes_purple.png")
+letters.register_letters("scifi_nodes", "bluemetal", "scifi_nodes:bluemetal", "Blue metal", "scifi_nodes_bluemetal.png")
+letters.register_letters("scifi_nodes", "greenmetal", "scifi_nodes:greenmetal", "Green metal", "scifi_nodes_greenmetal.png")

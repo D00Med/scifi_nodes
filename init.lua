@@ -32,3 +32,8 @@ dofile(MP.."/models.lua")
 dofile(MP.."/octagon_panes.lua")
 dofile(MP.."/forcefield.lua")
 dofile(MP.."/crafts.lua")
+
+if minetest.get_modpath("letters") then
+	-- register letter nodes
+	dofile(MP.."/letters.lua")
+end
