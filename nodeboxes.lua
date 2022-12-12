@@ -543,6 +543,7 @@ minetest.register_node("scifi_nodes:lightbars", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
+	paramtype2 = "facedir",
 	use_texture_alpha = "blend",
 	light_source = minetest.LIGHT_MAX,
 	node_box = {
@@ -569,6 +570,7 @@ tiles = {{
 	drawtype = "nodebox",
 	sunlight_propagates = true,
 	paramtype = "light",
+	paramtype2 = "facedir",
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -589,6 +591,7 @@ tiles = {
 	drawtype = "nodebox",
 	sunlight_propagates = true,
 	paramtype = "light",
+	paramtype2 = "facedir",
 	node_box = {
 		type = "fixed",
 		fixed = {
