@@ -1,5 +1,11 @@
-letters.register_letters("scifi_nodes", "black", "scifi_nodes:black", "Black wall", "scifi_nodes_black.png")
-letters.register_letters("scifi_nodes", "white2", "scifi_nodes:white2", "Plastic", "scifi_nodes_white2.png")
-letters.register_letters("scifi_nodes", "purple", "scifi_nodes:purple", "Purple node", "scifi_nodes_purple.png")
-letters.register_letters("scifi_nodes", "bluemetal", "scifi_nodes:bluemetal", "Blue metal", "scifi_nodes_bluemetal.png")
-letters.register_letters("scifi_nodes", "greenmetal", "scifi_nodes:greenmetal", "Green metal", "scifi_nodes_greenmetal.png")
+letters.register_letters("scifi_nodes", "white2", "scifi_nodes:white2", "Plastic", "scifi_nodes_white2.png", {
+    paramtype2 = "colorwallmounted",
+    palette = "unifieddyes_palette_colorwallmounted.png",
+    groups = {
+        ud_param2_colorable = 1,
+        not_in_creative_inventory = 1,
+        not_in_craft_guide = 1,
+        oddly_breakable_by_hand = 1,
+        attached_node = 1
+    }
+})
