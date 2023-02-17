@@ -131,8 +131,8 @@ minetest.register_abm({
 	nodenames = {"scifi_nodes:egg"},
 	interval = 30, chance = 10,
 	action = function(pos, node, _, _)
-		minetest.env:add_entity(pos, "scifi_mobs:xenomorph")
-		minetest.env:remove_node(pos)
+		minetest.add_entity(pos, "scifi_mobs:xenomorph")
+		minetest.remove_node(pos)
 	end
 })
 end
@@ -189,12 +189,12 @@ minetest.register_node("scifi_nodes:pad", {
 		if minetest.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
 			clicker:setpos(position2)
 		end
-		local objs = minetest.env:get_objects_inside_radius(pos, 3)
+		local objs = minetest.get_objects_inside_radius(pos, 3)
                 for _, obj in pairs(objs) do
 				if obj:get_luaentity() and not obj:is_player() then
 				if obj:get_luaentity().name == "__builtin:item" then
 				local item1 = obj:get_luaentity().itemstring
-				local obj2 = minetest.env:add_entity(position2, "__builtin:item")
+				local obj2 = minetest.add_entity(position2, "__builtin:item")
 				obj2:get_luaentity():set_item(item1)
 				obj:remove()
 				end
@@ -223,12 +223,12 @@ minetest.register_node("scifi_nodes:pad", {
 		if minetest.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
 			clicker:setpos(position1)
 		end
-		local objs = minetest.env:get_objects_inside_radius(pos, 3)
+		local objs = minetest.get_objects_inside_radius(pos, 3)
                 for _, obj in pairs(objs) do
 				if obj:get_luaentity() and not obj:is_player() then
 				if obj:get_luaentity().name == "__builtin:item" then
 				local item1 = obj:get_luaentity().itemstring
-				local obj2 = minetest.env:add_entity(position1, "__builtin:item")
+				local obj2 = minetest.add_entity(position1, "__builtin:item")
 				obj2:get_luaentity():set_item(item1)
 				obj:remove()
 				end
