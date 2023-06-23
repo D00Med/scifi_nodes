@@ -2,11 +2,13 @@ minetest.register_node("scifi_nodes:forcefield", {
 	description = "Forcefield",
 	sunlight_propagates = true,
 	drawtype = "glasslike",
-	groups = {},
+	groups = {
+		cracky = 1,
+		level = 3
+	},
+	sounds = scifi_nodes.node_sound_glass_defaults(),
 	paramtype = "light",
 	light_source = minetest.LIGHT_MAX,
-	diggable = false,
-	drop = '',
 	tiles = {{
 		name = "scifi_nodes_forcefield.png",
 		animation = {
@@ -15,6 +17,5 @@ minetest.register_node("scifi_nodes:forcefield", {
 			aspect_h = 16,
 			length = 1.0,
 		}
-	}},
-	on_blast = function() end,
+	}}
 })
