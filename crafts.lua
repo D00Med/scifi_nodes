@@ -1736,3 +1736,30 @@ minetest.register_craft({
         {"scifi_nodes:stripes"}
     }
 })
+
+minetest.register_craft({
+	output = "scifi_nodes:fan",
+	recipe = {
+        {"scifi_nodes:grey", 	"", 					"scifi_nodes:grey"},
+        {"", 					"scifi_nodes:vent2", 	""},
+        {"scifi_nodes:grey", 	"", 					"scifi_nodes:grey"}
+    }
+})
+
+minetest.register_craft({
+	output = "scifi_nodes:engine",
+	recipe = {
+        {"scifi_nodes:bluwllight", 	"", 					"scifi_nodes:bluwllight"},
+        {"scifi_nodes:screen",		"scifi_nodes:fan", 	    "scifi_nodes:screen3"},
+        {"scifi_nodes:bluwllight", 	"", 					"scifi_nodes:bluwllight"}
+    }
+})
+
+minetest.register_craft({
+	output = "scifi_nodes:forcefield 4",
+	recipe = {
+        {"scifi_nodes:octbl", 	"", 					"scifi_nodes:octbl"},
+        {"", 					"scifi_nodes:engine", 	""},
+        {"scifi_nodes:octbl", 	"", 					"scifi_nodes:octbl"}
+    }
+})
