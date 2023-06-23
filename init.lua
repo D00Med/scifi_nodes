@@ -37,3 +37,8 @@ if minetest.get_modpath("letters") then
 	-- register letter nodes
 	dofile(MP.."/letters.lua")
 end
+
+if minetest.get_modpath("mesecons_stealthnode") then
+	-- register stealthnodes
+	dofile(MP.."/stealthnodes.lua")
+end

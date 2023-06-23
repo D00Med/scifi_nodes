@@ -22,5 +22,6 @@ read_globals = {
 	"minetest",
 	"mesecon",
 	"unifieddyes",
-	"letters"
+	"letters",
+	"stealthnode"
 }
