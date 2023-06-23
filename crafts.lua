@@ -475,6 +475,15 @@ minetest.register_craft({
     }
 })
 
+minetest.register_craft({
+    output = "scifi_nodes:crate",
+    recipe = {
+        {"scifi_nodes:grey", "scifi_nodes:grey", "scifi_nodes:grey"},
+        {"scifi_nodes:grey", "", "scifi_nodes:grey"},
+        {"scifi_nodes:grey", "scifi_nodes:grey", "scifi_nodes:grey"}
+    }
+})
+
 -- 6 blue metal from 6 plastic, 2 blue dye, 1 dented metal block
 minetest.register_craft({
     output = "scifi_nodes:bluemetal 6",
