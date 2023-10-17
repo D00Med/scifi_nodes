@@ -10,7 +10,7 @@ xpanes.register_pane("doompane", {
 	diggable = false,
 	buildable_to = true,
 	air_equivalent = true,
-	textures = {"scifi_nodes_doompane.png","scifi_nodes_doompane.png","default_wood.png"},
+	textures = {"scifi_nodes_doompane.png","scifi_nodes_doompane.png","scifi_nodes_wood.png"},
 	inventory_image = "scifi_nodes_doompane.png",
 	wield_image = "scifi_nodes_doompane.png",
 	groups = {cracky=1, pane=1},

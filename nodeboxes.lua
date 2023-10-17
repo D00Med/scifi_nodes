@@ -379,13 +379,10 @@ local function remove_lid(pos)
 	end
 end
 
-local dirt_tex = "default_dirt.png"
-if not minetest.get_modpath("default") then dirt_tex = "[combine:16x16^[noalpha^[colorize:#654321" end
-
 minetest.register_node("scifi_nodes:pot", {
 	description = "Metal Plant Pot (right-click for lid, sneak + right-click to plant)",
 	tiles = {
-		dirt_tex .. "^scifi_nodes_pot.png",
+		"scifi_nodes_dirt.png^scifi_nodes_pot.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
@@ -419,7 +416,7 @@ minetest.register_node("scifi_nodes:pot", {
 minetest.register_node("scifi_nodes:pot2", {
 	description = "Metal Plant Pot Wet (right-click for lid, sneak + right-click to plant)",
 	tiles = {
-		dirt_tex .. "^scifi_nodes_pot2.png",
+		"scifi_nodes_dirt.png^scifi_nodes_pot2.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",
 		"scifi_nodes_greybolts.png",

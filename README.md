@@ -39,6 +39,10 @@ CC BY 3.0
 * scifi_nodes_access_granted https://freesound.org/people/TheBuilder15/sounds/415762/
 * scifi_nodes_access_refused https://freesound.org/people/RICHERlandTV/sounds/216090/
 * scifi_nodes_forcefield.png https://github.com/minetest-mods/technic/
+* scifi_nodes_dirt.png https://github.com/minetest/minetest_game
+* scifi_nodes_grass.png https://github.com/minetest/minetest_game
+* scifi_nodes_grass_side.png https://github.com/minetest/minetest_game
+* scifi_nodes_wood.png https://github.com/minetest/minetest_game
 
 CC0
 * scifi_nodes_digicode.ogg https://freesound.org/people/benjaminharveydesign/sounds/315921/
