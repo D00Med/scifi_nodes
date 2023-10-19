@@ -640,28 +640,13 @@ for _, row in ipairs(nodetypes) do
 		node_def.palette = "unifieddyes_palette_extended.png"
 		node_def.groups.ud_param2_colorable = 1
 		node_def.airbrush_replacement_node = "scifi_nodes:"..name.."_colored"
+		-- NOTE: about the "Node scifi_nodes:xxx has a palette, but not a suitable paramtype2" warning:
+		-- inserting "color" here (which would be the proper type) results in wrong
+		-- colored original nodes due to existing param2type = "facedir"
+		-- a migration lbm for those might be the proper solution but has to be thoroughly tested first
+		node_def.paramtype2 = nil
 	end
 
 	-- register node
 	minetest.register_node("scifi_nodes:"..name, node_def)
-
-	if is_colorable and has_unifieddyes_mod then
-		-- register colored node
-		minetest.register_node("scifi_nodes:"..name.."_colored", {
-			description = desc,
-			tiles = {"scifi_nodes_"..name..".png"},
-			groups = {
-				cracky = 1,
-				ud_param2_colorable = 1,
-				not_in_creative_inventory = 1
-			},
-			palette = "unifieddyes_palette_extended.png",
-			paramtype = "light",
-			paramtype2 = "color",
-			light_source = light,
-			sounds = scifi_nodes.node_sound_glass_defaults(),
-			on_construct = unifieddyes.on_construct,
-			on_dig = unifieddyes.on_dig
-		})
-	end
 end
