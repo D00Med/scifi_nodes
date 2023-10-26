@@ -533,10 +533,16 @@ for name, def in pairs(nodes) do
 		sounds = scifi_nodes.node_sound_metal_defaults()
 	end
 
+	-- tiles (default to nodename as texture-name)
+	local tiles = {"scifi_nodes_" .. name .. ".png"}
+	if def.texture_name then
+		tiles = {"scifi_nodes_" .. def.texture_name .. ".png"}
+	end
+
 	-- Node Definition
 	local node_def = {
 		description = def.description,
-		tiles = {"scifi_nodes_"..name..".png"},
+		tiles = tiles,
 		groups = {cracky=1, dig_generic = 3},
 		paramtype = "light",
 		paramtype2 = "facedir",
@@ -558,7 +564,7 @@ for name, def in pairs(nodes) do
 	if def.colorable and has_unifieddyes_mod then
 		minetest.register_node("scifi_nodes:"..name.."_colored", {
 			description = def.description,
-			tiles = {"scifi_nodes_"..name..".png"},
+			tiles = tiles,
 			groups = {
 				cracky = 1,
 				ud_param2_colorable = 1,
@@ -574,11 +580,11 @@ for name, def in pairs(nodes) do
 		})
 	end
 
-	-- moreblocks registration
-	if has_moreblocks_mod then
+	-- moreblocks registration (default to register all except if "false" encountered)
+	if has_moreblocks_mod and def.moreblocks ~= false then
 		stairsplus:register_all("scifi_nodes", name, "scifi_nodes:"..name, {
 			description = def.description,
-			tiles = {"scifi_nodes_"..name..".png"},
+			tiles = tiles,
 			use_texture_alpha = "clip",
 			groups = {cracky=1, dig_generic = 3},
 			paramtype = "light",

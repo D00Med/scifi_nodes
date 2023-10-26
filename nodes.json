@@ -258,11 +258,13 @@
     },
     "rock": {
         "description": "Moonstone",
-        "sounds": "stone"
+        "sounds": "stone",
+        "colorable": true
     },
     "rock2": {
         "description": "Moonstone 2",
-        "sounds": "stone"
+        "sounds": "stone",
+        "colorable": true
     },
     "blackvnt": {
         "description": "Black vent"
