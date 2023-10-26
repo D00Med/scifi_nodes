@@ -402,6 +402,28 @@ minetest.register_node("scifi_nodes:octppl", {
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
+minetest.register_node("scifi_nodes:octwht", {
+	description = "Octagon Glass",
+	sunlight_propagates = false,
+	drawtype = "glasslike",
+	tiles = {
+		"scifi_nodes_octwht.png",
+	},
+	palette = "unifieddyes_palette_extended.png",
+	paramtype = "light",
+	paramtype2 = "color",
+	use_texture_alpha = "blend",
+	light_source = 10,
+	groups = {
+		cracky = 2,
+		dig_generic = 3,
+		ud_param2_colorable = 1
+	},
+	sounds = scifi_nodes.node_sound_glass_defaults(),
+	on_construct = unifieddyes.on_construct,
+	on_dig = unifieddyes.on_dig
+})
+
 minetest.register_node("scifi_nodes:tower", {
 	description = "Wind tower",
 	sunlight_propagates = false,

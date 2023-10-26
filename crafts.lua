@@ -945,6 +945,15 @@ minetest.register_craft({
     }
 })
 
+minetest.register_craft({
+    output = "scifi_nodes:octwht 4",
+    recipe = {
+        {"dye:white", "scifi_nodes:glass", ""},
+        {"scifi_nodes:glass", "scifi_nodes:lightbar", "scifi_nodes:glass"},
+        {"", "scifi_nodes:glass", "dye:white"}
+    }
+})
+
 -- 1 purple node from 1 plastic, 1 blue dye and 1 red dye
 minetest.register_craft({
     output = "scifi_nodes:purple",
