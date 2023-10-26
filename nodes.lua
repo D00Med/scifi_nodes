@@ -1,3 +1,5 @@
+local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
+local has_moreblocks_mod = minetest.get_modpath("moreblocks")
 
 --nodes
 
@@ -402,27 +404,29 @@ minetest.register_node("scifi_nodes:octppl", {
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
-minetest.register_node("scifi_nodes:octwht", {
-	description = "Octagon Glass",
-	sunlight_propagates = false,
-	drawtype = "glasslike",
-	tiles = {
-		"scifi_nodes_octwht.png",
-	},
-	palette = "unifieddyes_palette_extended.png",
-	paramtype = "light",
-	paramtype2 = "color",
-	use_texture_alpha = "blend",
-	light_source = 10,
-	groups = {
-		cracky = 2,
-		dig_generic = 3,
-		ud_param2_colorable = 1
-	},
-	sounds = scifi_nodes.node_sound_glass_defaults(),
-	on_construct = unifieddyes.on_construct,
-	on_dig = unifieddyes.on_dig
-})
+if has_unifieddyes_mod then
+	minetest.register_node("scifi_nodes:octwht", {
+		description = "Octagon Glass",
+		sunlight_propagates = false,
+		drawtype = "glasslike",
+		tiles = {
+			"scifi_nodes_octwht.png",
+		},
+		palette = "unifieddyes_palette_extended.png",
+		paramtype = "light",
+		paramtype2 = "color",
+		use_texture_alpha = "blend",
+		light_source = 10,
+		groups = {
+			cracky = 2,
+			dig_generic = 3,
+			ud_param2_colorable = 1
+		},
+		sounds = scifi_nodes.node_sound_glass_defaults(),
+		on_construct = unifieddyes.on_construct,
+		on_dig = unifieddyes.on_dig
+	})
+end
 
 minetest.register_node("scifi_nodes:tower", {
 	description = "Wind tower",
@@ -540,9 +544,6 @@ minetest.register_node("scifi_nodes:whtlightbnd", {
 local f = assert(io.open(minetest.get_modpath("scifi_nodes") .. "/nodes.json", "rb"))
 local nodes = assert(minetest.parse_json(f:read("*all")))
 f:close()
-
-local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
-local has_moreblocks_mod = minetest.get_modpath("moreblocks")
 
 -- register all nodes
 for name, def in pairs(nodes) do
