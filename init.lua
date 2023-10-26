@@ -21,6 +21,7 @@ if minetest.get_modpath("default") then
 end
 
 dofile(MP.."/plants.lua")
+dofile(MP.."/models.lua")
 dofile(MP.."/nodes.lua")
 dofile(MP.."/doors.lua")
 dofile(MP.."/switch.lua")
@@ -28,7 +29,6 @@ dofile(MP.."/protected_switch.lua")
 dofile(MP.."/nodeboxes.lua")
 dofile(MP.."/palm_scanner.lua")
 dofile(MP.."/digicode.lua")
-dofile(MP.."/models.lua")
 dofile(MP.."/octagon_panes.lua")
 dofile(MP.."/forcefield.lua")
 dofile(MP.."/crafts.lua")

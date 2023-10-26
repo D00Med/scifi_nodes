@@ -514,111 +514,20 @@ minetest.register_node("scifi_nodes:whtlightbnd", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
---edited wool code (Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>)
-
-
--- This uses a trick: you can first define the recipes using all of the base
--- colors, and then some recipes using more specific colors for a few non-base
--- colors available. When crafting, the last recipes will be checked first.
---add new block using texture name(without "scifi_nodes_" prefix) then the description, and then the name of the block
-local nodetypes = {
-	-- { name, description, shortname?, light, colorable, sounds }
-	{"blue",      "blue lines",        "blue"},
-	{"holes",       "metal with holes","holes"},
-	{"white2",      "plastic",         "white2", 0, true, "stone"},
-    {"super_white",      "Super Plastic",         "super_white", 11, nil, "stone"},
-    {"ultra_white",      "Ultra Plastic",         "ultra_white", minetest.LIGHT_MAX, nil, "stone"},
-	{"engine",      "engine",          "engine"},
-	{"wall",      "metal wall",        "wall"},
-	{"white",      "plastic wall",     "white", 0, true, "stone"},
-	{"stripes2top",     "dirty metal block","metal2"},
-	{"rough",      "rough metal",      "rough"},
-	{"lighttop",      "metal block",      "metal"},
-	{"red",      "red lines",          "red"},
-	{"green",      "green lines",      "green"},
-	{"vent2",      "vent",              "vent"},
-	{"stripes",      "hazard stripes", "stripes"},
-	{"rust",      "rusty metal",       "rust"},
-	{"mesh",      "metal mesh",       "mesh"},
-	{"black",      "black wall",       "black"},
-	{"blackoct",      "black octagon",       "blackoct"},
-	{"blackpipe",      "black pipe",       "blackpipe"},
-	{"blacktile",      "black tile",       "blktl"},
-	{"blacktile2",      "black tile 2",       "blktl2"},
-	{"blackvent",      "black vent",       "blkvnt"},
-	{"bluebars",      "blue bars",       "bluebars"},
-	{"bluemetal",      "blue metal",       "blumtl"},
-	{"bluetile",      "blue tile",       "blutl"},
-	{"greytile",      "grey tile",       "grytl"},
-	{"mesh2",      "metal floormesh",       "mesh2"},
-	{"pipe",      "wall pipe",       "pipe2"},
-	{"pipeside",      "side pipe",       "pipe3"},
-	{"tile",      "white tile",       "tile"},
-	{"whiteoct",      "white octagon",       "whiteoct", 0, true},
-	{"whitetile",      "white tile2",       "whttl", 0, true},
-	{"black_detail",      "black detail",       "blckdtl"},
-	{"green_square",      "green metal block",       "grnblck"},
-	{"red_square",      "red metal block",       "redblck"},
-	{"grey_square",      "grey metal block",       "greyblck"},
-	{"blue_square",      "blue metal block",       "blublck"},
-	{"black_mesh",      "black vent block",       "blckmsh"},
-	{"dent",      "dented metal block",       "dent"},
-	{"greenmetal",      "green metal wall",       "grnmetl"},
-	{"greenmetal2",      "green metal wall2",       "grnmetl2"},
-	{"greenlights",      "green wall lights",       "grnlt", 10},
-	{"greenlights2",      "green wall lights2",       "grnlt2", 10},
-	{"greenbar",      "green light bar",       "grnlghtbr", 10},
-	{"green2",      "green wall panel",       "grn2"},
-	{"greentubes",      "green pipes",       "grntubes"},
-	{"grey",      "grey wall",       "gry"},
-	{"greybolts",      "grey wall bolts",       "gryblts"},
-	{"greybars",      "grey bars",       "grybrs"},
-	{"greydots",      "grey wall dots",       "grydts"},
-	{"greygreenbar",      "gray power pipe",       "grygrnbr", 10},
-	{"octofloor",      "Doom floor",       "octofloor", nil, nil, "stone"},
-	{"octofloor2",      "Brown Doom floor",       "octofloor2", nil, nil, "stone"},
-	{"doomwall1",      "Doom wall 1",       "doomwall1"},
-	{"doomwall2",      "Doom wall 2",       "doomwall2"},
-	{"doomwall3",      "Doom wall 3",       "doomwall3"},
-	{"doomwall4",      "Doom wall 4",       "doomwall4"},
-	{"doomwall41",      "Doom wall 4.1",       "doomwall4.1"},
-	{"doomwall42",      "Doom wall 4.2",       "doomwall4.2"},
-	{"doomwall43",      "Doom wall 4.3",       "doomwall4.3"},
-	{"doomwall431",      "Doom wall 4.3.1",       "doomwall4.3.1"},
-	{"doomwall44",      "Doom wall 4.4",       "doomwall4.4"},
-	{"blackdmg",      "Damaged black wall",       "blckdmg"},
-	{"blackdmgstripe",      "Damaged black wall(stripes)",       "blckdmgstripe"},
-	{"doomengine",      "Doom engine wall",       "doomengine"},
-	{"monitorwall",      "Wall monitors",       "monitorwall"},
-	{"screen3",      "Wall monitor",       "screen3"},
-	{"doomlight",      "Doom light",       "doomlight", 12},
-	{"bluwllight",      "Blue wall light", "capsule3", minetest.LIGHT_MAX},
-	{"bluegrid",      "Blue Grid", "bluegrid", 5},
-	{"fan",      "Fan",       "fan"},
-	{"ppllght",      "Purple wall light", "", minetest.LIGHT_MAX},
-	{"pplwll",      "Purple wall", "", 0},
-	{"pplwll2",      "Purple wall2", "", 0},
-	{"pplwll3",      "Purple wall3", "", 0},
-	{"pplwll4",      "Purple wall4", "", 0},
-	{"pplblk",      "Purple tile", "", 0},
-	{"purple",      "Purple node", "", 0},
-	{"rock",      "Moonstone", "", 0, nil, "stone"},
-	{"rock2",      "Moonstone2", "", 0, nil, "stone"},
-	{"blackvnt",      "Black vent", "", 0},
-	{"blackplate",      "Black plate", "", 0},
-}
+-- read "nodes.json"
+local f = assert(io.open(minetest.get_modpath("scifi_nodes") .. "/nodes.json", "rb"))
+local nodes = assert(minetest.parse_json(f:read("*all")))
+f:close()
 
 local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
+local has_moreblocks_mod = minetest.get_modpath("moreblocks")
 
-for _, row in ipairs(nodetypes) do
-	local name = row[1]
-	local desc = row[2]
-	local light = row[4]
-	local is_colorable = row[5]
-	local soundtype = row[6]
+-- register all nodes
+for name, def in pairs(nodes) do
 
+	-- default to "metal" sounds if not specified
 	local sounds
-	if soundtype == "stone" then
+	if def.sounds == "stone" then
 		sounds = scifi_nodes.node_sound_stone_defaults()
 	else
 		sounds = scifi_nodes.node_sound_metal_defaults()
@@ -626,16 +535,16 @@ for _, row in ipairs(nodetypes) do
 
 	-- Node Definition
 	local node_def = {
-		description = desc,
+		description = def.description,
 		tiles = {"scifi_nodes_"..name..".png"},
 		groups = {cracky=1, dig_generic = 3},
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = light,
+		light_source = def.light,
 		sounds = sounds,
 	}
 
-	if is_colorable and has_unifieddyes_mod then
+	if def.colorable and has_unifieddyes_mod then
 		-- overwrite attributes on the "uncolored" node
 		node_def.palette = "unifieddyes_palette_extended.png"
 		node_def.groups.ud_param2_colorable = 1
@@ -645,10 +554,10 @@ for _, row in ipairs(nodetypes) do
 	-- register node
 	minetest.register_node("scifi_nodes:"..name, node_def)
 
-	if is_colorable and has_unifieddyes_mod then
-		-- register colored node
+	-- unified dyes registration
+	if def.colorable and has_unifieddyes_mod then
 		minetest.register_node("scifi_nodes:"..name.."_colored", {
-			description = desc,
+			description = def.description,
 			tiles = {"scifi_nodes_"..name..".png"},
 			groups = {
 				cracky = 1,
@@ -658,10 +567,24 @@ for _, row in ipairs(nodetypes) do
 			palette = "unifieddyes_palette_extended.png",
 			paramtype = "light",
 			paramtype2 = "color",
-			light_source = light,
+			light_source = def.light,
 			sounds = scifi_nodes.node_sound_glass_defaults(),
 			on_construct = unifieddyes.on_construct,
 			on_dig = unifieddyes.on_dig
+		})
+	end
+
+	-- moreblocks registration
+	if has_moreblocks_mod then
+		stairsplus:register_all("scifi_nodes", name, "scifi_nodes:"..name, {
+			description = def.description,
+			tiles = {"scifi_nodes_"..name..".png"},
+			use_texture_alpha = "clip",
+			groups = {cracky=1, dig_generic = 3},
+			paramtype = "light",
+			paramtype2 = "facedir",
+			light_source = def.light,
+			sounds = sounds,
 		})
 	end
 end

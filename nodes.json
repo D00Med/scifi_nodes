@@ -1,0 +1,273 @@
+{
+    "blue": {
+        "description": "Blue lines"
+    },
+    "holes": {
+        "description": "Metal with holes"
+    },
+    "white2": {
+        "description": "plastic",
+        "colorable": true,
+        "sounds": "stone"
+    },
+    "super_white": {
+        "description": "Super Plastic",
+        "light": 11,
+        "sounds": "stone"
+    },
+    "ultra_white": {
+        "description": "Ultra Plastic",
+        "light": 14,
+        "sounds": "stone"
+    },
+    "engine": {
+        "description": "Engine"
+    },
+    "wall": {
+        "description": "metal wall"
+    },
+    "white": {
+        "description": "plastic wall",
+        "colorable": true,
+        "sounds": "stone"
+    },
+    "stripes2top": {
+        "description": "Dirty metal block"
+    },
+    "rough": {
+        "description": "rough metal"
+    },
+    "lighttop": {
+        "description": "metal block"
+    },
+    "red": {
+        "description": "red lines"
+    },
+    "green": {
+        "description": "green lines"
+    },
+    "vent2": {
+        "description": "vent"
+    },
+    "stripes": {
+        "description": "hazard stripes"
+    },
+    "rust": {
+        "description": "rusty metal"
+    },
+    "mesh": {
+        "description": "metal mesh"
+    },
+    "black": {
+        "description": "black wall"
+    },
+    "blackoct": {
+        "description": "black octagon"
+    },
+    "blackpipe": {
+        "description": "black pipe"
+    },
+    "blacktile": {
+        "description": "black tile"
+    },
+    "blacktile2": {
+        "description": "black tile 2"
+    },
+    "blackvent": {
+        "description": "black vent"
+    },
+    "bluebars": {
+        "description": "blue bars"
+    },
+    "bluemetal": {
+        "description": "blue metal"
+    },
+    "bluetile": {
+        "description": "blue tile"
+    },
+    "greytile": {
+        "description": "grey tile"
+    },
+    "mesh2": {
+        "description": "metal floormesh"
+    },
+    "pipe": {
+        "description": "wall pipe"
+    },
+    "pipeside": {
+        "description": "side pipe"
+    },
+    "tile": {
+        "description": "white tile"
+    },
+    "whiteoct": {
+        "description": "white octagon",
+        "colorable": true
+    },
+    "whitetile": {
+        "description": "white tile 2",
+        "colorable": true
+    },
+    "black_detail": {
+        "description": "black detail"
+    },
+    "green_square": {
+        "description": "green metal block"
+    },
+    "red_square": {
+        "description": "red metal block"
+    },
+    "grey_square": {
+        "description": "grey metal block"
+    },
+    "blue_square": {
+        "description": "blue metal block"
+    },
+    "black_mesh": {
+        "description": "black vent block"
+    },
+    "dent": {
+        "description": "dented metal block"
+    },
+    "greenmetal": {
+        "description": "green metal wall"
+    },
+    "greenmetal2": {
+        "description": "green metal wall2"
+    },
+    "greenlights": {
+        "description": "green wall lights",
+        "light": 10
+    },
+    "greenlights2": {
+        "description": "green wall lights2",
+        "light": 10
+    },
+    "greenbar": {
+        "description": "green light bar",
+        "light": 10
+    },
+    "green2": {
+        "description": "green wall panel"
+    },
+    "greentubes": {
+        "description": "green pipes"
+    },
+    "grey": {
+        "description": "grey wall"
+    },
+    "greybolts": {
+        "description": "grey wall bolts"
+    },
+    "greybars": {
+        "description": "grey bars"
+    },
+    "greydots": {
+        "description": "grey wall dots"
+    },
+    "greygreenbar": {
+        "description": "gray power pipe",
+        "light": 10
+    },
+    "octofloor": {
+        "description": "Doom floor",
+        "sounds": "stone"
+    },
+    "octofloor2": {
+        "description": "Brown Doom floor",
+        "sounds": "stone"
+    },
+    "doomwall1": {
+        "description": "Doom wall 1"
+    },
+    "doomwall2": {
+        "description": "Doom wall 2"
+    },
+    "doomwall3": {
+        "description": "Doom wall 3"
+    },
+    "doomwall4": {
+        "description": "Doom wall 4"
+    },
+    "doomwall41": {
+        "description": "Doom wall 4.1"
+    },
+    "doomwall42": {
+        "description": "Doom wall 4.2"
+    },
+    "doomwall43": {
+        "description": "Doom wall 4.3"
+    },
+    "doomwall431": {
+        "description": "Doom wall 4.3.1"
+    },
+    "doomwall44": {
+        "description": "Doom wall 4.4"
+    },
+    "blackdmg": {
+        "description": "Damaged black wall"
+    },
+    "blackdmgstripe": {
+        "description": "Damaged black wall(stripes)"
+    },
+    "doomengine": {
+        "description": "Doom engine wall"
+    },
+    "monitorwall": {
+        "description": "Wall monitors"
+    },
+    "screen3": {
+        "description": "Wall monitor"
+    },
+    "doomlight": {
+        "description": "Doom light",
+        "light": 12
+    },
+    "bluwllight": {
+        "description": "Blue wall light",
+        "light": 14
+    },
+    "bluegrid": {
+        "description": "Blue Grid",
+        "light": 5
+    },
+    "fan": {
+        "description": "Fan"
+    },
+    "ppllght": {
+        "description": "Purple wall light",
+        "light": 14
+    },
+    "pplwll": {
+        "description": "Purple wall"
+    },
+    "pplwll2": {
+        "description": "Purple wall 2"
+    },
+    "pplwll3": {
+        "description": "Purple wall 3"
+    },
+    "pplwll4": {
+        "description": "Purple wall 4"
+    },
+    "pplblk": {
+        "description": "Purple tile"
+    },
+    "purple": {
+        "description": "Purple node"
+    },
+    "rock": {
+        "description": "Moonstone",
+        "sounds": "stone"
+    },
+    "rock2": {
+        "description": "Moonstone 2",
+        "sounds": "stone"
+    },
+    "blackvnt": {
+        "description": "Black vent"
+    },
+    "blackplate": {
+        "description": "Black plate"
+    }
+}
