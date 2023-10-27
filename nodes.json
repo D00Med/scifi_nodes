@@ -127,7 +127,8 @@
         "description": "black vent block"
     },
     "dent": {
-        "description": "dented metal block"
+        "description": "dented metal block",
+        "colorable": true
     },
     "greenmetal": {
         "description": "green metal wall"
