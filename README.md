@@ -8,6 +8,8 @@
 
 Minetest mod that adds scifi themed blocks, doors, materials, plants and other assets.
 
+Lua api: see [api.md](./api.md)
+
 # Changelog
 
 * Added support for unifieddyes

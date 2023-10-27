@@ -155,7 +155,7 @@ for _, current_door in ipairs(doors) do
 
 	end
 
-	local function open_door(pos, node, player, itemstack, pointed_thing)
+	local function open_door(pos, node)
 		-- play sound
 		minetest.sound_play(sound,{
 			max_hear_distance = 16,
@@ -240,7 +240,11 @@ for _, current_door in ipairs(doors) do
 		drawtype = "nodebox",
 		paramtype = "light",
 		paramtype2 = "facedir",
-		groups = {cracky = 3, oddly_breakable_by_hand = 1},
+		groups = {
+			cracky = 3,
+			oddly_breakable_by_hand = 1,
+			scifi_nodes_door = 1
+		},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -253,6 +257,7 @@ for _, current_door in ipairs(doors) do
 				{-0.5, -0.5, -0.0625, 0.5, 1.5, 0.0625}
 			}
 		},
+		_open = open_door,
 		mesecons = mesecons_doors_def,
 		on_place = onplace,
 		after_destruct = afterdestruct,
@@ -350,3 +355,27 @@ for _, current_door in ipairs(doors) do
 		sounds = scifi_nodes.node_sound_metal_defaults(),
 	})
 end     -- end of doors table browsing
+
+-- opens the scifi-door at the given position
+function scifi_nodes.open_door(pos)
+	local node = minetest.get_node_or_nil(pos)
+	if not node then
+		-- area not loaded
+		return false
+	end
+
+	local def = minetest.registered_nodes[node.name]
+	if type(def._open) ~= "function" then
+		-- open function not found
+		return false
+	end
+
+	if not def.groups or not def.groups.scifi_nodes_door then
+		-- not a scifi_nodes door
+		return false
+	end
+
+	-- call open function
+	def._open(pos, node)
+	return true
+end
