@@ -346,7 +346,7 @@ minetest.register_node("scifi_nodes:grnpipe2", {
 
 minetest.register_node("scifi_nodes:octrng", {
 	description = "Orange Octagon Glass",
-	sunlight_propagates = false,
+	sunlight_propagates = true,
 	drawtype = "glasslike",
 	tiles = {
 		"scifi_nodes_octrng.png",
@@ -361,7 +361,7 @@ minetest.register_node("scifi_nodes:octrng", {
 
 minetest.register_node("scifi_nodes:octgrn", {
 	description = "Green Octagon Glass",
-	sunlight_propagates = false,
+	sunlight_propagates = true,
 	drawtype = "glasslike",
 	tiles = {
 		"scifi_nodes_octgrn.png",
@@ -376,7 +376,7 @@ minetest.register_node("scifi_nodes:octgrn", {
 
 minetest.register_node("scifi_nodes:octbl", {
 	description = "Blue Octagon Glass",
-	sunlight_propagates = false,
+	sunlight_propagates = true,
 	drawtype = "glasslike",
 	tiles = {
 		"scifi_nodes_octbl.png",
@@ -391,7 +391,7 @@ minetest.register_node("scifi_nodes:octbl", {
 
 minetest.register_node("scifi_nodes:octppl", {
 	description = "Purple Octagon Glass",
-	sunlight_propagates = false,
+	sunlight_propagates = true,
 	drawtype = "glasslike",
 	tiles = {
 		"scifi_nodes_octppl.png",
@@ -407,7 +407,7 @@ minetest.register_node("scifi_nodes:octppl", {
 if has_unifieddyes_mod then
 	minetest.register_node("scifi_nodes:octwht", {
 		description = "Octagon Glass",
-		sunlight_propagates = false,
+		sunlight_propagates = true,
 		drawtype = "glasslike",
 		tiles = {
 			"scifi_nodes_octwht.png",
