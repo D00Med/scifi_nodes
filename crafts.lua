@@ -234,7 +234,7 @@ minetest.register_craft({
     }
 })
 
--- 4 electronic screen from 4 plastic, 1 trap glow glass, 2 cyan dye, 2
+-- 4 electronic screen from 4 plastic, 1 lightbar, 2 cyan dye, 2
 -- microcontroller
 minetest.register_craft({
     output = "scifi_nodes:screen 4",
@@ -245,13 +245,25 @@ minetest.register_craft({
     }
 })
 
--- 4 electronic screen2 from 4 plastic, 1 trap glow glass, 2 green dye, 2
+-- 4 electronic screen2 from 4 plastic, 1 lightbar, 2 green dye, 2
 -- microcontroller
 minetest.register_craft({
     output = "scifi_nodes:screen2 4",
     recipe = {
         {"scifi_nodes:white2", "mesecons_microcontroller:microcontroller0000", "scifi_nodes:white2"},
         {"dye:green", "scifi_nodes:lightbar", "dye:green"},
+        {"scifi_nodes:white2", "mesecons_microcontroller:microcontroller0000", "scifi_nodes:white2"}
+    }
+})
+
+
+-- 4 electronic screen3 from 4 plastic, 1 lightbar, 2 black dye, 2
+-- microcontroller
+minetest.register_craft({
+    output = "scifi_nodes:screen3 4",
+    recipe = {
+        {"scifi_nodes:white2", "mesecons_microcontroller:microcontroller0000", "scifi_nodes:white2"},
+        {"dye:black", "scifi_nodes:lightbar", "dye:black"},
         {"scifi_nodes:white2", "mesecons_microcontroller:microcontroller0000", "scifi_nodes:white2"}
     }
 })
