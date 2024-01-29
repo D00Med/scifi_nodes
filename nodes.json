@@ -38,7 +38,8 @@
         "description": "rough metal"
     },
     "lighttop": {
-        "description": "metal block"
+        "description": "metal block",
+        "slat": true
     },
     "red": {
         "description": "red lines"
@@ -50,7 +51,8 @@
         "description": "vent"
     },
     "stripes": {
-        "description": "hazard stripes"
+        "description": "hazard stripes",
+        "slat": true
     },
     "rust": {
         "description": "rusty metal"
@@ -83,7 +85,8 @@
         "description": "blue metal"
     },
     "bluetile": {
-        "description": "blue tile"
+        "description": "blue tile",
+        "slat": true
     },
     "greytile": {
         "description": "grey tile"
@@ -106,7 +109,8 @@
     },
     "whitetile": {
         "description": "white tile 2",
-        "colorable": true
+        "colorable": true,
+        "slat": true
     },
     "black_detail": {
         "description": "black detail"
@@ -206,7 +210,8 @@
         "description": "Doom wall 4.4"
     },
     "blackdmg": {
-        "description": "Damaged black wall"
+        "description": "Damaged black wall",
+        "slat": true
     },
     "blackdmgstripe": {
         "description": "Damaged black wall(stripes)"
@@ -252,7 +257,8 @@
         "description": "Purple wall 4"
     },
     "pplblk": {
-        "description": "Purple tile"
+        "description": "Purple tile",
+        "slat": true
     },
     "purple": {
         "description": "Purple node"

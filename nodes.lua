@@ -1,5 +1,6 @@
 local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
 local has_moreblocks_mod = minetest.get_modpath("moreblocks")
+local has_slats_mod = minetest.get_modpath("slats")
 
 --nodes
 
@@ -615,5 +616,16 @@ for name, def in pairs(nodes) do
 			light_source = def.light,
 			sounds = sounds,
 		})
+	end
+
+	if has_slats_mod and def.slat then
+		slats.register_slat(
+			name,
+			"scifi_nodes:" .. name,
+			node_def.groups,
+			"scifi_nodes_" .. name .. ".png^slats_slat_overlay.png^[makealpha:255,126,126",
+			def.description .. " Slat",
+			sounds
+		)
 	end
 end

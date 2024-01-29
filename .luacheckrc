@@ -23,5 +23,6 @@ read_globals = {
 	"mesecon",
 	"unifieddyes",
 	"letters",
-	"stealthnode"
+	"stealthnode",
+	"slats"
 }
