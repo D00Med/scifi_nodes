@@ -622,7 +622,7 @@ for name, def in pairs(nodes) do
 		slats.register_slat(
 			name,
 			"scifi_nodes:" .. name,
-			node_def.groups,
+			table.copy(node_def.groups),
 			"scifi_nodes_" .. name .. ".png^slats_slat_overlay.png^[makealpha:255,126,126",
 			def.description .. " Slat",
 			sounds
