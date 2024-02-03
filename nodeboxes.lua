@@ -656,6 +656,8 @@ minetest.register_node("scifi_nodes:cover", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
 	node_box = {
 		type = "fixed",
 		fixed = {
