@@ -343,6 +343,16 @@ minetest.register_craft({
     }
 })
 
+-- 6 black vnt from 6 black wall block and 6 stripes
+minetest.register_craft({
+    output = "scifi_nodes:blackvnt 6",
+    recipe = {
+        {"scifi_nodes:black", "scifi_nodes:black", "scifi_nodes:black"},
+        {"scifi_nodes:stripes", "scifi_nodes:stripes", "scifi_nodes:stripes"},
+        {"", "", ""}
+    }
+})
+
 -- 6 black vent from 6 black wall
 minetest.register_craft({
     output = "scifi_nodes:blackvent 6",
@@ -745,6 +755,16 @@ minetest.register_craft({
     }
 })
 
+-- 6 black pipe from 6 lighttop and 1 vent
+minetest.register_craft({
+    output = "scifi_nodes:blackpipe 6",
+    recipe = {
+        {"scifi_nodes:lighttop", "", "scifi_nodes:lighttop"},
+        {"scifi_nodes:lighttop", "scifi_nodes:vent2", "scifi_nodes:lighttop"},
+        {"scifi_nodes:lighttop", "", "scifi_nodes:lighttop"}
+    }
+})
+
 -- 1 broken green pipe from 1 green pipe
 minetest.register_craft({
     output = "scifi_nodes:grnpipe2",
@@ -904,6 +924,16 @@ minetest.register_craft({
     recipe = {
         {"scifi_nodes:grey", "dye:black", "scifi_nodes:grey"},
         {"", "", ""},
+        {"scifi_nodes:grey", "dye:white", "scifi_nodes:grey"}
+    }
+})
+
+-- 4 holes from 4 grey and 1 black dye and 1 white dye and 1 metal mesh
+minetest.register_craft({
+    output = "scifi_nodes:holes 4",
+    recipe = {
+        {"scifi_nodes:grey", "dye:black", "scifi_nodes:grey"},
+        {"", "scifi_nodes:mesh", ""},
         {"scifi_nodes:grey", "dye:white", "scifi_nodes:grey"}
     }
 })
@@ -1644,6 +1674,25 @@ minetest.register_craft({
     output = "scifi_nodes:wallpipe 3",
     recipe = {
         {"default:papyrus","scifi_nodes:grnpipe", "scifi_nodes:liquid_pipe"}
+    }
+})
+
+minetest.register_craft({
+    output = 'scifi_nodes:green2 6',
+    recipe = {
+        {"scifi_nodes:white","dye:dark_green","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","dye:green","scifi_nodes:white"}
+    }
+})
+
+
+minetest.register_craft({
+    output = 'scifi_nodes:doomwall4 6',
+    recipe = {
+        {"scifi_nodes:white","dye:dark_green","scifi_nodes:white"},
+        {"scifi_nodes:black","dye:dark_green","scifi_nodes:black"},
+        {"scifi_nodes:white","dye:dark_green","scifi_nodes:white"}
     }
 })
 
