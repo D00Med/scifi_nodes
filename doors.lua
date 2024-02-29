@@ -243,7 +243,8 @@ for _, current_door in ipairs(doors) do
 		groups = {
 			cracky = 3,
 			oddly_breakable_by_hand = 1,
-			scifi_nodes_door = 1
+			scifi_nodes_door = 1,
+			door = 1
 		},
 		node_box = {
 			type = "fixed",
@@ -277,7 +278,7 @@ for _, current_door in ipairs(doors) do
 		drawtype = "nodebox",
 		paramtype = "light",
 		paramtype2 = "facedir",
-		groups = {cracky = 1, dig_generic = 3},
+		groups = {cracky = 1, dig_generic = 3, door = 1},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -307,7 +308,7 @@ for _, current_door in ipairs(doors) do
 		paramtype = "light",
 		paramtype2 = "facedir",
 		drop = closed,
-		groups = {cracky = 1, dig_generic = 3},
+		groups = {cracky = 1, dig_generic = 3, door = 2},
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -338,7 +339,7 @@ for _, current_door in ipairs(doors) do
 		drawtype = "nodebox",
 		paramtype = "light",
 		paramtype2 = "facedir",
-		groups = {cracky = 1, dig_generic = 3},
+		groups = {cracky = 1, dig_generic = 3, door = 2},
 		node_box = {
 			type = "fixed",
 			fixed = {
