@@ -59,6 +59,7 @@ minetest.register_node("scifi_nodes:palm_scanner_off", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
+	is_ground_content = false,
 	mesecons = {
 		receptor = {
 			state = (has_mesecons and mesecon.state.off)
@@ -82,6 +83,7 @@ minetest.register_node("scifi_nodes:palm_scanner_checking", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	is_ground_content = false,
 	drop = "scifi_nodes:palm_scanner_off",
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
@@ -100,6 +102,7 @@ minetest.register_node("scifi_nodes:palm_scanner_on", {
 	paramtype2 = "wallmounted",
 	light_source = 5,
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	is_ground_content = false,
 	drop = "scifi_nodes:palm_scanner_off",
 	mesecons = {
 		receptor = {

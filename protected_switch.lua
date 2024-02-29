@@ -46,6 +46,7 @@ minetest.register_node("scifi_nodes:protected_switch_on", {
 		not_in_creative_inventory = 1,
 		mesecon_needs_receiver = 1
 	},
+	is_ground_content = false,
 	mesecons = {
 		receptor = {
 			state = (has_mesecons and mesecon.state.on)
@@ -73,6 +74,7 @@ minetest.register_node("scifi_nodes:protected_switch_off", {
 		oddly_breakable_by_hand = 1,
 		mesecon_needs_receiver = 1
 	},
+	is_ground_content = false,
 	mesecons = {
 		receptor = {
 			state = (has_mesecons and mesecon.state.off)

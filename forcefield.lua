@@ -6,6 +6,7 @@ minetest.register_node("scifi_nodes:forcefield", {
 		cracky = 1,
 		level = 3
 	},
+	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 	paramtype = "light",
 	light_source = minetest.LIGHT_MAX,

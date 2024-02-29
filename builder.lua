@@ -86,25 +86,26 @@ minetest.register_node("scifi_nodes:builder", {
     on_metadata_inventory_take = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
-			local istack = inv:get_stack("input", 1)
-			local stack_name = istack:get_name()
-			inv:remove_item("input", stack_name.." 1")
+		local istack = inv:get_stack("input", 1)
+		local stack_name = istack:get_name()
+		inv:remove_item("input", stack_name.." 1")
 
-			inv:set_stack("output", 1, "")
-			inv:set_stack("output", 2, "")
-			inv:set_stack("output", 3, "")
-			inv:set_stack("output", 4, "")
-			inv:set_stack("output", 5, "")
-			inv:set_stack("output", 6, "")
-			inv:set_stack("output", 7, "")
-			inv:set_stack("output", 8, "")
-			inv:set_stack("output", 9, "")
-			inv:set_stack("output", 10, "")
-			inv:set_stack("output", 11, "")
-			inv:set_stack("output", 12, "")
+		inv:set_stack("output", 1, "")
+		inv:set_stack("output", 2, "")
+		inv:set_stack("output", 3, "")
+		inv:set_stack("output", 4, "")
+		inv:set_stack("output", 5, "")
+		inv:set_stack("output", 6, "")
+		inv:set_stack("output", 7, "")
+		inv:set_stack("output", 8, "")
+		inv:set_stack("output", 9, "")
+		inv:set_stack("output", 10, "")
+		inv:set_stack("output", 11, "")
+		inv:set_stack("output", 12, "")
 	end,
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1, oddly_breakable_by_hand=1},
+	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })

@@ -102,7 +102,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
     -- play sound at context position
 	minetest.sound_play(sounds[sound_index], {
-	pos = context.pos,
+		pos = context.pos,
 		max_hear_distance = 10
     })
 	context[player:get_player_name()] = nil -- we don't need it anymore
@@ -122,6 +122,7 @@ minetest.register_node("scifi_nodes:digicode_on", {
 	paramtype2 = "wallmounted",
 	light_source = 5,
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1, mesecon_needs_receiver = 1},
+	is_ground_content = false,
 	drop = "scifi_nodes:digicode_off",
 	mesecons = {
 		receptor = {
@@ -145,6 +146,7 @@ minetest.register_node("scifi_nodes:digicode_off", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	groups = {cracky=1, oddly_breakable_by_hand=1, mesecon_needs_receiver = 1},
+	is_ground_content = false,
 	mesecons = {
 		receptor = {
 			state = (has_mesecons and mesecon.state.off)

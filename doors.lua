@@ -246,6 +246,7 @@ for _, current_door in ipairs(doors) do
 			scifi_nodes_door = 1,
 			door = 1
 		},
+		is_ground_content = false,
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -279,6 +280,7 @@ for _, current_door in ipairs(doors) do
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {cracky = 1, dig_generic = 3, door = 1},
+		is_ground_content = false,
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -309,6 +311,7 @@ for _, current_door in ipairs(doors) do
 		paramtype2 = "facedir",
 		drop = closed,
 		groups = {cracky = 1, dig_generic = 3, door = 2},
+		is_ground_content = false,
 		node_box = {
 			type = "fixed",
 			fixed = {
@@ -340,6 +343,7 @@ for _, current_door in ipairs(doors) do
 		paramtype = "light",
 		paramtype2 = "facedir",
 		groups = {cracky = 1, dig_generic = 3, door = 2},
+		is_ground_content = false,
 		node_box = {
 			type = "fixed",
 			fixed = {
