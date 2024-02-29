@@ -176,11 +176,13 @@
     },
     "octofloor": {
         "description": "Doom floor",
-        "sounds": "stone"
+        "sounds": "stone",
+        "paramtype2": "none"
     },
     "octofloor2": {
         "description": "Brown Doom floor",
-        "sounds": "stone"
+        "sounds": "stone",
+        "paramtype2": "none"
     },
     "doomwall1": {
         "description": "Doom wall 1"

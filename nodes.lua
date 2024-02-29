@@ -569,7 +569,7 @@ for name, def in pairs(nodes) do
 		tiles = tiles,
 		groups = {cracky=1, dig_generic = 3},
 		paramtype = "light",
-		paramtype2 = "facedir",
+		paramtype2 = def.paramtype2 or "facedir",
 		light_source = def.light,
 		sounds = sounds,
 	}
