@@ -16,29 +16,30 @@ function scifi_nodes.register_slope(name, desc, texture, light, soundtype)
 		drawtype = "mesh",
 		mesh = "scifi_nodes_slope.obj",
 		tiles = texture,
-			selection_box = {
-				type = "fixed",
-		fixed = {
-			{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
-			{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
-			{-0.5,     0,     0, 0.5,  0.25, 0.5},
-			{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
-		}
-			},
-			collision_box = {
-				type = "fixed",
-		fixed = {
-			{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
-			{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
-			{-0.5,     0,     0, 0.5,  0.25, 0.5},
-			{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
-		}
-			},
+		selection_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
+				{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
+				{-0.5,     0,     0, 0.5,  0.25, 0.5},
+				{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
+			}
+		},
+		collision_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
+				{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
+				{-0.5,     0,     0, 0.5,  0.25, 0.5},
+				{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
+			}
+		},
 		paramtype = "light",
 		paramtype2 = "facedir",
 		use_texture_alpha = "clip",
 		light_source = light,
 		groups = {cracky=1, dig_generic = 3},
+		is_ground_content = false,
 		on_place = minetest.rotate_node,
 		sounds = sounds,
 	})
