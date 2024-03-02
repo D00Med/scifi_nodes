@@ -465,7 +465,7 @@ minetest.register_node("scifi_nodes:lightbar", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	paramtype2 = "wallmounted",
+	paramtype2 = "facedir",
 	sunlight_propagates = true,
 	light_source = minetest.LIGHT_MAX,
 	node_box = {
@@ -475,8 +475,8 @@ minetest.register_node("scifi_nodes:lightbar", {
 		}
 	},
 	selection_box = {
-		type = "wallmounted",
-		wallmounted = {
+		type = "fixed",
+		fixed = {
 			{-0.125, -0.5, -0.5, 0.125, -0.375, 0.5}, -- NodeBox1
 		}
 	},
