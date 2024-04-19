@@ -24,5 +24,6 @@ read_globals = {
 	"unifieddyes",
 	"letters",
 	"stealthnode",
-	"slats"
+	"slats",
+	"mtt"
 }
