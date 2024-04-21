@@ -8,3 +8,5 @@ jobs:
     - uses: buckaroobanzay/mtt@main
       with:
         modname: scifi_nodes
+        enable_coverage: "true"
+    - uses: coverallsapp/github-action@v1
