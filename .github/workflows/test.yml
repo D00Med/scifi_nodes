@@ -8,4 +8,3 @@ jobs:
     - uses: buckaroobanzay/mtt@main
       with:
         modname: scifi_nodes
-    - uses: coverallsapp/github-action@v1
