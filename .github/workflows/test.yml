@@ -1,0 +1,12 @@
+name: test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: buckaroobanzay/mtt@main
+      with:
+        modname: scifi_nodes
+        enable_coverage: "true"
+    - uses: coverallsapp/github-action@v1
