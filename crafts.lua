@@ -1842,3 +1842,21 @@ minetest.register_craft({
         {"scifi_nodes:octbl", 	"", 					"scifi_nodes:octbl"}
     }
 })
+
+minetest.register_craft({
+	output = "scifi_nodes:vent3 4",
+	recipe = {
+        {"scifi_nodes:vent2", 	"", 					"scifi_nodes:vent2"},
+        {"", 					"scifi_nodes:glass", 	""},
+        {"scifi_nodes:vent2", 	"", 					"scifi_nodes:vent2"}
+    }
+})
+
+minetest.register_craft({
+	output = "scifi_nodes:mesh3 4",
+	recipe = {
+        {"scifi_nodes:mesh2", 	"", 					"scifi_nodes:mesh2"},
+        {"", 					"scifi_nodes:glass", 	""},
+        {"scifi_nodes:mesh2", 	"", 					"scifi_nodes:mesh2"}
+    }
+})

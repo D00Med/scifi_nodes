@@ -50,6 +50,12 @@
     "vent2": {
         "description": "vent"
     },
+    "vent3": {
+        "description": "transparent vent",
+        "texture_name": "vent2",
+        "texture_modifier": "^[makealpha:33,33,33",
+        "drawtype": "glasslike"
+    },
     "stripes": {
         "description": "hazard stripes",
         "slat": true
@@ -93,6 +99,12 @@
     },
     "mesh2": {
         "description": "metal floormesh"
+    },
+    "mesh3": {
+        "description": "transparent metal floormesh",
+        "texture_name": "mesh2",
+        "texture_modifier": "^[makealpha:19,19,19",
+        "drawtype": "glasslike"
     },
     "pipe": {
         "description": "wall pipe"

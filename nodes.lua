@@ -598,9 +598,15 @@ for name, def in pairs(nodes) do
 		tiles = {"scifi_nodes_" .. def.texture_name .. ".png"}
 	end
 
+	-- optional texture modifier
+	if def.texture_modifier then
+		tiles[1] = tiles[1] .. def.texture_modifier
+	end
+
 	-- Node Definition
 	local node_def = {
 		description = def.description,
+		drawtype = def.drawtype or "normal",
 		tiles = tiles,
 		groups = {cracky=1, dig_generic = 3},
 		is_ground_content = false,
