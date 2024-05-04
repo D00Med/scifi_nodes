@@ -102,8 +102,8 @@
     },
     "mesh3": {
         "description": "transparent metal floormesh",
-        "texture_name": "mesh2",
-        "texture_modifier": "^[makealpha:19,19,19",
+        "texture_name": "mesh",
+        "texture_modifier": "^[contrast:10:-50^[makealpha:0,0,0",
         "drawtype": "glasslike"
     },
     "pipe": {
