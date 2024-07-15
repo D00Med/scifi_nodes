@@ -43,7 +43,7 @@ CC BY 3.0
 * scifi_nodes_access_refused https://freesound.org/people/RICHERlandTV/sounds/216090/
 * scifi_nodes_forcefield.png https://github.com/minetest-mods/technic/
 * scifi_nodes_dirt.png https://github.com/minetest/minetest_game
-* scifi_nodes_grass.png https://github.com/minetest/minetest_game
+* scifi_nodes_grass_top.png https://github.com/minetest/minetest_game
 * scifi_nodes_grass_side.png https://github.com/minetest/minetest_game
 * scifi_nodes_wood.png https://github.com/minetest/minetest_game
 
