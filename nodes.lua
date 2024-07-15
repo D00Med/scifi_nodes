@@ -6,7 +6,7 @@ local has_slats_mod = minetest.get_modpath("slats")
 
 minetest.register_node("scifi_nodes:grassblk", {
 	description = "Dirt With Alien Grass",
-	tiles = {"scifi_nodes_grass.png^[colorize:cyan:80", "scifi_nodes_dirt.png",
+	tiles = {"scifi_nodes_grass_top.png^[colorize:cyan:80", "scifi_nodes_dirt.png",
 		{name = "scifi_nodes_dirt.png^(scifi_nodes_grass_side.png^[colorize:cyan:80)",
 			tileable_vertical = false}},
 	light_source = 2,
