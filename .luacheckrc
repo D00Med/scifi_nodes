@@ -1,3 +1,5 @@
+std = "min+minetest"
+
 unused_args = false
 max_line_length = 180
 
@@ -6,14 +8,6 @@ globals = {
 }
 
 read_globals = {
-	-- Stdlib
-	string = {fields = {"split"}},
-	table = {fields = {"copy", "getn"}},
-
-	-- Minetest
-	"vector", "ItemStack",
-	"dump",
-
 	-- optional deps
 	"advtrains",
 	"default",
