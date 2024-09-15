@@ -8,7 +8,9 @@
     "white2": {
         "description": "plastic",
         "colorable": true,
-        "sounds": "stone"
+        "sounds": "stone",
+        "signs_banner": true,
+        "signs_banner_color": "#000"
     },
     "super_white": {
         "description": "Super Plastic",
@@ -68,7 +70,8 @@
         "description": "metal mesh"
     },
     "black": {
-        "description": "black wall"
+        "description": "black wall",
+        "signs_banner": true
     },
     "blackoct": {
         "description": "black octagon"
@@ -89,7 +92,8 @@
         "description": "blue bars"
     },
     "bluemetal": {
-        "description": "blue metal"
+        "description": "blue metal",
+        "signs_banner": true
     },
     "bluetile": {
         "description": "blue tile",
@@ -148,7 +152,8 @@
         "colorable": true
     },
     "greenmetal": {
-        "description": "green metal wall"
+        "description": "green metal wall",
+        "signs_banner": true
     },
     "greenmetal2": {
         "description": "green metal wall2"
@@ -172,7 +177,8 @@
         "description": "green pipes"
     },
     "grey": {
-        "description": "grey wall"
+        "description": "grey wall",
+        "signs_banner": true
     },
     "greybolts": {
         "description": "grey wall bolts"
@@ -276,7 +282,8 @@
         "slat": true
     },
     "purple": {
-        "description": "Purple node"
+        "description": "Purple node",
+        "signs_banner": true
     },
     "rock": {
         "description": "Moonstone",

@@ -18,6 +18,7 @@ read_globals = {
 	"mesecon",
 	"unifieddyes",
 	"letters",
+	"signs_api",
 	"stealthnode",
 	"slats",
 	"mtt"

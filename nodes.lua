@@ -2,6 +2,7 @@ local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
 local has_moreblocks_mod = minetest.get_modpath("moreblocks")
 local has_slats_mod = minetest.get_modpath("slats")
 local has_advtrains_mod = minetest.get_modpath("advtrains")
+local has_signs_api_mod = minetest.get_modpath("signs_api")
 
 --nodes
 
@@ -665,6 +666,25 @@ for name, def in pairs(nodes) do
 	-- advtrains platform registration
 	if has_advtrains_mod and def.advtrains_platform then
 		advtrains.register_platform("scifi_nodes", "scifi_nodes:" .. name)
+	end
+
+	if has_signs_api_mod and def.signs_banner then
+		signs_api.register_sign("scifi_nodes", name .. "_banner", {
+			depth = 1/16,
+			width = 5,
+			height = 1,
+			entity_fields = {
+				maxlines = 1,
+				color = def.signs_banner_color or "#fff",
+			},
+			node_fields = {
+				visual_scale = 1,
+				description = name .. " banner",
+				tiles = tiles,
+				inventory_image = "scifi_nodes_" .. name .. ".png",
+				use_texture_alpha = "clip",
+			},
+		})
 	end
 
 	if has_slats_mod and def.slat then
