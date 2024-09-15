@@ -58,7 +58,8 @@
     },
     "stripes": {
         "description": "hazard stripes",
-        "slat": true
+        "slat": true,
+        "advtrains_platform": true
     },
     "rust": {
         "description": "rusty metal"

@@ -15,6 +15,7 @@ read_globals = {
 	"dump",
 
 	-- optional deps
+	"advtrains",
 	"default",
 	"stairsplus",
 	"xpanes",

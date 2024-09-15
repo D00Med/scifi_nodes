@@ -1,6 +1,7 @@
 local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
 local has_moreblocks_mod = minetest.get_modpath("moreblocks")
 local has_slats_mod = minetest.get_modpath("slats")
+local has_advtrains_mod = minetest.get_modpath("advtrains")
 
 --nodes
 
@@ -659,6 +660,11 @@ for name, def in pairs(nodes) do
 			light_source = def.light,
 			sounds = sounds,
 		})
+	end
+
+	-- advtrains platform registration
+	if has_advtrains_mod and def.advtrains_platform then
+		advtrains.register_platform("scifi_nodes", "scifi_nodes:" .. name)
 	end
 
 	if has_slats_mod and def.slat then
