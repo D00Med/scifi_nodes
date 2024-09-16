@@ -25,7 +25,10 @@ local function register(basename, description, texture)
       type = "fixed",
       fixed = {{-0.5, -0.5, -0.25, 0.5, 0.5, 0.25}},
     },
-    groups = {cracky = 3, oddly_breakable_by_hand = 3},
+    groups = {
+      cracky = 3,
+      oddly_breakable_by_hand = 3
+    },
     use_texture_alpha = "blend",
     sounds = scifi_nodes.node_sound_glass_defaults()
   })
@@ -50,7 +53,10 @@ local function register(basename, description, texture)
       type = "fixed",
       fixed = {{-0.5, -0.5, -0.25, 0.5, 1.5, 0.25}},
     },
-    groups = {cracky = 3, oddly_breakable_by_hand = 3},
+    groups = {
+      cracky = 3,
+      oddly_breakable_by_hand = 3
+    },
     use_texture_alpha = "blend",
     sounds = scifi_nodes.node_sound_glass_defaults()
   })
@@ -75,7 +81,11 @@ local function register(basename, description, texture)
       type = "fixed",
       fixed = {{-0.5, -0.5, 0.75, 0.5, 0.5, 1.25}},
     },
-    groups = {cracky = 3, oddly_breakable_by_hand = 3},
+    groups = {
+      cracky = 3,
+      oddly_breakable_by_hand = 3,
+      not_blocking_trains = 1
+    },
     use_texture_alpha = "blend",
     sounds = scifi_nodes.node_sound_glass_defaults()
   })
