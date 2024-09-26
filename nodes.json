@@ -15,12 +15,14 @@
     "super_white": {
         "description": "Super Plastic",
         "light": 11,
-        "sounds": "stone"
+        "sounds": "stone",
+        "texture_name": "white2"
     },
     "ultra_white": {
         "description": "Ultra Plastic",
         "light": 14,
-        "sounds": "stone"
+        "sounds": "stone",
+        "texture_name": "white2"
     },
     "engine": {
         "description": "Engine"
