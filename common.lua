@@ -1,7 +1,5 @@
 
-
-scifi_nodes.get_switch_rules = function(param2)
-
+function scifi_nodes.get_switch_rules(param2)
 	-- param2 = 2
 	local rules = {
 		{x=1, y=-1, z=-1},
@@ -10,7 +8,7 @@ scifi_nodes.get_switch_rules = function(param2)
 		{x=0, y=-1, z=1},
 	}
 
--- Left and right when looking to +y ?
+	-- Left and right when looking to +y ?
 	if param2 == 3 then
 		rules = mesecon.rotate_rules_right(mesecon.rotate_rules_right (rules))
 	elseif param2 == 4 then

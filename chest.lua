@@ -14,7 +14,7 @@ local chest_formspec =
 
 -- Helper functions
 local function drop_chest_stuff()
-	return function(pos, oldnode, oldmetadata, digger)
+	return function(pos, _, oldmetadata)
 		local meta = minetest.get_meta(pos)
 		meta:from_table(oldmetadata)
 		local inv = meta:get_inventory()

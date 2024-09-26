@@ -120,7 +120,7 @@ for _, current_door in ipairs(doors) do
 		return itemstack;
 	end
 
-	local function afterdestruct(pos, oldnode)
+	local function afterdestruct(pos)
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 	end
 
@@ -173,12 +173,12 @@ for _, current_door in ipairs(doors) do
 		timer:start(3)
 	end
 
-	local function afterplace(pos, placer, itemstack, pointed_thing)
+	local function afterplace(pos)
 		local node = minetest.get_node(pos)
 		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=node.param2})
 	end
 
-	local function ontimer(pos, elapsed)
+	local function ontimer(pos)
 		-- play sound
 		minetest.sound_play(sound,{
 			max_hear_distance = 16,
@@ -218,7 +218,7 @@ for _, current_door in ipairs(doors) do
 		},
 	}
 
-	local function nodig(pos, digger)
+	local function nodig()
 		return false
 	end
 

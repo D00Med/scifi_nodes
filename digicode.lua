@@ -11,7 +11,7 @@ local digicode_context = {}
 
 -- after_place_node, use by digicode and palm_scanner
 -- placer is a player object
-local function set_owner(pos, placer, itemstack, pointed_thing)
+local function set_owner(pos, placer)
 	local meta = minetest.get_meta(pos)
 	meta:set_string("owner", placer:get_player_name())
 	meta:set_string("code", secret_code)
@@ -48,7 +48,7 @@ local function update_code(pos, code)
 	meta:set_string("code", code)
 end
 
-local function show_digicode_formspec(pos, node, player, itemstack, pointed_thing)
+local function show_digicode_formspec(pos, _, player)
 	local meta = minetest.get_meta(pos)
 	local owner = meta:get_string("owner")
 	local current_code = meta:get_string("code")

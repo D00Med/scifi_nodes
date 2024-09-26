@@ -1,7 +1,6 @@
 std = "min+minetest"
 
 unused_args = false
-max_line_length = 180
 
 globals = {
 	"scifi_nodes"
