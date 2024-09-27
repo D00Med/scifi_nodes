@@ -1,0 +1,73 @@
+local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
+
+local function register_glass(key, name)
+    local tiles = {"scifi_nodes_" .. key .. ".png"}
+
+    minetest.register_node("scifi_nodes:" .. key, {
+        description = name .. " Octagon Glass",
+        sunlight_propagates = true,
+        drawtype = "glasslike",
+        tiles = tiles,
+        paramtype = "light",
+        paramtype2 = "facedir",
+        use_texture_alpha = "blend",
+        light_source = 10,
+        groups = {
+            cracky = 2,
+            dig_generic = 3
+        },
+        is_ground_content = false,
+        sounds = scifi_nodes.node_sound_glass_defaults(),
+    })
+
+    minetest.register_node("scifi_nodes:" .. key .. "_slope", {
+		description = "Octagon Glass slope",
+		sunlight_propagates = true,
+		drawtype = "mesh",
+		mesh = "scifi_nodes_slope.obj",
+		tiles = tiles,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		use_texture_alpha = "blend",
+		light_source = 10,
+		groups = {
+			cracky = 2,
+			dig_generic = 3
+		},
+		selection_box = scifi_nodes.slope_selection_box,
+		collision_box = scifi_nodes.slope_collision_box,
+		is_ground_content = false,
+		sounds = scifi_nodes.node_sound_glass_defaults()
+	})
+end
+
+register_glass("octppl", "Purple")
+register_glass("octbl", "Blue")
+register_glass("octgrn", "Green")
+register_glass("octrng", "Orange")
+register_glass("octwht", "White")
+
+if has_unifieddyes_mod then
+	minetest.register_node("scifi_nodes:octwht", {
+		description = "Octagon Glass",
+		sunlight_propagates = true,
+		drawtype = "glasslike",
+		tiles = {
+			"scifi_nodes_octwht.png",
+		},
+		palette = "unifieddyes_palette_extended.png",
+		paramtype = "light",
+		paramtype2 = "color",
+		use_texture_alpha = "blend",
+		light_source = 10,
+		groups = {
+			cracky = 2,
+			dig_generic = 3,
+			ud_param2_colorable = 1
+		},
+		is_ground_content = false,
+		sounds = scifi_nodes.node_sound_glass_defaults(),
+		on_construct = unifieddyes.on_construct,
+		on_dig = unifieddyes.on_dig
+	})
+end

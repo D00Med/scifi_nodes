@@ -30,6 +30,7 @@ dofile(MP.."/nodeboxes.lua")
 dofile(MP.."/palm_scanner.lua")
 dofile(MP.."/digicode.lua")
 dofile(MP.."/octagon_panes.lua")
+dofile(MP.."/octagon_glass.lua")
 dofile(MP.."/forcefield.lua")
 dofile(MP.."/crafts.lua")
 

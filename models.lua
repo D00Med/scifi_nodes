@@ -16,24 +16,8 @@ function scifi_nodes.register_slope(name, desc, texture, light, soundtype)
 		drawtype = "mesh",
 		mesh = "scifi_nodes_slope.obj",
 		tiles = texture,
-		selection_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
-				{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
-				{-0.5,     0,     0, 0.5,  0.25, 0.5},
-				{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
-			}
-		},
-		collision_box = {
-			type = "fixed",
-			fixed = {
-				{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
-				{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
-				{-0.5,     0,     0, 0.5,  0.25, 0.5},
-				{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
-			}
-		},
+		selection_box = scifi_nodes.slope_selection_box,
+		collision_box = scifi_nodes.slope_collision_box,
 		paramtype = "light",
 		paramtype2 = "facedir",
 		use_texture_alpha = "clip",
