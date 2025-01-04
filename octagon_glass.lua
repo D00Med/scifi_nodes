@@ -19,26 +19,6 @@ local function register_glass(key, name)
         is_ground_content = false,
         sounds = scifi_nodes.node_sound_glass_defaults(),
     })
-
-    minetest.register_node("scifi_nodes:" .. key .. "_slope", {
-		description = "Octagon Glass slope",
-		sunlight_propagates = true,
-		drawtype = "mesh",
-		mesh = "scifi_nodes_slope.obj",
-		tiles = tiles,
-		paramtype = "light",
-		paramtype2 = "facedir",
-		use_texture_alpha = "blend",
-		light_source = 10,
-		groups = {
-			cracky = 2,
-			dig_generic = 3
-		},
-		selection_box = scifi_nodes.slope_selection_box,
-		collision_box = scifi_nodes.slope_collision_box,
-		is_ground_content = false,
-		sounds = scifi_nodes.node_sound_glass_defaults()
-	})
 end
 
 register_glass("octppl", "Purple")

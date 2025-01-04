@@ -1,13 +1,15 @@
 
-local function register(basename, description, texture)
+local function register(basename, color, texture)
   local nodename_single = "scifi_nodes:" .. basename .. "_pane"
   local nodename_double = "scifi_nodes:" .. basename .. "_pane_double"
   local nodename_offset = "scifi_nodes:" .. basename .. "_pane_offset"
+  local nodename_slope = "scifi_nodes:" .. basename .. "_slope"
   local recipe_ingredient = "scifi_nodes:" .. basename
+  local base_decription = color ..  " octagon glass"
 
   -- single height
   minetest.register_node(nodename_single, {
-    description = description,
+    description = base_decription .. " pane",
     drawtype = "nodebox",
     tiles = {
       texture
@@ -35,7 +37,7 @@ local function register(basename, description, texture)
 
   -- double height
   minetest.register_node(nodename_double, {
-    description = description,
+    description = base_decription .. " pane (double)",
     drawtype = "nodebox",
     tiles = {
       texture
@@ -63,7 +65,7 @@ local function register(basename, description, texture)
 
   -- single height with offset
   minetest.register_node(nodename_offset, {
-    description = description,
+    description = base_decription .. " pane (offset)",
     drawtype = "nodebox",
     tiles = {
       texture
@@ -90,12 +92,43 @@ local function register(basename, description, texture)
     sounds = scifi_nodes.node_sound_glass_defaults()
   })
 
+  -- slope pane
+  minetest.register_node(nodename_slope, {
+    description = base_decription .. " pane (slope)",
+		sunlight_propagates = true,
+		drawtype = "mesh",
+		mesh = "scifi_nodes_slope_simple.obj",
+		tiles = {
+      texture
+    },
+    paramtype = "light",
+		paramtype2 = "facedir",
+		use_texture_alpha = "blend",
+		light_source = 10,
+		groups = {
+			cracky = 2,
+			dig_generic = 3
+		},
+		selection_box = scifi_nodes.slope_box_simple,
+		collision_box = scifi_nodes.slope_box_simple,
+		is_ground_content = false,
+		sounds = scifi_nodes.node_sound_glass_defaults()
+	})
   -- register recipes
 
   minetest.register_craft({
     output = nodename_single .. " 16",
     recipe = {
       {recipe_ingredient}
+    },
+  })
+
+  minetest.register_craft({
+    output = nodename_slope .. " 16",
+    recipe = {
+      {"", "", recipe_ingredient},
+      {"", recipe_ingredient, ""},
+      {recipe_ingredient, "", ""}
     },
   })
 
@@ -114,8 +147,9 @@ local function register(basename, description, texture)
   })
 end
 
-register("octrng", "Orange Octagon Glass pane", "scifi_nodes_octrng.png")
-register("octgrn", "Green Octagon Glass pane", "scifi_nodes_octgrn.png")
-register("octbl", "Blue Octagon Glass pane", "scifi_nodes_octbl.png")
-register("octppl", "Purple Octagon Glass pane", "scifi_nodes_octppl.png")
+register("octrng", "Orange", "scifi_nodes_octrng.png")
+register("octgrn", "Green", "scifi_nodes_octgrn.png")
+register("octbl", "Blue", "scifi_nodes_octbl.png")
+register("octppl", "Purple", "scifi_nodes_octppl.png")
+register("octwht", "White", "scifi_nodes_octwht.png")
 register("glass", "Dark Glass pane", "scifi_nodes_glass.png")

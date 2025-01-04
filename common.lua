@@ -19,7 +19,7 @@ function scifi_nodes.get_switch_rules(param2)
 	return rules
 end
 
-scifi_nodes.slope_selection_box = {
+scifi_nodes.slope_box = {
 	type = "fixed",
 	fixed = {
 		{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
@@ -29,12 +29,12 @@ scifi_nodes.slope_selection_box = {
 	}
 }
 
-scifi_nodes.slope_collision_box = {
+scifi_nodes.slope_box_simple = {
 	type = "fixed",
 	fixed = {
-		{-0.5,  -0.5,  -0.5, 0.5, -0.25, 0.5},
-		{-0.5, -0.25, -0.25, 0.5,     0, 0.5},
-		{-0.5,     0,     0, 0.5,  0.25, 0.5},
+		{-0.5,  -0.5,  -0.5, 0.5, -0.25, -0.25},
+		{-0.5, -0.25, -0.25, 0.5,     0, 0},
+		{-0.5,     0,     0, 0.5,  0.25, 0.25},
 		{-0.5,  0.25,  0.25, 0.5,   0.5, 0.5}
 	}
 }
