@@ -302,5 +302,12 @@
     },
     "blackplate": {
         "description": "Black plate"
+    },
+    "plastcrete": {
+        "description": "Plastcrete",
+        "sounds": "stone",
+        "colorable": true,
+        "moreblocks": false,
+        "paramtype2": "none"
     }
 }
