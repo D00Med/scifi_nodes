@@ -577,7 +577,6 @@ for name, def in pairs(nodes) do
 
 	if def.ambience then
 		for soundname, opts in pairs(def.ambience) do
-			print(dump(opts))
 			scifi_nodes.register_ambience(nodename, soundname, opts)
 		end
 	end

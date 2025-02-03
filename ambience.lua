@@ -31,7 +31,7 @@ end
 -- limit plaing sounds per mapblock
 local function can_play(pos)
     local count = currently_playing[get_key(pos)]
-    return not count or count < 10
+    return not count or count < 25
 end
 
 -- register ambience sounds with node-timer
@@ -53,7 +53,7 @@ function scifi_nodes.register_ambience(nodename, soundname, opts)
 
             if not can_play(pos) then
                 -- too many sounds playing, recheck again soon
-                timer:start(2)
+                timer:start(1)
                 return
             end
 

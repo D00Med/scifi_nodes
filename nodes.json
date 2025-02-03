@@ -28,8 +28,7 @@
         "description": "Engine",
         "ambience": {
             "scifi_nodes_ambience_engine": {
-                "interval": 16.1,
-                "gain": 2.0
+                "interval": 16.1
             }
         }
     },
