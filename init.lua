@@ -20,6 +20,7 @@ if minetest.get_modpath("default") then
 	dofile(MP.."/chest.lua")
 end
 
+dofile(MP.."/ambience.lua")
 dofile(MP.."/plants.lua")
 dofile(MP.."/models.lua")
 dofile(MP.."/nodes.lua")
