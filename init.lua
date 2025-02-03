@@ -23,6 +23,7 @@ end
 dofile(MP.."/plants.lua")
 dofile(MP.."/models.lua")
 dofile(MP.."/nodes.lua")
+dofile(MP.."/access_cards.lua")
 dofile(MP.."/doors.lua")
 dofile(MP.."/switch.lua")
 dofile(MP.."/protected_switch.lua")
