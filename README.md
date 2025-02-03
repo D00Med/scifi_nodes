@@ -49,6 +49,9 @@ CC BY 3.0
 
 CC0
 * scifi_nodes_digicode.ogg https://freesound.org/people/benjaminharveydesign/sounds/315921/
+* scifi_nodes_ambience_fan.ogg https://freesound.org/people/itinerantmonk108/sounds/554430/
+* scifi_nodes_ambience_vent.ogg https://freesound.org/people/kentspublicdomain/sounds/324665/
+* scifi_nodes_ambience_engine.ogg https://freesound.org/people/firestorm185/sounds/423221/
 
 
 # Contributors:

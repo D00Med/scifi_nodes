@@ -25,7 +25,13 @@
         "texture_name": "white2"
     },
     "engine": {
-        "description": "Engine"
+        "description": "Engine",
+        "ambience": {
+            "scifi_nodes_ambience_engine": {
+                "interval": 16.1,
+                "gain": 2.0
+            }
+        }
     },
     "wall": {
         "description": "metal wall"
@@ -58,7 +64,12 @@
         "description": "transparent vent",
         "texture_name": "vent2",
         "texture_modifier": "^[makealpha:33,33,33",
-        "drawtype": "glasslike"
+        "drawtype": "glasslike",
+        "ambience": {
+            "scifi_nodes_ambience_vent": {
+                "interval": 4.2
+            }
+        }
     },
     "stripes": {
         "description": "hazard stripes",
@@ -261,7 +272,12 @@
         "light": 5
     },
     "fan": {
-        "description": "Fan"
+        "description": "Fan",
+        "ambience": {
+            "scifi_nodes_ambience_fan": {
+                "interval": 7
+            }
+        }
     },
     "ppllght": {
         "description": "Purple wall light",

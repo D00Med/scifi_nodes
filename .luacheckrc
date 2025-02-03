@@ -3,7 +3,8 @@ std = "min+minetest"
 unused_args = false
 
 globals = {
-	"scifi_nodes"
+	"scifi_nodes",
+	"minetest"
 }
 
 read_globals = {
@@ -13,7 +14,6 @@ read_globals = {
 	"stairsplus",
 	"xpanes",
 	"screwdriver",
-	"minetest",
 	"mesecon",
 	"unifieddyes",
 	"letters",

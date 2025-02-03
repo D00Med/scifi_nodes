@@ -537,7 +537,8 @@ for name, def in pairs(nodes) do
 	end
 
 	-- register node
-	minetest.register_node("scifi_nodes:"..name, node_def)
+	local nodename = "scifi_nodes:" .. name
+	minetest.register_node(nodename , node_def)
 
 	-- unified dyes registration
 	if def.colorable and has_unifieddyes_mod then
@@ -572,6 +573,13 @@ for name, def in pairs(nodes) do
 			light_source = def.light,
 			sounds = sounds,
 		})
+	end
+
+	if def.ambience then
+		for soundname, opts in pairs(def.ambience) do
+			print(dump(opts))
+			scifi_nodes.register_ambience(nodename, soundname, opts)
+		end
 	end
 
 	-- advtrains platform registration
