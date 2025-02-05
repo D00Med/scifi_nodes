@@ -46,6 +46,7 @@ CC BY 3.0
 * scifi_nodes_grass_top.png https://github.com/minetest/minetest_game
 * scifi_nodes_grass_side.png https://github.com/minetest/minetest_game
 * scifi_nodes_wood.png https://github.com/minetest/minetest_game
+* scifi_nodes_plastcrete.png https://github.com/mt-mods/basic_materials
 
 CC0
 * scifi_nodes_digicode.ogg https://freesound.org/people/benjaminharveydesign/sounds/315921/

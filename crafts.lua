@@ -35,6 +35,15 @@ if not minetest.get_modpath("default") or not minetest.get_modpath("dye") then
 end
 
 minetest.register_craft({
+    output = "scifi_nodes:plastcrete 6",
+    recipe = {
+        {"scifi_nodes:white2", "default:gravel", "scifi_nodes:white2"},
+        {"default:gravel", "scifi_nodes:white2", "default:gravel"},
+        {"scifi_nodes:white2", "default:gravel", "scifi_nodes:white2"}
+    }
+})
+
+minetest.register_craft({
 	output = "scifi_nodes:super_white",
 	recipe = {
 		{"scifi_nodes:white2", "default:torch", ""}
