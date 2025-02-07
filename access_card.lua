@@ -1,10 +1,5 @@
 local FORMSPEC_NAME = "scifi_nodes:access_card_configure"
 
-local valid_itemnames = {
-    ["scifi_nodes:access_card"] = true,
-    ["scifi_nodes:access_card_colored"] = true
-}
-
 local function create_id()
     local template = "xxxxxx"
     return string.gsub(template, '[x]', function ()
@@ -40,7 +35,7 @@ function scifi_nodes.door_check_access_card(node_pos, itemstack, player)
 
     local playername = player:get_player_name()
 
-    if not valid_itemnames[itemstack:get_name()] then
+    if itemstack:get_name() ~= "scifi_nodes:access_card" then
         minetest.chat_send_player(playername, minetest.colorize("#ff0000", "Access denied: no access card detected!"))
         minetest.sound_play("scifi_nodes_scanner_refused", { pos = node_pos, max_hear_distance = 10 })
         return false
@@ -168,7 +163,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     end
 
     local itemstack = player:get_wielded_item()
-    if not valid_itemnames[itemstack:get_name()] then
+    if itemstack:get_name() ~= "scifi_nodes:access_card" then
         -- invalid item
         return true
     end
@@ -181,9 +176,14 @@ end)
 minetest.register_craftitem("scifi_nodes:access_card", {
 	description = "Access card (unconfigured)",
     inventory_image = "scifi_nodes_access_card.png",
+    palette = "unifieddyes_palette_extended.png",
     stack_max = 1,
+    paramtype2 = "color",
     on_use = on_use,
-    on_secondary_use = on_secondary_use
+    on_secondary_use = on_secondary_use,
+    groups = {
+        ud_param2_colorable = 1
+    }
 })
 
 -- initial recipe
@@ -196,27 +196,25 @@ minetest.register_craft({
 	}
 })
 
-for nodename in pairs(valid_itemnames) do
-    -- copy recipe
-    minetest.register_craft({
-        output = nodename,
-        recipe = {
-            {nodename, "scifi_nodes:white_pad", ""},
-            {"", "", ""},
-            {"", "", ""}
-        }
-    })
-end
+-- copy recipe
+minetest.register_craft({
+    output = "scifi_nodes:access_card",
+    recipe = {
+        {"scifi_nodes:access_card", "scifi_nodes:white_pad", ""},
+        {"", "", ""},
+        {"", "", ""}
+    }
+})
 
 minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
-    if not valid_itemnames[itemstack:get_name()] then
+    if itemstack:get_name() ~= "scifi_nodes:access_card" then
         return
     end
 
     local original
     local index
     for i = 1, #old_craft_grid do
-        if valid_itemnames[old_craft_grid[i]:get_name()] then
+        if old_craft_grid[i]:get_name() == "scifi_nodes:access_card" then
             original = old_craft_grid[i]
             index = i
             break
@@ -226,6 +224,7 @@ minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv
         return
     end
 
+    -- copy metadata
     local src_meta = original:get_meta()
     local dst_meta = itemstack:get_meta()
     local copy_fields = {"id", "name", "description"}
@@ -233,41 +232,16 @@ minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv
         dst_meta:set_string(fieldname, src_meta:get_string(fieldname))
     end
 
-    craft_inv:set_stack("craft", index, original)
+    if old_craft_grid[2]:get_name() == "scifi_nodes:white_pad" then
+        -- keep original item if the copy-recipe is used
+        craft_inv:set_stack("craft", index, original)
+    end
 end)
 
 if minetest.get_modpath("unifieddyes") then
-    -- add colored cards
-
-    minetest.register_craftitem("scifi_nodes:access_card_colored", {
-        description = "Colored access card (unconfigured)",
-        groups = {
-            ud_param2_colorable = 1,
-            not_in_creative_inventory = 1
-        },
-        inventory_image = "scifi_nodes_access_card.png",
-        palette = "unifieddyes_palette_extended.png",
-        stack_max = 1,
-        paramtype2 = "color",
-        on_use = on_use,
-        on_secondary_use = on_secondary_use
-    })
-
-    -- update color
+    -- add colored crafts
     unifieddyes.register_color_craft({
-        output = "scifi_nodes:access_card_colored",
-        palette = "extended",
-        neutral_node = "scifi_nodes:access_card_colored",
-        recipe = {
-            "NEUTRAL_NODE",
-            "MAIN_DYE"
-        },
-        type = "shapeless"
-    })
-
-    -- set color
-    unifieddyes.register_color_craft({
-        output = "scifi_nodes:access_card_colored",
+        output = "scifi_nodes:access_card",
         palette = "extended",
         neutral_node = "scifi_nodes:access_card",
         recipe = {
@@ -276,4 +250,5 @@ if minetest.get_modpath("unifieddyes") then
         },
         type = "shapeless"
     })
+
 end
