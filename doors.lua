@@ -148,14 +148,18 @@ for _, current_door in ipairs(doors) do
 
 			local adjacent = minetest.get_node({x=x, y=y, z=z})
 			if adjacent.name == target_opposite then
-				minetest.set_node({x=x, y=y, z=z}, {name=target, param2 = adjacent.param2})
-				minetest.set_node({x=x, y=y+1, z=z}, {name=target_top, param2 = adjacent.param2})
+				minetest.swap_node({x=x, y=y, z=z}, {name=target, param2 = adjacent.param2})
+				minetest.swap_node({x=x, y=y+1, z=z}, {name=target_top, param2 = adjacent.param2})
 			end
 		end
 
 	end
 
-	local function open_door(pos, node)
+	local function open_door(pos, node, player, itemstack)
+		if not scifi_nodes.door_check_access_card(pos, itemstack, player) then
+			return
+		end
+
 		-- play sound
 		minetest.sound_play(sound,{
 			max_hear_distance = 16,
@@ -165,8 +169,8 @@ for _, current_door in ipairs(doors) do
 
 		local timer = minetest.get_node_timer(pos)
 
-		minetest.set_node(pos, {name=opened, param2=node.param2})
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=opened_top, param2=node.param2})
+		minetest.swap_node(pos, {name=opened, param2=node.param2})
+		minetest.swap_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=opened_top, param2=node.param2})
 
 		change_adjacent(opened, pos, node)
 
@@ -188,8 +192,8 @@ for _, current_door in ipairs(doors) do
 
 		local node = minetest.get_node(pos)
 
-		minetest.set_node(pos, {name=closed, param2=node.param2})
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=closed_top, param2=node.param2})
+		minetest.swap_node(pos, {name=closed, param2=node.param2})
+		minetest.swap_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=closed_top, param2=node.param2})
 
 		change_adjacent(closed, pos, node)
 	end
@@ -242,7 +246,7 @@ for _, current_door in ipairs(doors) do
 		paramtype2 = "facedir",
 		groups = {
 			cracky = 3,
-			oddly_breakable_by_hand = 1,
+			dig_generic = 3,
 			scifi_nodes_door = 1,
 			door = 1
 		},
