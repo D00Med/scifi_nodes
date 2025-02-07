@@ -174,7 +174,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 end)
 
 minetest.register_craftitem("scifi_nodes:access_card", {
-	description = "Access card (unconfigured)",
+    description = "Access card (unconfigured)",
     inventory_image = "scifi_nodes_access_card.png",
     palette = "unifieddyes_palette_extended.png",
     stack_max = 1,
@@ -188,12 +188,12 @@ minetest.register_craftitem("scifi_nodes:access_card", {
 
 -- initial recipe
 minetest.register_craft({
-	output = "scifi_nodes:access_card",
-	recipe = {
-		{"scifi_nodes:white2", "", ""},
-		{"scifi_nodes:white_pad", "", ""},
-		{"scifi_nodes:white2", "", ""}
-	}
+    output = "scifi_nodes:access_card",
+    recipe = {
+        {"scifi_nodes:white2", "", ""},
+        {"scifi_nodes:white_pad", "", ""},
+        {"scifi_nodes:white2", "", ""}
+    }
 })
 
 -- copy recipe
