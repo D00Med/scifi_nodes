@@ -246,7 +246,7 @@ for _, current_door in ipairs(doors) do
 		paramtype2 = "facedir",
 		groups = {
 			cracky = 3,
-			oddly_breakable_by_hand = 1,
+			dig_generic = 3,
 			scifi_nodes_door = 1,
 			door = 1
 		},
