@@ -33,6 +33,11 @@ function scifi_nodes.door_check_access_card(node_pos, itemstack, player)
         return true
     end
 
+    if not player or not player:is_player() then
+        -- not a player, restrict access
+        return false
+    end
+
     local playername = player:get_player_name()
 
     if itemstack:get_name() ~= "scifi_nodes:access_card" then
