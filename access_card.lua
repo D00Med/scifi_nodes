@@ -33,7 +33,7 @@ function scifi_nodes.door_check_access_card(node_pos, itemstack, player)
         return true
     end
 
-    if not player or not player:is_player() then
+    if not minetest.is_player(player) then
         -- not a player, restrict access
         return false
     end
