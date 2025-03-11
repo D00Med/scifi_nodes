@@ -1,16 +1,17 @@
+local has_default = minetest.get_modpath("default")
 
 --chest code from default(Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>)
 local chest_formspec =
 	"size[8,9]" ..
-	default.gui_bg ..
-	default.gui_bg_img ..
-	default.gui_slots ..
+	(has_default and default.gui_bg or "") ..
+	(has_default and default.gui_bg_img or "") ..
+	(has_default and default.gui_slots or "") ..
 	"list[current_name;main;0,0.3;8,4;]" ..
 	"list[current_player;main;0,4.85;8,1;]" ..
 	"list[current_player;main;0,6.08;8,3;8]" ..
 	"listring[current_name;main]" ..
 	"listring[current_player;main]" ..
-	default.get_hotbar_bg(0,4.85)
+	(has_default and default.get_hotbar_bg(0,4.85) or "")
 
 -- Helper functions
 local function drop_chest_stuff()

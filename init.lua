@@ -14,13 +14,13 @@ end
 dofile(MP.."/common.lua")
 
 if minetest.get_modpath("default") then
-	-- only load builder and chest if the default mod is available
+	-- only load builder if the default mod is available
 	-- the formspecs depend on it
 	dofile(MP.."/builder.lua")
-	dofile(MP.."/chest.lua")
 end
 
 dofile(MP.."/ambience.lua")
+dofile(MP.."/chest.lua")
 dofile(MP.."/plants.lua")
 dofile(MP.."/models.lua")
 dofile(MP.."/nodes.lua")
