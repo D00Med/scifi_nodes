@@ -31,8 +31,8 @@ end
 
 -- register some blocks in stairsplus if available (part of moreblocks)
 scifi_nodes.register_slope("white2", "Plastic", {"scifi_nodes_white2.png",}, 0, "stone")
-scifi_nodes.register_slope("super_white", "Super Plastic", {"scifi_nodes_super_white.png",}, 11, "stone")
-scifi_nodes.register_slope("ultra_white", "Super Plastic", {"scifi_nodes_ultra_white.png",},minetest.LIGHT_MAX, "stone")
+scifi_nodes.register_slope("super_white", "Super Plastic", {"scifi_nodes_white2.png",}, 11, "stone")
+scifi_nodes.register_slope("ultra_white", "Super Plastic", {"scifi_nodes_white2.png",},minetest.LIGHT_MAX, "stone")
 scifi_nodes.register_slope("black", "Black", {"scifi_nodes_black.png",}, 0)
 scifi_nodes.register_slope("white", "White", {"scifi_nodes_white.png",}, 0)
 scifi_nodes.register_slope("grey", "Grey", {"scifi_nodes_grey.png",}, 0)
