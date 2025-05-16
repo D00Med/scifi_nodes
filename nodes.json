@@ -122,7 +122,8 @@
         "description": "transparent metal floormesh",
         "texture_name": "mesh",
         "texture_modifier": "^[contrast:10:-50^[makealpha:0,0,0",
-        "drawtype": "glasslike"
+        "drawtype": "glasslike",
+        "sunlight_propagates": true
     },
     "pipe": {
         "description": "wall pipe"

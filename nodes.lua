@@ -520,6 +520,7 @@ for name, def in pairs(nodes) do
 	local node_def = {
 		description = def.description,
 		drawtype = def.drawtype or "normal",
+		sunlight_propagates = def.sunlight_propagates,
 		tiles = tiles,
 		groups = {cracky=1, dig_generic = 3},
 		is_ground_content = false,
