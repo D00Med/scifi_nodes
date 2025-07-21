@@ -14,12 +14,14 @@
     },
     "super_white": {
         "description": "Super Plastic",
+        "colorable": true,
         "light": 11,
         "sounds": "stone",
         "texture_name": "white2"
     },
     "ultra_white": {
         "description": "Ultra Plastic",
+        "colorable": true,
         "light": 14,
         "sounds": "stone",
         "texture_name": "white2"
