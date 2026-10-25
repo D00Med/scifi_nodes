@@ -531,9 +531,10 @@ for name, def in pairs(nodes) do
 	}
 
 	if def.colorable and has_unifieddyes_mod then
-		-- overwrite attributes on the "uncolored" node
-		node_def.palette = "unifieddyes_palette_extended.png"
+		-- Add ud_param2_colorable group to base node to indicate it can be colored
 		node_def.groups.ud_param2_colorable = 1
+		-- But don't add palette to base node to avoid paramtype2 mismatch warnings
+		-- The palette will be added only to the "_colored" variant
 		node_def.airbrush_replacement_node = "scifi_nodes:"..name.."_colored"
 	end
 
