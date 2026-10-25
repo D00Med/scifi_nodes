@@ -1,0 +1,13 @@
+services:
+ mtt:
+  image: ghcr.io/buckaroobanzay/mtt:latest
+  volumes:
+   - "./:/github/workspace"
+  environment:
+   INPUT_MODNAME: "scifi_nodes"
+   INPUT_TEST_MODE: "mod"
+   INPUT_MAPGEN: "singlenode"
+   INPUT_GIT_GAME_REPO: "https://github.com/minetest/minetest_game"
+   INPUT_GIT_DEPENDENCIES: |
+    https://github.com/minetest-mods/mesecons
+
