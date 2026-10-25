@@ -9,4 +9,8 @@ jobs:
       with:
         modname: scifi_nodes
         enable_coverage: "true"
+        git_dependencies: |
+          https://github.com/BuckarooBanzay/mtt
+          https://github.com/BuckarooBanzay/promise
+          https://github.com/OgelGames/fakelib
     - uses: coverallsapp/github-action@v2

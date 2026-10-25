@@ -9,5 +9,7 @@ services:
    INPUT_MAPGEN: "singlenode"
    INPUT_GIT_GAME_REPO: "https://github.com/minetest/minetest_game"
    INPUT_GIT_DEPENDENCIES: |
+    https://github.com/BuckarooBanzay/promise
+    https://github.com/OgelGames/fakelib
     https://github.com/minetest-mods/mesecons
 

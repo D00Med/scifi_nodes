@@ -48,4 +48,5 @@ end
 
 if core.get_modpath("mtt") and mtt.enabled then
 	dofile(MP .. "/mtt.lua")
+	dofile(MP .. "/access_card.spec.lua")
 end
