@@ -1,2 +1,2 @@
 
-mtt.validate_nodenames(minetest.get_modpath("scifi_nodes") .. "/nodenames.txt")
+mtt.validate_nodenames(core.get_modpath("scifi_nodes") .. "/nodenames.txt")

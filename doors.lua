@@ -15,28 +15,28 @@
 
 
 -- Retrieving mod settings
-scifi_nodes.doors_open_with_mesecon_only = minetest.settings:get_bool("scifi_nodes.doors_open_with_mesecon_only", false)
+scifi_nodes.doors_open_with_mesecon_only = core.settings:get_bool("scifi_nodes.doors_open_with_mesecon_only", false)
 
 -- Some aliases to deal with old namming policy --
-minetest.register_alias("scifi_nodes:door1a","scifi_nodes:Doom_door_closed")
-minetest.register_alias("scifi_nodes:door1b","scifi_nodes:Doom_door_closed_top")
-minetest.register_alias("scifi_nodes:door1c","scifi_nodes:Doom_door_opened")
-minetest.register_alias("scifi_nodes:door1d","scifi_nodes:Doom_door_opened_top")
+core.register_alias("scifi_nodes:door1a","scifi_nodes:Doom_door_closed")
+core.register_alias("scifi_nodes:door1b","scifi_nodes:Doom_door_closed_top")
+core.register_alias("scifi_nodes:door1c","scifi_nodes:Doom_door_opened")
+core.register_alias("scifi_nodes:door1d","scifi_nodes:Doom_door_opened_top")
 
-minetest.register_alias("scifi_nodes:door2a","scifi_nodes:black_door_closed")
-minetest.register_alias("scifi_nodes:door2b","scifi_nodes:black_door_closed_top")
-minetest.register_alias("scifi_nodes:door2c","scifi_nodes:black_door_opened")
-minetest.register_alias("scifi_nodes:door2d","scifi_nodes:black_door_opened_top")
+core.register_alias("scifi_nodes:door2a","scifi_nodes:black_door_closed")
+core.register_alias("scifi_nodes:door2b","scifi_nodes:black_door_closed_top")
+core.register_alias("scifi_nodes:door2c","scifi_nodes:black_door_opened")
+core.register_alias("scifi_nodes:door2d","scifi_nodes:black_door_opened_top")
 
-minetest.register_alias("scifi_nodes:door3a","scifi_nodes:white_door_closed")
-minetest.register_alias("scifi_nodes:door3b","scifi_nodes:white_door_closed_top")
-minetest.register_alias("scifi_nodes:door3c","scifi_nodes:white_door_opened")
-minetest.register_alias("scifi_nodes:door3d","scifi_nodes:white_door_opened_top")
+core.register_alias("scifi_nodes:door3a","scifi_nodes:white_door_closed")
+core.register_alias("scifi_nodes:door3b","scifi_nodes:white_door_closed_top")
+core.register_alias("scifi_nodes:door3c","scifi_nodes:white_door_opened")
+core.register_alias("scifi_nodes:door3d","scifi_nodes:white_door_opened_top")
 
-minetest.register_alias("scifi_nodes:door4a","scifi_nodes:green_door_closed")
-minetest.register_alias("scifi_nodes:door4b","scifi_nodes:green_door_closed_top")
-minetest.register_alias("scifi_nodes:door4c","scifi_nodes:green_door_opened")
-minetest.register_alias("scifi_nodes:door4d","scifi_nodes:green_door_opened_top")
+core.register_alias("scifi_nodes:door4a","scifi_nodes:green_door_closed")
+core.register_alias("scifi_nodes:door4b","scifi_nodes:green_door_closed_top")
+core.register_alias("scifi_nodes:door4c","scifi_nodes:green_door_opened")
+core.register_alias("scifi_nodes:door4d","scifi_nodes:green_door_opened_top")
 
 -- This table now uses named parameters and more convenient variables names
 local doors = {
@@ -57,7 +57,7 @@ for _, current_door in ipairs(doors) do
 	local base_ingredient = current_door.base_ingredient
 	local sound = current_door.sound
 
-	minetest.register_craft({
+	core.register_craft({
 		output = closed .. " 2",
 		recipe = {
 			{"scifi_nodes:white2", base_ingredient, "scifi_nodes:white2"},
@@ -73,12 +73,12 @@ for _, current_door in ipairs(doors) do
 			  pos2.y = pos2.y+1 -- 2 nodes above
 
 		if
-		not minetest.registered_nodes[minetest.get_node(pos1).name].buildable_to or
-		not minetest.registered_nodes[minetest.get_node(pos2).name].buildable_to or
+		not core.registered_nodes[core.get_node(pos1).name].buildable_to or
+		not core.registered_nodes[core.get_node(pos2).name].buildable_to or
 		not placer or
 		not placer:is_player() or
-		minetest.is_protected(pos1, placer:get_player_name()) or
-		minetest.is_protected(pos2, placer:get_player_name()) then
+		core.is_protected(pos1, placer:get_player_name()) or
+		core.is_protected(pos2, placer:get_player_name()) then
 			return
 		end
 
@@ -86,7 +86,7 @@ for _, current_door in ipairs(doors) do
 		local pt2 = {x=pt.x, y=pt.y, z=pt.z}
 		pt2.y = pt2.y+1
 		-- Player look dir is converted to node rotation ?
-		local p2 = minetest.dir_to_facedir(placer:get_look_dir())
+		local p2 = core.dir_to_facedir(placer:get_look_dir())
 		-- Where to look for another door ?
 		local pt3 = {x=pt.x, y=pt.y, z=pt.z}
 
@@ -107,13 +107,13 @@ for _, current_door in ipairs(doors) do
 		end
 
 		-- First door of a pair is already there
-		if minetest.get_node(pt3).name == closed then
-			minetest.set_node(pt, {name=closed, param2=p4,})
-			minetest.set_node(pt2, {name=closed_top, param2=p4})
+		if core.get_node(pt3).name == closed then
+			core.set_node(pt, {name=closed, param2=p4,})
+			core.set_node(pt2, {name=closed_top, param2=p4})
 		--	Placed door is the first of a pair
 		else
-			minetest.set_node(pt, {name=closed, param2=p2,})
-			minetest.set_node(pt2, {name=closed_top, param2=p2})
+			core.set_node(pt, {name=closed, param2=p2,})
+			core.set_node(pt2, {name=closed_top, param2=p2})
 		end
 
 		itemstack:take_item(1)
@@ -121,7 +121,7 @@ for _, current_door in ipairs(doors) do
 	end
 
 	local function afterdestruct(pos)
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
+		core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name="air"})
 	end
 
 	local function change_adjacent(target, pos, node)
@@ -146,10 +146,10 @@ for _, current_door in ipairs(doors) do
 				z = z + offset
 			end
 
-			local adjacent = minetest.get_node({x=x, y=y, z=z})
+			local adjacent = core.get_node({x=x, y=y, z=z})
 			if adjacent.name == target_opposite then
-				minetest.swap_node({x=x, y=y, z=z}, {name=target, param2 = adjacent.param2})
-				minetest.swap_node({x=x, y=y+1, z=z}, {name=target_top, param2 = adjacent.param2})
+				core.swap_node({x=x, y=y, z=z}, {name=target, param2 = adjacent.param2})
+				core.swap_node({x=x, y=y+1, z=z}, {name=target_top, param2 = adjacent.param2})
 			end
 		end
 
@@ -161,16 +161,16 @@ for _, current_door in ipairs(doors) do
 		end
 
 		-- play sound
-		minetest.sound_play(sound,{
+		core.sound_play(sound,{
 			max_hear_distance = 16,
 			pos = pos,
 			gain = 1.0
 		})
 
-		local timer = minetest.get_node_timer(pos)
+		local timer = core.get_node_timer(pos)
 
-		minetest.swap_node(pos, {name=opened, param2=node.param2})
-		minetest.swap_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=opened_top, param2=node.param2})
+		core.swap_node(pos, {name=opened, param2=node.param2})
+		core.swap_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=opened_top, param2=node.param2})
 
 		change_adjacent(opened, pos, node)
 
@@ -178,22 +178,22 @@ for _, current_door in ipairs(doors) do
 	end
 
 	local function afterplace(pos)
-		local node = minetest.get_node(pos)
-		minetest.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=node.param2})
+		local node = core.get_node(pos)
+		core.set_node({x=pos.x,y=pos.y+1,z=pos.z},{name=opened_top,param2=node.param2})
 	end
 
 	local function ontimer(pos)
 		-- play sound
-		minetest.sound_play(sound,{
+		core.sound_play(sound,{
 			max_hear_distance = 16,
 			pos = pos,
 			gain = 1.0
 		})
 
-		local node = minetest.get_node(pos)
+		local node = core.get_node(pos)
 
-		minetest.swap_node(pos, {name=closed, param2=node.param2})
-		minetest.swap_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=closed_top, param2=node.param2})
+		core.swap_node(pos, {name=closed, param2=node.param2})
+		core.swap_node({x=pos.x,y=pos.y+1,z=pos.z}, {name=closed_top, param2=node.param2})
 
 		change_adjacent(closed, pos, node)
 	end
@@ -229,7 +229,7 @@ for _, current_door in ipairs(doors) do
 	local doors_rightclick = nil -- Crashes serv if empty table !
 	if not scifi_nodes.doors_open_with_mesecon_only then doors_rightclick = open_door end
 
-	minetest.register_node(closed, {
+	core.register_node(closed, {
 		description = current_door.base_name.." sliding door",
 		inventory_image = "scifi_nodes_door_"..base_name.."_inv.png",
 		wield_image = "scifi_nodes_door_"..base_name.."_inv.png",
@@ -271,7 +271,7 @@ for _, current_door in ipairs(doors) do
 		sounds = scifi_nodes.node_sound_metal_defaults(),
 	})
 
-	minetest.register_node(closed_top, {
+	core.register_node(closed_top, {
 		tiles = {
 			"scifi_nodes_door_"..base_name.."_edge.png",
 			"scifi_nodes_door_"..base_name.."_edge.png",
@@ -301,7 +301,7 @@ for _, current_door in ipairs(doors) do
 		sounds = scifi_nodes.node_sound_metal_defaults(),
 	})
 
-	minetest.register_node(opened, {
+	core.register_node(opened, {
 		tiles = {
 			"scifi_nodes_door_"..base_name.."_edge.png",
 			"scifi_nodes_door_"..base_name.."_edge.png",
@@ -334,7 +334,7 @@ for _, current_door in ipairs(doors) do
 		sounds = scifi_nodes.node_sound_metal_defaults(),
 	})
 
-	minetest.register_node(opened_top, {
+	core.register_node(opened_top, {
 		tiles = {
 			"scifi_nodes_door_"..base_name.."_edge.png",
 			"scifi_nodes_door_"..base_name.."_edge.png",
@@ -367,13 +367,13 @@ end     -- end of doors table browsing
 
 -- opens the scifi-door at the given position
 function scifi_nodes.open_door(pos)
-	local node = minetest.get_node_or_nil(pos)
+	local node = core.get_node_or_nil(pos)
 	if not node then
 		-- area not loaded
 		return false
 	end
 
-	local def = minetest.registered_nodes[node.name]
+	local def = core.registered_nodes[node.name]
 	if type(def._open) ~= "function" then
 		-- open function not found
 		return false

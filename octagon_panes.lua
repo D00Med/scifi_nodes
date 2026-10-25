@@ -8,7 +8,7 @@ local function register(basename, color, texture)
   local base_decription = color ..  " octagon glass"
 
   -- single height
-  minetest.register_node(nodename_single, {
+  core.register_node(nodename_single, {
     description = base_decription .. " pane",
     drawtype = "nodebox",
     tiles = {
@@ -36,7 +36,7 @@ local function register(basename, color, texture)
   })
 
   -- double height
-  minetest.register_node(nodename_double, {
+  core.register_node(nodename_double, {
     description = base_decription .. " pane (double)",
     drawtype = "nodebox",
     tiles = {
@@ -64,7 +64,7 @@ local function register(basename, color, texture)
   })
 
   -- single height with offset
-  minetest.register_node(nodename_offset, {
+  core.register_node(nodename_offset, {
     description = base_decription .. " pane (offset)",
     drawtype = "nodebox",
     tiles = {
@@ -93,7 +93,7 @@ local function register(basename, color, texture)
   })
 
   -- slope pane
-  minetest.register_node(nodename_slope, {
+  core.register_node(nodename_slope, {
     description = base_decription .. " pane (slope)",
 		sunlight_propagates = true,
 		drawtype = "mesh",
@@ -116,14 +116,14 @@ local function register(basename, color, texture)
 	})
   -- register recipes
 
-  minetest.register_craft({
+  core.register_craft({
     output = nodename_single .. " 16",
     recipe = {
       {recipe_ingredient}
     },
   })
 
-  minetest.register_craft({
+  core.register_craft({
     output = nodename_slope .. " 16",
     recipe = {
       {"", "", recipe_ingredient},
@@ -132,7 +132,7 @@ local function register(basename, color, texture)
     },
   })
 
-  minetest.register_craft({
+  core.register_craft({
     output = nodename_double .. " 16",
     recipe = {
       {recipe_ingredient},
@@ -140,7 +140,7 @@ local function register(basename, color, texture)
     },
   })
 
-  minetest.register_craft({
+  core.register_craft({
     output = nodename_offset,
     type = "shapeless",
     recipe = {nodename_single},

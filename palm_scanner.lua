@@ -7,7 +7,7 @@
 -- re-use all the parameters in same order ! --
 -----------------------------------------------
 
-local has_mesecons = minetest.get_modpath("mesecons")
+local has_mesecons = core.get_modpath("mesecons")
 
 
 local function activate_palm_scanner(pos, node, player)
@@ -15,38 +15,38 @@ local function activate_palm_scanner(pos, node, player)
 	name = name or ""
 
 	node.name = "scifi_nodes:palm_scanner_checking"
-	minetest.swap_node(pos, node)
+	core.swap_node(pos, node)
 
-	minetest.sound_play("scifi_nodes_palm_scanner", {max_hear_distance = 8, pos = pos, gain = 1.0})
-	minetest.chat_send_player(name, "Checking : please wait.")
+	core.sound_play("scifi_nodes_palm_scanner", {max_hear_distance = 8, pos = pos, gain = 1.0})
+	core.chat_send_player(name, "Checking : please wait.")
 
 	-- check protection
-	minetest.after(2, function()
-		if minetest.get_node(pos).name ~= node.name then return end
+	core.after(2, function()
+		if core.get_node(pos).name ~= node.name then return end
 
-		if minetest.is_protected(pos, name or "") then
+		if core.is_protected(pos, name or "") then
 			-- clicker has no access to area
-			minetest.chat_send_player(name, "Access denied !")
-			minetest.sound_play("scifi_nodes_scanner_refused", {max_hear_distance = 8, pos = pos, gain = 1.0})
+			core.chat_send_player(name, "Access denied !")
+			core.sound_play("scifi_nodes_scanner_refused", {max_hear_distance = 8, pos = pos, gain = 1.0})
 
 		else
 			-- clicker can build here
-			minetest.chat_send_player(name, "Access granted !")
+			core.chat_send_player(name, "Access granted !")
 			mesecon.receptor_on(pos, scifi_nodes.get_switch_rules(node.param2))
 
 		end
 
 		-- reset state
-		minetest.after(1, function()
-			if minetest.get_node(pos).name ~= node.name then return end
+		core.after(1, function()
+			if core.get_node(pos).name ~= node.name then return end
 			node.name = "scifi_nodes:palm_scanner_off"
-			minetest.swap_node(pos, node)
+			core.swap_node(pos, node)
 			mesecon.receptor_off(pos, scifi_nodes.get_switch_rules(node.param2))
 		end)
 	end)
 end
 
-minetest.register_node("scifi_nodes:palm_scanner_off", {
+core.register_node("scifi_nodes:palm_scanner_off", {
 	description = "Palm scanner",
 	tiles = {"scifi_nodes_palm_scanner_off.png",},
 	inventory_image = "scifi_nodes_palm_scanner_off.png",
@@ -69,7 +69,7 @@ minetest.register_node("scifi_nodes:palm_scanner_off", {
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:palm_scanner_checking", {
+core.register_node("scifi_nodes:palm_scanner_checking", {
 	description = "Palm scanner",
 	tiles = {{
 		name = "scifi_nodes_palm_scanner_checking.png",
@@ -88,7 +88,7 @@ minetest.register_node("scifi_nodes:palm_scanner_checking", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:palm_scanner_on", {
+core.register_node("scifi_nodes:palm_scanner_on", {
 	description = "Palm scanner",
 	sunlight_propagates = true,
 	buildable_to = false,
@@ -112,7 +112,7 @@ minetest.register_node("scifi_nodes:palm_scanner_on", {
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "scifi_nodes:palm_scanner_off 2",
 	recipe = {{"mesecons_powerplant:power_plant", "scifi_nodes:grey", ""}}
 })

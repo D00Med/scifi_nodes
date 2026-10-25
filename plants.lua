@@ -1,11 +1,11 @@
 
 local plants = {
-	{"flower1", "Glow Flower", 1,0, minetest.LIGHT_MAX},
+	{"flower1", "Glow Flower", 1,0, core.LIGHT_MAX},
 	{"flower2", "Pink Flower", 1.5,0, 10},
 	{"flower3", "Triffid", 2,5, 0},
 	{"flower4", "Weeping flower", 1.5,0, 0},
 	{"plant1", "Bulb Plant", 1,0, 0},
-	{"plant2", "Trap Plant", 1.5,0, minetest.LIGHT_MAX},
+	{"plant2", "Trap Plant", 1.5,0, core.LIGHT_MAX},
 	{"plant3", "Blue Jelly Plant", 1.2,0, 10},
 	{"plant4", "Green Jelly Plant", 1.2,0, 10},
 	{"plant5", "Fern Plant", 1.7,0, 0},
@@ -25,7 +25,7 @@ for _, row in ipairs(plants) do
 	local dmg = row[4]
 	local light = row[5]
 	-- Node Definition
-	minetest.register_node("scifi_nodes:"..name, {
+	core.register_node("scifi_nodes:"..name, {
 		description = desc,
 		tiles = {"scifi_nodes_"..name..".png"},
 		drawtype = "plantlike",

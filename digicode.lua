@@ -2,7 +2,7 @@
 --------------
 -- Digicode --
 --------------
-local has_mesecons = minetest.get_modpath("mesecons")
+local has_mesecons = core.get_modpath("mesecons")
 
 local secret_code = "1234"
 local allowed_chars = "0123456789"
@@ -12,20 +12,20 @@ local digicode_context = {}
 -- after_place_node, use by digicode and palm_scanner
 -- placer is a player object
 local function set_owner(pos, placer)
-	local meta = minetest.get_meta(pos)
+	local meta = core.get_meta(pos)
 	meta:set_string("owner", placer:get_player_name())
 	meta:set_string("code", secret_code)
 end
 
 local function toggle_digicode(pos)
-	local node = minetest.get_node(pos)
+	local node = core.get_node(pos)
 	local name = node.name
 	if name == "scifi_nodes:digicode_off" then
-		minetest.swap_node(pos, {name="scifi_nodes:digicode_on", param2=node.param2})
+		core.swap_node(pos, {name="scifi_nodes:digicode_on", param2=node.param2})
 		mesecon.receptor_on(pos, scifi_nodes.get_switch_rules(node.param2))
-		minetest.get_node_timer(pos):start(2)
+		core.get_node_timer(pos):start(2)
 	elseif name == "scifi_nodes:digicode_on" then
-		minetest.swap_node(pos, {name="scifi_nodes:digicode_off", param2=node.param2})
+		core.swap_node(pos, {name="scifi_nodes:digicode_off", param2=node.param2})
 		mesecon.receptor_off(pos, scifi_nodes.get_switch_rules(node.param2))
 	end
 end
@@ -44,12 +44,12 @@ local function code_is_valid(code)
 end
 
 local function update_code(pos, code)
-	local meta = minetest.get_meta(pos)
+	local meta = core.get_meta(pos)
 	meta:set_string("code", code)
 end
 
 local function show_digicode_formspec(pos, _, player)
-	local meta = minetest.get_meta(pos)
+	local meta = core.get_meta(pos)
 	local owner = meta:get_string("owner")
 	local current_code = meta:get_string("code")
 	local current_player = player:get_player_name()
@@ -58,13 +58,13 @@ local function show_digicode_formspec(pos, _, player)
 	digicode_context[current_player] = {code = current_code, pos = pos}
 
 	if current_player == owner then
-		minetest.show_formspec(current_player, "digicode_formspec",
+		core.show_formspec(current_player, "digicode_formspec",
 		"size[6,3]"..
 		"field[1,1;3,1;code;Code;]".. -- type, position, size, name, label
 		"button_exit[1,2;2,1;change;Change code]"..
 		"button_exit[3,2;2,1;open;Open door]")
 	else
-		minetest.show_formspec(current_player, "digicode_formspec",
+		core.show_formspec(current_player, "digicode_formspec",
 		"size[6,3]"..
 		"field[2,1;3,1;code;Code;]"..
 		"button_exit[2,2;3,1;open;Open door]")
@@ -72,7 +72,7 @@ local function show_digicode_formspec(pos, _, player)
 end
 
 -- Process datas from digicode_formspec
-minetest.register_on_player_receive_fields(function(player, formname, fields)
+core.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "digicode_formspec" then
 		return false
 	end
@@ -101,14 +101,14 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		sound_index = 4
 	end
     -- play sound at context position
-	minetest.sound_play(sounds[sound_index], {
+	core.sound_play(sounds[sound_index], {
 		pos = context.pos,
 		max_hear_distance = 10
     })
 	context[player:get_player_name()] = nil -- we don't need it anymore
 end)
 
-minetest.register_node("scifi_nodes:digicode_on", {
+core.register_node("scifi_nodes:digicode_on", {
 	description = "Digicode",
 	sunlight_propagates = true,
 	buildable_to = false,
@@ -133,7 +133,7 @@ minetest.register_node("scifi_nodes:digicode_on", {
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:digicode_off", {
+core.register_node("scifi_nodes:digicode_off", {
 	description = "Digicode",
 	tiles = {"scifi_nodes_digicode_off.png",},
 	inventory_image = "scifi_nodes_digicode_off.png",
@@ -157,7 +157,7 @@ minetest.register_node("scifi_nodes:digicode_off", {
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "scifi_nodes:digicode_off 2",
 	recipe = {{"mesecons_switch:mesecon_switch_off", "scifi_nodes:grey", ""}}
 })

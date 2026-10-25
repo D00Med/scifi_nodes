@@ -1,4 +1,4 @@
-local has_default = minetest.get_modpath("default")
+local has_default = core.get_modpath("default")
 
 --chest code from default(Copyright (C) 2012 celeron55, Perttu Ahola <celeron55@gmail.com>)
 local chest_formspec =
@@ -16,7 +16,7 @@ local chest_formspec =
 -- Helper functions
 local function drop_chest_stuff()
 	return function(pos, _, oldmetadata)
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		meta:from_table(oldmetadata)
 		local inv = meta:get_inventory()
 		for i = 1, inv:get_size("main") do
@@ -26,7 +26,7 @@ local function drop_chest_stuff()
 					x = pos.x + math.random(0, 5)/5 - 0.5,
 					y = pos.y,
 					z = pos.z + math.random(0, 5)/5 - 0.5}
-				minetest.add_item(p, stack)
+				core.add_item(p, stack)
 			end
 		end
 	end
@@ -43,7 +43,7 @@ local function register_chest(name, custom_def)
 		sounds = scifi_nodes.node_sound_wood_defaults(),
 		after_dig_node = drop_chest_stuff(),
 		on_construct = function(pos)
-			local meta = minetest.get_meta(pos)
+			local meta = core.get_meta(pos)
 			meta:set_string("formspec", chest_formspec)
 			meta:set_string("infotext", custom_def.description)
 			local inv = meta:get_inventory()
@@ -51,16 +51,16 @@ local function register_chest(name, custom_def)
 		end,
 		on_metadata_inventory_move = function(pos, from_list, from_index,
 				to_list, to_index, count, player)
-			minetest.log("action", player:get_player_name() ..
-				" moves stuff in chest at " .. minetest.pos_to_string(pos))
+			core.log("action", player:get_player_name() ..
+				" moves stuff in chest at " .. core.pos_to_string(pos))
 		end,
 		on_metadata_inventory_put = function(pos, listname, index, stack, player)
-			minetest.log("action", player:get_player_name() ..
-				" moves stuff to chest at " .. minetest.pos_to_string(pos))
+			core.log("action", player:get_player_name() ..
+				" moves stuff to chest at " .. core.pos_to_string(pos))
 		end,
 		on_metadata_inventory_take = function(pos, listname, index, stack, player)
-			minetest.log("action", player:get_player_name() ..
-				" takes stuff from chest at " .. minetest.pos_to_string(pos))
+			core.log("action", player:get_player_name() ..
+				" takes stuff from chest at " .. core.pos_to_string(pos))
 		end
 	}
 
@@ -68,7 +68,7 @@ local function register_chest(name, custom_def)
 		def[k] = v
 	end
 
-	minetest.register_node(name, def)
+	core.register_node(name, def)
 end
 
 

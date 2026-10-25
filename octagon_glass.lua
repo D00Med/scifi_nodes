@@ -1,9 +1,9 @@
-local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
+local has_unifieddyes_mod = core.get_modpath("unifieddyes")
 
 local function register_glass(key, name)
     local tiles = {"scifi_nodes_" .. key .. ".png"}
 
-    minetest.register_node("scifi_nodes:" .. key, {
+    core.register_node("scifi_nodes:" .. key, {
         description = name .. " Octagon Glass",
         sunlight_propagates = true,
         drawtype = "glasslike",
@@ -28,7 +28,7 @@ register_glass("octrng", "Orange")
 register_glass("octwht", "White")
 
 if has_unifieddyes_mod then
-	minetest.register_node("scifi_nodes:octwht", {
+	core.register_node("scifi_nodes:octwht", {
 		description = "Octagon Glass",
 		sunlight_propagates = true,
 		drawtype = "glasslike",

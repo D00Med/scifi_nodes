@@ -6,13 +6,13 @@ local currently_playing = {}
 -- clear the currently playing tracker every few seconds
 local function clear_currently_playing()
     currently_playing = {}
-    minetest.after(5, clear_currently_playing)
+    core.after(5, clear_currently_playing)
 end
-minetest.after(5, clear_currently_playing)
+core.after(5, clear_currently_playing)
 
 -- mapblock resolution
 local function get_key(pos)
-    return minetest.pos_to_string(vector.round(vector.divide(pos, 16)))
+    return core.pos_to_string(vector.round(vector.divide(pos, 16)))
 end
 
 local function add_currently_playing(pos, value)
@@ -40,16 +40,16 @@ function scifi_nodes.register_ambience(nodename, soundname, opts)
     opts.interval = opts.interval or 60
 
     local function play(pos)
-        minetest.sound_play(soundname ,{
+        core.sound_play(soundname ,{
             max_hear_distance = opts.max_hear_distance or 16,
             pos = pos,
             gain = opts.gain or 0.7
         })
     end
 
-    minetest.override_item(nodename, {
+    core.override_item(nodename, {
         on_timer = function(pos)
-            local timer = minetest.get_node_timer(pos)
+            local timer = core.get_node_timer(pos)
 
             if not can_play(pos) then
                 -- too many sounds playing, recheck again soon
@@ -66,7 +66,7 @@ function scifi_nodes.register_ambience(nodename, soundname, opts)
         end,
         on_construct = function(pos)
             play(pos)
-            local timer = minetest.get_node_timer(pos)
+            local timer = core.get_node_timer(pos)
             timer:start(opts.interval)
         end
     })

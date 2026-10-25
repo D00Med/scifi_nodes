@@ -1,4 +1,4 @@
-minetest.register_node("scifi_nodes:forcefield", {
+core.register_node("scifi_nodes:forcefield", {
 	description = "Forcefield",
 	sunlight_propagates = true,
 	drawtype = "glasslike",
@@ -9,7 +9,7 @@ minetest.register_node("scifi_nodes:forcefield", {
 	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 	paramtype = "light",
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	tiles = {{
 		name = "scifi_nodes_forcefield.png",
 		animation = {

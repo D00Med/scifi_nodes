@@ -34,7 +34,7 @@ local input_items = {
 	}
 }
 
-minetest.register_node("scifi_nodes:builder", {
+core.register_node("scifi_nodes:builder", {
 	description = "Sci-fi Node Builder",
 	tiles = {
 		"scifi_nodes_builder.png",
@@ -45,10 +45,10 @@ minetest.register_node("scifi_nodes:builder", {
 		"scifi_nodes_builder_front.png"
 	},
 	on_construct = function(pos)
-		--local meta = minetest.get_meta(pos)
+		--local meta = core.get_meta(pos)
 		--meta:set_string("infotext", "Node Builder (currently does nothing)")
 
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		meta:set_string("formspec", builder_formspec)
 		meta:set_string("infotext", "Node Builder")
 		local inv = meta:get_inventory()
@@ -56,7 +56,7 @@ minetest.register_node("scifi_nodes:builder", {
 		inv:set_size("input", 1 * 1)
 	end,
     on_metadata_inventory_put = function(pos, listname, index, stack, player)
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		local inv = meta:get_inventory()
 		local player_inv = player:get_inventory()
 		if listname == "output" then
@@ -84,7 +84,7 @@ minetest.register_node("scifi_nodes:builder", {
 		end
 	end,
     on_metadata_inventory_take = function(pos, listname, index, stack, player)
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		local inv = meta:get_inventory()
 		local istack = inv:get_stack("input", 1)
 		local stack_name = istack:get_name()

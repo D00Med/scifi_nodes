@@ -1,12 +1,12 @@
-local has_unifieddyes_mod = minetest.get_modpath("unifieddyes")
-local has_moreblocks_mod = minetest.get_modpath("moreblocks")
-local has_slats_mod = minetest.get_modpath("slats")
-local has_advtrains_mod = minetest.get_modpath("advtrains")
-local has_signs_api_mod = minetest.get_modpath("signs_api")
+local has_unifieddyes_mod = core.get_modpath("unifieddyes")
+local has_moreblocks_mod = core.get_modpath("moreblocks")
+local has_slats_mod = core.get_modpath("slats")
+local has_advtrains_mod = core.get_modpath("advtrains")
+local has_signs_api_mod = core.get_modpath("signs_api")
 
 --nodes
 
-minetest.register_node("scifi_nodes:grassblk", {
+core.register_node("scifi_nodes:grassblk", {
 	description = "Dirt With Alien Grass",
 	tiles = {"scifi_nodes_grass_top.png^[colorize:cyan:80", "scifi_nodes_dirt.png",
 		{name = "scifi_nodes_dirt.png^(scifi_nodes_grass_side.png^[colorize:cyan:80)",
@@ -19,7 +19,7 @@ minetest.register_node("scifi_nodes:grassblk", {
 	})
 })
 
-minetest.register_node("scifi_nodes:light", {
+core.register_node("scifi_nodes:light", {
 	description = "blue lightbox",
 	sunlight_propagates = false,
 	tiles = {
@@ -37,7 +37,7 @@ minetest.register_node("scifi_nodes:light", {
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:rfloor", {
+core.register_node("scifi_nodes:rfloor", {
 	description = "rusty floor",
 	tiles = {
 		"scifi_nodes_rustfloor.png",
@@ -50,7 +50,7 @@ minetest.register_node("scifi_nodes:rfloor", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:bfloor", {
+core.register_node("scifi_nodes:bfloor", {
 	description = "blue floor",
 	tiles = {
 		"scifi_nodes_bluefloor.png",
@@ -64,7 +64,7 @@ minetest.register_node("scifi_nodes:bfloor", {
 })
 
 
-minetest.register_node("scifi_nodes:stripes2", {
+core.register_node("scifi_nodes:stripes2", {
 	description = "hazard stripes2",
 	sunlight_propagates = false,
 	tiles = {
@@ -81,7 +81,7 @@ minetest.register_node("scifi_nodes:stripes2", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:gblock", {
+core.register_node("scifi_nodes:gblock", {
 	description = "Green metal block",
 	sunlight_propagates = false,
 	tiles = {
@@ -98,7 +98,7 @@ minetest.register_node("scifi_nodes:gblock", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:gblock2", {
+core.register_node("scifi_nodes:gblock2", {
 	description = "Green metal block 2",
 	sunlight_propagates = false,
 	tiles = {
@@ -116,7 +116,7 @@ minetest.register_node("scifi_nodes:gblock2", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:gblock3", {
+core.register_node("scifi_nodes:gblock3", {
 	description = "Green metal block 3",
 	sunlight_propagates = false,
 	tiles = {
@@ -136,7 +136,7 @@ minetest.register_node("scifi_nodes:gblock3", {
 
 
 
-minetest.register_node("scifi_nodes:green_light", {
+core.register_node("scifi_nodes:green_light", {
 	description = "green lightbox",
 	sunlight_propagates = false,
 	tiles = {
@@ -154,7 +154,7 @@ minetest.register_node("scifi_nodes:green_light", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:red_light", {
+core.register_node("scifi_nodes:red_light", {
 	description = "red lightbox",
 	sunlight_propagates = false,
 	tiles = {
@@ -172,7 +172,7 @@ minetest.register_node("scifi_nodes:red_light", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:discs", {
+core.register_node("scifi_nodes:discs", {
 	description = "disc shelves",
 	sunlight_propagates = false,
 	tiles = {
@@ -189,7 +189,7 @@ minetest.register_node("scifi_nodes:discs", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:disc", {
+core.register_node("scifi_nodes:disc", {
 	description = "disc",
 	drawtype = "torchlike",
 	sunlight_propagates = false,
@@ -204,7 +204,7 @@ minetest.register_node("scifi_nodes:disc", {
 	sounds = scifi_nodes.node_sound_defaults(),
 })
 
-minetest.register_node("scifi_nodes:greenbar_animated", {
+core.register_node("scifi_nodes:greenbar_animated", {
 	description = "animated green light bar",
 	sunlight_propagates = false,
 	tiles = {
@@ -220,10 +220,10 @@ minetest.register_node("scifi_nodes:greenbar_animated", {
 	is_ground_content = false,
 	light_source = 10,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
-	on_place = minetest.rotate_node
+	on_place = core.rotate_node
 })
 
-minetest.register_node("scifi_nodes:blink", {
+core.register_node("scifi_nodes:blink", {
 	description = "blinking light",
 	sunlight_propagates = false,
 	tiles = {{
@@ -237,7 +237,7 @@ minetest.register_node("scifi_nodes:blink", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:black_lights", {
+core.register_node("scifi_nodes:black_lights", {
 	description = "black wallpanel",
 	sunlight_propagates = false,
 	tiles = {{
@@ -250,7 +250,7 @@ minetest.register_node("scifi_nodes:black_lights", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:black_screen", {
+core.register_node("scifi_nodes:black_screen", {
 	description = "black wall screen",
 	sunlight_propagates = false,
 	tiles = {{
@@ -264,7 +264,7 @@ minetest.register_node("scifi_nodes:black_screen", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:screen", {
+core.register_node("scifi_nodes:screen", {
 	description = "electronic screen",
 	sunlight_propagates = false,
 	tiles = {{
@@ -278,7 +278,7 @@ minetest.register_node("scifi_nodes:screen", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:screen2", {
+core.register_node("scifi_nodes:screen2", {
 	description = "electronic screen 2",
 	sunlight_propagates = false,
 	tiles = {{
@@ -294,7 +294,7 @@ minetest.register_node("scifi_nodes:screen2", {
 
 
 
-minetest.register_node("scifi_nodes:white_pad", {
+core.register_node("scifi_nodes:white_pad", {
 	description = "white keypad",
 	sunlight_propagates = false,
 	tiles = {
@@ -312,7 +312,7 @@ minetest.register_node("scifi_nodes:white_pad", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:white_base", {
+core.register_node("scifi_nodes:white_base", {
 	description = "white wall base",
 	sunlight_propagates = false,
 	tiles = {
@@ -330,7 +330,7 @@ minetest.register_node("scifi_nodes:white_base", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:grnpipe", {
+core.register_node("scifi_nodes:grnpipe", {
 	description = "green pipe",
 	sunlight_propagates = false,
 	tiles = {
@@ -346,11 +346,11 @@ minetest.register_node("scifi_nodes:grnpipe", {
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_metal_defaults(),
-	on_place = minetest.rotate_node
+	on_place = core.rotate_node
 })
 
 
-minetest.register_node("scifi_nodes:grnpipe2", {
+core.register_node("scifi_nodes:grnpipe2", {
 	description = "broken green pipe",
 	sunlight_propagates = false,
 	tiles = {
@@ -366,10 +366,10 @@ minetest.register_node("scifi_nodes:grnpipe2", {
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_metal_defaults(),
-	on_place = minetest.rotate_node
+	on_place = core.rotate_node
 })
 
-minetest.register_node("scifi_nodes:tower", {
+core.register_node("scifi_nodes:tower", {
 	description = "Wind tower",
 	sunlight_propagates = false,
 	drawtype = "plantlike",
@@ -385,7 +385,7 @@ minetest.register_node("scifi_nodes:tower", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:junk", {
+core.register_node("scifi_nodes:junk", {
 	description = "Junk",
 	sunlight_propagates = true,
 	paramtype = "light",
@@ -404,7 +404,7 @@ minetest.register_node("scifi_nodes:junk", {
 })
 
 
-minetest.register_node("scifi_nodes:blumetlight", {
+core.register_node("scifi_nodes:blumetlight", {
 	description = "blue metal light",
 	sunlight_propagates = false,
 	tiles = {
@@ -423,20 +423,20 @@ minetest.register_node("scifi_nodes:blumetlight", {
 })
 
 
-minetest.register_node("scifi_nodes:lightstp", {
+core.register_node("scifi_nodes:lightstp", {
 	description = "twin lights",
 	sunlight_propagates = false,
 	tiles = {
 		"scifi_nodes_lightstripe.png"
 	},
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	paramtype = "light",
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:blklt2", {
+core.register_node("scifi_nodes:blklt2", {
 	description = "black stripe light",
 	sunlight_propagates = false,
 	tiles = {
@@ -449,7 +449,7 @@ minetest.register_node("scifi_nodes:blklt2", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:blumetstr", {
+core.register_node("scifi_nodes:blumetstr", {
 	description = "blue stripe light",
 	sunlight_propagates = false,
 	tiles = {
@@ -462,7 +462,7 @@ minetest.register_node("scifi_nodes:blumetstr", {
 	sounds = scifi_nodes.node_sound_metal_defaults()
 })
 
-minetest.register_node("scifi_nodes:glass", {
+core.register_node("scifi_nodes:glass", {
 	description = "dark glass",
 	drawtype = "glasslike",
 	sunlight_propagates = true,
@@ -476,7 +476,7 @@ minetest.register_node("scifi_nodes:glass", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:whtlightbnd", {
+core.register_node("scifi_nodes:whtlightbnd", {
 	description = "white light stripe",
 	sunlight_propagates = false,
 	tiles = {
@@ -490,8 +490,8 @@ minetest.register_node("scifi_nodes:whtlightbnd", {
 })
 
 -- read "nodes.json"
-local f = assert(io.open(minetest.get_modpath("scifi_nodes") .. "/nodes.json", "rb"))
-local nodes = assert(minetest.parse_json(f:read("*all")))
+local f = assert(io.open(core.get_modpath("scifi_nodes") .. "/nodes.json", "rb"))
+local nodes = assert(core.parse_json(f:read("*all")))
 f:close()
 
 -- register all nodes
@@ -539,11 +539,11 @@ for name, def in pairs(nodes) do
 
 	-- register node
 	local nodename = "scifi_nodes:" .. name
-	minetest.register_node(nodename , node_def)
+	core.register_node(nodename , node_def)
 
 	-- unified dyes registration
 	if def.colorable and has_unifieddyes_mod then
-		minetest.register_node("scifi_nodes:"..name.."_colored", {
+		core.register_node("scifi_nodes:"..name.."_colored", {
 			description = def.description,
 			tiles = tiles,
 			groups = {

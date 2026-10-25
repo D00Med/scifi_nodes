@@ -13,27 +13,27 @@ local function get_door_access_table(meta)
         -- no config
         return {}
     else
-        return minetest.deserialize(str) or {}
+        return core.deserialize(str) or {}
     end
 end
 
 local function set_door_access_table(meta, at)
     if next(at) then
-        meta:set_string("access", minetest.serialize(at))
+        meta:set_string("access", core.serialize(at))
     else
         meta:set_string("access", "")
     end
 end
 
 function scifi_nodes.door_check_access_card(node_pos, itemstack, player)
-    local node_meta = minetest.get_meta(node_pos)
+    local node_meta = core.get_meta(node_pos)
     local access_table = get_door_access_table(node_meta)
     if not next(access_table) then
         -- access not restricted
         return true
     end
 
-    if not minetest.is_player(player) then
+    if not core.is_player(player) then
         -- not a player, restrict access
         return false
     end
@@ -41,26 +41,26 @@ function scifi_nodes.door_check_access_card(node_pos, itemstack, player)
     local playername = player:get_player_name()
 
     if itemstack:get_name() ~= "scifi_nodes:access_card" then
-        minetest.chat_send_player(playername, minetest.colorize("#ff0000", "Access denied: no access card detected!"))
-        minetest.sound_play("scifi_nodes_scanner_refused", { pos = node_pos, max_hear_distance = 10 })
+        core.chat_send_player(playername, core.colorize("#ff0000", "Access denied: no access card detected!"))
+        core.sound_play("scifi_nodes_scanner_refused", { pos = node_pos, max_hear_distance = 10 })
         return false
     end
 
     local item_meta = itemstack:get_meta()
     local id = item_meta:get_string("id")
     if id == "" then
-        minetest.chat_send_player(playername, minetest.colorize("#ff0000", "Access denied: unconfigured access card"))
-        minetest.sound_play("scifi_nodes_scanner_refused", { pos = node_pos, max_hear_distance = 10 })
+        core.chat_send_player(playername, core.colorize("#ff0000", "Access denied: unconfigured access card"))
+        core.sound_play("scifi_nodes_scanner_refused", { pos = node_pos, max_hear_distance = 10 })
         return false
     end
 
     if not access_table[id] then
-        minetest.chat_send_player(playername, minetest.colorize("#ff0000", "Access denied: invalid access card"))
-        minetest.sound_play("scifi_nodes_scanner_refused", { pos = node_pos, max_hear_distance = 10 })
+        core.chat_send_player(playername, core.colorize("#ff0000", "Access denied: invalid access card"))
+        core.sound_play("scifi_nodes_scanner_refused", { pos = node_pos, max_hear_distance = 10 })
         return false
     end
 
-    minetest.sound_play("scifi_nodes_scanner_granted", { pos = node_pos, max_hear_distance = 10 })
+    core.sound_play("scifi_nodes_scanner_granted", { pos = node_pos, max_hear_distance = 10 })
     return true
 end
 
@@ -74,13 +74,13 @@ local function on_use(itemstack, player, pointed_thing)
         return
     end
 
-    if minetest.is_protected(pos, playername) then
+    if core.is_protected(pos, playername) then
         -- protected
         return
     end
 
-    local node = minetest.get_node(pos)
-    local node_def = minetest.registered_nodes[node.name]
+    local node = core.get_node(pos)
+    local node_def = core.registered_nodes[node.name]
     if not node_def.groups or not node_def.groups.scifi_nodes_door then
         -- incompatible node
         return
@@ -89,24 +89,24 @@ local function on_use(itemstack, player, pointed_thing)
     local item_meta = itemstack:get_meta()
     local card_id = item_meta:get_string("id")
     if card_id == "" then
-        minetest.chat_send_player(playername, "Access card is unconfigured")
+        core.chat_send_player(playername, "Access card is unconfigured")
         return
     end
     local card_name = item_meta:get_string("name")
 
-    local node_meta = minetest.get_meta(pos)
+    local node_meta = core.get_meta(pos)
     local access_table = get_door_access_table(node_meta)
 
     if access_table[card_id] then
         -- remove access
         access_table[card_id] = nil
-        minetest.chat_send_player(playername, "Revoked access to card-id '" .. card_id .. "'")
-        minetest.sound_play("scifi_nodes_scanner_refused", { pos = pos, max_hear_distance = 10 })
+        core.chat_send_player(playername, "Revoked access to card-id '" .. card_id .. "'")
+        core.sound_play("scifi_nodes_scanner_refused", { pos = pos, max_hear_distance = 10 })
     else
         -- grant access
         access_table[card_id] = card_name
-        minetest.chat_send_player(playername, "Granted access to card-id '" .. card_id .. "'")
-        minetest.sound_play("scifi_nodes_scanner_granted", { pos = pos, max_hear_distance = 10 })
+        core.chat_send_player(playername, "Granted access to card-id '" .. card_id .. "'")
+        core.sound_play("scifi_nodes_scanner_granted", { pos = pos, max_hear_distance = 10 })
     end
 
     local msg = ""
@@ -119,7 +119,7 @@ local function on_use(itemstack, player, pointed_thing)
         -- access table is empty
         msg = "No access-card left in access-table, door is free to use"
     end
-    minetest.chat_send_player(playername, msg)
+    core.chat_send_player(playername, msg)
 
     -- set new access table
     set_door_access_table(node_meta, access_table)
@@ -146,17 +146,17 @@ local function on_secondary_use(itemstack, player, pointed_thing)
     end
     local name = meta:get_string("name")
 
-    minetest.show_formspec(player:get_player_name(), FORMSPEC_NAME, [[
+    core.show_formspec(player:get_player_name(), FORMSPEC_NAME, [[
         size[10,1.4]
         real_coordinates[true]
-        field[0.1,0.4;7,0.8;name;Name;]] .. minetest.formspec_escape(name) .. [[]
+        field[0.1,0.4;7,0.8;name;Name;]] .. core.formspec_escape(name) .. [[]
         button_exit[7.3,0.4;2.5,0.8;save;Save]
     ]])
 
     return itemstack
 end
 
-minetest.register_on_player_receive_fields(function(player, formname, fields)
+core.register_on_player_receive_fields(function(player, formname, fields)
     if formname ~= FORMSPEC_NAME then
         -- wrong formspec
         return false
@@ -178,7 +178,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     player:set_wielded_item(itemstack)
 end)
 
-minetest.register_craftitem("scifi_nodes:access_card", {
+core.register_craftitem("scifi_nodes:access_card", {
     description = "Access card (unconfigured)",
     inventory_image = "scifi_nodes_access_card.png",
     palette = "unifieddyes_palette_extended.png",
@@ -192,7 +192,7 @@ minetest.register_craftitem("scifi_nodes:access_card", {
 })
 
 -- initial recipe
-minetest.register_craft({
+core.register_craft({
     output = "scifi_nodes:access_card",
     recipe = {
         {"scifi_nodes:white2", "", ""},
@@ -202,7 +202,7 @@ minetest.register_craft({
 })
 
 -- copy recipe
-minetest.register_craft({
+core.register_craft({
     output = "scifi_nodes:access_card",
     recipe = {
         {"scifi_nodes:access_card", "scifi_nodes:white_pad", ""},
@@ -211,7 +211,7 @@ minetest.register_craft({
     }
 })
 
-minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
+core.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
     if itemstack:get_name() ~= "scifi_nodes:access_card" then
         return
     end
@@ -243,7 +243,7 @@ minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv
     end
 end)
 
-if minetest.get_modpath("unifieddyes") then
+if core.get_modpath("unifieddyes") then
     -- add colored crafts
     unifieddyes.register_color_craft({
         output = "scifi_nodes:access_card",

@@ -5,7 +5,7 @@
 local position1 = nil
 local position2 = nil
 
-minetest.register_node("scifi_nodes:alienslope", {
+core.register_node("scifi_nodes:alienslope", {
 	description = "Alien Platform",
 	tiles = {
 		"scifi_nodes_alnslp_top2.png",
@@ -34,10 +34,10 @@ minetest.register_node("scifi_nodes:alienslope", {
 		}
 	},
 	sounds = scifi_nodes.node_sound_wood_defaults(),
-	on_place = minetest.rotate_node
+	on_place = core.rotate_node
 })
 
-minetest.register_node("scifi_nodes:wallpipe", {
+core.register_node("scifi_nodes:wallpipe", {
 	description = "Alien wall pipe",
 	tiles = {
 		"scifi_nodes_wallpipe.png",
@@ -67,7 +67,7 @@ minetest.register_node("scifi_nodes:wallpipe", {
 	sounds = scifi_nodes.node_sound_wood_defaults()
 })
 
-minetest.register_node("scifi_nodes:plant_trap", {
+core.register_node("scifi_nodes:plant_trap", {
 	description = "Hanging Trap Plant",
 	tiles = {
 		"scifi_nodes_traplant_top.png",
@@ -97,7 +97,7 @@ minetest.register_node("scifi_nodes:plant_trap", {
 	sounds = scifi_nodes.node_sound_wood_defaults(),
 })
 
-minetest.register_node("scifi_nodes:egg", {
+core.register_node("scifi_nodes:egg", {
 	description = "Alien Egg",
 	tiles = {
 		"scifi_nodes_egg_top.png",
@@ -130,18 +130,18 @@ minetest.register_node("scifi_nodes:egg", {
 	sounds = scifi_nodes.node_sound_wood_defaults(),
 })
 
-if minetest.get_modpath("scifi_mobs") then
-	minetest.register_abm({
+if core.get_modpath("scifi_mobs") then
+	core.register_abm({
 		nodenames = {"scifi_nodes:egg"},
 		interval = 30, chance = 10,
 		action = function(pos, node, _, _)
-			minetest.add_entity(pos, "scifi_mobs:xenomorph")
-			minetest.remove_node(pos)
+			core.add_entity(pos, "scifi_mobs:xenomorph")
+			core.remove_node(pos)
 		end
 	})
 end
 
-minetest.register_node("scifi_nodes:pad", {
+core.register_node("scifi_nodes:pad", {
 	description = "teleport pad",
 	tiles = {
 		"scifi_nodes_pad.png",
@@ -158,7 +158,7 @@ minetest.register_node("scifi_nodes:pad", {
 	light_source = 5,
     after_place_node = function(pos, placer, itemstack, pointed_thing)
         local placer_name = placer:get_player_name()
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		if position1 == nil then
 			position1 = pos
 			meta:set_int("type", 1)
@@ -166,14 +166,14 @@ minetest.register_node("scifi_nodes:pad", {
 			position2 = pos
 			meta:set_int("type", 2)
 		else
-			minetest.chat_send_player(placer_name, "There can only be two teleportation pads at a time!")
+			core.chat_send_player(placer_name, "There can only be two teleportation pads at a time!")
 		end
 	end,
     on_rightclick = function(pos, node, clicker)
         local clicker_name = clicker:get_player_name()
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		if meta:get_int("type") == 1 and position2 ~= nil and position1 ~= nil then
-			minetest.add_particlespawner(
+			core.add_particlespawner(
 				25, --amount
 				1.5, --time
 				{x=pos.x-0.9, y=pos.y-0.3, z=pos.z-0.9}, --minpos
@@ -189,17 +189,17 @@ minetest.register_node("scifi_nodes:pad", {
 				false, --collisiondetection
 				"scifi_nodes_tp_part.png" --texture
 			)
-			minetest.after(1, function()
+			core.after(1, function()
 				local ppos = clicker:getpos()
-				if minetest.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
+				if core.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
 					clicker:setpos(position2)
 				end
-				local objs = minetest.get_objects_inside_radius(pos, 3)
+				local objs = core.get_objects_inside_radius(pos, 3)
 				for _, obj in pairs(objs) do
 					if obj:get_luaentity() and not obj:is_player() then
 						if obj:get_luaentity().name == "__builtin:item" then
 							local item1 = obj:get_luaentity().itemstring
-							local obj2 = minetest.add_entity(position2, "__builtin:item")
+							local obj2 = core.add_entity(position2, "__builtin:item")
 							obj2:get_luaentity():set_item(item1)
 							obj:remove()
 						end
@@ -207,7 +207,7 @@ minetest.register_node("scifi_nodes:pad", {
 				end
 			end)
 		elseif meta:get_int("type") == 2 and position1 ~= nil and position2 ~= nil then
-			minetest.add_particlespawner(
+			core.add_particlespawner(
 				25, --amount
 				1.5, --time
 				{x=pos.x-0.9, y=pos.y-0.3, z=pos.z-0.9}, --minpos
@@ -223,17 +223,17 @@ minetest.register_node("scifi_nodes:pad", {
 				false, --collisiondetection
 				"scifi_nodes_tp_part.png" --texture
 			)
-			minetest.after(1, function()
+			core.after(1, function()
 				local ppos = clicker:getpos()
-				if minetest.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
+				if core.get_node({x=ppos.x, y=ppos.y, z=ppos.z}).name == "scifi_nodes:pad" then
 					clicker:setpos(position1)
 				end
-				local objs = minetest.get_objects_inside_radius(pos, 3)
+				local objs = core.get_objects_inside_radius(pos, 3)
                 for _, obj in pairs(objs) do
 					if obj:get_luaentity() and not obj:is_player() then
 						if obj:get_luaentity().name == "__builtin:item" then
 							local item1 = obj:get_luaentity().itemstring
-							local obj2 = minetest.add_entity(position1, "__builtin:item")
+							local obj2 = core.add_entity(position1, "__builtin:item")
 							obj2:get_luaentity():set_item(item1)
 							obj:remove()
 						end
@@ -243,17 +243,17 @@ minetest.register_node("scifi_nodes:pad", {
 		elseif position1 == nil and meta:get_int("type") ~= 2 then
 			position1 = pos
 			meta:set_int("type", 1)
-			minetest.chat_send_player(clicker_name, "Teleporter 1 connected at "..minetest.pos_to_string(pos))
+			core.chat_send_player(clicker_name, "Teleporter 1 connected at "..core.pos_to_string(pos))
 		elseif position2 == nil and meta:get_int("type") ~= 1 then
 			position2 = pos
 			meta:set_int("type", 2)
-			minetest.chat_send_player(clicker_name, "Teleporter 2 connected at "..minetest.pos_to_string(pos))
+			core.chat_send_player(clicker_name, "Teleporter 2 connected at "..core.pos_to_string(pos))
 		else
-			minetest.chat_send_player(clicker_name, "Teleporter error!")
+			core.chat_send_player(clicker_name, "Teleporter error!")
 		end
 	end,
 	on_destruct = function(pos, oldnode, placer)
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		if meta:get_int("type") == 1 then
 			position1 = nil
 			meta:set_int("type", 0)
@@ -274,7 +274,7 @@ minetest.register_node("scifi_nodes:pad", {
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:pplwndw", {
+core.register_node("scifi_nodes:pplwndw", {
 	description = "Purple Window",
 	tiles = {
 		"scifi_nodes_purple.png",
@@ -299,7 +299,7 @@ minetest.register_node("scifi_nodes:pplwndw", {
 	}
 })
 
-minetest.register_node("scifi_nodes:gloshroom", {
+core.register_node("scifi_nodes:gloshroom", {
 	description = "Gloshroom",
 	tiles = {
 		"scifi_nodes_gloshroom.png",
@@ -311,7 +311,7 @@ minetest.register_node("scifi_nodes:gloshroom", {
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	walkable = false,
 	buildable_to = true,
 	sunlight_propagates = false,
@@ -332,7 +332,7 @@ minetest.register_node("scifi_nodes:gloshroom", {
 	sounds = scifi_nodes.node_sound_plant_defaults(),
 })
 
-minetest.register_node("scifi_nodes:pot_lid", {
+core.register_node("scifi_nodes:pot_lid", {
 	description = "Plant Pot Lid",
 	tiles = {
 		"scifi_nodes_glass2.png"
@@ -368,27 +368,27 @@ minetest.register_node("scifi_nodes:pot_lid", {
 })
 
 local function toggle_lid(pos, node, player, itemstack)
-	if not player or minetest.is_protected(pos, player:get_player_name()) then
+	if not player or core.is_protected(pos, player:get_player_name()) then
 		return
 	end
 	local lid_pos = {x = pos.x, y = pos.y+2 , z = pos.z}
-	local lid_node = minetest.get_node(lid_pos)
+	local lid_node = core.get_node(lid_pos)
 	if lid_node.name == "scifi_nodes:pot_lid" then
-		minetest.set_node(lid_pos, {name = "air"})
+		core.set_node(lid_pos, {name = "air"})
 	elseif lid_node.name == "air" then
-		minetest.set_node(lid_pos, {name = "scifi_nodes:pot_lid"})
+		core.set_node(lid_pos, {name = "scifi_nodes:pot_lid"})
 	end
 end
 
 local function remove_lid(pos)
 	local lid_pos = {x = pos.x, y = pos.y+2 , z = pos.z}
-	local lid_node = minetest.get_node(lid_pos)
+	local lid_node = core.get_node(lid_pos)
 	if lid_node.name == "scifi_nodes:pot_lid" then
-		minetest.set_node(lid_pos, {name = "air"})
+		core.set_node(lid_pos, {name = "air"})
 	end
 end
 
-minetest.register_node("scifi_nodes:pot", {
+core.register_node("scifi_nodes:pot", {
 	description = "Metal Plant Pot (right-click for lid, sneak + right-click to plant)",
 	tiles = {
 		"scifi_nodes_dirt.png^scifi_nodes_pot.png",
@@ -423,7 +423,7 @@ minetest.register_node("scifi_nodes:pot", {
 	}),
 })
 
-minetest.register_node("scifi_nodes:pot2", {
+core.register_node("scifi_nodes:pot2", {
 	description = "Metal Plant Pot Wet (right-click for lid, sneak + right-click to plant)",
 	tiles = {
 		"scifi_nodes_dirt.png^scifi_nodes_pot2.png",
@@ -458,7 +458,7 @@ minetest.register_node("scifi_nodes:pot2", {
 	}),
 })
 
-minetest.register_node("scifi_nodes:lightbar", {
+core.register_node("scifi_nodes:lightbar", {
 	description = "ceiling light",
 	tiles = {
 		"scifi_nodes_white2.png",
@@ -467,7 +467,7 @@ minetest.register_node("scifi_nodes:lightbar", {
 	paramtype = "light",
 	paramtype2 = "wallmounted",
 	sunlight_propagates = true,
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -485,7 +485,7 @@ minetest.register_node("scifi_nodes:lightbar", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:light_dynamic", {
+core.register_node("scifi_nodes:light_dynamic", {
 	description = "Wall light",
 	tiles = {
 		"scifi_nodes_lightoverlay.png",
@@ -505,13 +505,13 @@ minetest.register_node("scifi_nodes:light_dynamic", {
 		}
 	},
 	paramtype2 = "wallmounted",
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	groups = {cracky=1, oddly_breakable_by_hand=1},
 	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:ladder", {
+core.register_node("scifi_nodes:ladder", {
 	description = "Metal Ladder",
 	tiles = {
 		"scifi_nodes_ladder.png",
@@ -547,7 +547,7 @@ minetest.register_node("scifi_nodes:ladder", {
 	is_ground_content = false,
 })
 
-minetest.register_node("scifi_nodes:lightbars", {
+core.register_node("scifi_nodes:lightbars", {
 	description = "orange lightbars",
 	tiles = {
 		"scifi_nodes_orange2.png",
@@ -556,7 +556,7 @@ minetest.register_node("scifi_nodes:lightbars", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	use_texture_alpha = "blend",
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -571,14 +571,14 @@ minetest.register_node("scifi_nodes:lightbars", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:liquid_pipe", {
+core.register_node("scifi_nodes:liquid_pipe", {
 	description = "Liquid pipe",
 	tiles = {{
 		name = "scifi_nodes_liquid.png",
 		animation = {type = "vertical_frames", aspect_w = 16, aspect_h = 16, length = 1.00},
 	}},
 	use_texture_alpha = "blend",
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	drawtype = "nodebox",
 	sunlight_propagates = true,
 	paramtype = "light",
@@ -594,13 +594,13 @@ minetest.register_node("scifi_nodes:liquid_pipe", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:liquid_pipe2", {
+core.register_node("scifi_nodes:liquid_pipe2", {
 	description = "Liquid pipe 2",
 	tiles = {
 		"scifi_nodes_orange.png",
 	},
 	use_texture_alpha = "blend",
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	drawtype = "nodebox",
 	sunlight_propagates = true,
 	paramtype = "light",
@@ -616,7 +616,7 @@ minetest.register_node("scifi_nodes:liquid_pipe2", {
 	sounds = scifi_nodes.node_sound_glass_defaults()
 })
 
-minetest.register_node("scifi_nodes:powered_stand", {
+core.register_node("scifi_nodes:powered_stand", {
 	description = "powered stand",
 	tiles = {
 		"scifi_nodes_pwrstnd_top.png",
@@ -655,14 +655,14 @@ minetest.register_node("scifi_nodes:powered_stand", {
 				wield_item = wield_item_stack
 			end
 
-			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, wield_item)
+			core.add_item({x=pos.x, y=pos.y+1, z=pos.z}, wield_item)
 			return item
 		end
 	end,
 	sounds = scifi_nodes.node_sound_wood_defaults()
 })
 
-minetest.register_node("scifi_nodes:cover", {
+core.register_node("scifi_nodes:cover", {
 	description = "Metal cover",
 	tiles = {
 		"scifi_nodes_pwrstnd_top.png",
@@ -689,7 +689,7 @@ minetest.register_node("scifi_nodes:cover", {
 	is_ground_content = false,
 })
 
-minetest.register_node("scifi_nodes:computer", {
+core.register_node("scifi_nodes:computer", {
 	description = "computer",
 	tiles = {
 		"scifi_nodes_black.png",
@@ -714,7 +714,7 @@ minetest.register_node("scifi_nodes:computer", {
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:keysmonitor", {
+core.register_node("scifi_nodes:keysmonitor", {
 	description = "Keyboard and monitor",
 	tiles = {
 		"scifi_nodes_keyboard.png",
@@ -742,7 +742,7 @@ minetest.register_node("scifi_nodes:keysmonitor", {
 	sounds = scifi_nodes.node_sound_defaults(),
 })
 
-minetest.register_node("scifi_nodes:microscope", {
+core.register_node("scifi_nodes:microscope", {
 	description = "Microscope",
 	tiles = {
 		"scifi_nodes_white.png",
@@ -771,7 +771,7 @@ minetest.register_node("scifi_nodes:microscope", {
 	sounds = scifi_nodes.node_sound_defaults(),
 })
 
-minetest.register_node("scifi_nodes:table", {
+core.register_node("scifi_nodes:table", {
 	description = "Metal table",
 	tiles = {
 		"scifi_nodes_grey.png",
@@ -801,7 +801,7 @@ minetest.register_node("scifi_nodes:table", {
 	is_ground_content = false,
 })
 
-minetest.register_node("scifi_nodes:laptop_open", {
+core.register_node("scifi_nodes:laptop_open", {
 	description = "laptop",
 	tiles = {
 		"scifi_nodes_lapkey.png",
@@ -825,12 +825,12 @@ minetest.register_node("scifi_nodes:laptop_open", {
 	groups = {cracky=1, oddly_breakable_by_hand=1, not_in_creative_inventory=1},
 	is_ground_content = false,
 	on_rightclick = function(pos, node, clicker, item, _)
-			minetest.set_node(pos, {name="scifi_nodes:laptop_closed", param2=node.param2})
+			core.set_node(pos, {name="scifi_nodes:laptop_closed", param2=node.param2})
 	end,
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:laptop_closed", {
+core.register_node("scifi_nodes:laptop_closed", {
 	description = "laptop",
 	tiles = {
 		"scifi_nodes_black.png",
@@ -853,12 +853,12 @@ minetest.register_node("scifi_nodes:laptop_closed", {
 	groups = {cracky=1, oddly_breakable_by_hand=1},
 	is_ground_content = false,
 	on_rightclick = function(pos, node, clicker, item, _)
-			minetest.set_node(pos, {name="scifi_nodes:laptop_open", param2=node.param2})
+			core.set_node(pos, {name="scifi_nodes:laptop_open", param2=node.param2})
 	end,
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:pipen", {
+core.register_node("scifi_nodes:pipen", {
 	description = "pipe(nodebox)",
 	tiles = {
 		"scifi_nodes_blacktile2.png",
@@ -887,11 +887,11 @@ minetest.register_node("scifi_nodes:pipen", {
 	},
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
-	on_place = minetest.rotate_node,
+	on_place = core.rotate_node,
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:windowcorner", {
+core.register_node("scifi_nodes:windowcorner", {
 	description = "strong window corner",
 	tiles = {
 		"scifi_nodes_glassstrngsd2.png",
@@ -919,11 +919,11 @@ minetest.register_node("scifi_nodes:windowcorner", {
 	},
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
-	on_place = minetest.rotate_node,
+	on_place = core.rotate_node,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
-minetest.register_node("scifi_nodes:windowstraight", {
+core.register_node("scifi_nodes:windowstraight", {
 	description = "strong window",
 	tiles = {
 		"scifi_nodes_glassstrngsd2.png",
@@ -947,11 +947,11 @@ minetest.register_node("scifi_nodes:windowstraight", {
 	},
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
-	on_place = minetest.rotate_node,
+	on_place = core.rotate_node,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
-minetest.register_node("scifi_nodes:windowcorner2", {
+core.register_node("scifi_nodes:windowcorner2", {
 	description = "strong window corner(black)",
 	tiles = {
 		"scifi_nodes_glassstrngsd4.png",
@@ -979,11 +979,11 @@ minetest.register_node("scifi_nodes:windowcorner2", {
 	},
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
-	on_place = minetest.rotate_node,
+	on_place = core.rotate_node,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
-minetest.register_node("scifi_nodes:windowstraight2", {
+core.register_node("scifi_nodes:windowstraight2", {
 	description = "strong window(black)",
 	tiles = {
 		"scifi_nodes_glassstrngsd4.png",
@@ -1007,13 +1007,13 @@ minetest.register_node("scifi_nodes:windowstraight2", {
 	},
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
-	on_place = minetest.rotate_node,
+	on_place = core.rotate_node,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 })
 
 
 
-minetest.register_node("scifi_nodes:capsule", {
+core.register_node("scifi_nodes:capsule", {
 	description = "sample capsule",
 	tiles = {
 		"scifi_nodes_capsule.png",
@@ -1040,11 +1040,11 @@ minetest.register_node("scifi_nodes:capsule", {
 	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, clicker, item, _)
-			minetest.set_node(pos, {name="scifi_nodes:capsule2", param2=node.param2})
+			core.set_node(pos, {name="scifi_nodes:capsule2", param2=node.param2})
 	end,
 })
 
-minetest.register_node("scifi_nodes:capsule3", {
+core.register_node("scifi_nodes:capsule3", {
 	description = "sample capsule",
 	tiles = {
 		"scifi_nodes_capsule3.png",
@@ -1071,11 +1071,11 @@ minetest.register_node("scifi_nodes:capsule3", {
 	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, clicker, item, _)
-			minetest.set_node(pos, {name="scifi_nodes:capsule", param2=node.param2})
+			core.set_node(pos, {name="scifi_nodes:capsule", param2=node.param2})
 	end,
 })
 
-minetest.register_node("scifi_nodes:capsule2", {
+core.register_node("scifi_nodes:capsule2", {
 	description = "sample capsule",
 	tiles = {
 		"scifi_nodes_capsule2.png",
@@ -1102,11 +1102,11 @@ minetest.register_node("scifi_nodes:capsule2", {
 	is_ground_content = false,
 	sounds = scifi_nodes.node_sound_glass_defaults(),
 	on_rightclick = function(pos, node, clicker, item, _)
-			minetest.set_node(pos, {name="scifi_nodes:capsule3", param2=node.param2})
+			core.set_node(pos, {name="scifi_nodes:capsule3", param2=node.param2})
 	end,
 })
 
-minetest.register_node("scifi_nodes:itemholder", {
+core.register_node("scifi_nodes:itemholder", {
 	description = "item holder",
 	tiles = {
 		"scifi_nodes_box_top.png",
@@ -1131,21 +1131,21 @@ minetest.register_node("scifi_nodes:itemholder", {
 	},
 	groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
-	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.disallow,
+	on_rotate = core.get_modpath("screwdriver") and screwdriver.disallow,
 	after_place_node = function(pos, placer, itemstack)
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		meta:set_string("owner",placer:get_player_name())
 		meta:set_string("infotext", "Itemholder (owned by " ..
 				meta:get_string("owner") .. ")")
 	end,
 	on_rightclick = function(pos, node, clicker, item, _)
 		local name = clicker and clicker:get_player_name()
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		if name == meta:get_string("owner") or
-				minetest.check_player_privs(name, "protection_bypass") then
+				core.check_player_privs(name, "protection_bypass") then
 			local taken = item:take_item()
 			if taken and not taken:is_empty() then
-				minetest.add_item(pos, taken:to_string())
+				core.add_item(pos, taken:to_string())
 				return item
 			end
 		end
@@ -1153,20 +1153,20 @@ minetest.register_node("scifi_nodes:itemholder", {
 	can_dig = function(pos,player)
 		if not player then return end
 		local name = player and player:get_player_name()
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		return name == meta:get_string("owner") or
-				minetest.check_player_privs(name, "protection_bypass")
+				core.check_player_privs(name, "protection_bypass")
 	end,
 	on_destruct = function(pos)
-		local meta = minetest.get_meta(pos)
+		local meta = core.get_meta(pos)
 		if meta:get_string("item") ~= "" then
-			minetest.add_item(pos, meta:get_string("item"))
+			core.add_item(pos, meta:get_string("item"))
 		end
 	end,
 	sounds = scifi_nodes.node_sound_metal_defaults(),
 })
 
-minetest.register_node("scifi_nodes:glassscreen", {
+core.register_node("scifi_nodes:glassscreen", {
 	description = "glass screen",
 	tiles = {
 		"scifi_nodes_glscrn.png",
@@ -1180,7 +1180,7 @@ minetest.register_node("scifi_nodes:glassscreen", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	light_source = minetest.LIGHT_MAX,
+	light_source = core.LIGHT_MAX,
 	sunlight_propagates = true,
 	node_box = {
 		type = "fixed",
@@ -1195,7 +1195,7 @@ minetest.register_node("scifi_nodes:glassscreen", {
 })
 
 
-minetest.register_node("scifi_nodes:widescreen", {
+core.register_node("scifi_nodes:widescreen", {
 	description = "widescreen",
 	tiles = {
 		"scifi_nodes_black.png",
@@ -1227,7 +1227,7 @@ minetest.register_node("scifi_nodes:widescreen", {
 	sounds = scifi_nodes.node_sound_defaults(),
 })
 
-minetest.register_node("scifi_nodes:tallscreen", {
+core.register_node("scifi_nodes:tallscreen", {
 	description = "tallscreen",
 	tiles = {
 		"scifi_nodes_black.png",
@@ -1259,8 +1259,8 @@ minetest.register_node("scifi_nodes:tallscreen", {
 	sounds = scifi_nodes.node_sound_defaults(),
 })
 
--- https://forum.minetest.net/viewtopic.php?f=10&t=13125&p=261481#p261481
-minetest.register_node("scifi_nodes:windowpanel", {
+-- https://forum.core.net/viewtopic.php?f=10&t=13125&p=261481#p261481
+core.register_node("scifi_nodes:windowpanel", {
     description = "strong window panel",
     tiles = {
         "scifi_nodes_glass.png",
@@ -1278,6 +1278,6 @@ minetest.register_node("scifi_nodes:windowpanel", {
     },
     groups = {cracky=1, dig_generic = 3},
 	is_ground_content = false,
-    on_place = minetest.rotate_node,
+    on_place = core.rotate_node,
     sounds = scifi_nodes.node_sound_glass_defaults(),
 })
