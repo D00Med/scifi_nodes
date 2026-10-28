@@ -1860,3 +1860,23 @@ core.register_craft({
         {"scifi_nodes:mesh2", 	"", 					"scifi_nodes:mesh2"}
     }
 })
+
+-- 6 doom engine wall from 4 white, 2 black, 1 red dye, 1 dark green dye and 1 steel ingot
+core.register_craft({
+    output = "scifi_nodes:doomengine 6",
+    recipe = {
+        {"scifi_nodes:white", "dye:red", "scifi_nodes:white"},
+        {"scifi_nodes:black", "dye:dark_green", "scifi_nodes:black"},
+        {"scifi_nodes:white", "default:steel_ingot", "scifi_nodes:white"}
+    }
+})
+
+-- wind tower from 1 vent, 2 steel ingots and 2 greybolts
+core.register_craft({
+    output = "scifi_nodes:tower",
+    recipe = {
+        {"", "scifi_nodes:vent2", ""},
+        {"scifi_nodes:greybolts", "default:steel_ingot", "scifi_nodes:greybolts"},
+        {"", "default:steel_ingot", ""}
+    }
+})
